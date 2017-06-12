@@ -1,60 +1,64 @@
 package com.advertisement.model;
+
 import java.sql.Date;
-public class AdvertisementVO implements java.io.Serializable{
-		private String ad_no;
-		private String mf_no;
-		private String ad_self;
-		private byte[] ad_photo;
-		private Date day_start;
-		private Date day_end;
-		private Double ad_cash;
-		private String ad_sta;
-		public String getAd_no() {
-			return ad_no;
-		}
-		public void setAd_no(String ad_no) {
-			this.ad_no = ad_no;
-		}
-		public String getMf_no() {
-			return mf_no;
-		}
-		public void setMf_no(String mf_no) {
-			this.mf_no = mf_no;
-		}
-		public String getAd_self() {
-			return ad_self;
-		}
-		public void setAd_self(String ad_self) {
-			this.ad_self = ad_self;
-		}
-		public byte[] getAd_photo() {
-			return ad_photo;
-		}
-		public void setAd_photo(byte[] ad_photo) {
-			this.ad_photo = ad_photo;
-		}
-		public Date getDay_start() {
-			return day_start;
-		}
-		public void setDay_start(Date day_start) {
-			this.day_start = day_start;
-		}
-		public Date getDay_end() {
-			return day_end;
-		}
-		public void setDay_end(Date day_end) {
-			this.day_end = day_end;
-		}
-		public Double getAd_cash() {
-			return ad_cash;
-		}
-		public void setAd_cash(Double ad_cash) {
-			this.ad_cash = ad_cash;
-		}
-		public String getAd_sta() {
-			return ad_sta;
-		}
-		public void setAd_sta(String ad_sta) {
-			this.ad_sta = ad_sta;
-		}
+
+public class AdvertisementVO {
+	private String AD_NO;
+	private String MF_NO;
+	private String AD_SELF;
+	private byte[] AD_PHOTO;
+	private Date DAY_START;
+	private Date DAY_END;
+	private Integer AD_CASH;
+	private Character AD_STA;
+	
+	public String getAD_NO() {
+		return AD_NO;
+	}
+	public void setAD_NO(String aD_NO) {
+		AD_NO = aD_NO;
+	}
+	public String getMF_NO() {
+		return MF_NO;
+	}
+	public void setMF_NO(String mF_NO) {
+		MF_NO = mF_NO;
+	}
+	public String getAD_SELF() {
+		return AD_SELF;
+	}
+	public void setAD_SELF(String aD_SELF) {
+		AD_SELF = aD_SELF;
+	}
+	public byte[] getAD_PHOTO() {
+		return AD_PHOTO;
+	}
+	public void setAD_PHOTO(byte[] aD_PHOTO) {
+		AD_PHOTO = aD_PHOTO;
+	}
+	public Date getDAY_START() {
+		return DAY_START;
+	}
+	public void setDAY_START(Date dAY_START) {
+		DAY_START = dAY_START;
+	}
+	public Date getDAY_END() {
+		return DAY_END;
+	}
+	public void setDAY_END(Date dAY_END) {
+		DAY_END = dAY_END;
+	}
+	public Integer getAD_CASH() {
+		return AD_CASH;
+	}
+	public void setAD_CASH(Integer aD_CASH) {
+		AD_CASH = aD_CASH;
+	}
+	public Character getAD_STA() {
+		return AD_STA;
+	}
+	public void setAD_STA(Character aD_STATE) {
+		AD_STA = aD_STATE;
+	}
+	
 }

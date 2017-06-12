@@ -1,11 +1,11 @@
 package com.chatroom_members.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Chatroom_MembersVO implements java.io.Serializable {
 		private String chatroom_no;
 		private String mem_no;
 		private String chatroom_role;
-		private Date   ban_until;
+		private Timestamp ban_until;
 		public String getChatroom_no() {
 			return chatroom_no;
 		}
@@ -24,10 +24,10 @@ public class Chatroom_MembersVO implements java.io.Serializable {
 		public void setChatroom_role(String chatroom_role) {
 			this.chatroom_role = chatroom_role;
 		}
-		public Date getBan_until() {
+		public Timestamp getBan_until() {
 			return ban_until;
 		}
-		public void setBan_until(Date ban_until) {
+		public void setBan_until(Timestamp ban_until) {
 			this.ban_until = ban_until;
 		}
 }

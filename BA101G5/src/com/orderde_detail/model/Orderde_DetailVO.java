@@ -1,5 +1,5 @@
 package com.orderde_detail.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Orderde_DetailVO implements java.io.Serializable {
 		private String picnic_no;
@@ -8,7 +8,7 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		private String gs_no;
 		private Integer od_amount;
 		private Integer od_price;
-		private Date od_deliver;
+		private Timestamp od_deliver;
 		private String od_bs;
 		public String getPicnic_no() {
 			return picnic_no;
@@ -46,10 +46,10 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		public void setOd_price(Integer od_price) {
 			this.od_price = od_price;
 		}
-		public Date getOd_deliver() {
+		public Timestamp getOd_deliver() {
 			return od_deliver;
 		}
-		public void setOd_deliver(Date od_deliver) {
+		public void setOd_deliver(Timestamp od_deliver) {
 			this.od_deliver = od_deliver;
 		}
 		public String getOd_bs() {

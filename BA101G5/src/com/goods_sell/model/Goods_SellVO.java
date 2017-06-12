@@ -1,11 +1,11 @@
 package com.goods_sell.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Goods_SellVO implements java.io.Serializable{
 		private String gs_no;
 		private String mf_no;
 		private String gs_name;
-		private Date gs_date;
+		private Timestamp gs_date;
 		private Integer gs_price;
 		private String gs_info;
 		private byte[] gs_img;
@@ -28,10 +28,10 @@ public class Goods_SellVO implements java.io.Serializable{
 		public void setGs_name(String gs_name) {
 			this.gs_name = gs_name;
 		}
-		public Date getGs_date() {
+		public Timestamp getGs_date() {
 			return gs_date;
 		}
-		public void setGs_date(Date gs_date) {
+		public void setGs_date(Timestamp gs_date) {
 			this.gs_date = gs_date;
 		}
 		public Integer getGs_price() {

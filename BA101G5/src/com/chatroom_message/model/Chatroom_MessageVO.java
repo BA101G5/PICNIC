@@ -1,11 +1,11 @@
 package com.chatroom_message.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Chatroom_MessageVO implements java.io.Serializable {
 		private String cr_msg_no;
 		private String chatroom_no;
 		private String mem_no;
-		private Date   message_date;
+		private Timestamp   message_date;
 		private String message_text;
 		private byte[] message_img;
 		public String getCr_msg_no() {
@@ -26,10 +26,10 @@ public class Chatroom_MessageVO implements java.io.Serializable {
 		public void setMem_no(String mem_no) {
 			this.mem_no = mem_no;
 		}
-		public Date getMessage_date() {
+		public Timestamp getMessage_date() {
 			return message_date;
 		}
-		public void setMessage_date(Date message_date) {
+		public void setMessage_date(Timestamp message_date) {
 			this.message_date = message_date;
 		}
 		public String getMessage_text() {

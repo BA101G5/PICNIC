@@ -1,5 +1,5 @@
 package com.forum_article.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Forum_ArticleVO implements java.io.Serializable{
 		private String article_no;
@@ -8,8 +8,8 @@ public class Forum_ArticleVO implements java.io.Serializable{
 		private String forum_no;
 		private String article_title;
 		private String article_text;
-		private Date article_post;
-		private Date article_edit;
+		private Timestamp article_post;
+		private Timestamp article_edit;
 		private Integer article_view;
 		private String article_sta;
 		private Integer article_kind;
@@ -50,16 +50,16 @@ public class Forum_ArticleVO implements java.io.Serializable{
 		public void setArticle_text(String article_text) {
 			this.article_text = article_text;
 		}
-		public Date getArticle_post() {
+		public Timestamp getArticle_post() {
 			return article_post;
 		}
-		public void setArticle_post(Date article_post) {
+		public void setArticle_post(Timestamp article_post) {
 			this.article_post = article_post;
 		}
-		public Date getArticle_edit() {
+		public Timestamp getArticle_edit() {
 			return article_edit;
 		}
-		public void setArticle_edit(Date article_edit) {
+		public void setArticle_edit(Timestamp article_edit) {
 			this.article_edit = article_edit;
 		}
 		public Integer getArticle_view() {

@@ -1,19 +1,19 @@
 package com.picnic.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PicnicVO implements java.io.Serializable{
 		private String picnic_no;
 		private String picnic_name;
 		private String picnic_desc;
-		private Date picupdate;
-		private Date picnic_startup;
-		private Date picnic_setup;
+		private Timestamp picupdate;
+		private Timestamp picnic_startup;
+		private Timestamp picnic_setup;
 		private String picnic_chk;
-		private Date picnic_date;
+		private Timestamp picnic_date;
 		private Integer picnic_pl;
 		private String picnic_sta;
 		private Double ord_total;
-		private Date ord_date;
+		private Timestamp ord_date;
 		private String ord_dm;
 		private String ord_sta;
 		public String getPicnic_no() {
@@ -34,22 +34,22 @@ public class PicnicVO implements java.io.Serializable{
 		public void setPicnic_desc(String picnic_desc) {
 			this.picnic_desc = picnic_desc;
 		}
-		public Date getPicupdate() {
+		public Timestamp getPicupdate() {
 			return picupdate;
 		}
-		public void setPicupdate(Date picupdate) {
+		public void setPicupdate(Timestamp picupdate) {
 			this.picupdate = picupdate;
 		}
-		public Date getPicnic_startup() {
+		public Timestamp getPicnic_startup() {
 			return picnic_startup;
 		}
-		public void setPicnic_startup(Date picnic_startup) {
+		public void setPicnic_startup(Timestamp picnic_startup) {
 			this.picnic_startup = picnic_startup;
 		}
-		public Date getPicnic_setup() {
+		public Timestamp getPicnic_setup() {
 			return picnic_setup;
 		}
-		public void setPicnic_setup(Date picnic_setup) {
+		public void setPicnic_setup(Timestamp picnic_setup) {
 			this.picnic_setup = picnic_setup;
 		}
 		public String getPicnic_chk() {
@@ -58,10 +58,10 @@ public class PicnicVO implements java.io.Serializable{
 		public void setPicnic_chk(String picnic_chk) {
 			this.picnic_chk = picnic_chk;
 		}
-		public Date getPicnic_date() {
+		public Timestamp getPicnic_date() {
 			return picnic_date;
 		}
-		public void setPicnic_date(Date picnic_date) {
+		public void setPicnic_date(Timestamp picnic_date) {
 			this.picnic_date = picnic_date;
 		}
 		public Integer getPicnic_pl() {
@@ -82,10 +82,10 @@ public class PicnicVO implements java.io.Serializable{
 		public void setOrd_total(Double ord_total) {
 			this.ord_total = ord_total;
 		}
-		public Date getOrd_date() {
+		public Timestamp getOrd_date() {
 			return ord_date;
 		}
-		public void setOrd_date(Date ord_date) {
+		public void setOrd_date(Timestamp ord_date) {
 			this.ord_date = ord_date;
 		}
 		public String getOrd_dm() {

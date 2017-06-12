@@ -1,12 +1,12 @@
 package com.commend.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class CommendVO implements java.io.Serializable{
 		private String comm_memno;
 		private String comm_be_no;
 		private Integer comm_cate;
 		private Integer comm_grade;
-		private Date comm_date;
+		private Timestamp comm_date;
 		public String getComm_memno() {
 			return comm_memno;
 		}
@@ -31,10 +31,10 @@ public class CommendVO implements java.io.Serializable{
 		public void setComm_grade(Integer comm_grade) {
 			this.comm_grade = comm_grade;
 		}
-		public Date getComm_date() {
+		public Timestamp getComm_date() {
 			return comm_date;
 		}
-		public void setComm_date(Date comm_date) {
+		public void setComm_date(Timestamp comm_date) {
 			this.comm_date = comm_date;
 		}
 }

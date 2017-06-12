@@ -1,10 +1,10 @@
 package com.buy_record.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Buy_RecordVO implements java.io.Serializable{
 		private String br_id;
 		private String mem_no;
-		private Date br_date;
+		private Timestamp br_date;
 		private Integer br_cash;
 		public String getBr_id() {
 			return br_id;
@@ -18,10 +18,10 @@ public class Buy_RecordVO implements java.io.Serializable{
 		public void setMem_no(String mem_no) {
 			this.mem_no = mem_no;
 		}
-		public Date getBr_date() {
+		public Timestamp getBr_date() {
 			return br_date;
 		}
-		public void setBr_date(Date br_date) {
+		public void setBr_date(Timestamp br_date) {
 			this.br_date = br_date;
 		}
 		public Integer getBr_cash() {

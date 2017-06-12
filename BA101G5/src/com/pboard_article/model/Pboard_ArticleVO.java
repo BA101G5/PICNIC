@@ -1,5 +1,5 @@
 package com.pboard_article.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Pboard_ArticleVO implements java.io.Serializable{
 		private String article_no;
@@ -8,7 +8,7 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 		private String picnic_no;
 		private String article_title;
 		private String article_text;
-		private Date article_edit;
+		private Timestamp article_edit;
 		private Integer article_view;
 		private String article_sta;
 		private Integer article_kind;
@@ -49,10 +49,10 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 		public void setArticle_text(String article_text) {
 			this.article_text = article_text;
 		}
-		public Date getArticle_edit() {
+		public Timestamp getArticle_edit() {
 			return article_edit;
 		}
-		public void setArticle_edit(Date article_edit) {
+		public void setArticle_edit(Timestamp article_edit) {
 			this.article_edit = article_edit;
 		}
 		public Integer getArticle_view() {

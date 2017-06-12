@@ -1,11 +1,11 @@
 package com.place.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 public class PlaceVO implements java.io.Serializable{
 		private String p_no;
 		private String mf_no;
 		private String mem_no;
 		private String p_name;
-		private Date p_until;
+		private Timestamp p_until;
 		private String p_place;
 		private Integer p_pop;
 		private byte[] pimg;
@@ -36,10 +36,10 @@ public class PlaceVO implements java.io.Serializable{
 		public void setP_name(String p_name) {
 			this.p_name = p_name;
 		}
-		public Date getP_until() {
+		public Timestamp getP_until() {
 			return p_until;
 		}
-		public void setP_until(Date p_until) {
+		public void setP_until(Timestamp p_until) {
 			this.p_until = p_until;
 		}
 		public String getP_place() {

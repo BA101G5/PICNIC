@@ -1,16 +1,16 @@
 package com.checklist.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 public class ChecklistVO implements java.io.Serializable {
 	private String chli_no;
 	private Integer chli_cate;
 	private String chli_be_num;
 	private String chli_memno;
-	private Date chli_start;
-	private Date chli_end;
+	private Timestamp chli_start;
+	private Timestamp chli_end;
 	private Integer chli_day;
 	private Integer chli_pun;
 	private String chli_reason;
-	private Date chli_date;
+	private Timestamp chli_date;
 	private String chli_sta;
 	public String getChli_no() {
 		return chli_no;
@@ -36,16 +36,16 @@ public class ChecklistVO implements java.io.Serializable {
 	public void setChli_memno(String chli_memno) {
 		this.chli_memno = chli_memno;
 	}
-	public Date getChli_start() {
+	public Timestamp getChli_start() {
 		return chli_start;
 	}
-	public void setChli_start(Date chli_start) {
+	public void setChli_start(Timestamp chli_start) {
 		this.chli_start = chli_start;
 	}
-	public Date getChli_end() {
+	public Timestamp getChli_end() {
 		return chli_end;
 	}
-	public void setChli_end(Date chli_end) {
+	public void setChli_end(Timestamp chli_end) {
 		this.chli_end = chli_end;
 	}
 	public Integer getChli_day() {
@@ -66,10 +66,10 @@ public class ChecklistVO implements java.io.Serializable {
 	public void setChli_reason(String chli_reason) {
 		this.chli_reason = chli_reason;
 	}
-	public Date getChli_date() {
+	public Timestamp getChli_date() {
 		return chli_date;
 	}
-	public void setChli_date(Date chli_date) {
+	public void setChli_date(Timestamp chli_date) {
 		this.chli_date = chli_date;
 	}
 	public String getChli_sta() {

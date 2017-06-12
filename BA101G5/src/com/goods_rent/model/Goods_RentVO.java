@@ -1,16 +1,16 @@
 package com.goods_rent.model;
-import java.sql.Date;
+import java.sql.Timestamp;
 public class Goods_RentVO implements java.io.Serializable {
 		private String gr_no;
 		private String mf_no;
 		private String p_no;
 		private String gr_name;
-		private Date gr_date;
+		private Timestamp gr_date;
 		private Integer gr_price;
 		private Integer gr_count;
 		private String gr_info;
 		private byte[] gr_img;
-		private Date gr_until;
+		private Timestamp gr_until;
 		private String gr_sta;
 		public String getGr_no() {
 			return gr_no;
@@ -36,10 +36,10 @@ public class Goods_RentVO implements java.io.Serializable {
 		public void setGr_name(String gr_name) {
 			this.gr_name = gr_name;
 		}
-		public Date getGr_date() {
+		public Timestamp getGr_date() {
 			return gr_date;
 		}
-		public void setGr_date(Date gr_date) {
+		public void setGr_date(Timestamp gr_date) {
 			this.gr_date = gr_date;
 		}
 		public Integer getGr_price() {
@@ -66,10 +66,10 @@ public class Goods_RentVO implements java.io.Serializable {
 		public void setGr_img(byte[] gr_img) {
 			this.gr_img = gr_img;
 		}
-		public Date getGr_until() {
+		public Timestamp getGr_until() {
 			return gr_until;
 		}
-		public void setGr_until(Date gr_until) {
+		public void setGr_until(Timestamp gr_until) {
 			this.gr_until = gr_until;
 		}
 		public String getGr_sta() {
