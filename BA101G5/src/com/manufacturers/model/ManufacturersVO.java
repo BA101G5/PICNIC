@@ -1,96 +1,102 @@
-package com.manufacturers.model;
+package manufacturers.model;
 
-public class ManufacturersVO implements java.io.Serializable{
-		private String mf_no;
-		private String mf_name;
-		private String mf_phone;
-		private String mf_mail;
-		private String mf_acco;
-		private String mf_psw;
-		private byte[] mf_logo;
-		private String mf_self;
-		private String mf_bs;
-		private String mf_addr;
-		private String mf_fax;
-		private String mf_sta;
-		private Integer mf_reportnum;
-		public String getMf_no() {
-			return mf_no;
-		}
-		public void setMf_no(String mf_no) {
-			this.mf_no = mf_no;
-		}
-		public String getMf_name() {
-			return mf_name;
-		}
-		public void setMf_name(String mf_name) {
-			this.mf_name = mf_name;
-		}
-		public String getMf_phone() {
-			return mf_phone;
-		}
-		public void setMf_phone(String mf_phone) {
-			this.mf_phone = mf_phone;
-		}
-		public String getMf_mail() {
-			return mf_mail;
-		}
-		public void setMf_mail(String mf_mail) {
-			this.mf_mail = mf_mail;
-		}
-		public String getMf_acco() {
-			return mf_acco;
-		}
-		public void setMf_acco(String mf_acco) {
-			this.mf_acco = mf_acco;
-		}
-		public String getMf_psw() {
-			return mf_psw;
-		}
-		public void setMf_psw(String mf_psw) {
-			this.mf_psw = mf_psw;
-		}
-		public byte[] getMf_logo() {
-			return mf_logo;
-		}
-		public void setMf_logo(byte[] mf_logo) {
-			this.mf_logo = mf_logo;
-		}
-		public String getMf_self() {
-			return mf_self;
-		}
-		public void setMf_self(String mf_self) {
-			this.mf_self = mf_self;
-		}
-		public String getMf_bs() {
-			return mf_bs;
-		}
-		public void setMf_bs(String mf_bs) {
-			this.mf_bs = mf_bs;
-		}
-		public String getMf_addr() {
-			return mf_addr;
-		}
-		public void setMf_addr(String mf_addr) {
-			this.mf_addr = mf_addr;
-		}
-		public String getMf_fax() {
-			return mf_fax;
-		}
-		public void setMf_fax(String mf_fax) {
-			this.mf_fax = mf_fax;
-		}
-		public String getMf_sta() {
-			return mf_sta;
-		}
-		public void setMf_sta(String mf_sta) {
-			this.mf_sta = mf_sta;
-		}
-		public Integer getMf_reportnum() {
-			return mf_reportnum;
-		}
-		public void setMf_reportnum(Integer mf_reportnum) {
-			this.mf_reportnum = mf_reportnum;
-		}
-		
+public class ManufacturersVO {
+	private String MF_NO;
+	private String MF_NAME;
+	private String MF_PHONE;
+	private String MF_MAIL;
+	private String MF_ACCO;
+	private String MF_PSW;
+	private byte[] MF_LOGO;
+	private String MF_SELF;
+	private String MF_BS;
+	private String MF_ADDR;
+	private String MF_FAX;
+	private Character MF_STA;
+	private Integer MF_REPORTNUM;
+	public Integer getMF_REPORTNUM() {
+		return MF_REPORTNUM;
+	}
+	public void setMF_REPORTNUM(Integer mF_REPORTNUM) {
+		MF_REPORTNUM = mF_REPORTNUM;
+	}
+	public String getMF_NO() {
+		return MF_NO;
+	}
+	public void setMF_NO(String mF_NO) {
+		MF_NO = mF_NO;
+	}
+	public String getMF_NAME() {
+		return MF_NAME;
+	}
+	public void setMF_NAME(String mF_NAME) {
+		MF_NAME = mF_NAME;
+	}
+	public String getMF_PHONE() {
+		return MF_PHONE;
+	}
+	public void setMF_PHONE(String mF_PHONE) {
+		MF_PHONE = mF_PHONE;
+	}
+	public String getMF_MAIL() {
+		return MF_MAIL;
+	}
+	public void setMF_MAIL(String mF_MAIL) {
+		MF_MAIL = mF_MAIL;
+	}
+	public String getMF_ACCO() {
+		return MF_ACCO;
+	}
+	public void setMF_ACCO(String mF_ACCO) {
+		MF_ACCO = mF_ACCO;
+	}
+	public String getMF_PSW() {
+		return MF_PSW;
+	}
+	public void setMF_PSW(String mF_PSW) {
+		MF_PSW = mF_PSW;
+	}
+	public byte[] getMF_LOGO() {
+		return MF_LOGO;
+	}
+	public void setMF_LOGO(byte[] mF_LOGO) {
+		MF_LOGO = mF_LOGO;
+	}
+	public String getMF_SELF() {
+		return MF_SELF;
+	}
+	public void setMF_SELF(String mF_SELF) {
+		MF_SELF = mF_SELF;
+	}
+	public String getMF_BS() {
+		return MF_BS;
+	}
+	public void setMF_BS(String mF_BS) {
+		MF_BS = mF_BS;
+	}
+	public String getMF_ADDR() {
+		return MF_ADDR;
+	}
+	public void setMF_ADDR(String mF_ADDR) {
+		MF_ADDR = mF_ADDR;
+	}
+	public String getMF_FAX() {
+		return MF_FAX;
+	}
+	public void setMF_FAX(String mF_FAX) {
+		MF_FAX = mF_FAX;
+	}
+	public Character getMF_STA() {
+		return MF_STA;
+	}
+	public void setMF_STA(Character mF_STA) {
+		MF_STA = mF_STA;
+	}
+	public String getMF_COUNT() {
+		return MF_COUNT;
+	}
+	public void setMF_COUNT(String mF_COUNT) {
+		MF_COUNT = mF_COUNT;
+	}
+	private String MF_COUNT;
 }

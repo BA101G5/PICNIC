@@ -1,4 +1,4 @@
-package com.advertisement.model;
+package advertisement.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
