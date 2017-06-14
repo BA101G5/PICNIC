@@ -1,4 +1,4 @@
-package advertisement.model;
+package com.advertisement.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package manufacturers.model;
+package com.manufacturers.model;
 
 public class ManufacturersVO {
 	private String MF_NO;

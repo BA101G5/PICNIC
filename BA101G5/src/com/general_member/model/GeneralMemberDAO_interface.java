@@ -1,4 +1,4 @@
-package general_member.model;
+package com.general_member.model;
 
 import java.util.List;
 

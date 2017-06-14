@@ -1,4 +1,4 @@
-package buy_record.model;
+package com.buy_record.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,11 @@ import java.util.List;
 
 
 
-public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
+public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USERNAME = "ba101";
-	private static final String PASSWORD = "ba101";
+	private static final String USERNAME = "BA101G5";
+	private static final String PASSWORD = "BA101G5";
 	private static final String INSERT = "INSERT INTO BUY_RECORD(BR_ID,MEM_NO,BR_DATE,BR_CASH)"
 			+ "VALUES('BR' || LPAD(BR_NO_SQ.NEXTVAL, 8, '0'),?,?,?)";
 	private static final String UPDATE = "UPDATE BUY_RECORD SET  MEM_NO=?,BR_DATE=?,BR_CASH=? WHERE BR_ID=?";
@@ -30,7 +30,7 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 	}
 
 	@Override
-	public void insert(Buy_recordVO Buy_recordVO) {
+	public void insert(Buy_RecordVO Buy_recordVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -65,7 +65,7 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 	}
 
 	@Override
-	public void update(Buy_recordVO Buy_recordVO) {
+	public void update(Buy_RecordVO Buy_recordVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -134,8 +134,8 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 	}
 
 	@Override
-	public Buy_recordVO findByPrimaryKey(String BR_NO) {
-		Buy_recordVO bVO = null;
+	public Buy_RecordVO findByPrimaryKey(String BR_NO) {
+		Buy_RecordVO bVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -146,7 +146,7 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 			pstmt.setString(1, BR_NO);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				bVO = new Buy_recordVO();
+				bVO = new Buy_RecordVO();
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
 				bVO.setBR_DATE(rs.getDate("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
@@ -188,9 +188,9 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 	
 
 	@Override
-	public List<Buy_recordVO> getAll() {
-		List<Buy_recordVO> list = new ArrayList<Buy_recordVO>();
-		Buy_recordVO bVO = null;
+	public List<Buy_RecordVO> getAll() {
+		List<Buy_RecordVO> list = new ArrayList<Buy_RecordVO>();
+		Buy_RecordVO bVO = null;
 		Connection con =null;
 		PreparedStatement pstmt= null;
 		ResultSet rs= null;
@@ -199,7 +199,7 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 			pstmt = con.prepareStatement(FINDALL);
 			rs =pstmt.executeQuery();
 			while(rs.next()){
-				bVO = new Buy_recordVO();
+				bVO = new Buy_RecordVO();
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
 				bVO.setBR_DATE(rs.getDate("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
@@ -240,7 +240,7 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 	}
 
 	public static void main(String[] args) {
-		Buy_recordJDBCDAO dao = new Buy_recordJDBCDAO();
+		Buy_RecordJDBCDAO dao = new Buy_RecordJDBCDAO();
 		// 1.insert
 		// try {
 		// Buy_recordVO bVO =new Buy_recordVO();
@@ -277,8 +277,8 @@ public class Buy_recordJDBCDAO implements Buy_recordDAO_interface {
 		 
 
 		//5. FIND ALL
-				List<Buy_recordVO> listgVO =dao.getAll();
-				for(Buy_recordVO gVO :listgVO ){
+				List<Buy_RecordVO> listgVO =dao.getAll();
+				for(Buy_RecordVO gVO :listgVO ){
 					System.out.println("MEM_NO : " + gVO.getMEM_NO());
 					System.out.println("BR_DATE : " + gVO.getBR_DATE());
 					System.out.println("BR_CASH : " + gVO.getBR_CASH());
