@@ -1,4 +1,4 @@
-package com.interval_letter.model;
+package com.blocked_keywords.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,26 +8,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
+public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
 	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO INTERNAL_LETTER (LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS) VALUES ('IL' || LPAD(LETTER_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?)";
+		"INSERT INTO BLOCKED_KEYWORDS (KEYWORD_NO, KEYWORD, REPLACEMENT) VALUES ('BK' || LPAD(KEYWORD_NO_SQ.NEXTVAL, 8, '0'), ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS FROM INTERNAL_LETTER order by LETTER_NO";
+		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS order by KEYWORD_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS FROM INTERNAL_LETTER where LETTER_NO = ?";
+		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
 	private static final String DELETE = 
-		"DELETE FROM INTERNAL_LETTER where LETTER_NO = ?";
+		"DELETE FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
 	private static final String UPDATE = 
-		"UPDATE INTERNAL_LETTER set SENDER_NO=?, RECIPIENT_NO=?, LETTER_DATE=?, LETTER_TEXT=?, LETTER_TITLE=?, LETTER_STATUS=? where LETTER_NO = ?";
+		"UPDATE BLOCKED_KEYWORDS set KEYWORD=?, REPLACEMENT=? where KEYWORD_NO = ?";
 
 	@Override
-	public void insert(Interval_LetterVO intervalLetterVO) {
+	public void insert(Blocked_KeywordsVO blockedKeywordsVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -39,13 +38,8 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
-			pstmt.setString(1, intervalLetterVO.getSender_no());
-			pstmt.setString(2, intervalLetterVO.getRecipient_no());
-//			pstmt.setDate(3, intervalLetterVO.getLetter_date());
-			pstmt.setTimestamp(3, intervalLetterVO.getLetter_date());
-			pstmt.setString(4, intervalLetterVO.getLetter_text());
-			pstmt.setString(5, intervalLetterVO.getLetter_title());
-			pstmt.setString(6, intervalLetterVO.getLetter_sta());
+			pstmt.setString(1, blockedKeywordsVO.getKeyword());
+			pstmt.setString(2, blockedKeywordsVO.getReplacement());
 
 			pstmt.executeUpdate();
 
@@ -78,7 +72,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	}
 
 	@Override
-	public void update(Interval_LetterVO intervalLetterVO) {
+	public void update(Blocked_KeywordsVO blockedKeywordsVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -89,14 +83,9 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, intervalLetterVO.getSender_no());
-			pstmt.setString(2, intervalLetterVO.getRecipient_no());
-//			pstmt.setDate(3, intervalLetterVO.getLetter_date());
-			pstmt.setTimestamp(3, intervalLetterVO.getLetter_date());
-			pstmt.setString(4, intervalLetterVO.getLetter_text());
-			pstmt.setString(5, intervalLetterVO.getLetter_title());
-			pstmt.setString(6, intervalLetterVO.getLetter_sta());
-			pstmt.setString(7, intervalLetterVO.getLetter_no());
+			pstmt.setString(1, blockedKeywordsVO.getKeyword());
+			pstmt.setString(2, blockedKeywordsVO.getReplacement());
+			pstmt.setString(3, blockedKeywordsVO.getKeyword_no());
 
 			pstmt.executeUpdate();
 
@@ -130,7 +119,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	}
 
 	@Override
-	public void delete(String intervalLetterVO) {
+	public void delete(String blockedKeywordsVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +130,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, intervalLetterVO);
+			pstmt.setString(1, blockedKeywordsVO);
 
 			pstmt.executeUpdate();
 
@@ -174,9 +163,9 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	}
 
 	@Override
-	public Interval_LetterVO findByPrimaryKey(String letter_no) {
+	public Blocked_KeywordsVO findByPrimaryKey(String keyword_no) {
 
-		Interval_LetterVO intervalLetterVO = null;
+		Blocked_KeywordsVO blockedKeywordsVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -187,21 +176,15 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, letter_no);
+			pstmt.setString(1, keyword_no);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// intervlLetterVO 也稱為 Domain objects
-				intervalLetterVO = new Interval_LetterVO();
-				intervalLetterVO.setLetter_no(rs.getString("LETTER_NO"));
-				intervalLetterVO.setSender_no(rs.getString("SENDER_NO"));
-				intervalLetterVO.setRecipient_no(rs.getString("RECIPIENT_NO"));
-//				intervalLetterVO.setLetter_date(rs.getDate("LETTER_DATE"));
-				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
-				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
-				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
-				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STATUS"));
+				blockedKeywordsVO = new Blocked_KeywordsVO();
+				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
+				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
 			}
 
 			// Handle any driver errors
@@ -236,13 +219,13 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 				}
 			}
 		}
-		return intervalLetterVO;
+		return blockedKeywordsVO;
 	}
 
 	@Override
-	public List<Interval_LetterVO> getAll() {
-		List<Interval_LetterVO> list = new ArrayList<Interval_LetterVO>();
-		Interval_LetterVO intervalLetterVO = null;
+	public List<Blocked_KeywordsVO> getAll() {
+		List<Blocked_KeywordsVO> list = new ArrayList<Blocked_KeywordsVO>();
+		Blocked_KeywordsVO blockedKeywordsVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -256,17 +239,12 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// intervalLetterVO 也稱為 Domain objects
-				intervalLetterVO = new Interval_LetterVO();
-				intervalLetterVO.setLetter_no(rs.getString("LETTER_NO"));
-				intervalLetterVO.setSender_no(rs.getString("SENDER_NO"));
-				intervalLetterVO.setRecipient_no(rs.getString("RECIPIENT_NO"));
-//				intervalLetterVO.setLetter_date(rs.getDate("LETTER_DATE"));
-				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
-				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
-				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
-				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STATUS"));
-				list.add(intervalLetterVO); // Store the row in the list
+				// blockedKeywordsVO 也稱為 Domain objects
+				blockedKeywordsVO = new Blocked_KeywordsVO();
+				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
+				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
+				blockedKeywordsVO.setReplacement(rs.getString("REPLACEMENT"));
+				list.add(blockedKeywordsVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -307,55 +285,40 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	
 	public static void main(String[] args) {
 
-		Interval_LetterJDBCDAO dao = new Interval_LetterJDBCDAO();
+		Blocked_KeywordsJDBCDAO dao = new Blocked_KeywordsJDBCDAO();
 
 //		// 新增
-		Interval_LetterVO intervalLetterVO1 = new Interval_LetterVO();
-		intervalLetterVO1.setSender_no("MG00000001");
-		intervalLetterVO1.setRecipient_no("MG00000003");
-		intervalLetterVO1.setLetter_date(java.sql.Timestamp.valueOf("2005-01-01 16:16:16"));
-		intervalLetterVO1.setLetter_text("內文: 站內信");
-		intervalLetterVO1.setLetter_title("站內信標題");
-		intervalLetterVO1.setLetter_sta("U");
-		dao.insert(intervalLetterVO1);
+		Blocked_KeywordsVO blockedKeywordsVO1 = new Blocked_KeywordsVO();
+		blockedKeywordsVO1.setKeyword("髒話OOXX");
+		blockedKeywordsVO1.setReplacement("***被屏蔽的字***");
+		dao.insert(blockedKeywordsVO1);
 		
 //		// 修改
-//		Interval_LetterVO intervalLetterVO2 = new Interval_LetterVO();
-//		intervalLetterVO2.setLetter_no("IL00000001");
-//		intervalLetterVO2.setSender_no("MG00000001");
-//		intervalLetterVO2.setRecipient_no("MG00000003");
-//		intervalLetterVO2.setLetter_date(java.sql.Date.valueOf("2005-01-01"));
-//		intervalLetterVO2.setLetter_text("**修改**內文: 站內信");
-//		intervalLetterVO2.setLetter_title("**修改**站內信標題");
-//		intervalLetterVO2.setLetter_sta("U");
-//		dao.update(intervalLetterVO2);
+		Blocked_KeywordsVO blockedKeywordsVO2 = new Blocked_KeywordsVO();
+		blockedKeywordsVO2.setKeyword_no("BK00000001");
+		blockedKeywordsVO2.setKeyword("**已修改**XXOO髒話");
+		blockedKeywordsVO2.setReplacement("**已修改**--被屏蔽的字");
+		dao.update(blockedKeywordsVO2);
 		
 //		// 刪除
-//		dao.delete("IL00000003");
+//		dao.delete("BK00000003");
 		
 		// 查詢 單筆.
-		Interval_LetterVO intervalLetterVO3 = dao.findByPrimaryKey("IL00000001");
-		System.out.print(intervalLetterVO3.getLetter_no() + ",");
-		System.out.print(intervalLetterVO3.getSender_no() + ",");
-		System.out.print(intervalLetterVO3.getRecipient_no() + ",");
-		System.out.print(intervalLetterVO3.getLetter_date() + ",");
-		System.out.print(intervalLetterVO3.getLetter_text() + ",");
-		System.out.print(intervalLetterVO3.getLetter_title() + ",");
-		System.out.println(intervalLetterVO3.getLetter_sta());
+		Blocked_KeywordsVO blockedKeywordsVO3 = dao.findByPrimaryKey("BK00000001");
+		System.out.print(blockedKeywordsVO3.getKeyword_no() + ",");
+		System.out.print(blockedKeywordsVO3.getKeyword() + ",");
+		System.out.print(blockedKeywordsVO3.getReplacement() + ",");
 		System.out.println("---------------------");
 		
 		// 查詢 全部
-		List<Interval_LetterVO> list = dao.getAll();
-		for (Interval_LetterVO aEmp : list) {
-			System.out.print(aEmp.getLetter_no() + ",");
-			System.out.print(aEmp.getSender_no() + ",");
-			System.out.print(aEmp.getRecipient_no() + ",");
-			System.out.print(aEmp.getLetter_date() + ",");
-			System.out.print(aEmp.getLetter_text() + ",");
-			System.out.print(aEmp.getLetter_title() + ",");
-			System.out.print(aEmp.getLetter_sta());
+		List<Blocked_KeywordsVO> list = dao.getAll();
+		for (Blocked_KeywordsVO aEmp : list) {
+			System.out.print(aEmp.getKeyword_no() + ",");
+			System.out.print(aEmp.getKeyword() + ",");
+			System.out.print(aEmp.getReplacement() + ",");
 			System.out.println();
 		}
 	
 	}
+
 }

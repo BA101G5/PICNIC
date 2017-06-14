@@ -1,7 +1,7 @@
 package com.announcement.model;
 import java.util.List;
 
-public interface Announcement_interface {
+public interface AnnouncementDAO_interface {
 	public void insert (AnnouncementVO announcementVO);
  	public void update (AnnouncementVO announcementVO);
  	public void delete (String ann_no);
