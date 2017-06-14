@@ -12,8 +12,8 @@ import java.util.List;
 public class Interval_LetterJDBCDAO implements Interval_Letter_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "ALLEN";
-	String passwd = "ALLEN";
+	String userid = "BA101G5";
+	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO INTERNAL_LETTER (LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS) VALUES ('IL' || LPAD(LETTER_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?)";
@@ -310,14 +310,14 @@ public class Interval_LetterJDBCDAO implements Interval_Letter_interface {
 		Interval_LetterJDBCDAO dao = new Interval_LetterJDBCDAO();
 
 //		// 新增
-//		Interval_LetterVO intervalLetterVO1 = new Interval_LetterVO();
-//		intervalLetterVO1.setSender_no("MG00000001");
-//		intervalLetterVO1.setRecipient_no("MG00000003");
-//		intervalLetterVO1.setLetter_date(java.sql.Date.valueOf("2005-01-01"));
-//		intervalLetterVO1.setLetter_text("內文: 站內信");
-//		intervalLetterVO1.setLetter_title("站內信標題");
-//		intervalLetterVO1.setLetter_sta("U");
-//		dao.insert(intervalLetterVO1);
+		Interval_LetterVO intervalLetterVO1 = new Interval_LetterVO();
+		intervalLetterVO1.setSender_no("MG00000001");
+		intervalLetterVO1.setRecipient_no("MG00000003");
+		intervalLetterVO1.setLetter_date(java.sql.Timestamp.valueOf("2005-01-01 16:16:16"));
+		intervalLetterVO1.setLetter_text("內文: 站內信");
+		intervalLetterVO1.setLetter_title("站內信標題");
+		intervalLetterVO1.setLetter_sta("U");
+		dao.insert(intervalLetterVO1);
 		
 //		// 修改
 //		Interval_LetterVO intervalLetterVO2 = new Interval_LetterVO();
