@@ -1,4 +1,4 @@
-package general_member.model;
+package com.general_member.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,8 +11,8 @@ import java.util.List;
 public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USERNAME = "ba101";
-	private static final String PASSWORD = "ba101";
+	private static final String USERNAME = "BA101G5";
+	private static final String PASSWORD = "BA101G5";
 	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STATE,MEM_PHONE,MEM_PBOARD)"
 			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STATE=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
