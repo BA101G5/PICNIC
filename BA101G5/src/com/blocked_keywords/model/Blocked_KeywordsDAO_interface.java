@@ -1,7 +1,7 @@
 package com.blocked_keywords.model;
 import java.util.List;
 
-public interface Blocked_Keywords_interface {
+public interface Blocked_KeywordsDAO_interface {
 	public void insert (Blocked_KeywordsVO blocked_keywordVO);
  	public void update (Blocked_KeywordsVO blocked_keywordVO);
  	public void delete (String keyword_no);
