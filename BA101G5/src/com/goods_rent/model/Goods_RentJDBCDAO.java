@@ -2,7 +2,7 @@ package com.goods_rent.model;
 
 import java.util.List;
 
-public class Goods_RentDAO implements Goods_Rent_interface{
+public class Goods_RentJDBCDAO implements Goods_Rent_interface{
 		String driver ="Oracle.driver.jdbc.OracleDriver";
 		String url ="jdbc:oracle:thin@localhost:1521:XE";
 		String userid ="ba101";
