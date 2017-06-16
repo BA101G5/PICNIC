@@ -1,7 +1,7 @@
 package com.chatroom_members.model;
 import java.util.List;
 
-public interface Chatroom_Members_interface {
+public interface Chatroom_Members_interface1 {
 		public void insert(Chatroom_MembersVO chatroom_membersVO);
 		public void update(Chatroom_MembersVO chatroom_membersVO);
 		public void delete(String chatroom_no,String mem_no);
