@@ -137,7 +137,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 	}
 
 	@Override
-	public void delete(String forumArticleVO) {
+	public void delete(String article_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -148,7 +148,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, forumArticleVO);
+			pstmt.setString(1, article_no);
 
 			pstmt.executeUpdate();
 
