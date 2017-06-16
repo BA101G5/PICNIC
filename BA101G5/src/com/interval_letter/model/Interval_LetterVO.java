@@ -1,10 +1,12 @@
 package com.interval_letter.model;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Interval_LetterVO implements java.io.Serializable{
 		private String letter_no;
 		private String sender_no;
 		private String recipient_no;
+//		private Date letter_date;
 		private Timestamp letter_date;
 		private String letter_text;
 		private String letter_title;
@@ -27,9 +29,11 @@ public class Interval_LetterVO implements java.io.Serializable{
 		public void setRecipient_no(String recipient_no) {
 			this.recipient_no = recipient_no;
 		}
+//		public Date getLetter_date() {
 		public Timestamp getLetter_date() {
 			return letter_date;
 		}
+//		public void setLetter_date(Date letter_date) {
 		public void setLetter_date(Timestamp letter_date) {
 			this.letter_date = letter_date;
 		}

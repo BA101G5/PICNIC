@@ -1,33 +1,36 @@
 package com.buy_record.model;
-import java.sql.Timestamp;
 
-public class Buy_RecordVO implements java.io.Serializable{
-		private String br_id;
-		private String mem_no;
-		private Timestamp br_date;
-		private Integer br_cash;
-		public String getBr_id() {
-			return br_id;
+import java.sql.Date;
+
+public class Buy_RecordVO {
+		private String BR_ID;
+		private String MEM_NO;
+		private Date BR_DATE;
+		private Integer BR_CASH;
+		public String getBR_ID() {
+			return BR_ID;
 		}
-		public void setBr_id(String br_id) {
-			this.br_id = br_id;
+		public void setBR_ID(String bR_ID) {
+			BR_ID = bR_ID;
 		}
-		public String getMem_no() {
-			return mem_no;
+		public String getMEM_NO() {
+			return MEM_NO;
 		}
-		public void setMem_no(String mem_no) {
-			this.mem_no = mem_no;
+		public void setMEM_NO(String mEM_NO) {
+			MEM_NO = mEM_NO;
 		}
-		public Timestamp getBr_date() {
-			return br_date;
+		public Date getBR_DATE() {
+			return BR_DATE;
 		}
-		public void setBr_date(Timestamp br_date) {
-			this.br_date = br_date;
+		public void setBR_DATE(Date bR_DATE) {
+			BR_DATE = bR_DATE;
 		}
-		public Integer getBr_cash() {
-			return br_cash;
+		public Integer getBR_CASH() {
+			return BR_CASH;
 		}
-		public void setBr_cash(Integer br_cash) {
-			this.br_cash = br_cash;
+		public void setBR_CASH(Integer bR_CASH) {
+			BR_CASH = bR_CASH;
 		}
+		
+		
 }
