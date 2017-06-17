@@ -3,6 +3,7 @@ package com.purview_detail.model;
 public class Purview_DetailVO implements java.io.Serializable {
 		private String adm_no;
 		private String purview_no;
+		
 		public String getAdm_no() {
 			return adm_no;
 		}
