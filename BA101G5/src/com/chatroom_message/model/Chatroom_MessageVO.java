@@ -2,7 +2,7 @@ package com.chatroom_message.model;
 
 import java.sql.Timestamp;
 
-public class Chatroom_MessageVO {
+public class Chatroom_MessageVO implements java.io.Serializable {
 	private String cr_msg_no;
 	private String chatroom_no;
 	private String mem_no;
