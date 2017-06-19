@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-public class Orderde_DetailJDBCDAO implements Orderde_Detail_interface {
+public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 	String driver = "Oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "ba101";

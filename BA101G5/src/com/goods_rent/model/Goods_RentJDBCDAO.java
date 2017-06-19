@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
 
-public class Goods_RentJDBCDAO implements Goods_Rent_interface {
+public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 	String driver = "Oracle.jdbc.driver.Oracledriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "ba101";

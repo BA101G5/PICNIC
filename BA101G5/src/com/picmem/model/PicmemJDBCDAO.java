@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PicmemJDBCDAO implements Picmem_interface {
+public class PicmemJDBCDAO implements PicmemDAO_interface {
 	private String driver = "Oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "BA101G5";

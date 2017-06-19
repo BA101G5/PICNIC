@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
 
-public class PlaceJDBCDAO implements Place_interface {
+public class PlaceJDBCDAO implements PlaceDAO_interface {
 	String driver = "Oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "ba101";

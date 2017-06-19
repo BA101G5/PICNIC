@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.naming.Context;
 
-public class PicnicJNDIDAO implements Picnic_interface {
+public class PicnicJNDIDAO implements PicnicDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {

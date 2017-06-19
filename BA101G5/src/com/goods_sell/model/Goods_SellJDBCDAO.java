@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
-public class Goods_SellJDBCDAO implements Goods_Sell_interface {
+public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 	String driver = "Oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "ba101";

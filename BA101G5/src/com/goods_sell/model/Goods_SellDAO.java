@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 import java.io.*;
 
-public class Goods_SellDAO implements Goods_Sell_interface {
+public class Goods_SellDAO implements Goods_SellDAO_interface {
 	private static DataSource ds = null;
 	static{
 		Context ctx;

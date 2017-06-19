@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.naming.Context;
 
-public class PlaceDAO implements Place_interface {
+public class PlaceDAO implements PlaceDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {

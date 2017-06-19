@@ -3,7 +3,7 @@ package com.picnic.model;
 import java.sql.*;
 import java.util.*;
 
-public class PicnicJDBCDAO implements Picnic_interface {
+public class PicnicJDBCDAO implements PicnicDAO_interface {
 	String driver = "Oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "BA101G5";

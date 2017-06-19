@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class Goods_RentDAO implements Goods_Rent_interface {
+public class Goods_RentDAO implements Goods_RentDAO_interface {
 	private static DataSource ds = null;
 	static{	
 		try {

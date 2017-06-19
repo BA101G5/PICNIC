@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class Goods_SellJNDIDAO implements Goods_Sell_interface {
+public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 	private static DataSource ds = null;
 	static{
 		Context ctx;

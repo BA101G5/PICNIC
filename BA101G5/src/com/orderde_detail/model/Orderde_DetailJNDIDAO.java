@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class Orderde_DetailJNDIDAO implements Orderde_Detail_interface {
+public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 	private static DataSource ds = null;
 	static {
 
