@@ -7,6 +7,7 @@ public class AdministratorVO implements java.io.Serializable{
 		private String adm_iden;
 		private String adm_name;
 		private String adm_sta;
+		
 		public String getAdministrator() {
 			return administrator;
 		}
