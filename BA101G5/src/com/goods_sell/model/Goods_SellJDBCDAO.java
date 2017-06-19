@@ -7,14 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
-public class Goods_sellJDBCDAO implements Goods_Sell_interface {
+public class Goods_SellJDBCDAO implements Goods_Sell_interface {
 	String driver = "Oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin@localhost:1521:XE";
 	String userid = "ba101";
 	String passwd = "ba101";
 
-	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values(?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values('GS'||LPAD(GS_NO_SQ.nexval,8,0),?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_SELL ORDER BY GS_NO";
 	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
@@ -29,14 +30,13 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, goods_sellVO.getGs_no());
-			pstmt.setString(2, goods_sellVO.getMf_no());
-			pstmt.setString(3, goods_sellVO.getGs_name());
-			pstmt.setTimestamp(4, goods_sellVO.getGs_date());
-			pstmt.setInt(5, goods_sellVO.getGs_price());
-			pstmt.setString(6, goods_sellVO.getGs_info());
-			pstmt.setBytes(7, goods_sellVO.getGs_img());
-			pstmt.setString(8, goods_sellVO.getGs_sta());
+			pstmt.setString(1, goods_sellVO.getMf_no());
+			pstmt.setString(2, goods_sellVO.getGs_name());
+			pstmt.setTimestamp(3, goods_sellVO.getGs_date());
+			pstmt.setInt(4, goods_sellVO.getGs_price());
+			pstmt.setString(5, goods_sellVO.getGs_info());
+			pstmt.setBytes(6, goods_sellVO.getGs_img());
+			pstmt.setString(7, goods_sellVO.getGs_sta());
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -245,8 +245,83 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 		}
 		return list;
 	}
-	public static void main(String[] args){
-		
+
+	public static void main(String[] args) {
+		Goods_SellJDBCDAO goods_selljdbcdao = new Goods_SellJDBCDAO();
+// insert
+		// Goods_SellVO goods_sellVO = new Goods_SellVO();
+		// goods_sellVO.setGs_no("");
+		// goods_sellVO.setMf_no("");
+		// goods_sellVO.setGs_name("");
+		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
+		// goods_sellVO.setGs_price(0);
+		// goods_sellVO.setGs_info("");
+		// goods_sellVO.setGs_img(getPicture("nothing-here.jpg"));
+		// goods_sellVO.setGs_sta("");
+		// goods_selljdbcdao.insert(goods_sellVO);
+// update
+		// Goods_SellVO goods_sellVO = new Goods_SellVO();
+		// goods_sellVO.setGs_no("");
+		// goods_sellVO.setMf_no("");
+		// goods_sellVO.setGs_name("");
+		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
+		// goods_sellVO.setGs_price(0);
+		// goods_sellVO.setGs_info("");
+		// goods_sellVO.setGs_img(getPicture("nothing-here.jpg"));
+		// goods_sellVO.setGs_sta("");
+		// goods_selljdbcdao.update(goods_sellVO);
+// delete
+		// goods_selljdbcdao.delete("");
+// search one
+		// Goods_SellVO goods_sellVO = goods_selljdbcdao.findByPrimaryKey("");
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getMf_no());
+		// System.out.println(goods_sellVO.getGs_name());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println(goods_sellVO.getGs_price());
+		// System.out.println(goods_sellVO.getGs_info());
+		// System.out.println(goods_sellVO.getGs_img());
+		// System.out.println(goods_sellVO.getGs_date());
+	    // System.out.println("---------------------");
+//search all
+		// List<Goods_SellVO> list = goods_selljdbcdao.getAll();
+		// for(Goods_SellVO goods_sellVO : list){
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getMf_no());
+		// System.out.println(goods_sellVO.getGs_name());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println(goods_sellVO.getGs_price());
+		// System.out.println(goods_sellVO.getGs_info());
+		// System.out.println(goods_sellVO.getGs_img());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println("---------------------");
+		// }
+
+	}
+
+	private static byte[] getPicture(String path) {
+		byte[] data = null;
+
+		FileInputStream fileinput;
+		try {
+			fileinput = new FileInputStream(new File(path));
+			ByteArrayOutputStream fileoutput = new ByteArrayOutputStream();
+			byte[] buffer = new byte[8192];
+			int len = 0;
+			while ((len = fileinput.read(buffer)) != -1) {
+				fileoutput.write(buffer, 0, len);
+			}
+			data = fileoutput.toByteArray();
+			fileinput.close();
+			fileoutput.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return data;
 	}
 
 }

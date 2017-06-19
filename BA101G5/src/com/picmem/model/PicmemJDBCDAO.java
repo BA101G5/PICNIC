@@ -240,8 +240,7 @@ public class PicmemJDBCDAO implements Picmem_interface {
 	}
 
 	public static void main(String[] args) {
-		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
-
+		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO(); 
 // insert
 		// PicmemVO picmemVO = new PicmemVO();
 		// picmemVO.setPicnic_no("");
@@ -250,33 +249,27 @@ public class PicmemJDBCDAO implements Picmem_interface {
 		// picmemVO.setPicmem_sta("");
 		// picmemVO.setMem_longi(0.0);
 		// picmemVO.setMem_latit(0.0);
-		//
-		// picmemjdbcdao.insert(picmemVO);
-		//
 // update
 		// PicmemVO picmemVO = new PicmemVO();
+		// picmemVO.setPicnic_no("");
+		// picmemVO.setMem_no("");
 		// picmemVO.setPicmem_iden("");
 		// picmemVO.setPicmem_sta("");
 		// picmemVO.setMem_longi(0.0);
 		// picmemVO.setMem_latit(0.0);
-		// picmemVO.setPicnic_no("");
-		// picmemVO.setMem_no("");
-		//
 		// picmemjdbcdao.update(picmemVO);
-		//
 // delete
 		// picmemjdbcdao.delete("", "");
-		//
 // search one
 		// PicmemVO picmemVO = picmemjdbcdao.findByPrimaryKey("", "");
 		// System.out.println(picmemVO.getPicmem_iden());
 		// System.out.println(picmemVO.getPicmem_sta());
 		// System.out.println(picmemVO.getMem_longi());
 		// System.out.println(picmemVO.getMem_latit());
+		// System.out.println("---------------------");
 
 //search all
 		// List<PicmemVO> list = picmemjdbcdao.getAll();
-		//
 		// for (PicmemVO picmemVO : list) {
 		// System.out.println(picmemVO.getPicnic_no());
 		// System.out.println(picmemVO.getMem_no());
@@ -284,7 +277,7 @@ public class PicmemJDBCDAO implements Picmem_interface {
 		// System.out.println(picmemVO.getPicmem_sta());
 		// System.out.println(picmemVO.getMem_longi());
 		// System.out.println(picmemVO.getMem_latit());
-		//
+		// System.out.println("---------------------");
 		// }
 
 	}
