@@ -5,8 +5,8 @@ public class PicmemVO implements java.io.Serializable {
 		private String mem_no;
 		private String picmem_iden;
 		private String picmem_sta;
-		private Integer mem_longi;
-		private Integer mem_latit;
+		private Double mem_longi;
+		private Double mem_latit;
 		public String getPicnic_no() {
 			return picnic_no;
 		}
@@ -31,16 +31,16 @@ public class PicmemVO implements java.io.Serializable {
 		public void setPicmem_sta(String picmem_sta) {
 			this.picmem_sta = picmem_sta;
 		}
-		public Integer getMem_longi() {
+		public Double getMem_longi() {
 			return mem_longi;
 		}
-		public void setMem_longi(Integer mem_longi) {
+		public void setMem_longi(Double mem_longi) {
 			this.mem_longi = mem_longi;
 		}
-		public Integer getMem_latit() {
+		public Double getMem_latit() {
 			return mem_latit;
 		}
-		public void setMem_latit(Integer mem_latit) {
+		public void setMem_latit(Double mem_latit) {
 			this.mem_latit = mem_latit;
 		}
 }
