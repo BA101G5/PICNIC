@@ -81,14 +81,12 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace(System.err);
 				}
 			}
@@ -116,7 +114,6 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 
@@ -124,7 +121,6 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace(System.err);
 				}
 			}
@@ -165,7 +161,6 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 			if (rs != null) {
@@ -179,7 +174,6 @@ public class Goods_sellJDBCDAO implements Goods_Sell_interface {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace(System.err);
 				}
 			}
