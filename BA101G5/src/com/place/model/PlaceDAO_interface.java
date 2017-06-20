@@ -1,7 +1,7 @@
 package com.place.model;
 import java.util.List;
 
-public interface Place_interface {
+public interface PlaceDAO_interface {
 		public void insert(PlaceVO placeVO);
 		public void update(PlaceVO placeVO);
 		public void delete(String p_no);
