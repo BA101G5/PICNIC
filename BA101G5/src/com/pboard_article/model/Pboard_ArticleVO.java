@@ -8,6 +8,7 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 		private String picnic_no;
 		private String article_title;
 		private String article_text;
+		private Timestamp article_post;
 		private Timestamp article_edit;
 		private Integer article_view;
 		private String article_sta;
@@ -78,6 +79,12 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 		}
 		public void setArticle_pw(String article_pw) {
 			this.article_pw = article_pw;
+		}
+		public Timestamp getArticle_post() {
+			return article_post;
+		}
+		public void setArticle_post(Timestamp article_post) {
+			this.article_post = article_post;
 		}
 		
 }

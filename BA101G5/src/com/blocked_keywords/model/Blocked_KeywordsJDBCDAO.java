@@ -119,7 +119,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	}
 
 	@Override
-	public void delete(String blockedKeywordsVO) {
+	public void delete(String keyword_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -130,7 +130,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, blockedKeywordsVO);
+			pstmt.setString(1, keyword_no);
 
 			pstmt.executeUpdate();
 

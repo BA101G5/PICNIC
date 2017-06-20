@@ -118,7 +118,7 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 	}
 
 	@Override
-	public void delete(String announcementVO) {
+	public void delete(String letter_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -129,7 +129,7 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, announcementVO);
+			pstmt.setString(1, letter_no);
 
 			pstmt.executeUpdate();
 

@@ -121,7 +121,7 @@ public class Forum_BoardJDBCDAO implements Forum_BoardDAO_interface {
 	}
 
 	@Override
-	public void delete(String forumBoardVO) {
+	public void delete(String keyword_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -132,7 +132,7 @@ public class Forum_BoardJDBCDAO implements Forum_BoardDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, forumBoardVO);
+			pstmt.setString(1, keyword_no);
 
 			pstmt.executeUpdate();
 

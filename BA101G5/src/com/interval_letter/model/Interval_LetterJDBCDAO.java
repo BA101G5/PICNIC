@@ -130,7 +130,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	}
 
 	@Override
-	public void delete(String intervalLetterVO) {
+	public void delete(String letter_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +141,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, intervalLetterVO);
+			pstmt.setString(1, letter_no);
 
 			pstmt.executeUpdate();
 
