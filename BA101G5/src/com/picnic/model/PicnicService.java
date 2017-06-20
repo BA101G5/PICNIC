@@ -2,8 +2,6 @@ package com.picnic.model;
 
 import java.util.List;
 
-import com.place.model.PlaceVO;
-
 public class PicnicService {
 	private PicnicDAO dao = null;
 

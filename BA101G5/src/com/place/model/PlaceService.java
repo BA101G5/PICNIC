@@ -2,8 +2,6 @@ package com.place.model;
 
 import java.util.List;
 
-import com.goods_sell.model.Goods_SellVO;
-
 public class PlaceService {
 	private PlaceDAO dao= null;
 	public PlaceService(){
