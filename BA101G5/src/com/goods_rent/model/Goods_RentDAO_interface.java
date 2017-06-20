@@ -8,5 +8,5 @@ public interface Goods_RentDAO_interface {
 		public Goods_RentVO findByPrimaryKey(String gr_no);
 		public List<Goods_RentVO> getAll();
 		
-		public Goods_RentVO addGoods_Rent(){}
+	
 }
