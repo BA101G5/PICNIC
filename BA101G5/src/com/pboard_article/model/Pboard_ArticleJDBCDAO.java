@@ -15,15 +15,15 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO PBOARD_ARTICLE (ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STATUS, ARTICLE_KIND, ARTICLE_PW) VALUES ('AB' || LPAD(PBOARD_ARTICLE_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		"INSERT INTO PBOARD_ARTICLE (ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW) VALUES ('AB' || LPAD(PBOARD_ARTICLE_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STATUS, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE order by ARTICLE_NO";
+		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE order by ARTICLE_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STATUS, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE where ARTICLE_NO = ?";
+		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE where ARTICLE_NO = ?";
 	private static final String DELETE = 
 		"DELETE FROM PBOARD_ARTICLE where ARTICLE_NO = ?";
 	private static final String UPDATE = 
-		"UPDATE PBOARD_ARTICLE set AUTHOR_NO=?, TOPIC_NO=?, PICNIC_NO=?, ARTICLE_TITLE=?, ARTICLE_TEXT=?, ARTICLE_POST=?, ARTICLE_EDIT=?, ARTICLE_VIEWS=?, ARTICLE_STATUS=?, ARTICLE_KIND=?, ARTICLE_PW=? where ARTICLE_NO = ?";
+		"UPDATE PBOARD_ARTICLE set AUTHOR_NO=?, TOPIC_NO=?, PICNIC_NO=?, ARTICLE_TITLE=?, ARTICLE_TEXT=?, ARTICLE_POST=?, ARTICLE_EDIT=?, ARTICLE_VIEWS=?, ARTICLE_STA=?, ARTICLE_KIND=?, ARTICLE_PW=? where ARTICLE_NO = ?";
 
 	@Override
 	public void insert(Pboard_ArticleVO pboardArticleVO) {
@@ -210,7 +210,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
 				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
-				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STATUS"));
+				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
 			}
@@ -278,7 +278,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
 				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
-				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STATUS"));
+				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
 				list.add(pboardArticleVO); // Store the row in the list
