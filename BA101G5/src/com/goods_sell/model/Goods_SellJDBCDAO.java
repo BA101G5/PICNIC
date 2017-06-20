@@ -10,12 +10,12 @@ import java.util.List;
 import java.io.*;
 
 public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
-	String driver = "Oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin@localhost:1521:XE";
-	String userid = "ba101";
-	String passwd = "ba101";
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "BA101G5";
+	String passwd = "III";
 
-	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values('GS'||LPAD(GS_NO_SQ.nexval,8,0),?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values ('GS'||LPAD(GS_NO_SQ.nextval,8,0),?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_SELL ORDER BY GS_NO";
 	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
@@ -149,6 +149,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			pstmt.setString(1, gs_no);
 			rs = pstmt.executeQuery();
 
+			rs.next() ;
 			goods_sellVO = new Goods_SellVO();
 			goods_sellVO.setGs_no(rs.getString("GS_NO"));
 			goods_sellVO.setMf_no(rs.getString("MF_NO"));
@@ -158,6 +159,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 			goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
 			goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -250,30 +252,32 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		Goods_SellJDBCDAO goods_selljdbcdao = new Goods_SellJDBCDAO();
 // insert
 		// Goods_SellVO goods_sellVO = new Goods_SellVO();
-		// goods_sellVO.setGs_no("");
-		// goods_sellVO.setMf_no("");
-		// goods_sellVO.setGs_name("");
-		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_sellVO.setGs_price(0);
-		// goods_sellVO.setGs_info("");
-		// goods_sellVO.setGs_img(getPicture("nothing-here.jpg"));
-		// goods_sellVO.setGs_sta("");
+		// goods_sellVO.setMf_no("MM00000001");
+		// goods_sellVO.setGs_name("aoeu");
+		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		// goods_sellVO.setGs_price(10);
+		// goods_sellVO.setGs_info("aeou");
+		// goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
+		// goods_sellVO.setGs_sta("A");
 		// goods_selljdbcdao.insert(goods_sellVO);
 // update
 		// Goods_SellVO goods_sellVO = new Goods_SellVO();
-		// goods_sellVO.setGs_no("");
-		// goods_sellVO.setMf_no("");
-		// goods_sellVO.setGs_name("");
-		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_sellVO.setGs_price(0);
-		// goods_sellVO.setGs_info("");
-		// goods_sellVO.setGs_img(getPicture("nothing-here.jpg"));
-		// goods_sellVO.setGs_sta("");
+		// goods_sellVO.setGs_no("GS00000001");
+		// goods_sellVO.setMf_no("MM00000001");
+		// goods_sellVO.setGs_name(" aoeuaoeu");
+		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		// goods_sellVO.setGs_price(140);
+		// goods_sellVO.setGs_info("aoeuaoeuaoeu");
+		// goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
+		// goods_sellVO.setGs_sta("B");
 		// goods_selljdbcdao.update(goods_sellVO);
 // delete
-		// goods_selljdbcdao.delete("");
+		// goods_selljdbcdao.delete("GS00000001");
 // search one
-		// Goods_SellVO goods_sellVO = goods_selljdbcdao.findByPrimaryKey("");
+		// Goods_SellVO goods_sellVO =
+		// goods_selljdbcdao.findByPrimaryKey("GS00000002");
+		// System.out.println(goods_sellVO.getGs_no());
 		// System.out.println(goods_sellVO.getGs_no());
 		// System.out.println(goods_sellVO.getMf_no());
 		// System.out.println(goods_sellVO.getGs_name());
@@ -282,7 +286,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		// System.out.println(goods_sellVO.getGs_info());
 		// System.out.println(goods_sellVO.getGs_img());
 		// System.out.println(goods_sellVO.getGs_date());
-	    // System.out.println("---------------------");
+		// System.out.println("---------------------");
 //search all
 		// List<Goods_SellVO> list = goods_selljdbcdao.getAll();
 		// for(Goods_SellVO goods_sellVO : list){

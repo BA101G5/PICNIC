@@ -14,19 +14,18 @@ import javax.sql.DataSource;
 
 public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 	private static DataSource ds = null;
-	static{
+	static {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds=(DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 
-		
 	}
 
-	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values('GS'||LPAD(GS_NO_SQ.nexval,8,0),?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values('GS'||LPAD(GS_NO_SQ.nextval,8,0),?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_SELL ORDER BY GS_NO";
 	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
@@ -38,7 +37,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			con =ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, goods_sellVO.getMf_no());
 			pstmt.setString(2, goods_sellVO.getGs_name());
@@ -73,7 +72,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con =ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, goods_sellVO.getMf_no());
 			pstmt.setString(2, goods_sellVO.getGs_name());
@@ -144,21 +143,22 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			con =ds.getConnection();
-		
+			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gs_no);
 			rs = pstmt.executeQuery();
 
-			goods_sellVO = new Goods_SellVO();
-			goods_sellVO.setGs_no(rs.getString("GS_NO"));
-			goods_sellVO.setMf_no(rs.getString("MF_NO"));
-			goods_sellVO.setGs_name(rs.getString("GS_NAME"));
-			goods_sellVO.setGs_date(rs.getTimestamp("GS_DATE"));
-			goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
-			goods_sellVO.setGs_info(rs.getString("GS_INFO"));
-			goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-			goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+			rs.next();
+				goods_sellVO = new Goods_SellVO();
+				goods_sellVO.setGs_no(rs.getString("GS_NO"));
+				goods_sellVO.setMf_no(rs.getString("MF_NO"));
+				goods_sellVO.setGs_name(rs.getString("GS_NAME"));
+				goods_sellVO.setGs_date(rs.getTimestamp("GS_DATE"));
+				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
+				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
+				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -194,7 +194,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
 		ResultSet rs = null;
 		try {
-			con =ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 

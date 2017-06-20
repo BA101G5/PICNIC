@@ -159,7 +159,8 @@ public class Goods_RentJNDIDAO implements Goods_RentDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gr_no);
 			rs = pstmt.executeQuery();
-
+				
+			rs.next();
 			goods_rentVO = new Goods_RentVO();
 			goods_rentVO.setGr_no(rs.getString("GR_NO"));
 			goods_rentVO.setMf_no(rs.getString("MF_NO"));

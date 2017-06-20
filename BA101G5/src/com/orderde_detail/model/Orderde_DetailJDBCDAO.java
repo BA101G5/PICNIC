@@ -5,12 +5,12 @@ import java.util.List;
 import java.sql.*;
 
 public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
-	String driver = "Oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin@localhost:1521:XE";
-	String userid = "ba101";
-	String passwd = "ba101";
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "BA101G5";
+	String passwd = "III";
 
-	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_BS)values(?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_BS)values(?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = " select * from ORDERDE_DETAIL ORDER BY PICNIC_NO";
 	private static final String GET_ONE_STMT = " select PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_BS form ORDERDE_DETAIL where PICNIC_NO= ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where PICNIC_NO =? ";
@@ -157,8 +157,12 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 			pstmt.setString(4, gs_no);
 
 			rs = pstmt.executeQuery();
-
+			rs.next();
 			orderde_detailVO = new Orderde_DetailVO();
+			orderde_detailVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			orderde_detailVO.setP_no(rs.getString("P_NO"));
+			orderde_detailVO.setGr_no(rs.getString("GR_NO"));
+			orderde_detailVO.setGs_no(rs.getString("GS_NO"));
 			orderde_detailVO.setOd_amount(rs.getInt("OD_AMOUNT"));
 			orderde_detailVO.setOd_price(rs.getInt("OD_PRICE"));
 			orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
@@ -259,29 +263,30 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		Orderde_DetailJDBCDAO orderde_detailjdbcdao = new Orderde_DetailJDBCDAO();
 //insert
 		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-		// orderde_detailVO.setPicnic_no("");
-		// orderde_detailVO.setP_no("");
+		// orderde_detailVO.setPicnic_no("PG00000001");
+		// orderde_detailVO.setP_no("P000000001");
 		// orderde_detailVO.setGr_no("");
-		// orderde_detailVO.setGs_no("");
+		// orderde_detailVO.setGs_no(" ");
 		// orderde_detailVO.setOd_amount(1);
 		// orderde_detailVO.setOd_price(100);
-		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("0-0-0
+		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01
 		// 0:0:0"));
-		// orderde_detailVO.setOd_bs("");
+		// orderde_detailVO.setOd_bs("A");
 		// orderde_detailjdbcdao.insert(orderde_detailVO);
 //update
 		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-		// orderde_detailVO.setPicnic_no("");
-		// orderde_detailVO.setP_no("");
+		// orderde_detailVO.setPicnic_no("PG00000001");
+		// orderde_detailVO.setP_no("P000000001");
 		// orderde_detailVO.setGr_no("");
-		// orderde_detailVO.setGs_no("");
+		// orderde_detailVO.setGs_no(" ");
 		// orderde_detailVO.setOd_amount(1);
 		// orderde_detailVO.setOd_price(100);
-		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// orderde_detailVO.setOd_bs("");
+		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		// orderde_detailVO.setOd_bs("A");
 		// orderde_detailjdbcdao.update(orderde_detailVO);
 //delete
-		// orderde_detailjdbcdao.delete("","","","");
+		// orderde_detailjdbcdao.delete("PG00000001","P000000001","","");
 //search one
 		// Orderde_DetailVO orderde_detailVO =
 		// orderde_detailjdbcdao.findByPrimaryKey("","","","");

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class PlaceJDBCDAO implements PlaceDAO_interface {
-	String driver = "Oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin@localhost:1521:XE";
-	String userid = "ba101";
-	String passwd = "ba101";
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "BA101G5";
+	String passwd = "III";
 
 	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PLACE ORDER BY P_NO";
@@ -148,7 +148,8 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, p_no);
 			rs = pstmt.executeQuery();
-
+		
+			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
 			placeVO.setMem_no(rs.getString("MEM_NO"));
@@ -160,7 +161,6 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			placeVO.setP_info(rs.getString("P_INFO"));
 			placeVO.setP_sta(rs.getString("P_STA"));
 			placeVO.setP_price(rs.getInt("P_PRICE"));
-
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -253,37 +253,35 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		PlaceJDBCDAO placejdbcdao = new PlaceJDBCDAO();
 // insert
 		// PlaceVO placeVO = new PlaceVO();
-		// placeVO.setMf_no("");
-		// placeVO.setMem_no("");
-		// placeVO.setP_name("");
-		// placeVO.setP_until(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// placeVO.setP_place("");
-		// placeVO.setP_pop(1);
-		// placeVO.setPimg(getPicture("nothing-here.jpg"));
-		// placeVO.setP_info("");
-		// placeVO.setP_sta("");
+		// placeVO.setMf_no("MM00000001");
+		// placeVO.setMem_no("MG00000003");
+		// placeVO.setP_name("aoeu");
+		// placeVO.setP_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		// placeVO.setP_place("aoeuaoeuaoeu");
+		// placeVO.setP_pop(10);
+		// placeVO.setPimg(getPicture("WebContent/nothing-here.jpg"));
+		// placeVO.setP_info("aeouaoeu");
+		// placeVO.setP_sta("A");
 		// placeVO.setP_price(12);
-		
 		// placejdbcdao.insert(placeVO);
 // update
 		// PlaceVO placeVO = new PlaceVO();
-		// placeVO.setP_no("");
-		// placeVO.setMf_no("");
-		// placeVO.setMem_no("");
-		// placeVO.setP_name("");
-		// placeVO.setP_until(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// placeVO.setP_place("");
-		// placeVO.setP_pop(1);
-		// placeVO.setPimg(getPicture("nothing-here.jpg"));
-		// placeVO.setP_info("");
-		// placeVO.setP_sta("");
+		// placeVO.setP_no("P000000001");
+		// placeVO.setMf_no("MM00000001");
+		// placeVO.setMem_no("MG00000003");
+		// placeVO.setP_name("aoeuaoeu");
+		// placeVO.setP_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		// placeVO.setP_place("aoeuaoeu");
+		// placeVO.setP_pop(10);
+		// placeVO.setPimg(getPicture("WebContent/nothing-here.jpg"));
+		// placeVO.setP_info("aoeuaoeuaoeu");
+		// placeVO.setP_sta("A");
 		// placeVO.setP_price(12);
-		
 		// placejdbcdao.update(placeVO);
 //delete
-		//placejdbcdao.delete("");
+		//placejdbcdao.delete("P000000001");
 //search one
-		// PlaceVO placeVO =placejdbcdao.findByPrimaryKey("");
+		// PlaceVO placeVO = placejdbcdao.findByPrimaryKey("P000000001");
 		// System.out.println(placeVO.getP_no());
 		// System.out.println(placeVO.getMf_no());
 		// System.out.println(placeVO.getMem_no());
@@ -299,20 +297,20 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 //search all
 		// List<PlaceVO> list=placejdbcdao.getAll();
 		// for(PlaceVO placeVO :list){
-		// // System.out.println(placeVO.getP_no());
-		// // System.out.println(placeVO.getMf_no());
-		// // System.out.println(placeVO.getMem_no());
-		// // System.out.println(placeVO.getP_name());
-		// // System.out.println(placeVO.getP_until());
-		// // System.out.println(placeVO.getP_place());
-		// // System.out.println(placeVO.getP_pop());
-		// // System.out.println(placeVO.getPimg());
-		// // System.out.println(placeVO.getP_info());
-		// // System.out.println(placeVO.getP_sta());
-		// // System.out.println(placeVO.getP_price());
-		// // System.out.println("---------------------");
+		// System.out.println(placeVO.getP_no());
+		// System.out.println(placeVO.getMf_no());
+		// System.out.println(placeVO.getMem_no());
+		// System.out.println(placeVO.getP_name());
+		// System.out.println(placeVO.getP_until());
+		// System.out.println(placeVO.getP_place());
+		// System.out.println(placeVO.getP_pop());
+		// System.out.println(placeVO.getPimg());
+		// System.out.println(placeVO.getP_info());
+		// System.out.println(placeVO.getP_sta());
+		// System.out.println(placeVO.getP_price());
+		// System.out.println("---------------------");
 		// }
-		
+		//
 		
 
 	}

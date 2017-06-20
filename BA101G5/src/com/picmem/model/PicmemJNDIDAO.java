@@ -1,11 +1,13 @@
 package com.picmem.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -26,7 +28,7 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 	private static final String GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
-	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN=?,PICMEM_STATUS=?,MEM_LONGI=?,MEM_LATIT=? where PICNIC_NO =? MEM_NO =? where PICNIC_NO= ? ,MEM_NO = ?";
+	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
 
 	@Override
 	public void insert(PicmemVO picmemVO) {
@@ -41,9 +43,10 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 			pstmt.setString(3, picmemVO.getPicmem_iden());
 			pstmt.setString(4, picmemVO.getPicmem_sta());
 			pstmt.setDouble(5, picmemVO.getMem_longi());
-			pstmt.setDouble(5, picmemVO.getMem_latit());
+			pstmt.setDouble(6, picmemVO.getMem_latit());
 
 			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -80,7 +83,6 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 			pstmt.setDouble(4, picmemVO.getMem_latit());
 			pstmt.setString(5, picmemVO.getPicnic_no());
 			pstmt.setString(6, picmemVO.getMem_no());
-
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -149,7 +151,10 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 			pstmt.setString(2, mem_no);
 			rs = pstmt.executeQuery();
 
+			rs.next();
 			picmemVO = new PicmemVO();
+			picmemVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			picmemVO.setMem_no(rs.getString("MEM_NO"));
 			picmemVO.setPicmem_iden(rs.getString("PICMEM_IDEN"));
 			picmemVO.setPicmem_sta(rs.getString("PICMEM_STA"));
 			picmemVO.setMem_longi(rs.getDouble("MEM_LONGI"));
@@ -232,5 +237,7 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 			}
 		}
 		return list;
+
 	}
+
 }

@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
-	String driver = "Oracle.jdbc.driver.Oracledriver";
-	String url = "jdbc:oracle:thin@localhost:1521:XE";
-	String userid = "ba101";
-	String passwd = "ba101";
+	String driver = "oracle.jdbc.driver.Oracledriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "BA101G5";
+	String passwd = "III";
 
-	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA) values('GR'||LPAD(GR_NO_SQ.nexval,8,0),?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA) values('GR'||LPAD(GR_NO_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_RENT order by GR_NO";
 	private static final String GET_ONE_STMT = "select GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA from GOODS_RENT where GR_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_RENT where GR_NO =?";
@@ -273,16 +273,18 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		Goods_RentJDBCDAO goods_rentjdbcdao = new Goods_RentJDBCDAO();
 // insert
 		// Goods_RentVO goods_rentVO = new Goods_RentVO();
-		// goods_rentVO.setMf_no("");
-		// goods_rentVO.setP_no("");
-		// goods_rentVO.setGr_name("");
-		// goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_rentVO.setGr_price(0);
-		// goods_rentVO.setGr_count(1);
-		// goods_rentVO.setGr_info("");
-		// goods_rentVO.setGr_img(getPicture("nothing-here.jpg"));
-		// goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_rentVO.setGr_sta("");
+		// goods_rentVO.setMf_no("MM00000001");
+		// goods_rentVO.setP_no("P000000001");
+		// goods_rentVO.setGr_name("aoeuaoeu");
+		// goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		// goods_rentVO.setGr_price(10);
+		// goods_rentVO.setGr_count(14);
+		// goods_rentVO.setGr_info("aoeuaoeu");
+		// goods_rentVO.setGr_img(getPicture("WebContent\nothing-here.jpg"));
+		// goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		// goods_rentVO.setGr_sta("A");
 		// goods_rentjdbcdao.insert(goods_rentVO);
 // update
 		// Goods_RentVO goods_rentVO = new Goods_RentVO();

@@ -23,7 +23,7 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static final String INSERT_STMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICNICDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE_ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC Order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_NO = ?";
@@ -36,7 +36,7 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-		    con = ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, picnicVO.getPicnic_name());
 			pstmt.setString(2, picnicVO.getPicnic_desc());
@@ -54,7 +54,6 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 
 			pstmt.executeUpdate();
 
-		
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -99,7 +98,6 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 			pstmt.setString(13, picnicVO.getOrd_sta());
 
 			pstmt.executeUpdate();
-	
 
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -129,7 +127,7 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-		    con = ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, picnic_no);
 			pstmt.executeUpdate();
@@ -162,29 +160,27 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-            con = ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				picnicVO = new PicnicVO();
-				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
-				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
-				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-				picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
-				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
-				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
-				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
-				picnicVO.setPicnic_date(rs.getTimestamp("PICNIC_DATE"));
-				picnicVO.setPicnic_pl(rs.getInt("PICNIC_PL"));
-				picnicVO.setPicnic_sta(rs.getString("PICNIC_STA"));
-				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
-				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
-				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
-
-			}
+			rs.next();
+			picnicVO = new PicnicVO();
+			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
+			picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
+			picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+			picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
+			picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
+			picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
+			picnicVO.setPicnic_date(rs.getTimestamp("PICNIC_DATE"));
+			picnicVO.setPicnic_pl(rs.getInt("PICNIC_PL"));
+			picnicVO.setPicnic_sta(rs.getString("PICNIC_STA"));
+			picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
+			picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
+			picnicVO.setOrd_dm(rs.getString("ORD_DM"));
+			picnicVO.setOrd_sta(rs.getString("Ord_sta"));
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {

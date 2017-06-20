@@ -151,6 +151,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 			pstmt.setString(1, p_no);
 			rs = pstmt.executeQuery();
 
+			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
 			placeVO.setMem_no(rs.getString("MEM_NO"));

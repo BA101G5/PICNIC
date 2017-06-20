@@ -4,10 +4,10 @@ import java.sql.*;
 import java.util.*;
 
 public class PicnicJDBCDAO implements PicnicDAO_interface {
-	String driver = "Oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin@localhost:1521:XE";
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "BA101G5";
+	String passwd = "III";
 
 	private static final String INSERT_STMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICNICDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE_ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC Order by PICNIC_NO";
@@ -162,7 +162,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			rs.next();
 				picnicVO = new PicnicVO();
 				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
@@ -178,9 +178,6 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
 				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
-
-			}
-
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -279,15 +276,19 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 
 	public static void main(String[] args) {
 		PicnicJDBCDAO picnicjdbcdao = new PicnicJDBCDAO();
-// insert
+		// insert
 		// PicnicVO picnicVO =new PicnicVO();
 		// picnicVO.setPicnic_name("天線寶寶");
 		// picnicVO.setPicnic_desc("在這裡在這裡");
-		// picnicVO.setPicupdate(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
-		// picnicVO.setPicnic_startup(java.sql.Timestamp.valueOf("2056-01-04 0:0:0"));
-		// picnicVO.setPicnic_setup(java.sql.Timestamp.valueOf("2055-01-02 0:0:0"));
+		// picnicVO.setPicupdate(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		// picnicVO.setPicnic_startup(java.sql.Timestamp.valueOf("2056-01-04
+		// 0:0:0"));
+		// picnicVO.setPicnic_setup(java.sql.Timestamp.valueOf("2055-01-02
+		// 0:0:0"));
 		// picnicVO.setPicnic_chk("S");
-		// picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-05 0:0:0:0"));
+		// picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-05
+		// 0:0:0:0"));
 		// picnicVO.setPicnic_pl(10);
 		// picnicVO.setPicnic_sta("L");
 		// picnicVO.setOrd_total(400.0);
@@ -297,7 +298,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		//
 		// picnicjdbcdao.insert(picnicVO);
 
-// update
+		// update
 		// PicnicVO picnicVO =new PicnicVO();
 		// picnicVO.setPicnic_no(PG00000001);
 		// picnicVO.setPicnic_name("天線寶寶");
@@ -315,9 +316,9 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		// picnicVO.setOrd_sta("H");
 		//
 		// picnicjdbcdao.update(picnicVO);
-// delete
+		// delete
 		// picnicjdbcdao.delete("PG00000001");
-// search one
+		// search one
 		// PicnicVO picnicVO= picnicjdbcdao.findByPrimaryKey("PG00000001");
 		// System.out.println(picnicVO.getPicnic_no());
 		// System.out.println(picnicVO.getPicnic_name());
@@ -334,8 +335,8 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		// System.out.println(picnicVO.getOrd_dm());
 		// System.out.println(picnicVO.getOrd_sta());
 		// System.out.println("---------------------");
-// search all
-        // List<PicnicVO> list = picnicjdbcdao.getAll();
+		// search all
+		// List<PicnicVO> list = picnicjdbcdao.getAll();
 		// for (PicnicVO apicnic : list) {
 		// System.out.println(apicnic.getPicnic_no());
 		// System.out.println(apicnic.getPicnic_name());
