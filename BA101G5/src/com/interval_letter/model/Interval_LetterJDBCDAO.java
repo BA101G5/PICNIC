@@ -16,15 +16,15 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO INTERNAL_LETTER (LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS) VALUES ('IL' || LPAD(LETTER_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?)";
+		"INSERT INTO INTERNAL_LETTER (LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA) VALUES ('IL' || LPAD(LETTER_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS FROM INTERNAL_LETTER order by LETTER_NO";
+		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA FROM INTERNAL_LETTER order by LETTER_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STATUS FROM INTERNAL_LETTER where LETTER_NO = ?";
+		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA FROM INTERNAL_LETTER where LETTER_NO = ?";
 	private static final String DELETE = 
 		"DELETE FROM INTERNAL_LETTER where LETTER_NO = ?";
 	private static final String UPDATE = 
-		"UPDATE INTERNAL_LETTER set SENDER_NO=?, RECIPIENT_NO=?, LETTER_DATE=?, LETTER_TEXT=?, LETTER_TITLE=?, LETTER_STATUS=? where LETTER_NO = ?";
+		"UPDATE INTERNAL_LETTER set SENDER_NO=?, RECIPIENT_NO=?, LETTER_DATE=?, LETTER_TEXT=?, LETTER_TITLE=?, LETTER_STA=? where LETTER_NO = ?";
 
 	@Override
 	public void insert(Interval_LetterVO intervalLetterVO) {
@@ -201,7 +201,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
 				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
 				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
-				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STATUS"));
+				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STA"));
 			}
 
 			// Handle any driver errors
@@ -265,7 +265,7 @@ public class Interval_LetterJDBCDAO implements Interval_LetterDAO_interface {
 				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
 				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
 				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
-				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STATUS"));
+				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STA"));
 				list.add(intervalLetterVO); // Store the row in the list
 			}
 
