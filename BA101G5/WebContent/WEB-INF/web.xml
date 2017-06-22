@@ -26,7 +26,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AnnouncementServlet</servlet-name>
-		<url-pattern>/announcement/announcement.do</url-pattern>
+		<url-pattern>/backend/announcement/announcement.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

@@ -47,13 +47,13 @@
 			<td>${announcementVO.ann_no}</td>
 			<td>${announcementVO.ann_text}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/announcement/announcement.do">
+			  <FORM METHOD="post" ACTION="announcement.do">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="ann_no" value="${announcementVO.ann_no}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/announcement/announcement.do">
+			  <FORM METHOD="post" ACTION="announcement.do">
 			    <input type="submit" value="刪除">
 			    <input type="hidden" name="ann_no" value="${announcementVO.ann_no}">
 			    <input type="hidden" name="action"value="delete"></FORM>
