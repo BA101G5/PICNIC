@@ -33,7 +33,7 @@ public class AnnouncementServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("ann_no");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入員工編號");
+					errorMsgs.add("請輸入編號");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -172,33 +172,6 @@ public class AnnouncementServlet extends HttpServlet {
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String ann_text = req.getParameter("ann_text").trim();
-				String job = req.getParameter("job").trim();
-				
-				java.sql.Date hiredate = null;
-				try {
-					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-				} catch (IllegalArgumentException e) {
-					hiredate=new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
-				}
-				
-				Double sal = null;
-				try {
-					sal = new Double(req.getParameter("sal").trim());
-				} catch (NumberFormatException e) {
-					sal = 0.0;
-					errorMsgs.add("薪水請填數字.");
-				}
-				
-				Double comm = null;
-				try {
-					comm = new Double(req.getParameter("comm").trim());
-				} catch (NumberFormatException e) {
-					comm = 0.0;
-					errorMsgs.add("獎金請填數字.");
-				}
-				
-				Integer deptno = new Integer(req.getParameter("deptno").trim());
 
 				AnnouncementVO announcementVO = new AnnouncementVO();
 				announcementVO.setAnn_text(ann_text);
