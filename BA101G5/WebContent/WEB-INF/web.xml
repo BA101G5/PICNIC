@@ -21,6 +21,15 @@
 	</resource-ref>
   	
   	<servlet>
+		<servlet-name>AnnouncementServlet</servlet-name>
+		<servlet-class>com.announcement.controller.AnnouncementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnnouncementServlet</servlet-name>
+		<url-pattern>/announcement/announcement.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>Chatroom_MembersServlet</servlet-name>
 		<servlet-class>com.chatroom_members.controller.Chatroom_MembersServlet</servlet-class>
 	</servlet>
