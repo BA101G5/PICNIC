@@ -287,14 +287,14 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 
 //		// 穝糤
 		AnnouncementVO announcementVO1 = new AnnouncementVO();
-		announcementVO1.setAnn_text("程穝: そずゅ");
+		announcementVO1.setAnn_text("程穝: 舧厨把 ");
 		dao.insert(announcementVO1);
 		
 //		// э
-		AnnouncementVO announcementVO2 = new AnnouncementVO();
-		announcementVO2.setAnn_no("AN00000001");
-		announcementVO2.setAnn_text("**э**--程穝: そずゅ");
-		dao.update(announcementVO2);
+//		AnnouncementVO announcementVO2 = new AnnouncementVO();
+//		announcementVO2.setAnn_no("AN00000001");
+//		announcementVO2.setAnn_text("**э**--程穝: そずゅ");
+//		dao.update(announcementVO2);
 		
 //		// 埃
 //		dao.delete("AN00000003");
