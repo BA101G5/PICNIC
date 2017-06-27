@@ -34,6 +34,14 @@
 	margin: 0px;
 	margin-bottom: 0px;
 }
+
+.thumbnail {
+	height: 350px;
+	text-align: center;
+	line-height: 180px;
+	margin-top: 0px;
+	bgcolor:blue;
+}
 </style>
 </head>
 <body>
@@ -42,12 +50,10 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-10 col-sm-push-1 ">
+			<div class="col-sm-10 col-sm-push-1 ">
 
 				<div class="row">
-					<div class="col-xs-10 col-sm-push-1">
-
-
+					<div class="col-sm-11 col-sm-push-1">
 						<div id="carousel-id" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#carousel-id" data-slide-to="0" class=""></li>
@@ -81,81 +87,50 @@
 					</div>
 				</div>
 
+
 				<div class="row">
-					<div class="col-xs-10 col-sm-push-1">
-						<a href="#" class="thumbnail">
-							<div class="row">
-								<div class="col-xs-12 ">
-									<img class="banner"
-										src="http://riseabreakfastplace.com/wp-content/uploads/2014/11/minipic-200x350.jpg"
-										alt="">
-									<div class="caption">
-										<h2></h2>
-										<p>獹ē承穨ゼτい笵盰蟚さぱだ痲 痟国港ぇ礛ㄍ矫ぇぃ居ず┚вぇ
-											аō籠發ぇ笿饼厨ぇ啊港﹜秨 眎竧钮框紈グвぇぃ﹜滇痢ま畴
-											ア竡峨┚肯ぇ隔甤い┎い砰訤籃籒ぃ ﹜钵璝Τデの┚到﹜Τ阶ㄤ洁
-											琇啊キぇ獀ぃ﹜絞╬ㄏず钵猭 ㄍいㄍ尝яぇ禣缜赋す单▆龟в納┚
-											琌虏┺框啊稭甤いぇㄆㄆ礚眡 玹ぇ礛琁︽ゲ籺干脉簗Τ┮約痲盢瓁胐┦︽
-											睶А惧篫瓁ㄆ刚ノら嘿ぇり琌渤某 羭胐服稭犁いぇㄆ眡玹ぇゲㄏ︽皚㎝伏纔
-											眔┮克藉环簙┮砍订克环藉 簙┮渡繸–籔阶ㄆゼ沽ぃ价
-											礹艶ㄍい﹟把瓁眡璼▆竊 ぇ腀啊克ぇ獺ぇ玥簙ぇ订璸らτ
+					<div class="col-sm-11 col-sm-push-1">
+						<div class="col-sm-4 ">
 
-											セガ︾癭玭锭璭┦㏑睹ぃ―籇笷窖 獼ぃ焕礣狿﹠臮胒ぇい吭
-											讽ぇㄆパ琌稰縀笶砛臱梗渡滦ヴ毖 瓁ぇ悔㏑螟ぇ丁焊ㄓΤ╫略稸
-											珿羬盰盚ㄆ㏑ㄓ紐对癠ぃ 端ぇ珿きる寸脃瞏ぃをさ玭よ﹚ヒ
-											ì讽贱瞯瓁﹚い眆很緌秝腸埃た砍確簙 临侣常┮厨τ┚啊ぇ戮だ穜皍穕
-											痲秈荷┚ē玥яぇ缜すぇヴ 腀啊癠癚搁砍確ぇぃ玥獀ぇ竜
-											ぇ艶璝礚砍紈ぇē玥籍す单裹ㄤ篊啊ョ﹜揭 吭缭到笵诡懂ē瞏發框禓</p>
-									</div>
+							<a href="#" class="thumbnail">
+								<p>ahetounsaoeuhtnsaoeu</p>
+								<div class="caption">
+									<button type="button" class="btn btn-default">鎯冲枬</button>
 								</div>
-							</div>
-						</a>
+							</a>
+						</div>
+						<div class="col-sm-4 ">
+							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail"> 
+								<p>ahetounsaoeuhtnsaoeu</p>
+								<div class="caption">
+									<button type="button" class="btn btn-default">鎯冲枬</button>
+								</div>
+							</a>
+						</div>
+						<div class="col-sm-4 ">
+							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail">
+								<p>ahetounsaoeuhtnsaoeu</p>
+								<div class="caption">
+									<button type="button" class="btn btn-default">鎯冲枬</button>
+								</div>
+							</a>
+						</div>
 					</div>
 				</div>
-				<div class="col-xs-10 col-sm-push-1">
-					<div class="col-xs-4 ">
-						<a href="#" class="thumbnail"> <img
-							src="http://x.webdo.cc/manager_admin/upload_file/42640871/704/14919877041.png"
-							alt="">
-							<div class="caption">
-								<button type="button" class="btn btn-default">稱耻</button>
-							</div>
-						</a>
-					</div>
-					<div class="col-xs-4 ">
-						<a href="#" class="thumbnail"> <img
-							src="http://x.webdo.cc/manager_admin/upload_file/42640871/704/14919877041.png"
-							alt="">
-							<div class="caption">
-								<button type="button" class="btn btn-default">稱耻</button>
-							</div>
-						</a>
-					</div>
-					<div class="col-xs-4 ">
-						<a href="#" class="thumbnail"> <img
-							src="http://x.webdo.cc/manager_admin/upload_file/42640871/704/14919877041.png"
-							alt="">
-							<div class="caption">
-								<button type="button" class="btn btn-default">稱耻</button>
-							</div>
-						</a>
+
+				<div class="row ">
+					<div class="col-sm-11	 col-sm-push-1 ">
+						<div class="btn-group btn-group-justified ">
+							<a href="# " class="btn btn-default " role="button ">鍥炲埌</a>
+						</div>
+						<jsp:include page="/mustinclude/footer.jsp" />
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row ">
-			<div class="col-xs-8 col-xs-push-2 ">
-				<div class="btn-group btn-group-justified ">
-					<a href="# " class="btn btn-default " role="button "></a>
-				</div>
-				<jsp:include page="/mustinclude/footer.jsp" />
-			</div>
-		</div>
-	</div>
 
 
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="https://code.jquery.com/jquery.js"></script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

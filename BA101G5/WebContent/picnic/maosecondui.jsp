@@ -20,7 +20,7 @@
 <style>
 #map {
 	height: 600px;
-	width: 850px;
+	width: 800px;
 }
 
 #new {
@@ -50,25 +50,29 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-2 col-xs-push-2">
+			<div class="col-sm-3 col-sm-push-1">
 				<h3>請選擇條件</h3>
 				<form action="http://yahoo.com.tw">
 					<div class="list-group">
 						<a href="#" class="list-group-item active">First item</a> <a
 							href="#" class="list-group-item">
-							<p>
-								縣市<select name="" id="input" class="form-control"
-									required="required">
-									<option value=""></option>
-								</select>
-							</p>
-							<P>
-								地點<input type="text" name="">
-							</P>
-							<P>
-								時間<input type="text" name="">
-							</P>
-						</a> <a href="#" class="list-group-item"><P>
+							
+							<table>
+								<tr>
+									<td>縣市<select name="" id="input" class="form-control"
+										required="required">
+											<option value=""></option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>地點<input type="text" name=""></td>
+								</tr>
+								<tr>
+									<td>時間<input type="text" name=""></td>
+								</tr>
+							</table></a>
+							
+							 <a href="#" class="list-group-item"><P>
 								輸入一個可以清楚表達揪團性質的名子<input type="textarea" rows="4" cols="50"
 									name="">
 							</P></a>
@@ -86,7 +90,7 @@
 					</div>
 			</div>
 			</form>
-			<div class="col-xs-8 col-xs-push-2">
+			<div class="col-sm-8 col-xs-1 col-sm-push-1">
 				<div id="map"></div>
 				<script>
 					var map;
