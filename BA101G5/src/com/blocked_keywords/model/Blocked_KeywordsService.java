@@ -10,7 +10,7 @@ public class Blocked_KeywordsService {
 		dao = new Blocked_KeywordsDAO();
 	}
 
-	Blocked_KeywordsVO addBlocked_Keywords(String keyword, String replacement) {
+	public Blocked_KeywordsVO addBlocked_Keywords(String keyword, String replacement) {
 
 		Blocked_KeywordsVO blockedKeywordsVO = new Blocked_KeywordsVO();
 
@@ -33,16 +33,15 @@ public class Blocked_KeywordsService {
 		return blockedKeywordsVO;
 	}
 
-	public void deleteBlocked_Keywords(String ann_no) {
-		dao.delete(ann_no);
+	public void deleteBlocked_Keywords(String keyword_no) {
+		dao.delete(keyword_no);
 	}
 
-	public Blocked_KeywordsVO getOneBlocked_Keywords(String ann_no) {
-		return dao.findByPrimaryKey(ann_no);
+	public Blocked_KeywordsVO getOneBlocked_Keywords(String keyword_no) {
+		return dao.findByPrimaryKey(keyword_no);
 	}
 
 	public List<Blocked_KeywordsVO> getAll() {
 		return dao.getAll();
 	}
 }
-

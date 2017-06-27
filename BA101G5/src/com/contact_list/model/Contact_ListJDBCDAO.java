@@ -161,7 +161,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 	}
 
 	@Override
-	public List<Contact_ListVO> findByPrimaryKey(String MEM_NO, String CONTACT_NO) {
+	public List<Contact_ListVO> findByPrimaryKey(String mem_no, String contact_no) {
 		List<Contact_ListVO> list = new ArrayList<Contact_ListVO>();
 
 		Contact_ListVO contact_listVO = null;
@@ -175,8 +175,8 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, MEM_NO);
-			pstmt.setString(2, CONTACT_NO);
+			pstmt.setString(1, mem_no);
+			pstmt.setString(2, contact_no);
 
 			rs = pstmt.executeQuery();
 
