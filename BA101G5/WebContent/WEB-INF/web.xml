@@ -28,6 +28,15 @@
 		<servlet-name>AnnouncementServlet</servlet-name>
 		<url-pattern>/backend/announcement/announcement.do</url-pattern>
 	</servlet-mapping>
+	
+  	<servlet>
+		<servlet-name>Blocked_KeywordsServlet</servlet-name>
+		<servlet-class>com.blocked_keywords.controller.Blocked_KeywordsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Blocked_KeywordsServlet</servlet-name>
+		<url-pattern>/backend/blocked_keywords/blocked_keywords.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>Chatroom_MembersServlet</servlet-name>
