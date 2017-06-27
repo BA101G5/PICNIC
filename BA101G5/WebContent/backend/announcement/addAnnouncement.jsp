@@ -20,7 +20,7 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 		<h3>最新消息資料新增 - addAnnouncement.jsp</h3>
 		</td>
 		<td>
-		   <a href="select_page.jsp"><img src="images/back1.gif" width="100" height="100" border="1">回首頁</a>
+		   <a href="select_page.jsp"><img src="<%=request.getContextPath()%>/images/back1.gif" width="100" height="100" border="1">回首頁</a>
 	    </td>
 	</tr>
 </table>
