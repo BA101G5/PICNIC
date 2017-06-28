@@ -340,20 +340,20 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		dao.insert(pboardArticleVO1);
 		
 //		// 修改
-		Pboard_ArticleVO pboardArticleVO2 = new Pboard_ArticleVO();
-		pboardArticleVO2.setArticle_no("AB00000001");
-		pboardArticleVO2.setAuthor_no("MG00000001");
-		pboardArticleVO2.setTopic_no(null);
-		pboardArticleVO2.setPicnic_no("PG00000001");
-		pboardArticleVO2.setArticle_title("***已修改***標題: 新增野餐團的留言板留言");
-		pboardArticleVO2.setArticle_text("***已修改***新增野餐團的留言板留言");
-		pboardArticleVO2.setArticle_post(java.sql.Timestamp.valueOf("2017-06-20 12:38:40"));
-		pboardArticleVO2.setArticle_edit(null);
-		pboardArticleVO2.setArticle_view(0);
-		pboardArticleVO2.setArticle_sta("V");
-		pboardArticleVO2.setArticle_kind(1);
-		pboardArticleVO2.setArticle_pw(null);
-		dao.update(pboardArticleVO2);
+//		Pboard_ArticleVO pboardArticleVO2 = new Pboard_ArticleVO();
+//		pboardArticleVO2.setArticle_no("AB00000001");
+//		pboardArticleVO2.setAuthor_no("MG00000001");
+//		pboardArticleVO2.setTopic_no(null);
+//		pboardArticleVO2.setPicnic_no("PG00000001");
+//		pboardArticleVO2.setArticle_title("***已修改***標題: 新增野餐團的留言板留言");
+//		pboardArticleVO2.setArticle_text("***已修改***新增野餐團的留言板留言");
+//		pboardArticleVO2.setArticle_post(java.sql.Timestamp.valueOf("2017-06-20 12:38:40"));
+//		pboardArticleVO2.setArticle_edit(null);
+//		pboardArticleVO2.setArticle_view(0);
+//		pboardArticleVO2.setArticle_sta("V");
+//		pboardArticleVO2.setArticle_kind(1);
+//		pboardArticleVO2.setArticle_pw(null);
+//		dao.update(pboardArticleVO2);
 		
 //		// 刪除
 //		dao.delete("AB00000002");
