@@ -11,8 +11,8 @@
                         <!-- 左選單 -->
                         <ul class="nav navbar-nav">
                             <li><a href="#">參團</a></li>
-                            <li><a href="#">開團</a></li>
-                            <li><a href="#">精選</a></li>
+                            <li><a href="<%=request.getContextPath()%>/picnic/maosecondui.jsp">開團</a></li>
+                            <li><a href="<%=request.getContextPath()%>/buycart/moafirst.jsp">預購商品</a></li>
                             <li><a href="forum.html">討論區</a></li>
                         </ul>
 

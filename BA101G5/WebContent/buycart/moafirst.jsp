@@ -93,25 +93,25 @@
 						<div class="col-sm-4 ">
 
 							<a href="#" class="thumbnail">
-								<p>ahetounsaoeuhtnsaoeu</p>
+								<p>²Ä¤@¦¸¿ïÁÊ?</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">æƒ³å–</button>
+									<button type="button" class="btn btn-default">«e©¹µù¥U</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail"> 
-								<p>ahetounsaoeuhtnsaoeu</p>
+								<p>¦UºØ°Ó«~</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">æƒ³å–</button>
+									<button type="button" class="btn btn-default">«e©¹¡F</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail">
-								<p>ahetounsaoeuhtnsaoeu</p>
+								<p>¥Ø«e¬y¦æªº¹wÁÊ°Ó«~</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">æƒ³å–</button>
+									<button type="button" class="btn btn-default">«e©¹</button>
 								</div>
 							</a>
 						</div>
@@ -119,11 +119,13 @@
 				</div>
 
 				<div class="row ">
-					<div class="col-sm-11	 col-sm-push-1 ">
+					<div class="col-sm-11 col-sm-push-1 ">
 						<div class="btn-group btn-group-justified ">
-							<a href="# " class="btn btn-default " role="button ">å›åˆ°</a>
+							<a href="# " class="btn btn-default " role="button ">¦^¨ì¶}ÀY</a>
 						</div>
+						<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />
+						</div>
 					</div>
 				</div>
 			</div>

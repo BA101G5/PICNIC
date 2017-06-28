@@ -30,39 +30,41 @@
 				<div class="col-sm-11 cal-sm-push-1">
 					<div class="collapse navbar-collapse navbar-ex1-collapse">
 						<ul class="nav navbar-nav side-nav">
-							<li><a href="index.html"> 首頁</a></li>
-							<li class="active"><a href="charts.html">會員主頁</a></li>
-							<li><a href="tables.html">本日收益</a></li>
-							<li><a href="forms.html">昨日收益</a></li>
-							<li><a href="bootstrap-elements.html">下線會員</a></li>
-							<li><a href="bootstrap-grid.html"> 會員等級</a></li>
-							<li><a href="blank-page.html"> 匯款紀錄</a></li>
+							<li><a href="index.html">aeou</a></li>
+							<li class="active"><a href="charts.html">aeou</a></li>
+							<li><a href="tables.html">aeou</a></li>
+							<li><a href="forms.html">aeoua</a></li>
+							<li><a href="bootstrap-elements.html">aoeu</a></li>
+							<li><a href="bootstrap-grid.html"> aeou</a></li>
+							<li><a href="blank-page.html"> aeou</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 			<div class="col-sm-11 "><div class="col-sm-3 "><ul class="list-group">
-			<li class="list-group-item">清單項目 1</li>
-			<li class="list-group-item">清單項目 1</li>
-			<li class="list-group-item">清單項目 1</li>
-			<li class="list-group-item">清單項目 1</li>
-			<li class="list-group-item">清單項目 1</li>
-			<li class="list-group-item">清單項目 2</li>
-			<li class="list-group-item">清單項目 3</li>
+			<li class="list-group-item">aeu</li>
+			<li class="list-group-item">aeou</li>
+			<li class="list-group-item">aeou</li>
+			<li class="list-group-item">aeou</li>
+			<li class="list-group-item">aeou</li>
+			<li class="list-group-item">aeou</li>
+			<li class="list-group-item">aoeu</li>
 		</ul></div></div>
 			</div>
 
 		<div class="row ">
-			<div class="col-sm-10 cal-sm-push-1 ">
-				<div class="btn-group btn-group-justified ">
-					<a href="# " class="btn btn-default " role="button ">aoeu</a>
+					<div class="col-sm-11 col-sm-push-1 ">
+						<div class="btn-group btn-group-justified ">
+							<a href="# " class="btn btn-default " role="button ">aoeu</a>
+						</div>
+						<div class="col-sm-11 col-sm-push-3 ">
+						<jsp:include page="/mustinclude/footer.jsp" />
+						</div>
+					</div>
 				</div>
-				<jsp:include page="/mustinclude/footer.jsp" />
-			</div>
-		</div>
 	</div>
-	</div>
+	
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script

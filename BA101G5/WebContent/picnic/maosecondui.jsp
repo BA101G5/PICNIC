@@ -11,6 +11,10 @@
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link type="text/css" href="<%=request.getContextPath()%>/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />    
+<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src=""<%=request.getContextPath()%>/jquery-ui/jquery-ui.theme.min.js"></script>
+
 
 <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,6 +36,7 @@
 	background: skyblue;
 }
 </style>
+
 </head>
 
 <body>
@@ -40,44 +45,49 @@
 	<div class="container-fluid">
 		<div class="row ">
 
-			<div class="col-xs-8 col-xs-push-2">
+			<div class="col-sm-8 col-sm-push-2">
 
 				<ol class="breadcrumb">
-					<li><a href="#">回到首頁</a></li>
-					<li><a href="#">回上上頁</a></li>
-					<li class="active">回上一頁</li>
+					<li><a href="#">首頁</a></li>
+					<li><a href="#" class="active">開團</a></li>
+					
 				</ol>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3 col-sm-push-1">
+			<div class="col-sm-2 col-sm-push-2">
 				<h3>請選擇條件</h3>
 				<form action="http://yahoo.com.tw">
 					<div class="list-group">
 						<a href="#" class="list-group-item active">First item</a> <a
 							href="#" class="list-group-item">
-							
 							<table>
 								<tr>
-									<td>縣市<select name="" id="input" class="form-control"
+									<td>縣市: <select name="" id="input" class="form-control"
 										required="required">
 											<option value=""></option>
 									</select></td>
 								</tr>
 								<tr>
-									<td>地點<input type="text" name=""></td>
+									<td>地點 : <input type="text" name=""></td>
 								</tr>
 								<tr>
-									<td>時間<input type="text" name=""></td>
+									<td>Date : <input type="text" id="datepicker"></td>
 								</tr>
-							</table></a>
-							
-							 <a href="#" class="list-group-item"><P>
-								輸入一個可以清楚表達揪團性質的名子<input type="textarea" rows="4" cols="50"
+								<tr>
+									<td>限制人數: <input type="text" name=""></td>
+								</tr>
+							</table>
+						</a> <a href="#" class="list-group-item"><P>
+								請輸入可以清楚表達揪團性質的名子: <input type="textarea" rows="4" cols="50"
 									name="">
 							</P></a>
 					</div>
-
+					<script>
+						$(function() {
+							$("#datepicker").datepicker();
+						});
+					</script>
 
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
@@ -90,7 +100,7 @@
 					</div>
 			</div>
 			</form>
-			<div class="col-sm-8 col-xs-1 col-sm-push-1">
+			<div class="col-sm-8 col-xs-1 col-sm-push-2">
 				<div id="map"></div>
 				<script>
 					var map;
@@ -117,19 +127,21 @@
 				<div class="col-xs-8 col-xs-push-2 ">
 					<a href="# " class="thumbnail ">
 
-						<div class="caption "></div>
+						<div class="caption"></div>
 					</a>
 				</div>
 			</div>
 
 			<div class="row ">
-				<div class="col-xs-8 col-xs-push-2 ">
-					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">回到</a>
+					<div class="col-sm-8 col-sm-push-2 ">
+						<div class="btn-group btn-group-justified ">
+							<a href="# " class="btn btn-default " role="button ">回到開頭；</a>
+						</div>
+						<div class="col-sm-11 col-sm-push-3 ">
+						<jsp:include page="/mustinclude/footer.jsp" />
+						</div>
 					</div>
-					<jsp:include page="/mustinclude/footer.jsp" />
 				</div>
-			</div>
 
 		</div>
 	</div>
