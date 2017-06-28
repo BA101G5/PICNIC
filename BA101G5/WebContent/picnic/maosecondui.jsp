@@ -57,7 +57,7 @@
 		<div class="row">
 			<div class="col-sm-2 col-sm-push-2">
 				<h3>請選擇條件</h3>
-				<form action="http://yahoo.com.tw">
+				<form  action="http://yahoo.com.tw">
 					<div class="list-group">
 						<a href="#" class="list-group-item active">First item</a> <a
 							href="#" class="list-group-item">
@@ -91,10 +91,10 @@
 
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
-							<a href="#" class="btn btn-default" role="button">重設</a>
+							<a href="<%=request.getContextPath()%>/picnic/maosecondui.jsp" class="btn btn-default" role="button">重設</a>
 						</div>
 						<div class="btn-group">
-							<a href="#" class="btn btn-default" role="button">送出</a>
+							<a href="<%=request.getContextPath()%>/picnic/maosecondui2.jsp" class="btn btn-default"  "role="button">送出</a>
 						</div>
 
 					</div>
@@ -135,7 +135,7 @@
 			<div class="row ">
 					<div class="col-sm-8 col-sm-push-2 ">
 						<div class="btn-group btn-group-justified ">
-							<a href="# " class="btn btn-default " role="button ">回到開頭；</a>
+							<a href="# " class="btn btn-default " role="button ">回到開頭</a>
 						</div>
 						<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />

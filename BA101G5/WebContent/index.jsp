@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +9,11 @@
 <meta name="keywords" content="">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-<!-- 最新編譯和最佳化的 CSS -->
+<!-- ææ°ç·¨è­¯åæä½³åç CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<!-- 選擇性佈景主題 -->
+<!-- é¸ææ§ä½æ¯ä¸»é¡ -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-<!-- 最新編譯和最佳化的 JavaScript -->
+<!-- ææ°ç·¨è­¯åæä½³åç JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
@@ -88,10 +88,10 @@
 <body>
   <div id="navigation-bar">
   	<ul class="bs-glyphicons-list">
-	  	<li title="會員"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
-	  	<li title="站內信"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></li>
-	  	<li title="教學"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></li>
-	  	<li title="關於我們"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></li>
+	  	<li title="æå¡"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
+	  	<li title="ç«å§ä¿¡"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></li>
+	  	<li title="æå­¸"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></li>
+	  	<li title="éæ¼æå"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></li>
   	<ul>
   </div>
   <div id="home_middle" class="home_section">
@@ -99,16 +99,16 @@
   </div>
   <div id="home_right" class="home_section">
   	<div id="announcement_block">
-  		<div id="announcement">2017-05-31 [最新訊息] 一二三四五六七</div>
+  		<div id="announcement">2017-05-31 [最新訊息] 一二三四五六七</div>
   	</div>
   	<div id="four_block">
 			<div class="block">論壇</div>
-			<div class="block">參團</div>
+			<div class="block">參團</div>
 			<div class="block">精選</div>
 			<div class="block">揪團</div>
 		</div>
   	<div id="home_search">
-  		搜尋列
+  		搜尋列
   	</div>
   </div>
 	<div id="chat_room"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>聊天室</div>

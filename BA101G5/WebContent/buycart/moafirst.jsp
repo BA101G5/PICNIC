@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-
 <html>
 <head>
 <meta charset="utf-8">
@@ -103,7 +102,7 @@
 							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail"> 
 								<p>各種商品</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往；</button>
+									<button type="button" class="btn btn-default">前往</button>
 								</div>
 							</a>
 						</div>

@@ -5,7 +5,7 @@
             <nav class="navbar navbar-default " role="navigation">
                  <div class="col-xs-14 col-xs-push-1  ">
                             <div class="navbar-header">
-                        <a class="navbar-brand" href="#" style="padding: 4px;"><img src="<%=request.getContextPath()%>/mustinclude/logo.png" style="height: 100%;"></a>
+                        <a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp" style="padding: 4px;"><img src="<%=request.getContextPath()%>/mustinclude/logo.png" style="height: 100%;"></a>
                         </div>
                 
                         <!-- ¥ª¿ï³æ -->
