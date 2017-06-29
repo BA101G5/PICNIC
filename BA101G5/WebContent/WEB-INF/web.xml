@@ -21,6 +21,14 @@
 	</resource-ref>
   	
   	<servlet>
+		<servlet-name>Goods_SellServlet</servlet-name>
+		<servlet-class>com.goods_sell.controller.Goods_SellServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Goods_SellServlet</servlet-name>
+		<url-pattern>/goods_sell/goods_sell.do</url-pattern>
+	</servlet-mapping>
+  	<servlet>
 		<servlet-name>Chatroom_MembersServlet</servlet-name>
 		<servlet-class>com.chatroom_members.controller.Chatroom_MembersServlet</servlet-class>
 	</servlet>

@@ -19,6 +19,7 @@
                         <!-- 右選單 -->
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">shyangs</a></li>
+                            <li><a href="#" ><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         </ul>
 
                         <!-- 搜尋表單 -->
