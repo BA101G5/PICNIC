@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		
-		<h1 class="text-center"> é–‹åœ˜</h1>
+		<h1 class="text-center">¦³¯f</h1>
 		
 		
 		<script src="https://code.jquery.com/jquery.js"></script>

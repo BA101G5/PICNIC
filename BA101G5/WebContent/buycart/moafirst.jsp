@@ -92,25 +92,25 @@
 						<div class="col-sm-4 ">
 
 							<a href="#" class="thumbnail">
-								<p>第一次預購?</p>
+								<p>�Ĥ@���w�ʰӫ~�H</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往註冊</button>
+									<button type="button" class="btn btn-default">�e�����U</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail"> 
-								<p>各種商品</p>
+								<p>�ӫ~����</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往</button>
+									<button type="button" class="btn btn-default">�e��</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond2.jsp" class="thumbnail">
-								<p>流行商品</p>
+								<p>�y�檺�ӫ~</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往</button>
+									<button type="button" class="btn btn-default">�e��</button>
 								</div>
 							</a>
 						</div>

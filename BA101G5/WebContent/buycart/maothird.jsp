@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		
-		<h1 class="text-center">哈囉～哩後！</h1>
+		<h1 class="text-center">���f</h1>
 		
 		
 		<script src="https://code.jquery.com/jquery.js"></script>

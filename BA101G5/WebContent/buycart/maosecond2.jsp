@@ -50,10 +50,21 @@
 			</div>
 		</div>
 		<jsp:include page="/buycart/maosecond-import.jsp" />
+		<div class="row ">
+			<div class="col-sm-11 col-sm-push-1 ">
+				<div class="col-sm-9 col-sm-push-1 ">
+					<div class="btn-group btn-group-justified ">
+						<a href="# " class="btn btn-default " role="button ">¦^¼ÐÃD</a>
+					</div>
+					<div class="col-sm-9 col-sm-push-3 ">
+						<jsp:include page="/mustinclude/footer.jsp" />
+					</div>
+				</div>
+			</div>
+		</div>
 
-
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

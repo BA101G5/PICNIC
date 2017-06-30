@@ -25,7 +25,7 @@ public class Goods_RentService {
 	}
 
 	public List<Goods_RentVO> getAll() {
-		return null;
+		return dao.getAll();
 	}
 
 }
