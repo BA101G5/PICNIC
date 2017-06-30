@@ -70,7 +70,7 @@
 			<div class="col-sm-8 col-sm-push-2">
 
 				<ol class="breadcrumb">
-					<li><a href="#">首頁</a></li>
+					<li><a href="<%=request.getContextPath()%>/index.jsp">首頁</a></li>
 					<li><a href="#" class="active">開團</a></li>
 
 				</ol>
@@ -78,7 +78,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-2 col-sm-push-2">
-				<form action="http://yahoo.com.tw">
+				<form method="post" action="<%=request.getContextPath()%>/picnic/maosecondui2.jsp">
 					<h3>請選擇條件</h3>
 
 					<div class="list-group">
@@ -88,13 +88,13 @@
 							<tr>
 								<td>縣市: <select name="" id="input" class="form-control"
 									required="required">
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
+										<option value="aoeu">台北市</option>
+										<option value="aoeu">新北市</option>
+										<option value="aoeu">桃園市</option>
+										<option value="aoeu">臺中市</option>
+										<option value="aoeu">臺南市</option>
+										<option value="aoeu">基隆市</option>
+										<option value="aoeu">新竹市</option>
 										<option value="aoeu">aeou</option>
 										<option value="aoeu">aeou</option>
 										<option value="aoeu">aeou</option>
@@ -122,12 +122,10 @@
 
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
-							<a href="<%=request.getContextPath()%>/picnic/maosecondui.jsp"
-								class="btn btn-default" role="button">重設</a>
+							 <button type="reset" class="btn btn-default" value="Reset">重設</button>
 						</div>
 						<div class="btn-group">
-							<a href="<%=request.getContextPath()%>/picnic/maosecondui2.jsp"
-								class="btn btn-default" "role="button">送出</a>
+							<button type="submit" class="btn btn-default" value="Submit">送出</button>
 						</div>
 
 					</div>
@@ -153,7 +151,7 @@
 			<div class="row ">
 				<div class="col-sm-8 col-sm-push-2 ">
 					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">回到開頭</a>
+						<a href="# " class="btn btn-default " role="button ">回標題</a>
 					</div>
 					<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />
