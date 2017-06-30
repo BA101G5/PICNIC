@@ -46,7 +46,7 @@ public class Chatroom_MessageService {
 		dao.delete(cr_msg_no);
 	}
 
-	public Chatroom_MessageVO getOneEmp(String cr_msg_no) {
+	public Chatroom_MessageVO getOneChatroom_Message(String cr_msg_no) {
 		return dao.findByPrimaryKey(cr_msg_no);
 	}
 

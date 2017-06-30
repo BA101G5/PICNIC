@@ -41,7 +41,7 @@ public class Chatroom_MembersService {
 		dao.delete(chatroom_no,mem_no);
 	}
 
-	public List<Chatroom_MembersVO> getOneEmp(String chatroom_no,String mem_no) {
+	public Chatroom_MembersVO getOneChatroom_Members(String chatroom_no,String mem_no) {
 		return dao.findByPrimaryKey(chatroom_no, mem_no);
 	}
 
@@ -49,5 +49,11 @@ public class Chatroom_MembersService {
 		return dao.getAll();
 	}
 	
-
+	public List<Chatroom_MembersVO> getAllpk() {
+		return dao.getAllpk();
+	}
+	
+	public List<Chatroom_MembersVO> getCrm(String chatroom_no){
+		return dao.findByCrno(chatroom_no);
+	}
 }
