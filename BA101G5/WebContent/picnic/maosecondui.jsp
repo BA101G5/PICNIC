@@ -66,9 +66,7 @@
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<div class="container-fluid">
 		<div class="row ">
-
 			<div class="col-sm-8 col-sm-push-2">
-
 				<ol class="breadcrumb">
 					<li><a href="<%=request.getContextPath()%>/index.jsp">­º­¶</a></li>
 					<li><a href="#" class="active">¶}¹Î</a></li>

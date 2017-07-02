@@ -273,7 +273,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		// goods_sellVO.setGs_sta("B");
 		// goods_selljdbcdao.update(goods_sellVO);
 // delete
-		// goods_selljdbcdao.delete("GS00000001");
+//		 goods_selljdbcdao.delete("GS00000001");
 // search one
 		 Goods_SellVO goods_sellVO =
 		 goods_selljdbcdao.findByPrimaryKey("GS00000002");

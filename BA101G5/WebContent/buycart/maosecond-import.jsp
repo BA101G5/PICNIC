@@ -38,7 +38,7 @@
 										<a href="#"
 										class="btn btn-default">${goods_sellVO.getGs_price()}</a>
 											<input type="hidden" name="gsno" value="${goods_sellVO.gs_no}">
-											<input type="hidden" name="ation" value="getOne">
+											<input type="hidden" name="action" value="getOne">
 										</FORM></td>
 									<td></td>
 									<td><FORM METHOD="post"

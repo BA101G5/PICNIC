@@ -14,32 +14,32 @@ import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
 
 public class Goods_SellServlet extends HttpServlet {
-	public void DoGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
-
+		System.out.println(action);
 		if ("getOne".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-
+                System.out.println("hello");
 				String gsno = new String(req.getParameter("gsno"));
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
-				Goods_SellVO findone = goods_sellSvc.getOne(gsno);
+				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno);
 
-				req.setAttribute("soods_sellVO", findone);
+				req.setAttribute("goods_sellVO", goods_sellVO);
 				String url = null;
 				if ("getOne".equals(action)) {
-					 url="Servelet3/goods_sell/goods_sell.do";
+					 url="/buycart/maothird.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

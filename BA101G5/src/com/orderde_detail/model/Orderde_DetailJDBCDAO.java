@@ -8,7 +8,7 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_BS)values(?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = " select * from ORDERDE_DETAIL ORDER BY PICNIC_NO";
@@ -288,30 +288,30 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 //delete
 		// orderde_detailjdbcdao.delete("PG00000001","P000000001","","");
 //search one
-		// Orderde_DetailVO orderde_detailVO =
-		// orderde_detailjdbcdao.findByPrimaryKey("","","","");
-		// System.out.println(orderde_detailVO.getPicnic_no());
-		// System.out.println(orderde_detailVO.getP_no());
-		// System.out.println(orderde_detailVO.getGr_no());
-		// System.out.println(orderde_detailVO.getGs_no());
-		// System.out.println(orderde_detailVO.getOd_amount());
-		// System.out.println(orderde_detailVO.getOd_price());
-		// System.out.println(orderde_detailVO.getOd_deliver());
-		// System.out.println(orderde_detailVO.getOd_bs());
-		// System.out.println("---------------------");
+		 Orderde_DetailVO orderde_detailVO =
+		 orderde_detailjdbcdao.findByPrimaryKey("","","","");
+		 System.out.println(orderde_detailVO.getPicnic_no());
+		 System.out.println(orderde_detailVO.getP_no());
+		 System.out.println(orderde_detailVO.getGr_no());
+		 System.out.println(orderde_detailVO.getGs_no());
+		 System.out.println(orderde_detailVO.getOd_amount());
+		 System.out.println(orderde_detailVO.getOd_price());
+		 System.out.println(orderde_detailVO.getOd_deliver());
+		 System.out.println(orderde_detailVO.getOd_bs());
+		 System.out.println("---------------------");
 //search all
-		// List<Orderde_DetailVO> list = orderde_detailjdbcdao.getAll();
-		// for(Orderde_DetailVO orderde_detailVO : list){
-		// System.out.println(orderde_detailVO.getPicnic_no());
-		// System.out.println(orderde_detailVO.getP_no());
-		// System.out.println(orderde_detailVO.getGr_no());
-		// System.out.println(orderde_detailVO.getGs_no());
-		// System.out.println(orderde_detailVO.getOd_amount());
-		// System.out.println(orderde_detailVO.getOd_price());
-		// System.out.println(orderde_detailVO.getOd_deliver());
-		// System.out.println(orderde_detailVO.getOd_bs());
-		// System.out.println("---------------------");
-		// }
+//		 List<Orderde_DetailVO> list = orderde_detailjdbcdao.getAll();
+//		 for(Orderde_DetailVO orderde_detailVO : list){
+//		 System.out.println(orderde_detailVO.getPicnic_no());
+//		 System.out.println(orderde_detailVO.getP_no());
+//		 System.out.println(orderde_detailVO.getGr_no());
+//		 System.out.println(orderde_detailVO.getGs_no());
+//		 System.out.println(orderde_detailVO.getOd_amount());
+//		 System.out.println(orderde_detailVO.getOd_price());
+//		 System.out.println(orderde_detailVO.getOd_deliver());
+//		 System.out.println(orderde_detailVO.getOd_bs());
+//		 System.out.println("---------------------");
+//		 }
 	}
 		
 }
