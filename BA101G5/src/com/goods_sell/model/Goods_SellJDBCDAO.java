@@ -275,21 +275,8 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 // delete
 		// goods_selljdbcdao.delete("GS00000001");
 // search one
-		// Goods_SellVO goods_sellVO =
-		// goods_selljdbcdao.findByPrimaryKey("GS00000002");
-		// System.out.println(goods_sellVO.getGs_no());
-		// System.out.println(goods_sellVO.getGs_no());
-		// System.out.println(goods_sellVO.getMf_no());
-		// System.out.println(goods_sellVO.getGs_name());
-		// System.out.println(goods_sellVO.getGs_date());
-		// System.out.println(goods_sellVO.getGs_price());
-		// System.out.println(goods_sellVO.getGs_info());
-		// System.out.println(goods_sellVO.getGs_img());
-		// System.out.println(goods_sellVO.getGs_date());
-		// System.out.println("---------------------");
-//search all
-		 List<Goods_SellVO> list = goods_selljdbcdao.getAll();
-		 for(Goods_SellVO goods_sellVO : list){
+		 Goods_SellVO goods_sellVO =
+		 goods_selljdbcdao.findByPrimaryKey("GS00000002");
 		 System.out.println(goods_sellVO.getGs_no());
 		 System.out.println(goods_sellVO.getGs_no());
 		 System.out.println(goods_sellVO.getMf_no());
@@ -300,7 +287,20 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		 System.out.println(goods_sellVO.getGs_img());
 		 System.out.println(goods_sellVO.getGs_date());
 		 System.out.println("---------------------");
-		 }
+//search all
+		// List<Goods_SellVO> list = goods_selljdbcdao.getAll();
+		// for(Goods_SellVO goods_sellVO : list){
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getMf_no());
+		// System.out.println(goods_sellVO.getGs_name());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println(goods_sellVO.getGs_price());
+		// System.out.println(goods_sellVO.getGs_info());
+		// System.out.println(goods_sellVO.getGs_img());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println("---------------------");
+		// }
 
 	}
 

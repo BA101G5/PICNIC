@@ -20,8 +20,8 @@ public class Goods_SellService {
 	public void deleteGoods_Sell() {
 	}
 
-	public Goods_SellVO getOne() {
-		return null;
+	public Goods_SellVO getOne(String gs_no) {
+		return dao.findByPrimaryKey(gs_no);
 	}
 
 	public List<Goods_SellVO> getAll() {

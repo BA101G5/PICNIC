@@ -1,86 +1,52 @@
 package com.goods_sell.controller;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.goods_sell.model.*;
-
+import com.goods_sell.model.Goods_SellService;
+import com.goods_sell.model.Goods_SellVO;
 
 public class Goods_SellServlet extends HttpServlet {
-
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void DoGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
 
-		     
-		if ("listEmps_ByDeptno_A".equals(action) || "listEmps_ByDeptno_B".equals(action)) {
+		if ("getOne".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				
-				Integer deptno = new Integer(req.getParameter("deptno"));
 
-				
-				DeptService deptSvc = new DeptService();
-				Set<EmpVO> set = deptSvc.getEmpsByDeptno(deptno);
+				String gsno = new String(req.getParameter("gsno"));
 
-				
-				req.setAttribute("listEmps_ByDeptno", set);    
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				Goods_SellVO findone = goods_sellSvc.getOne(gsno);
+
+				req.setAttribute("soods_sellVO", findone);
 				String url = null;
-				if ("listEmps_ByDeptno_A".equals(action))
-					url = "/dept/listEmps_ByDeptno.jsp";        
-				else if ("listEmps_ByDeptno_B".equals(action))
-					url = "/dept/listAllDept.jsp";              
-
+				if ("getOne".equals(action)) {
+					 url="Servelet3/goods_sell/goods_sell.do";
+				}
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
-				
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
 		}
-		
-		
-		if ("delete_Dept".equals(action)) { 
-
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-	
-			try {
-				
-				Integer deptno = new Integer(req.getParameter("deptno"));
-				
-				
-				DeptService deptSvc = new DeptService();
-				deptSvc.deleteDept(deptno);
-				
-				
-				String url = "/dept/listAllDept.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-				
-				
-			} catch (Exception e) {
-				errorMsgs.add("�R����ƥ���:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/dept/listAllDept.jsp");
-				failureView.forward(req, res);
-			}
-		}
-
 	}
 }

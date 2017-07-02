@@ -33,12 +33,12 @@
 							<table>
 								<tr>
 								<td><FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/buycart/maothird.jsp"
+											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 											onclick="submit()">
 										<a href="#"
 										class="btn btn-default">${goods_sellVO.getGs_price()}</a>
-											 <input type="hidden" name="empno" value="${empVO.empno}">
-											<input type="hidden" name="action" value="getOne_For_Update">
+											<input type="hidden" name="gsno" value="${goods_sellVO.gs_no}">
+											<input type="hidden" name="ation" value="getOne">
 										</FORM></td>
 									<td></td>
 									<td><FORM METHOD="post"
@@ -46,8 +46,7 @@
 											onclick="submit()">
 											<a href="#" class="btn btn-default btn-xs"> <span
 												class="glyphicon glyphicon-shopping-cart" />
-											</a> <input type="hidden" name="empno" value="${empVO.empno}">
-											<input type="hidden" name="action" value="getOne_For_Update">
+											</a><input type="hidden" name="number" value="${goods_sellVO.gs_no}">
 										</FORM></td>
 								</tr>
 							</table>

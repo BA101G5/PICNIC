@@ -28,7 +28,10 @@
 .list-group {
 	margin-top: 15px;
 }
-.btn{width:50px;}
+
+.btn {
+	width: 50px;
+}
 </style>
 </head>
 <body>
@@ -40,43 +43,27 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav side-nav">
 						<li><a href="#">
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
 									<p>食物</p>
-									<input type="hidden" name="deptno" value="food"> <input
-										type="hidden" name="action" value="Goods_Sell_ByMF_A">
-
 								</FORM>
 						</a></li>
 						<li><a href="#">
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
 									<p>野餐器具</p>
-									<input type="hidden" name="deptno" value="food"> <input
-										type="hidden" name="action" value="Goods_Sell_ByMF_A">
-
 								</FORM>
 						</a></li>
 						<li><a href="#">
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
 									<p>防曬</p>
-									<input type="hidden" name="deptno" value="food"> <input
-										type="hidden" name="action" value="Goods_Sell_ByMF_A">
-
 								</FORM>
 						</a></li>
 						<li><a href="#">
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
 									<p>其他</p>
-									<input type="hidden" name="deptno" value="food"> <input
-										type="hidden" name="action" value="Goods_Sell_ByMF_A">
-
 								</FORM>
 						</a></li>
 
