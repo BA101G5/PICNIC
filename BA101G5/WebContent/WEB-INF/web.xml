@@ -15,6 +15,12 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/TestDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 
 
 	<servlet>
@@ -23,7 +29,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Orderde_DetailServlet</servlet-name>
-		<url-pattern>orderde_detail/orderde_detail.do</url-pattern>
+		<url-pattern>/orderde_detail/orderde_detail.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Goods_SellServlet</servlet-name>

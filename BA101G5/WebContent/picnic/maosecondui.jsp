@@ -30,7 +30,7 @@
 </script>
 
 <script>
-	var array={aoeu,aoeu,aoeu}
+	var array={aoeu,aoeu,aoeu};
 	var map;
 
 	function initMap() {
@@ -84,9 +84,9 @@
 							href="#" class="list-group-item">
 						<table>
 							<tr>
-								<td>縣市: <select name="" id="input" class="form-control"
+								<td>縣市: <select name="area" id="input" class="form-control"
 									required="required">
-										<option value="aoeu">台北市</option>
+										<option value="台北市">台北市</option>
 										<option value="aoeu">新北市</option>
 										<option value="aoeu">桃園市</option>
 										<option value="aoeu">臺中市</option>
@@ -105,17 +105,17 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td>地點 : <input type="text" name=""></td>
+								<td>地點 : <input type="text" name="address"></td>
 							</tr>
 							<tr>
-								<td>Date : <input type="text" id="datepicker"></td>
+								<td>Date : <input type="text" id="datepicker" name="date" ></td>
 							</tr>
 							<tr>
-								<td>限制人數: <input type="text" name=""></td>
+								<td>限制人數 : <input type="text" name="people"></td>
 							</tr>
 						</table></a>
 						<a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
-							type="textarea" rows="4" cols="50" name=""></a>
+							type="textarea" rows="4" cols="50" name="name"></a>
 					</div>
 
 					<div class="btn-group btn-group-justified">

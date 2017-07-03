@@ -34,12 +34,12 @@
 <form method="post" action="<%request.getContextPath(); %>/orderde_detail/orderde_detail.do" >
 	<Button type="submit">放入購物車</Button>
 	<input type="hidden" name="action" values="insertA">
-	<input type="hidden" name="aoeuaoeuaoeu " values=" aoeu">
+	<input type="hidden" name="values" values=" ${goods_sellVO}">
 </form>
 <form method="post" action="<%request.getContextPath(); %>/orderde_detail/orderde_detail.do" >
 	<Button type="submit">立即結帳</Button>
 	<input type="hidden" name="action" values="insertB">
-	<input type="hidden" name="aoeuaoeu " values=" aoeu">
+	<input type="hidden" name="values" values=" ${goods_sellVO}">
 </form>
 </div>
 </div>
