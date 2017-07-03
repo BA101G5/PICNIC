@@ -1,4 +1,4 @@
-package com.blocked_keywords.model;
+package com.contact_list.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,25 +8,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
+public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
 	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO BLOCKED_KEYWORDS (KEYWORD_NO, KEYWORD, REPLACEMENT) VALUES ('BK' || LPAD(KEYWORD_NO_SQ.NEXTVAL, 8, '0'), ?, ?)";
+		"INSERT INTO CONTACT_LIST (MEM_NO, CONTACT_NO, RELATIONSHIP) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS order by KEYWORD_NO";
+		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST order by MEM_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
+		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST where MEM_NO= ? and CONTACT_NO=?";
 	private static final String DELETE = 
-		"DELETE FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
+		"DELETE FROM CONTACT_LIST where MEM_NO=? and CONTACT_NO=?";
 	private static final String UPDATE = 
-		"UPDATE BLOCKED_KEYWORDS set KEYWORD=?, REPLACEMENT=? where KEYWORD_NO = ?";
+		"UPDATE CONTACT_LIST set RELATIONSHIP=? where MEM_NO=? and CONTACT_NO = ?";
 
 	@Override
-	public void insert(Blocked_KeywordsVO blockedKeywordsVO) {
+	public void insert(Contact_ListVO contact_listVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -37,10 +37,10 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-
-			pstmt.setString(1, blockedKeywordsVO.getKeyword());
-			pstmt.setString(2, blockedKeywordsVO.getReplacement());
-
+			pstmt.setString(1, contact_listVO.getMem_no());
+			pstmt.setString(2, contact_listVO.getContact_no());
+			pstmt.setString(3, contact_listVO.getRelationship().toString());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -72,7 +72,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	}
 
 	@Override
-	public void update(Blocked_KeywordsVO blockedKeywordsVO) {
+	public void update(Contact_ListVO contact_listVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -83,9 +83,9 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, blockedKeywordsVO.getKeyword());
-			pstmt.setString(2, blockedKeywordsVO.getReplacement());
-			pstmt.setString(3, blockedKeywordsVO.getKeyword_no());
+			pstmt.setString(1, contact_listVO.getRelationship().toString());
+			pstmt.setString(2, contact_listVO.getMem_no());
+			pstmt.setString(3, contact_listVO.getContact_no());
 
 			pstmt.executeUpdate();
 
@@ -114,12 +114,10 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 				}
 			}
 		}
-
-		
 	}
 
 	@Override
-	public void delete(String keyword_no) {
+	public void delete(String MEM_NO, String CONTACT_NO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -130,8 +128,9 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, keyword_no);
-
+			pstmt.setString(1, MEM_NO);
+			pstmt.setString(2, CONTACT_NO);
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -159,13 +158,13 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
-	public Blocked_KeywordsVO findByPrimaryKey(String keyword_no) {
+	public List<Contact_ListVO> findByPrimaryKey(String mem_no, String contact_no) {
+		List<Contact_ListVO> list = new ArrayList<Contact_ListVO>();
 
-		Blocked_KeywordsVO blockedKeywordsVO = null;
+		Contact_ListVO contact_listVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -176,75 +175,18 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, keyword_no);
+			pstmt.setString(1, mem_no);
+			pstmt.setString(2, contact_no);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// intervlLetterVO 也稱為 Domain objects
-				blockedKeywordsVO = new Blocked_KeywordsVO();
-				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
-				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return blockedKeywordsVO;
-	}
-
-	@Override
-	public List<Blocked_KeywordsVO> getAll() {
-		List<Blocked_KeywordsVO> list = new ArrayList<Blocked_KeywordsVO>();
-		Blocked_KeywordsVO blockedKeywordsVO = null;
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// blockedKeywordsVO 也稱為 Domain objects
-				blockedKeywordsVO = new Blocked_KeywordsVO();
-				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
-				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
-				blockedKeywordsVO.setReplacement(rs.getString("REPLACEMENT"));
-				list.add(blockedKeywordsVO); // Store the row in the list
+				// empVo 也稱為 Domain objects
+				contact_listVO = new Contact_ListVO();
+				contact_listVO.setMem_no(rs.getString("MEM_NO"));
+				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
+				contact_listVO.setRelationship(rs.getString("Relationship"));
+				list.add(contact_listVO);
 			}
 
 			// Handle any driver errors
@@ -281,44 +223,109 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 		}
 		return list;
 	}
-	
-	
-	public static void main(String[] args) {
 
-		Blocked_KeywordsJDBCDAO dao = new Blocked_KeywordsJDBCDAO();
+	@Override
+	public List<Contact_ListVO> getAll() {
+		List<Contact_ListVO> list = new ArrayList<Contact_ListVO>();
+		Contact_ListVO contact_listVO = null;
 
-//		// 新增
-		Blocked_KeywordsVO blockedKeywordsVO1 = new Blocked_KeywordsVO();
-		blockedKeywordsVO1.setKeyword("髒話OOXX");
-		blockedKeywordsVO1.setReplacement("***被屏蔽的字***");
-		dao.insert(blockedKeywordsVO1);
-		
-//		// 修改
-		Blocked_KeywordsVO blockedKeywordsVO2 = new Blocked_KeywordsVO();
-		blockedKeywordsVO2.setKeyword_no("BK00000001");
-		blockedKeywordsVO2.setKeyword("**已修改**XXOO髒話");
-		blockedKeywordsVO2.setReplacement("**已修改**--被屏蔽的字");
-		dao.update(blockedKeywordsVO2);
-		
-//		// 刪除
-//		dao.delete("BK00000003");
-		
-		// 查詢 單筆.
-		Blocked_KeywordsVO blockedKeywordsVO3 = dao.findByPrimaryKey("BK00000001");
-		System.out.print(blockedKeywordsVO3.getKeyword_no() + ",");
-		System.out.print(blockedKeywordsVO3.getKeyword() + ",");
-		System.out.print(blockedKeywordsVO3.getReplacement() + ",");
-		System.out.println("---------------------");
-		
-		// 查詢 全部
-		List<Blocked_KeywordsVO> list = dao.getAll();
-		for (Blocked_KeywordsVO aEmp : list) {
-			System.out.print(aEmp.getKeyword_no() + ",");
-			System.out.print(aEmp.getKeyword() + ",");
-			System.out.print(aEmp.getReplacement() + ",");
-			System.out.println();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				contact_listVO = new Contact_ListVO();
+				contact_listVO.setMem_no(rs.getString("MEM_NO"));
+				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
+				contact_listVO.setRelationship(rs.getString("RELATIONSHIP"));
+				list.add(contact_listVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
-	
+		return list;
 	}
 
+	public static void main(String[] args) {
+
+		Contact_ListJDBCDAO dao = new Contact_ListJDBCDAO();
+
+		// 新增
+		Contact_ListVO contact_listVO1 = new Contact_ListVO();
+		contact_listVO1.setMem_no("MG00000001");
+		contact_listVO1.setContact_no("MG00000002");
+		contact_listVO1.setRelationship("F");
+
+		dao.insert(contact_listVO1);
+
+		// 修改
+		Contact_ListVO contact_listVO2 = new Contact_ListVO();
+		contact_listVO2.setMem_no("MG00000001");
+		contact_listVO2.setContact_no("MG00000002");
+		contact_listVO2.setRelationship("B");
+		
+		dao.update(contact_listVO2);
+
+		// 刪除
+//		dao.delete("MG00000001", "MG00000002");
+
+		// 查詢
+		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
+		for (Contact_ListVO aEmp : list) {
+			System.out.print(aEmp.getMem_no() + ",");
+			System.out.print(aEmp.getContact_no() + ",");
+			System.out.print(aEmp.getRelationship() + ",");
+		}
+
+		System.out.println();
+		System.out.println("---------------------");
+		System.out.println();
+
+		// 查詢
+		List<Contact_ListVO> list2 = dao.getAll();
+		for (Contact_ListVO aEmp : list2) {
+			System.out.print(aEmp.getMem_no() + ",");
+			System.out.print(aEmp.getContact_no() + ",");
+			System.out.print(aEmp.getRelationship() + ",");
+			System.out.println();
+		}
+	}
 }

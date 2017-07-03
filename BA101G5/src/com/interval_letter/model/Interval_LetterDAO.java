@@ -1,4 +1,4 @@
-package com.announcement.model;
+package com.interval_letter.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,45 +8,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA101G5";
-	String passwd = "BA101G5";
+public class Interval_LetterDAO implements Interval_LetterDAO_interface {
+
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO ANNOUNCEMENT (ANN_NO, ANN_TEXT) VALUES ('AN' || LPAD(ANN_NO_SQ.NEXTVAL, 8, '0'), ?)";
+		"INSERT INTO INTERNAL_LETTER (LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA) VALUES ('IL' || LPAD(LETTER_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT ANN_NO, ANN_TEXT FROM ANNOUNCEMENT order by ANN_NO";
+		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA FROM INTERNAL_LETTER order by LETTER_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT ANN_NO, ANN_TEXT FROM ANNOUNCEMENT where ANN_NO = ?";
+		"SELECT LETTER_NO, SENDER_NO, RECIPIENT_NO, LETTER_DATE, LETTER_TEXT, LETTER_TITLE, LETTER_STA FROM INTERNAL_LETTER where LETTER_NO = ?";
 	private static final String DELETE = 
-		"DELETE FROM ANNOUNCEMENT where ANN_NO = ?";
+		"DELETE FROM INTERNAL_LETTER where LETTER_NO = ?";
 	private static final String UPDATE = 
-		"UPDATE ANNOUNCEMENT set ANN_TEXT=? where ANN_NO = ?";
+		"UPDATE INTERNAL_LETTER set SENDER_NO=?, RECIPIENT_NO=?, LETTER_DATE=?, LETTER_TEXT=?, LETTER_TITLE=?, LETTER_STA=? where LETTER_NO = ?";
 
 	@Override
-	public void insert(AnnouncementVO announcementVO) {
+	public void insert(Interval_LetterVO intervalLetterVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
-			pstmt.setString(1, announcementVO.getAnn_text());
+			pstmt.setString(1, intervalLetterVO.getSender_no());
+			pstmt.setString(2, intervalLetterVO.getRecipient_no());
+//			pstmt.setDate(3, intervalLetterVO.getLetter_date());
+			pstmt.setTimestamp(3, intervalLetterVO.getLetter_date());
+			pstmt.setString(4, intervalLetterVO.getLetter_text());
+			pstmt.setString(5, intervalLetterVO.getLetter_title());
+			pstmt.setString(6, intervalLetterVO.getLetter_sta());
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -72,26 +84,27 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 	}
 
 	@Override
-	public void update(AnnouncementVO announcementVO) {
+	public void update(Interval_LetterVO intervalLetterVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, announcementVO.getAnn_text());
-			pstmt.setString(2, announcementVO.getAnn_no());
+			pstmt.setString(1, intervalLetterVO.getSender_no());
+			pstmt.setString(2, intervalLetterVO.getRecipient_no());
+//			pstmt.setDate(3, intervalLetterVO.getLetter_date());
+			pstmt.setTimestamp(3, intervalLetterVO.getLetter_date());
+			pstmt.setString(4, intervalLetterVO.getLetter_text());
+			pstmt.setString(5, intervalLetterVO.getLetter_title());
+			pstmt.setString(6, intervalLetterVO.getLetter_sta());
+			pstmt.setString(7, intervalLetterVO.getLetter_no());
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -125,18 +138,13 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, letter_no);
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -162,17 +170,16 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 	}
 
 	@Override
-	public AnnouncementVO findByPrimaryKey(String letter_no) {
+	public Interval_LetterVO findByPrimaryKey(String letter_no) {
 
-		AnnouncementVO announcementVO = null;
+		Interval_LetterVO intervalLetterVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, letter_no);
@@ -181,15 +188,17 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 
 			while (rs.next()) {
 				// intervlLetterVO 也稱為 Domain objects
-				announcementVO = new AnnouncementVO();
-				announcementVO.setAnn_no(rs.getString("ANN_NO"));
-				announcementVO.setAnn_text(rs.getString("ANN_TEXT"));
+				intervalLetterVO = new Interval_LetterVO();
+				intervalLetterVO.setLetter_no(rs.getString("LETTER_NO"));
+				intervalLetterVO.setSender_no(rs.getString("SENDER_NO"));
+				intervalLetterVO.setRecipient_no(rs.getString("RECIPIENT_NO"));
+//				intervalLetterVO.setLetter_date(rs.getDate("LETTER_DATE"));
+				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
+				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
+				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
+				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STA"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -218,13 +227,13 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 				}
 			}
 		}
-		return announcementVO;
+		return intervalLetterVO;
 	}
 
 	@Override
-	public List<AnnouncementVO> getAll() {
-		List<AnnouncementVO> list = new ArrayList<AnnouncementVO>();
-		AnnouncementVO announcementVO = null;
+	public List<Interval_LetterVO> getAll() {
+		List<Interval_LetterVO> list = new ArrayList<Interval_LetterVO>();
+		Interval_LetterVO intervalLetterVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -232,23 +241,24 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// announcementVO 也稱為 Domain objects
-				announcementVO = new AnnouncementVO();
-				announcementVO.setAnn_no(rs.getString("ANN_NO"));
-				announcementVO.setAnn_text(rs.getString("ANN_TEXT"));
-				list.add(announcementVO); // Store the row in the list
+				// intervalLetterVO 也稱為 Domain objects
+				intervalLetterVO = new Interval_LetterVO();
+				intervalLetterVO.setLetter_no(rs.getString("LETTER_NO"));
+				intervalLetterVO.setSender_no(rs.getString("SENDER_NO"));
+				intervalLetterVO.setRecipient_no(rs.getString("RECIPIENT_NO"));
+//				intervalLetterVO.setLetter_date(rs.getDate("LETTER_DATE"));
+				intervalLetterVO.setLetter_date(rs.getTimestamp("LETTER_DATE"));
+				intervalLetterVO.setLetter_text(rs.getString("LETTER_TEXT"));
+				intervalLetterVO.setLetter_title(rs.getString("LETTER_TITLE"));
+				intervalLetterVO.setLetter_sta(rs.getString("LETTER_STA"));
+				list.add(intervalLetterVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -278,40 +288,5 @@ public class AnnouncementJDBCDAO implements AnnouncementDAO_interface {
 			}
 		}
 		return list;
-	}
-	
-	
-	public static void main(String[] args) {
-
-		AnnouncementJDBCDAO dao = new AnnouncementJDBCDAO();
-
-//		// 新增
-		AnnouncementVO announcementVO1 = new AnnouncementVO();
-		announcementVO1.setAnn_text("最新消息: 歡迎報名參加 ");
-		dao.insert(announcementVO1);
-		
-//		// 修改
-//		AnnouncementVO announcementVO2 = new AnnouncementVO();
-//		announcementVO2.setAnn_no("AN00000001");
-//		announcementVO2.setAnn_text("**已修改**--最新消息: 公告內文");
-//		dao.update(announcementVO2);
-		
-//		// 刪除
-//		dao.delete("AN00000003");
-		
-		// 查詢 單筆.
-		AnnouncementVO announcementVO3 = dao.findByPrimaryKey("AN00000001");
-		System.out.print(announcementVO3.getAnn_no() + ",");
-		System.out.print(announcementVO3.getAnn_text() + ",");
-		System.out.println("---------------------");
-		
-		// 查詢 全部
-		List<AnnouncementVO> list = dao.getAll();
-		for (AnnouncementVO aEmp : list) {
-			System.out.print(aEmp.getAnn_no() + ",");
-			System.out.print(aEmp.getAnn_text() + ",");
-			System.out.println();
-		}
-	
 	}
 }

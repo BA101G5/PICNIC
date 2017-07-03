@@ -8,11 +8,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA101G5";
-	String passwd = "BA101G5";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class Blocked_KeywordsDAO implements Blocked_KeywordsDAO_interface {
+
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO BLOCKED_KEYWORDS (KEYWORD_NO, KEYWORD, REPLACEMENT) VALUES ('BK' || LPAD(KEYWORD_NO_SQ.NEXTVAL, 8, '0'), ?, ?)";
@@ -33,8 +45,8 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
@@ -43,10 +55,6 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -79,8 +87,8 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, blockedKeywordsVO.getKeyword());
@@ -89,10 +97,6 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -126,18 +130,14 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, keyword_no);
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -172,8 +172,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, keyword_no);
@@ -185,12 +184,9 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 				blockedKeywordsVO = new Blocked_KeywordsVO();
 				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
 				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
+				blockedKeywordsVO.setReplacement(rs.getString("REPLACEMENT"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -233,8 +229,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -247,10 +242,6 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 				list.add(blockedKeywordsVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -280,45 +271,6 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			}
 		}
 		return list;
-	}
-	
-	
-	public static void main(String[] args) {
-
-		Blocked_KeywordsJDBCDAO dao = new Blocked_KeywordsJDBCDAO();
-
-//		// 新增
-		Blocked_KeywordsVO blockedKeywordsVO1 = new Blocked_KeywordsVO();
-		blockedKeywordsVO1.setKeyword("髒話OOXX");
-		blockedKeywordsVO1.setReplacement("***被屏蔽的字***");
-		dao.insert(blockedKeywordsVO1);
-		
-//		// 修改
-		Blocked_KeywordsVO blockedKeywordsVO2 = new Blocked_KeywordsVO();
-		blockedKeywordsVO2.setKeyword_no("BK00000001");
-		blockedKeywordsVO2.setKeyword("**已修改**XXOO髒話");
-		blockedKeywordsVO2.setReplacement("**已修改**--被屏蔽的字");
-		dao.update(blockedKeywordsVO2);
-		
-//		// 刪除
-//		dao.delete("BK00000003");
-		
-		// 查詢 單筆.
-		Blocked_KeywordsVO blockedKeywordsVO3 = dao.findByPrimaryKey("BK00000001");
-		System.out.print(blockedKeywordsVO3.getKeyword_no() + ",");
-		System.out.print(blockedKeywordsVO3.getKeyword() + ",");
-		System.out.print(blockedKeywordsVO3.getReplacement() + ",");
-		System.out.println("---------------------");
-		
-		// 查詢 全部
-		List<Blocked_KeywordsVO> list = dao.getAll();
-		for (Blocked_KeywordsVO aEmp : list) {
-			System.out.print(aEmp.getKeyword_no() + ",");
-			System.out.print(aEmp.getKeyword() + ",");
-			System.out.print(aEmp.getReplacement() + ",");
-			System.out.println();
-		}
-	
 	}
 
 }

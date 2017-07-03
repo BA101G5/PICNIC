@@ -1,4 +1,4 @@
-package com.blocked_keywords.model;
+package com.announcement.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,25 +8,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
+
+public class AnnouncementDAO implements AnnouncementDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
 	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO BLOCKED_KEYWORDS (KEYWORD_NO, KEYWORD, REPLACEMENT) VALUES ('BK' || LPAD(KEYWORD_NO_SQ.NEXTVAL, 8, '0'), ?, ?)";
+		"INSERT INTO ANNOUNCEMENT (ANN_NO, ANN_TEXT) VALUES ('AN' || LPAD(ANN_NO_SQ.NEXTVAL, 8, '0'), ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS order by KEYWORD_NO";
+		"SELECT ANN_NO, ANN_TEXT FROM ANNOUNCEMENT order by ANN_NO";
 	private static final String GET_ONE_STMT = 
-		"SELECT KEYWORD_NO, KEYWORD, REPLACEMENT FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
+		"SELECT ANN_NO, ANN_TEXT FROM ANNOUNCEMENT where ANN_NO = ?";
 	private static final String DELETE = 
-		"DELETE FROM BLOCKED_KEYWORDS where KEYWORD_NO = ?";
+		"DELETE FROM ANNOUNCEMENT where ANN_NO = ?";
 	private static final String UPDATE = 
-		"UPDATE BLOCKED_KEYWORDS set KEYWORD=?, REPLACEMENT=? where KEYWORD_NO = ?";
+		"UPDATE ANNOUNCEMENT set ANN_TEXT=? where ANN_NO = ?";
 
 	@Override
-	public void insert(Blocked_KeywordsVO blockedKeywordsVO) {
+	public void insert(AnnouncementVO announcementVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -38,8 +39,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
-			pstmt.setString(1, blockedKeywordsVO.getKeyword());
-			pstmt.setString(2, blockedKeywordsVO.getReplacement());
+			pstmt.setString(1, announcementVO.getAnn_text());
 
 			pstmt.executeUpdate();
 
@@ -72,7 +72,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	}
 
 	@Override
-	public void update(Blocked_KeywordsVO blockedKeywordsVO) {
+	public void update(AnnouncementVO announcementVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -83,9 +83,8 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, blockedKeywordsVO.getKeyword());
-			pstmt.setString(2, blockedKeywordsVO.getReplacement());
-			pstmt.setString(3, blockedKeywordsVO.getKeyword_no());
+			pstmt.setString(1, announcementVO.getAnn_text());
+			pstmt.setString(2, announcementVO.getAnn_no());
 
 			pstmt.executeUpdate();
 
@@ -119,7 +118,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	}
 
 	@Override
-	public void delete(String keyword_no) {
+	public void delete(String letter_no) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -130,7 +129,7 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, keyword_no);
+			pstmt.setString(1, letter_no);
 
 			pstmt.executeUpdate();
 
@@ -163,9 +162,9 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	}
 
 	@Override
-	public Blocked_KeywordsVO findByPrimaryKey(String keyword_no) {
+	public AnnouncementVO findByPrimaryKey(String letter_no) {
 
-		Blocked_KeywordsVO blockedKeywordsVO = null;
+		AnnouncementVO announcementVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -176,15 +175,15 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, keyword_no);
+			pstmt.setString(1, letter_no);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// intervlLetterVO 也稱為 Domain objects
-				blockedKeywordsVO = new Blocked_KeywordsVO();
-				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
-				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
+				announcementVO = new AnnouncementVO();
+				announcementVO.setAnn_no(rs.getString("ANN_NO"));
+				announcementVO.setAnn_text(rs.getString("ANN_TEXT"));
 			}
 
 			// Handle any driver errors
@@ -219,13 +218,13 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 				}
 			}
 		}
-		return blockedKeywordsVO;
+		return announcementVO;
 	}
 
 	@Override
-	public List<Blocked_KeywordsVO> getAll() {
-		List<Blocked_KeywordsVO> list = new ArrayList<Blocked_KeywordsVO>();
-		Blocked_KeywordsVO blockedKeywordsVO = null;
+	public List<AnnouncementVO> getAll() {
+		List<AnnouncementVO> list = new ArrayList<AnnouncementVO>();
+		AnnouncementVO announcementVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -239,12 +238,11 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// blockedKeywordsVO 也稱為 Domain objects
-				blockedKeywordsVO = new Blocked_KeywordsVO();
-				blockedKeywordsVO.setKeyword_no(rs.getString("KEYWORD_NO"));
-				blockedKeywordsVO.setKeyword(rs.getString("KEYWORD"));
-				blockedKeywordsVO.setReplacement(rs.getString("REPLACEMENT"));
-				list.add(blockedKeywordsVO); // Store the row in the list
+				// announcementVO 也稱為 Domain objects
+				announcementVO = new AnnouncementVO();
+				announcementVO.setAnn_no(rs.getString("ANN_NO"));
+				announcementVO.setAnn_text(rs.getString("ANN_TEXT"));
+				list.add(announcementVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -285,40 +283,35 @@ public class Blocked_KeywordsJDBCDAO implements Blocked_KeywordsDAO_interface {
 	
 	public static void main(String[] args) {
 
-		Blocked_KeywordsJDBCDAO dao = new Blocked_KeywordsJDBCDAO();
+		AnnouncementDAO dao = new AnnouncementDAO();
 
 //		// 新增
-		Blocked_KeywordsVO blockedKeywordsVO1 = new Blocked_KeywordsVO();
-		blockedKeywordsVO1.setKeyword("髒話OOXX");
-		blockedKeywordsVO1.setReplacement("***被屏蔽的字***");
-		dao.insert(blockedKeywordsVO1);
+		AnnouncementVO announcementVO1 = new AnnouncementVO();
+		announcementVO1.setAnn_text("最新消息: 公告內文");
+		dao.insert(announcementVO1);
 		
 //		// 修改
-		Blocked_KeywordsVO blockedKeywordsVO2 = new Blocked_KeywordsVO();
-		blockedKeywordsVO2.setKeyword_no("BK00000001");
-		blockedKeywordsVO2.setKeyword("**已修改**XXOO髒話");
-		blockedKeywordsVO2.setReplacement("**已修改**--被屏蔽的字");
-		dao.update(blockedKeywordsVO2);
+		AnnouncementVO announcementVO2 = new AnnouncementVO();
+		announcementVO2.setAnn_no("AN00000001");
+		announcementVO2.setAnn_text("**已修改**--最新消息: 公告內文");
+		dao.update(announcementVO2);
 		
 //		// 刪除
-//		dao.delete("BK00000003");
+//		dao.delete("AN00000003");
 		
 		// 查詢 單筆.
-		Blocked_KeywordsVO blockedKeywordsVO3 = dao.findByPrimaryKey("BK00000001");
-		System.out.print(blockedKeywordsVO3.getKeyword_no() + ",");
-		System.out.print(blockedKeywordsVO3.getKeyword() + ",");
-		System.out.print(blockedKeywordsVO3.getReplacement() + ",");
+		AnnouncementVO announcementVO3 = dao.findByPrimaryKey("AN00000001");
+		System.out.print(announcementVO3.getAnn_no() + ",");
+		System.out.print(announcementVO3.getAnn_text() + ",");
 		System.out.println("---------------------");
 		
 		// 查詢 全部
-		List<Blocked_KeywordsVO> list = dao.getAll();
-		for (Blocked_KeywordsVO aEmp : list) {
-			System.out.print(aEmp.getKeyword_no() + ",");
-			System.out.print(aEmp.getKeyword() + ",");
-			System.out.print(aEmp.getReplacement() + ",");
+		List<AnnouncementVO> list = dao.getAll();
+		for (AnnouncementVO aEmp : list) {
+			System.out.print(aEmp.getAnn_no() + ",");
+			System.out.print(aEmp.getAnn_text() + ",");
 			System.out.println();
 		}
 	
 	}
-
 }

@@ -8,11 +8,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA101G5";
-	String passwd = "BA101G5";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class Forum_ArticleJNDIDAO implements Forum_ArticleDAO_interface {
+
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO FORUM_ARTICLE (ARTICLE_NO, AUTHOR_NO, TOPIC_NO, FORUM_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW) VALUES ('AF' || LPAD(FORUM_ARTICLE_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -33,8 +45,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
@@ -52,10 +63,6 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -88,8 +95,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, forumArticleVO.getAuthor_no());
@@ -107,10 +113,6 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -144,18 +146,13 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, article_no);
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -190,8 +187,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, article_no);
@@ -215,10 +211,6 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 				forumArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -261,8 +253,7 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -284,10 +275,6 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 				list.add(forumArticleVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -317,78 +304,5 @@ public class Forum_ArticleJDBCDAO implements Forum_ArticleDAO_interface {
 			}
 		}
 		return list;
-	}
-	
-	
-	public static void main(String[] args) {
-
-		Forum_ArticleJDBCDAO dao = new Forum_ArticleJDBCDAO();
-
-//		// 新增
-		Forum_ArticleVO forumArticleVO1 = new Forum_ArticleVO();
-		forumArticleVO1.setAuthor_no("MG00000001");
-		forumArticleVO1.setTopic_no(null);
-		forumArticleVO1.setForum_no("BF00000001");
-		forumArticleVO1.setArticle_title("標題: 新增討論區文章");
-		forumArticleVO1.setArticle_text("新增討論區內文");
-		forumArticleVO1.setArticle_post(java.sql.Timestamp.valueOf("2017-06-15 21:38:40"));
-		forumArticleVO1.setArticle_edit(null);
-		forumArticleVO1.setArticle_view(0);
-		forumArticleVO1.setArticle_sta("V");
-		forumArticleVO1.setArticle_kind(1);
-		forumArticleVO1.setArticle_pw(null);
-		dao.insert(forumArticleVO1);
-		
-//		// 修改
-		Forum_ArticleVO forumArticleVO2 = new Forum_ArticleVO();
-		forumArticleVO2.setArticle_no("AF00000002");
-		forumArticleVO2.setAuthor_no("MG00000001");
-		forumArticleVO2.setTopic_no(null);
-		forumArticleVO2.setForum_no("BF00000001");
-		forumArticleVO2.setArticle_title("***已修改***標題: 新增討論區文章");
-		forumArticleVO2.setArticle_text("***已修改***新增討論區內文");
-		forumArticleVO2.setArticle_post(java.sql.Timestamp.valueOf("2017-06-15 21:38:40"));
-		forumArticleVO2.setArticle_edit(null);
-		forumArticleVO2.setArticle_view(0);
-		forumArticleVO2.setArticle_sta("V");
-		forumArticleVO2.setArticle_kind(1);
-		forumArticleVO2.setArticle_pw(null);
-		dao.update(forumArticleVO2);
-		
-//		// 刪除
-//		dao.delete("AF00000002");
-		
-		// 查詢 單筆.
-		Forum_ArticleVO forumArticleVO3 = dao.findByPrimaryKey("AF00000001");
-		System.out.print(forumArticleVO3.getArticle_no() + ",");
-		System.out.print(forumArticleVO3.getTopic_no() + ",");
-		System.out.print(forumArticleVO3.getForum_no() + ",");
-		System.out.print(forumArticleVO3.getArticle_title() + ",");
-		System.out.print(forumArticleVO3.getArticle_text() + ",");
-		System.out.print(forumArticleVO3.getArticle_post() + ",");
-		System.out.print(forumArticleVO3.getArticle_edit() + ",");
-		System.out.print(forumArticleVO3.getArticle_view() + ",");
-		System.out.print(forumArticleVO3.getArticle_sta() + ",");
-		System.out.print(forumArticleVO3.getArticle_kind() + ",");
-		System.out.println(forumArticleVO3.getArticle_pw());
-		System.out.println("---------------------");
-		
-		// 查詢 全部
-		List<Forum_ArticleVO> list = dao.getAll();
-		for (Forum_ArticleVO aEmp : list) {
-			System.out.print(aEmp.getArticle_no() + ",");
-			System.out.print(aEmp.getTopic_no() + ",");
-			System.out.print(aEmp.getForum_no() + ",");
-			System.out.print(aEmp.getArticle_title() + ",");
-			System.out.print(aEmp.getArticle_text() + ",");
-			System.out.print(aEmp.getArticle_post() + ",");
-			System.out.print(aEmp.getArticle_edit() + ",");
-			System.out.print(aEmp.getArticle_view() + ",");
-			System.out.print(aEmp.getArticle_sta() + ",");
-			System.out.print(aEmp.getArticle_kind() + ",");
-			System.out.print(aEmp.getArticle_pw());
-			System.out.println();
-		}
-	
 	}
 }

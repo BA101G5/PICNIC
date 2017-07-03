@@ -22,7 +22,6 @@
 		<res-auth>Container</res-auth>
 	</resource-ref>
 
-
 	<servlet>
 		<servlet-name>Orderde_DetailServlet</servlet-name>
 		<servlet-class>com.orderde_detail.controller.Orderde_detailServlet</servlet-class>
@@ -39,6 +38,25 @@
 		<servlet-name>Goods_SellServlet</servlet-name>
 		<url-pattern>/goods_sell/goods_sell.do</url-pattern>
 	</servlet-mapping>
+  	
+  	<servlet>
+		<servlet-name>AnnouncementServlet</servlet-name>
+		<servlet-class>com.announcement.controller.AnnouncementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnnouncementServlet</servlet-name>
+		<url-pattern>/backend/announcement/announcement.do</url-pattern>
+	</servlet-mapping>
+	
+  	<servlet>
+		<servlet-name>Blocked_KeywordsServlet</servlet-name>
+		<servlet-class>com.blocked_keywords.controller.Blocked_KeywordsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Blocked_KeywordsServlet</servlet-name>
+		<url-pattern>/backend/blocked_keywords/blocked_keywords.do</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>Chatroom_MembersServlet</servlet-name>
 		<servlet-class>com.chatroom_members.controller.Chatroom_MembersServlet</servlet-class>
