@@ -13,7 +13,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values ('GS'||LPAD(GS_NO_SQ.nextval,8,0),?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_SELL ORDER BY GS_NO";
@@ -273,20 +273,20 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		// goods_sellVO.setGs_sta("B");
 		// goods_selljdbcdao.update(goods_sellVO);
 // delete
-		// goods_selljdbcdao.delete("GS00000001");
+//		 goods_selljdbcdao.delete("GS00000001");
 // search one
-		// Goods_SellVO goods_sellVO =
-		// goods_selljdbcdao.findByPrimaryKey("GS00000002");
-		// System.out.println(goods_sellVO.getGs_no());
-		// System.out.println(goods_sellVO.getGs_no());
-		// System.out.println(goods_sellVO.getMf_no());
-		// System.out.println(goods_sellVO.getGs_name());
-		// System.out.println(goods_sellVO.getGs_date());
-		// System.out.println(goods_sellVO.getGs_price());
-		// System.out.println(goods_sellVO.getGs_info());
-		// System.out.println(goods_sellVO.getGs_img());
-		// System.out.println(goods_sellVO.getGs_date());
-		// System.out.println("---------------------");
+		 Goods_SellVO goods_sellVO =
+		 goods_selljdbcdao.findByPrimaryKey("GS00000002");
+		 System.out.println(goods_sellVO.getGs_no());
+		 System.out.println(goods_sellVO.getGs_no());
+		 System.out.println(goods_sellVO.getMf_no());
+		 System.out.println(goods_sellVO.getGs_name());
+		 System.out.println(goods_sellVO.getGs_date());
+		 System.out.println(goods_sellVO.getGs_price());
+		 System.out.println(goods_sellVO.getGs_info());
+		 System.out.println(goods_sellVO.getGs_img());
+		 System.out.println(goods_sellVO.getGs_date());
+		 System.out.println("---------------------");
 //search all
 		// List<Goods_SellVO> list = goods_selljdbcdao.getAll();
 		// for(Goods_SellVO goods_sellVO : list){

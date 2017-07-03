@@ -1,0 +1,48 @@
+
+#left-navigation-bar{
+	position: fixed;
+	z-index: 6000;
+	width: 280px;
+	height:100%;
+	background-color: #8bdddd;
+	opacity: 0.7;
+	text-align: center;
+	padding: 300px 0px;
+}
+.bs-glyphicons-list {
+    padding-left: 0px;
+    list-style: outside none none;
+}
+.bs-glyphicons-list > li{
+	margin: 16px 0px;
+}
+.glyphicon{
+	font-size: 36px;
+	color: #091e4c;
+}
+
+.footer {
+    padding: 36px 0;
+}
+
+.footer-nav {
+    float: left;
+}
+.footer-nav .column {
+    float: left;
+    width: 136px;
+}
+.footer-nav .title {
+    font-size: 12px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+.footer-nav ul {
+    font-size: 12px;
+}
+.footer-nav ul li {
+    margin-bottom: 7px;
+}
+.footer-nav a {
+    color: #8e959c;
+}
