@@ -62,6 +62,7 @@
 </head>
 
 <body>
+
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<div class="container-fluid">
@@ -105,17 +106,17 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td>地點 : <input type="text" name="address"></td>
+								<td>地點 : <input type="text" name="address" value="${sessionScope.address} "></td>
 							</tr>
 							<tr>
-								<td>Date : <input type="text" id="datepicker" name="date" ></td>
+								<td>Date : <input type="text" id="datepicker" name="date" value="${sessionScope.date}"></td>
 							</tr>
 							<tr>
-								<td>限制人數 : <input type="text" name="people"></td>
+								<td>限制人數 : <input type="text" name="people" value="${sessionScope.people}"></td>
 							</tr>
 						</table></a>
 						<a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
-							type="textarea" rows="4" cols="50" name="name"></a>
+							type="textarea" rows="4" cols="50" name="name" value="${sessionScope.name}"></a>
 					</div>
 
 					<div class="btn-group btn-group-justified">
@@ -156,9 +157,13 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
+
+	<%session.removeAttribute("address");
+	  session.removeAttribute("date");
+	  session.removeAttribute("people");
+	  session.removeAttribute("name");%>
 	<script src="https://code.jquery.com/jquery.js "></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js "></script>

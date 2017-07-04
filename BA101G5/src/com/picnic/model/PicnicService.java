@@ -1,5 +1,6 @@
 package com.picnic.model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class PicnicService {
@@ -27,4 +28,5 @@ public class PicnicService {
 	public List<PicnicVO> getAll() {
 		return null;
 	}
+	public void addPicnic(String picnic_name,Date picnic_date,Integer picnic_pl){}
 }
