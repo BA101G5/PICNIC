@@ -2,13 +2,25 @@ package com.orderde_detail.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import java.sql.*;
 
-public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA101G5";
-	String passwd = "BA101G5";
+public class Orderde_DetailJNDDAO implements Orderde_DetailDAO_interface {
+	private static DataSource ds = null;
+	static {
+		Context ctx;
+		try {
+			ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/java/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (ORDERDE_DETAILNO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS)values('OD'||LPAD(ORDERDE_DETAIL_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = " select * from ORDERDE_DETAIL ORDER BY ORDERDE_DETAILNO";
@@ -21,8 +33,8 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, orderde_detailVO.getPicnic_no());
 			pstmt.setString(2, orderde_detailVO.getP_no());
@@ -31,14 +43,11 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 			pstmt.setInt(5, orderde_detailVO.getOd_amount());
 			pstmt.setInt(6, orderde_detailVO.getOd_price());
 			pstmt.setTimestamp(7, orderde_detailVO.getOd_deliver());
-			pstmt.setString(8,orderde_detailVO.getOd_place());
+			pstmt.setString(8, orderde_detailVO.getOd_place());
 			pstmt.setString(9, orderde_detailVO.getOd_bs());
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -65,8 +74,8 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, orderde_detailVO.getPicnic_no());
@@ -81,9 +90,6 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 			pstmt.setString(10, orderde_detailVO.getOrderde_detailno());
 
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -110,15 +116,11 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, orderde_detailno);
 
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -148,11 +150,11 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		Orderde_DetailVO orderde_detailVO = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, orderde_detailno);
-			rs = pstmt.executeQuery();		
+			rs = pstmt.executeQuery();
 			rs.next();
 			orderde_detailVO = new Orderde_DetailVO();
 			orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
@@ -164,11 +166,8 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 			orderde_detailVO.setOd_price(rs.getInt("OD_PRICE"));
 			orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
 			orderde_detailVO.setOd_place(rs.getString("OD_PLACE"));
-			orderde_detailVO.setOd_bs(rs.getString("OD_BS"));;
+			orderde_detailVO.setOd_bs(rs.getString("OD_BS"));
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -207,8 +206,7 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -229,9 +227,6 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 				list.add(orderde_detailVO);
 
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -262,7 +257,7 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 	}
 
 	public static void main(String[] args) {
-		Orderde_DetailJDBCDAO orderde_detailjdbcdao = new Orderde_DetailJDBCDAO();
+		Orderde_DetailJNDDAO orderde_detailjdbcdao = new Orderde_DetailJNDDAO();
 		// insert
 		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
 		// orderde_detailVO.setPicnic_no("PG00000001");

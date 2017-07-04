@@ -2,6 +2,7 @@ package com.orderde_detail.model;
 import java.sql.Timestamp;
 
 public class Orderde_DetailVO implements java.io.Serializable {
+		private String orderde_detailno;
 		private String picnic_no;
 		private String p_no;
 		private String gr_no;
@@ -9,6 +10,7 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		private Integer od_amount;
 		private Integer od_price;
 		private Timestamp od_deliver;
+		private String od_place;
 		private String od_bs;
 		public String getPicnic_no() {
 			return picnic_no;
@@ -58,4 +60,17 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		public void setOd_bs(String od_bs) {
 			this.od_bs = od_bs;
 		}
+		public String getOrderde_detailno() {
+			return orderde_detailno;
+		}
+		public void setOrderde_detailno(String orderde_detailno) {
+			this.orderde_detailno = orderde_detailno;
+		}
+		public String getOd_place() {
+			return od_place;
+		}
+		public void setOd_place(String od_place) {
+			this.od_place = od_place;
+		}
+	
 }

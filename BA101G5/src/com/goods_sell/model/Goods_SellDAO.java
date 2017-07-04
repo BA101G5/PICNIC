@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -143,6 +144,7 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 
 		try {
 			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gs_no);
 			rs = pstmt.executeQuery();
@@ -192,7 +194,7 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
 		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
+		    con=ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -238,5 +240,4 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 		}
 		return list;
 	}
-
 }
