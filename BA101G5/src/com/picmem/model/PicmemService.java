@@ -27,4 +27,10 @@ public class PicmemService {
 	public List<PicmemVO> getAll() {
 		return null;
 	}
+	public void addowner(String picnic_no,String mem_no){
+		PicmemVO picmemVO =new PicmemVO();
+		picmemVO.setPicnic_no(picnic_no);
+		picmemVO.setMem_no(mem_no);
+		dao.insertowner(picmemVO);
+	}
 }

@@ -23,7 +23,7 @@ public class Goods_SellServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
-		System.out.println(action);
+	
 		if ("getOne".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();

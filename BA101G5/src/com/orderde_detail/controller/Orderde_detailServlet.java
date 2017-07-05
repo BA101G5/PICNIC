@@ -28,7 +28,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			
 			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 			Orderde_DetailVO orderde_detailVO =
-			orderde_detailSvc.addOrderde_Detail();
+			orderde_detailSvc.addOrderde_Detail(orderde_detailVO);
 		}
 
 	}
