@@ -15,6 +15,8 @@ import com.picmem.model.PicmemService;
 import com.picnic.model.PicnicService;
 import com.place.model.PlaceService;
 
+import net.sf.json.JSONObject;
+
 import javax.servlet.ServletException;
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -52,7 +54,11 @@ public class PicnicServlet extends HttpServlet {
 					errorMsgs.put("address",
 							"地址必須文中文和數字 且在6~15字之間");
 				}
+				JSONObject lonlat=  new JSONObject();
+				 
+				
 
+				
 				Timestamp picnic_date = null;
 				String date = null;
 				try {
