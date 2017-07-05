@@ -10,7 +10,7 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 	private String article_text;
 	private Timestamp article_post;
 	private Timestamp article_edit;
-	private Integer article_view;
+	private Integer article_views;
 	private String article_sta;
 	private Integer article_kind;
 	private String article_pw;		
@@ -63,11 +63,11 @@ public class Pboard_ArticleVO implements java.io.Serializable{
 	public void setArticle_edit(Timestamp article_edit) {
 		this.article_edit = article_edit;
 	}
-	public Integer getArticle_view() {
-		return article_view;
+	public Integer getArticle_views() {
+		return article_views;
 	}
-	public void setArticle_view(Integer article_view) {
-		this.article_view = article_view;
+	public void setArticle_views(Integer article_views) {
+		this.article_views = article_views;
 	}
 	public String getArticle_sta() {
 		return article_sta;

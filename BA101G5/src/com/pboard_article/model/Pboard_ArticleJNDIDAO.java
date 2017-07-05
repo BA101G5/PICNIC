@@ -56,7 +56,7 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 			pstmt.setString(5, pboardArticleVO.getArticle_text());
 			pstmt.setTimestamp(6, pboardArticleVO.getArticle_post());
 			pstmt.setTimestamp(7, pboardArticleVO.getArticle_edit());
-			pstmt.setInt(8, pboardArticleVO.getArticle_view());
+			pstmt.setInt(8, pboardArticleVO.getArticle_views());
 			pstmt.setString(9, pboardArticleVO.getArticle_sta());
 			pstmt.setInt(10, pboardArticleVO.getArticle_kind());
 			pstmt.setString(11, pboardArticleVO.getArticle_pw());
@@ -105,7 +105,7 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 			pstmt.setString(5, pboardArticleVO.getArticle_text());
 			pstmt.setTimestamp(6, pboardArticleVO.getArticle_post());
 			pstmt.setTimestamp(7, pboardArticleVO.getArticle_edit());
-			pstmt.setInt(8, pboardArticleVO.getArticle_view());
+			pstmt.setInt(8, pboardArticleVO.getArticle_views());
 			pstmt.setString(9, pboardArticleVO.getArticle_sta());
 			pstmt.setInt(10, pboardArticleVO.getArticle_kind());
 			pstmt.setString(11, pboardArticleVO.getArticle_pw());
@@ -205,7 +205,7 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
-				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
 				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
@@ -268,7 +268,7 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
-				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
 				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
