@@ -9,13 +9,13 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 
-	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PLACE ORDER BY P_NO";
-	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE from PLACE WHERE P_NO= ?";
+	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON from PLACE WHERE P_NO= ?";
 	private static final String DELETE_STMT = "delete from PLACE where P_NO = ?";
-	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=? where P_NO=?";
+	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=?,PICNIC_NO = ?,P_LAT = ?,P_LON = ? where P_NO=?";
 
 	@Override
 	public void insert(PlaceVO placeVO) {
@@ -35,6 +35,9 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			pstmt.setString(8, placeVO.getP_info());
 			pstmt.setString(9, placeVO.getP_sta());
 			pstmt.setInt(10, placeVO.getP_price());
+			pstmt.setString(11, placeVO.getPicnic_no());
+			pstmt.setDouble(12, placeVO.getP_lat());
+			pstmt.setDouble(13, placeVO.getP_lon());
 
 			pstmt.executeUpdate();
 
@@ -79,8 +82,10 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			pstmt.setString(8, placeVO.getP_info());
 			pstmt.setString(9, placeVO.getP_sta());
 			pstmt.setInt(10, placeVO.getP_price());
-			pstmt.setString(11, placeVO.getP_no());
-
+			pstmt.setString(11, placeVO.getPicnic_no());
+			pstmt.setDouble(12, placeVO.getP_lat());
+			pstmt.setDouble(13, placeVO.getP_lon());			
+			pstmt.setString(14, placeVO.getP_no());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -161,6 +166,9 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			placeVO.setP_info(rs.getString("P_INFO"));
 			placeVO.setP_sta(rs.getString("P_STA"));
 			placeVO.setP_price(rs.getInt("P_PRICE"));
+			placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			placeVO.setP_lat(rs.getDouble("P_LAT"));
+			placeVO.setP_lon(rs.getDouble("P_LON"));
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -216,6 +224,9 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 				placeVO.setP_info(rs.getString("P_INFO"));
 				placeVO.setP_sta(rs.getString("P_STA"));
 				placeVO.setP_price(rs.getInt("P_PRICE"));
+				placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				placeVO.setP_lat(rs.getDouble("P_LAT"));
+				placeVO.setP_lon(rs.getDouble("P_LON"));
 				list.add(placeVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -259,24 +270,30 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// placeVO.setP_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
 		// placeVO.setP_place("aoeuaoeuaoeu");
 		// placeVO.setP_pop(10);
-		// placeVO.setPimg(getPicture("WebContent/nothing-here.jpg"));
+		// placeVO.setPimg(getPicture("WebContent/images/nothing-here.jpg"));
 		// placeVO.setP_info("aeouaoeu");
 		// placeVO.setP_sta("A");
 		// placeVO.setP_price(12);
+		// placeVO.setPicnic_no("PG00000001");
+		// placeVO.setP_lat(46.8545646);
+		// placeVO.setP_lon(46.8545646);
 		// placejdbcdao.insert(placeVO);
 // update
 		// PlaceVO placeVO = new PlaceVO();
-		// placeVO.setP_no("P000000001");
+		// placeVO.setP_no("P000000002");
 		// placeVO.setMf_no("MM00000001");
 		// placeVO.setMem_no("MG00000003");
 		// placeVO.setP_name("aoeuaoeu");
 		// placeVO.setP_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
 		// placeVO.setP_place("aoeuaoeu");
 		// placeVO.setP_pop(10);
-		// placeVO.setPimg(getPicture("WebContent/nothing-here.jpg"));
+		// placeVO.setPimg(getPicture("WebContent/images/nothing-here.jpg"));
 		// placeVO.setP_info("aoeuaoeuaoeu");
 		// placeVO.setP_sta("A");
 		// placeVO.setP_price(12);
+		// placeVO.setPicnic_no("PG00000009");
+		// placeVO.setP_lat(46.8545646);
+		// placeVO.setP_lon(46.8545646);
 		// placejdbcdao.update(placeVO);
 //delete
 		//placejdbcdao.delete("P000000001");
@@ -293,6 +310,9 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// System.out.println(placeVO.getP_info());
 		// System.out.println(placeVO.getP_sta());
 		// System.out.println(placeVO.getP_price());
+		// System.out.println(placeVO.getPicnic_no());
+		// System.out.println(placeVO.getP_lat());
+		// System.out.println(placeVO.getP_lon());
 		// System.out.println("---------------------");
 //search all
 		// List<PlaceVO> list=placejdbcdao.getAll();
@@ -308,9 +328,12 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// System.out.println(placeVO.getP_info());
 		// System.out.println(placeVO.getP_sta());
 		// System.out.println(placeVO.getP_price());
+		// System.out.println(placeVO.getPicnic_no());
+		// System.out.println(placeVO.getP_lat());
+		// System.out.println(placeVO.getP_lon());
 		// System.out.println("---------------------");
 		// }
-		//
+		
 		
 
 	}

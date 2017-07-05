@@ -1,40 +1,38 @@
 package com.place.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
 import java.util.List;
-
+import java.util.ArrayList;
+import java.io.*;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.naming.Context;
 
 public class PlaceDAO implements PlaceDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	private static DataSource ds=null;
+	static{
+			try {
+				Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/TestDB");
+			} catch (NamingException e) {
+				
+				e.printStackTrace();
+			}
 	}
 
-	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PLACE ORDER BY P_NO";
-	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE from PLACE WHERE P_NO= ?";
+	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON from PLACE WHERE P_NO= ?";
 	private static final String DELETE_STMT = "delete from PLACE where P_NO = ?";
-	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=? where P_NO=?";
+	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=?,PICNIC_NO = ?,P_LAT = ?,P_LON = ? where P_NO=?";
 
 	@Override
 	public void insert(PlaceVO placeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+		    con=ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, placeVO.getMf_no());
 			pstmt.setString(2, placeVO.getMem_no());
@@ -46,8 +44,13 @@ public class PlaceDAO implements PlaceDAO_interface {
 			pstmt.setString(8, placeVO.getP_info());
 			pstmt.setString(9, placeVO.getP_sta());
 			pstmt.setInt(10, placeVO.getP_price());
+			pstmt.setString(11, placeVO.getPicnic_no());
+			pstmt.setDouble(12, placeVO.getP_lat());
+			pstmt.setDouble(13, placeVO.getP_lon());
 
 			pstmt.executeUpdate();
+
+		
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -74,7 +77,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con =ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, placeVO.getMf_no());
 			pstmt.setString(2, placeVO.getMem_no());
@@ -86,10 +89,12 @@ public class PlaceDAO implements PlaceDAO_interface {
 			pstmt.setString(8, placeVO.getP_info());
 			pstmt.setString(9, placeVO.getP_sta());
 			pstmt.setInt(10, placeVO.getP_price());
-			pstmt.setString(11, placeVO.getP_no());
-
+			pstmt.setString(11, placeVO.getPicnic_no());
+			pstmt.setDouble(12, placeVO.getP_lat());
+			pstmt.setDouble(13, placeVO.getP_lon());			
+			pstmt.setString(14, placeVO.getP_no());
 			pstmt.executeUpdate();
-
+		
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -115,11 +120,11 @@ public class PlaceDAO implements PlaceDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			con=ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, p_no);
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+		}catch(SQLException e){
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -146,11 +151,11 @@ public class PlaceDAO implements PlaceDAO_interface {
 		PlaceVO placeVO = null;
 		ResultSet rs = null;
 		try {
-			con =ds.getConnection();
+			con= ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, p_no);
 			rs = pstmt.executeQuery();
-
+		
 			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
@@ -163,6 +168,10 @@ public class PlaceDAO implements PlaceDAO_interface {
 			placeVO.setP_info(rs.getString("P_INFO"));
 			placeVO.setP_sta(rs.getString("P_STA"));
 			placeVO.setP_price(rs.getInt("P_PRICE"));
+			placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			placeVO.setP_lat(rs.getDouble("P_LAT"));
+			placeVO.setP_lon(rs.getDouble("P_LON"));
+		
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -200,7 +209,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 		List<PlaceVO> list = new ArrayList<PlaceVO>();
 		ResultSet rs = null;
 		try {
-			con =ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -215,8 +224,12 @@ public class PlaceDAO implements PlaceDAO_interface {
 				placeVO.setP_info(rs.getString("P_INFO"));
 				placeVO.setP_sta(rs.getString("P_STA"));
 				placeVO.setP_price(rs.getInt("P_PRICE"));
+				placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				placeVO.setP_lat(rs.getDouble("P_LAT"));
+				placeVO.setP_lon(rs.getDouble("P_LON"));
 				list.add(placeVO);
 			}
+		
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -244,5 +257,29 @@ public class PlaceDAO implements PlaceDAO_interface {
 			}
 		}
 		return list;
+	}
+
+
+	private static byte[] getPicture(String path) {
+		byte[] data = null;
+		FileInputStream fileinput;
+		try {
+			fileinput = new FileInputStream(new File(path));
+			ByteArrayOutputStream fileoutput = new ByteArrayOutputStream();
+			byte[] buffer = new byte[8152];
+			int len = 0;
+			while ((len = fileinput.read(buffer)) != -1) {
+				fileoutput.write(buffer, 0, len);
+			}
+			data = fileoutput.toByteArray();
+			fileinput.close();
+			fileoutput.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return data;
 	}
 }
