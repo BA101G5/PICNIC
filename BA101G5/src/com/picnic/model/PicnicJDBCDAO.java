@@ -1,19 +1,21 @@
 package com.picnic.model;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class PicnicJDBCDAO implements PicnicDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 
 	private static final String INSERT_STMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICNICDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE_ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC Order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_NO = ?";
 	private static final String DELETE_STMT = "delete from PICNIC where PICNIC = ?";
 	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNICNO=?";
+	private static final String INSERT_INITIATESTMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
 
 	@Override
 	public void insert(PicnicVO picnicVO) {
@@ -22,7 +24,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(userid, passwd, url);
+			con = DriverManager.getConnection(url,userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, picnicVO.getPicnic_name());
 			pstmt.setString(2, picnicVO.getPicnic_desc());
@@ -69,7 +71,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(userid, passwd, url);
+			con = DriverManager.getConnection(url,userid, passwd);;
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, picnicVO.getPicnic_name());
@@ -119,7 +121,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(userid, passwd, url);
+			con = DriverManager.getConnection(url,userid, passwd);;
 			pstmt = con.prepareStatement(DELETE_STMT);
 
 			pstmt.setString(1, picnic_no);
@@ -157,27 +159,27 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		ResultSet rs = null;
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(userid, passwd, url);
+			con = DriverManager.getConnection(url,userid, passwd);;
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
 			rs.next();
-				picnicVO = new PicnicVO();
-				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
-				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
-				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-				picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
-				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
-				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
-				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
-				picnicVO.setPicnic_date(rs.getTimestamp("PICNIC_DATE"));
-				picnicVO.setPicnic_pl(rs.getInt("PICNIC_PL"));
-				picnicVO.setPicnic_sta(rs.getString("PICNIC_STA"));
-				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
-				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
-				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+			picnicVO = new PicnicVO();
+			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
+			picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
+			picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+			picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
+			picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
+			picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
+			picnicVO.setPicnic_date(rs.getTimestamp("PICNIC_DATE"));
+			picnicVO.setPicnic_pl(rs.getInt("PICNIC_PL"));
+			picnicVO.setPicnic_sta(rs.getString("PICNIC_STA"));
+			picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
+			picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
+			picnicVO.setOrd_dm(rs.getString("ORD_DM"));
+			picnicVO.setOrd_sta(rs.getString("Ord_sta"));
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -219,7 +221,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(userid, passwd, url);
+			con = DriverManager.getConnection(url,userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -274,6 +276,46 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void addPicnic(PicnicVO picnicVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			System.out.print("Hello");
+			con = DriverManager.getConnection(url ,userid, passwd);
+			pstmt = con.prepareStatement(INSERT_INITIATESTMT);
+			pstmt.setString(1, picnicVO.getPicnic_name());
+			pstmt.setTimestamp(2, picnicVO.getPicnic_date());
+			pstmt.setInt(3, picnicVO.getPicnic_pl());
+
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	
 	public static void main(String[] args) {
 		PicnicJDBCDAO picnicjdbcdao = new PicnicJDBCDAO();
 		// insert
@@ -355,5 +397,13 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		// System.out.println("---------------------");
 		// }
 
+		// insert
+				 PicnicVO picnicVO =new PicnicVO();
+				 picnicVO.setPicnic_name("¤Ñ½uÄ_Ä_");
+				 picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-02 0:0:0"));
+				 picnicVO.setPicnic_pl(10);
+				 picnicVO.setPicnic_sta("L");
+				 picnicjdbcdao.addPicnic(picnicVO);
 	}
+
 }

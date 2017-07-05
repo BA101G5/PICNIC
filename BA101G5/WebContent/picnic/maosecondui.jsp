@@ -25,7 +25,9 @@
     <![endif]-->
 <script>
 	$(function() {
-		$("#datepicker").datepicker();
+		$("#datepicker").datepicker({
+	        minDate: 0
+		});
 	});
 </script>
 
@@ -77,51 +79,56 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-2 col-sm-push-2">
-				<form method="post" action="<%=request.getContextPath()%>/picnic/maosecondui2.jsp">
-					<h3>請選擇條件</h3>
+				<form method="post"
+					action="<%=request.getContextPath()%>/picnic/maosecondui2.jsp">
+					<h3>請輸入開團資訊</h3>
 
 					<div class="list-group">
 						<a href="#" class="list-group-item active">First item</a> <a
 							href="#" class="list-group-item">
-						<table>
-							<tr>
-								<td>縣市: <select name="area" id="input" class="form-control"
-									required="required">
-										<option value="台北市">台北市</option>
-										<option value="aoeu">新北市</option>
-										<option value="aoeu">桃園市</option>
-										<option value="aoeu">臺中市</option>
-										<option value="aoeu">臺南市</option>
-										<option value="aoeu">基隆市</option>
-										<option value="aoeu">新竹市</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-										<option value="aoeu">aeou</option>
-								</select></td>
-							</tr>
-							<tr>
-								<td>地點 : <input type="text" name="address" value="${sessionScope.address} "></td>
-							</tr>
-							<tr>
-								<td>Date : <input type="text" id="datepicker" name="date" value="${sessionScope.date}"></td>
-							</tr>
-							<tr>
-								<td>限制人數 : <input type="text" name="people" value="${sessionScope.people}"></td>
-							</tr>
-						</table></a>
-						<a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
-							type="textarea" rows="4" cols="50" name="name" value="${sessionScope.name}"></a>
+							<table>
+								<tr>
+									<td>縣市: <select name="area" id="input"
+										class="form-control" required="required">
+											<option value="台北市">台北市</option>
+											<option value="aoeu">新北市</option>
+											<option value="aoeu">桃園市</option>
+											<option value="aoeu">臺中市</option>
+											<option value="aoeu">臺南市</option>
+											<option value="aoeu">基隆市</option>
+											<option value="aoeu">新竹市</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+											<option value="aoeu">aeou</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>地點 : <input type="text" name="address"
+										value="${sessionScope.address} "></td>
+								</tr>
+								<tr>
+									<td>Date : <input type="text" id="datepicker" name="date"
+										value="${sessionScope.date}"></td>
+								</tr>
+								<tr>
+									<td>限制人數 : <input type="text" name="people"
+										value="${sessionScope.people}"></td>
+								</tr>
+							</table>
+						</a> <a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
+							type="textarea" rows="4" cols="50" name="name"
+							value="${sessionScope.name}"></a>
 					</div>
 
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
-							 <button type="reset" class="btn btn-default" value="Reset">重設</button>
+							<button type="reset" class="btn btn-default" value="Reset">重設</button>
 						</div>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-default" value="Submit">送出</button>
@@ -160,11 +167,12 @@
 		</div>
 	</div>
 
-	<%session.removeAttribute("address");
-	  session.removeAttribute("date");
-	  session.removeAttribute("people");
-	  session.removeAttribute("name");%>
-	<script src="https://code.jquery.com/jquery.js "></script>
+	<%
+		session.removeAttribute("address");
+		session.removeAttribute("date");
+		session.removeAttribute("people");
+		session.removeAttribute("name");
+	%>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js "></script>
 </body>

@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.picnic.model.PicnicService;
 
@@ -20,37 +21,38 @@ public class PicnicServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("UTF-8");
-
+		HttpSession	session=req.getSession();
 		String action = req.getParameter("action");
-		if("insert".equals(action)){
+		
+		if(action.equals("insert")){
 			Map<String,String> errorMsgs =new LinkedHashMap<String,String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			try{String picnic_name=req.getParameter("name");
+
+			try{String picnic_name=(String) session.getAttribute("name");
 				String nameReg ="^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				
 			if(picnic_name==null||picnic_name.trim().length()==0){
-				errorMsgs.put("name","³¥À\¹Î¦W½Ğª«ªÅ¥Õ");
+				errorMsgs.put("name","åš™è¸è•­åš™è¸è•­å³–Wåš™è«‹è¿è•­åš™è¤ä¼è•­");
 			}else if(!picnic_name.trim().matches(nameReg)){
-				errorMsgs.put("name", " ¹Î¦W¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r©M_ , ¥Bªø«×¥²»İ¦b2¨ì10¤§¶¡");
+				errorMsgs.put("name", " åš™è«„ååš™ç·šåš™è¸è•­Oåš™è¸è•­åš™ç•¿åš™ç¨·åš™è¸è•­råš™è¸è•­åš™ç•¿åš™è¤‡å­—åš™ç_ , åš™ç•¿åš™è¸è•­åš™è«–ä¼è•­åš™è±åœ¨2åš™è¸è•­10åš™è¸è•­åš™è¸è•­");
 			}
-			
-			String address = req.getParameter("tladdress");
+		
+			String address =(String)session.getAttribute("tladdress");
 			String addressReg ="^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,15}$";
 			if(address==null||address.trim().length()==0){
-				errorMsgs.put("address","³¥À\¹Î¦W½Ğª«ªÅ¥Õ");
+				errorMsgs.put("address","åš™è¸è•­åš™è¸è•­å³–Wåš™è«‹è¿è•­åš™è¤ä¼è•­");
 			}else if(!address.trim().matches(nameReg)){
-				errorMsgs.put("address", " ¦a§}¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r©M_ , ¥Bªø«×¥²»İ¦b2¨ì15¤§¶¡");
+				errorMsgs.put("address", " åš™çª®åš™ç½·åš™ç·šåš™è¸è•­Oåš™è¸è•­åš™ç•¿åš™ç¨·åš™è¸è•­råš™è¸è•­åš™ç•¿åš™è¤‡å­—åš™ç_ , åš™ç•¿åš™è¸è•­åš™è«–ä¼è•­åš™è±åœ¨2åš™è¸è•­15åš™è¸è•­åš™è¸è•­");
 			}
-			
-			java.sql.Date picnic_date =null;
+	
+			java.sql.Timestamp picnic_date =null;
 				try{
-				picnic_date= java.sql.Date.valueOf(req.getParameter("date"));
+				picnic_date= java.sql.Timestamp.valueOf((String) session.getAttribute("date"));
+				System.out.println(picnic_date+"aoeu");
 				} catch (IllegalArgumentException e) {
-					errorMsgs.put("date", "½Ğ¿é¤J¤é´Á");
+					errorMsgs.put("date", "åš™è«‹é¸è•­Jåš™è¸è•­åš™ï¿½");
 				}
-				
-			Integer picnic_pl=new Integer(req.getParameter("people"));	
-			
-			/*************************** 2.¶}©l·s¼W¸ê®Æ ***************************************/
+				Integer picnic_pl= new Integer(((String)session.getAttribute("people")).trim());	
 			if(action.equals("insert")){
 			PicnicService picnicSvc =new PicnicService();
 			picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
