@@ -1,7 +1,6 @@
 package com.picmem.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +28,7 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'¹Î¥D')";
 	@Override
 	public void insert(PicmemVO picmemVO) {
 		Connection con = null;
@@ -239,5 +238,40 @@ public class PicmemJNDIDAO implements PicmemDAO_interface {
 		return list;
 
 	}
+	@Override
+	public void insertowner(PicmemVO picmemVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con=ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_OWNER_STMT);
+			pstmt.setString(1, picmemVO.getPicnic_no());
+			pstmt.setString(2, picmemVO.getMem_no());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
 
 }

@@ -12,6 +12,9 @@ public class PlaceVO implements java.io.Serializable{
 		private String p_info;
 		private String p_sta;
 		private Integer p_price;
+		private String picnic_no;
+		private Double p_lat;
+		private Double p_lon;
 		public String getP_no() {
 			return p_no;
 		}
@@ -77,5 +80,23 @@ public class PlaceVO implements java.io.Serializable{
 		}
 		public void setP_price(Integer p_price) {
 			this.p_price = p_price;
+		}
+		public String getPicnic_no() {
+			return picnic_no;
+		}
+		public void setPicnic_no(String picnic_no) {
+			this.picnic_no = picnic_no;
+		}
+		public Double getP_lat() {
+			return p_lat;
+		}
+		public void setP_lat(Double p_lat) {
+			this.p_lat = p_lat;
+		}
+		public Double getP_lon() {
+			return p_lon;
+		}
+		public void setP_lon(Double p_lon) {
+			this.p_lon = p_lon;
 		}
 }

@@ -25,7 +25,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 	private static final String GET_ONE_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_NO = ?";
 	private static final String DELETE_STMT = "delete from PICNIC where PICNIC = ?";
 	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNICNO=?";
-	private static final String INSERT_INITIATESTMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
+	private static final String INSERT_INITIATESTMT = "insert into PICNIC (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
 
 	@Override
 	public void insert(PicnicVO picnicVO) {
@@ -274,24 +274,36 @@ public class PicnicDAO implements PicnicDAO_interface {
 	}
 
 	@Override
-	public void addPicnic(PicnicVO picnicVO) {
+	public String addPicnic(PicnicVO picnicVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs= null;
 		
 		try {
 			con = ds.getConnection();
 			
-			pstmt = con.prepareStatement(INSERT_INITIATESTMT);
+			pstmt = con.prepareStatement(INSERT_INITIATESTMT,new int[]{1});
 			pstmt.setString(1, picnicVO.getPicnic_name());
 			pstmt.setTimestamp(2, picnicVO.getPicnic_date());
 			pstmt.setInt(3, picnicVO.getPicnic_pl());
-			System.out.println("Hello");
-			try{
+			
 			pstmt.executeUpdate();
-			}catch(SQLException e){System.out.println(e.getMessage());}
+			
+			rs=pstmt.getGeneratedKeys();
+			rs.next();
+			String id =rs.getString(1);
+			
+			return id;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
+			if(rs!=null){
+				try{rs.close();
+				}catch(SQLException se){
+					se.printStackTrace(System.err);
+					}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();

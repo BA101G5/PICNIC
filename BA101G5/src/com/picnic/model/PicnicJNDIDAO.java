@@ -274,21 +274,35 @@ public class PicnicJNDIDAO implements PicnicDAO_interface {
 	}
 
 	@Override
-	public void addPicnic(PicnicVO picnicVO) {
+	public String addPicnic(PicnicVO picnicVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs=null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_INITIATESTMT);
+			pstmt = con.prepareStatement(INSERT_INITIATESTMT,new int[]{1});
 			pstmt.setString(1, picnicVO.getPicnic_name());
 			pstmt.setTimestamp(2, picnicVO.getPicnic_date());
 			pstmt.setInt(3, picnicVO.getPicnic_pl());
 
 			pstmt.executeUpdate();
+			
+			rs = pstmt.getGeneratedKeys();
+			rs.next();
+			String id=rs.getString(1);
+			return id;
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
+			if(rs != null){
+				try{
+					pstmt.close();
+				}catch(SQLException se){
+					se.printStackTrace(System.err);
+				}
+				
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();

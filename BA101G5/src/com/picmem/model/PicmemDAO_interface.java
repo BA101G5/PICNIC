@@ -7,4 +7,5 @@ public interface PicmemDAO_interface {
 	public void delete(String picnic_no,String mem_no);
 	public PicmemVO findByPrimaryKey(String picnic_no,String mem_no);
 	public List<PicmemVO> getAll();
+	public void insertowner(PicmemVO picmemVO);
 }

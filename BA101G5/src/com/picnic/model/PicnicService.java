@@ -29,13 +29,13 @@ public class PicnicService {
 	public List<PicnicVO> getAll() {
 		return null;
 	}
-	public void addPicnic(String picnic_name,Timestamp picnic_date,Integer picnic_pl){
+	public String addPicnic(String picnic_name,Timestamp picnic_date,Integer picnic_pl){
 		PicnicVO picnicVO=new PicnicVO();
 		picnicVO.setPicnic_name(picnic_name);
 		picnicVO.setPicnic_date(picnic_date);
 		picnicVO.setPicnic_pl(picnic_pl);
-		dao.addPicnic(picnicVO);
-	
+		String picnic_no = dao.addPicnic(picnicVO);
+			return picnic_no;
 		
 	}
 }

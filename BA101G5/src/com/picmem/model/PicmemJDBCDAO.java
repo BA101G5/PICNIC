@@ -12,12 +12,13 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 	private static final String INSERT_STMT = "insert into PICMEM (PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT) values(?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'¹Î¥D')";
 
 	@Override
 	public void insert(PicmemVO picmemVO) {
@@ -241,11 +242,48 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 
 	}
 
+	@Override
+	public void insertowner(PicmemVO picmemVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(INSERT_OWNER_STMT);
+			pstmt.setString(1, picmemVO.getPicnic_no());
+			pstmt.setString(2, picmemVO.getMem_no());
+
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
-		// insert
+// insert
 		// PicmemVO picmemVO = new PicmemVO();
-		// picmemVO.setPicnic_no("PG00000001");
+		// picmemVO.setPicnic_no("PG00000006");
 		// picmemVO.setMem_no("MG00000001");
 		// picmemVO.setPicmem_iden("aoeuaoeu");
 		// picmemVO.setPicmem_sta("A");
@@ -274,16 +312,21 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 		// System.out.println(picmemVO.getMem_latit());
 		// System.out.println("---------------------");
 // search all
-		// List<PicmemVO> list = picmemjdbcdao.getAll();
-		// for (PicmemVO picmemVO : list) {
-		// System.out.println(picmemVO.getPicnic_no());
-		// System.out.println(picmemVO.getMem_no());
-		// System.out.println(picmemVO.getPicmem_iden());
-		// System.out.println(picmemVO.getPicmem_sta());
-		// System.out.println(picmemVO.getMem_longi());
-		// System.out.println(picmemVO.getMem_latit());
-		// System.out.println("---------------------");
-		// }
+//		 List<PicmemVO> list = picmemjdbcdao.getAll();
+//		 for (PicmemVO picmemVO : list) {
+//		 System.out.println(picmemVO.getPicnic_no());
+//		 System.out.println(picmemVO.getMem_no());
+//		 System.out.println(picmemVO.getPicmem_iden());
+//		 System.out.println(picmemVO.getPicmem_sta());
+//		 System.out.println(picmemVO.getMem_longi());
+//		 System.out.println(picmemVO.getMem_latit());
+//		 System.out.println("---------------------");
+//		 }
+		//insert owner
+		PicmemVO picmemVO =new PicmemVO();
+		picmemVO.setPicnic_no("PG00000007");
+		picmemVO.setMem_no("MG00000002");
+		picmemjdbcdao.insertowner(picmemVO);
 
 	}
 

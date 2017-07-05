@@ -9,5 +9,5 @@ public interface PicnicDAO_interface {
 		public void delete(String picnic_no);
 		public PicnicVO findByPrimaryKey(String picnic_no);
 		public List<PicnicVO> getAll();
-		void addPicnic(PicnicVO picnicVO);
+		public String addPicnic(PicnicVO picnicVO);
 }

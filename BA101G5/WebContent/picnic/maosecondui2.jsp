@@ -19,23 +19,6 @@
 </head>
 <body>
 
-	<%
-		if (request.getMethod().toUpperCase().equals("POST")) {
-			request.setCharacterEncoding("Big5");
-			String address = request.getParameter("address");
-			String area = request.getParameter("area");
-			String tladdress = area + address;
-			String date = request.getParameter("date");
-			String people = request.getParameter("people");
-			String name = request.getParameter("name");
-			session.setAttribute("area", area);
-			session.setAttribute("tladdress", tladdress);
-			session.setAttribute("address", address);
-			session.setAttribute("date", date);
-			session.setAttribute("people", people);
-			session.setAttribute("name", name);
-		}
-	%>
 
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
@@ -43,10 +26,10 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<h1>請重複確認您的資料</h1>
-				<p>團名 : ${name}</p>
-				<p>地址 : ${tladdress}</p>
-				<p>日期: ${date}</p>
-				<p>限制人數 :${people}</p>
+				<p>團名 : ${sessionScope.picnic_name}</p>
+				<p>地址 : ${sessionScope.tladdress}</p>
+				<p>日期: ${sessionScope.picnic_date}</p>
+				<p>限制人數 :${sessionScope.people}</p>
 
 
 				<div class="btn-group btn-group-justified">
