@@ -8,12 +8,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 
 public class AnnouncementDAO implements AnnouncementDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA101G5";
-	String passwd = "BA101G5";
+
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO ANNOUNCEMENT (ANN_NO, ANN_TEXT) VALUES ('AN' || LPAD(ANN_NO_SQ.NEXTVAL, 8, '0'), ?)";
@@ -34,8 +46,8 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 
@@ -43,10 +55,6 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -79,8 +87,8 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, announcementVO.getAnn_text());
@@ -88,10 +96,6 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -125,18 +129,14 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, letter_no);
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -171,8 +171,8 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, letter_no);
@@ -186,10 +186,6 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 				announcementVO.setAnn_text(rs.getString("ANN_TEXT"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -232,8 +228,8 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -245,10 +241,6 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 				list.add(announcementVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -278,40 +270,5 @@ public class AnnouncementDAO implements AnnouncementDAO_interface {
 			}
 		}
 		return list;
-	}
-	
-	
-	public static void main(String[] args) {
-
-		AnnouncementDAO dao = new AnnouncementDAO();
-
-//		// 新增
-		AnnouncementVO announcementVO1 = new AnnouncementVO();
-		announcementVO1.setAnn_text("最新消息: 公告內文");
-		dao.insert(announcementVO1);
-		
-//		// 修改
-		AnnouncementVO announcementVO2 = new AnnouncementVO();
-		announcementVO2.setAnn_no("AN00000001");
-		announcementVO2.setAnn_text("**已修改**--最新消息: 公告內文");
-		dao.update(announcementVO2);
-		
-//		// 刪除
-//		dao.delete("AN00000003");
-		
-		// 查詢 單筆.
-		AnnouncementVO announcementVO3 = dao.findByPrimaryKey("AN00000001");
-		System.out.print(announcementVO3.getAnn_no() + ",");
-		System.out.print(announcementVO3.getAnn_text() + ",");
-		System.out.println("---------------------");
-		
-		// 查詢 全部
-		List<AnnouncementVO> list = dao.getAll();
-		for (AnnouncementVO aEmp : list) {
-			System.out.print(aEmp.getAnn_no() + ",");
-			System.out.print(aEmp.getAnn_text() + ",");
-			System.out.println();
-		}
-	
 	}
 }
