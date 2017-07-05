@@ -45,7 +45,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 			pstmt.setString(5, pboardArticleVO.getArticle_text());
 			pstmt.setTimestamp(6, pboardArticleVO.getArticle_post());
 			pstmt.setTimestamp(7, pboardArticleVO.getArticle_edit());
-			pstmt.setInt(8, pboardArticleVO.getArticle_view());
+			pstmt.setInt(8, pboardArticleVO.getArticle_views());
 			pstmt.setString(9, pboardArticleVO.getArticle_sta());
 			pstmt.setInt(10, pboardArticleVO.getArticle_kind());
 			pstmt.setString(11, pboardArticleVO.getArticle_pw());
@@ -99,7 +99,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 			pstmt.setString(5, pboardArticleVO.getArticle_text());
 			pstmt.setTimestamp(6, pboardArticleVO.getArticle_post());
 			pstmt.setTimestamp(7, pboardArticleVO.getArticle_edit());
-			pstmt.setInt(8, pboardArticleVO.getArticle_view());
+			pstmt.setInt(8, pboardArticleVO.getArticle_views());
 			pstmt.setString(9, pboardArticleVO.getArticle_sta());
 			pstmt.setInt(10, pboardArticleVO.getArticle_kind());
 			pstmt.setString(11, pboardArticleVO.getArticle_pw());
@@ -209,7 +209,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
-				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
 				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
@@ -277,7 +277,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
 				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
 				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
-				pboardArticleVO.setArticle_view(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
 				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
 				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
 				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
@@ -333,7 +333,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		pboardArticleVO1.setArticle_text("新增野餐團的留言板留言");
 		pboardArticleVO1.setArticle_post(java.sql.Timestamp.valueOf("2017-06-20 12:38:40"));
 		pboardArticleVO1.setArticle_edit(null);
-		pboardArticleVO1.setArticle_view(0);
+		pboardArticleVO1.setArticle_views(0);
 		pboardArticleVO1.setArticle_sta("V");
 		pboardArticleVO1.setArticle_kind(1);
 		pboardArticleVO1.setArticle_pw(null);
@@ -349,7 +349,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 //		pboardArticleVO2.setArticle_text("***已修改***新增野餐團的留言板留言");
 //		pboardArticleVO2.setArticle_post(java.sql.Timestamp.valueOf("2017-06-20 12:38:40"));
 //		pboardArticleVO2.setArticle_edit(null);
-//		pboardArticleVO2.setArticle_view(0);
+//		pboardArticleVO2.setArticle_views(0);
 //		pboardArticleVO2.setArticle_sta("V");
 //		pboardArticleVO2.setArticle_kind(1);
 //		pboardArticleVO2.setArticle_pw(null);
@@ -367,7 +367,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		System.out.print(pboardArticleVO3.getArticle_text() + ",");
 		System.out.print(pboardArticleVO3.getArticle_post() + ",");
 		System.out.print(pboardArticleVO3.getArticle_edit() + ",");
-		System.out.print(pboardArticleVO3.getArticle_view() + ",");
+		System.out.print(pboardArticleVO3.getArticle_views() + ",");
 		System.out.print(pboardArticleVO3.getArticle_sta() + ",");
 		System.out.print(pboardArticleVO3.getArticle_kind() + ",");
 		System.out.println(pboardArticleVO3.getArticle_pw());
@@ -383,7 +383,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 			System.out.print(aEmp.getArticle_text() + ",");
 			System.out.print(aEmp.getArticle_post() + ",");
 			System.out.print(aEmp.getArticle_edit() + ",");
-			System.out.print(aEmp.getArticle_view() + ",");
+			System.out.print(aEmp.getArticle_views() + ",");
 			System.out.print(aEmp.getArticle_sta() + ",");
 			System.out.print(aEmp.getArticle_kind() + ",");
 			System.out.print(aEmp.getArticle_pw());

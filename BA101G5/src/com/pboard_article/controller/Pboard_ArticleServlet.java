@@ -84,7 +84,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("pboard_articleVO", pboard_articleVO); // 資料庫取出的pboard_articleVO物件,存入req
-				String url = "/pboard_article/listOnePboard_Article.jsp";
+				String url = "listOnePboard_Article.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交listOnePboard_Article.jsp
 				successView.forward(req, res);
 
@@ -117,7 +117,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("pboard_articleVO", pboard_articleVO); // 資料庫取出的pboard_articleVO物件,存入req
-				String url = "/pboard_article/update_pboard_article_input.jsp";
+				String url = "update_pboard_article_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_pboard_article_input.jsp
 				successView.forward(req, res);
 
@@ -132,20 +132,20 @@ public class Pboard_ArticleServlet extends HttpServlet {
 		
 		
 		if ("update".equals(action)) { // 來自update_pboard_article_input.jsp的請求
-			
+//System.out.println(">>>1");	
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑: 可能為【/pboard_article/listAllPboard_Article.jsp】 或  【/general_member/listPboard_Articles_ByGeneralMemberno.jsp】 或 【 /general_member/listAllGeneralMember.jsp】 或 【 /pboard_article/listPboard_Articles_ByCompositeQuery.jsp】
-		
+//System.out.println("requestURL: " + requestURL);			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String article_no = new String(req.getParameter("article_no").trim());
 				String article_title = req.getParameter("article_title").trim();
 				String article_text = req.getParameter("article_text").trim();				
-				
+//System.out.println("article_no: " + article_no);		
 				java.sql.Timestamp article_post = null;
 				try {
 					article_post = java.sql.Timestamp.valueOf(req.getParameter("article_post").trim());
@@ -153,7 +153,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 					article_post=new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-
+//System.out.println("article_post: " + article_post);
 
 				Integer article_kind = null;
 				try {
@@ -163,35 +163,36 @@ public class Pboard_ArticleServlet extends HttpServlet {
 					errorMsgs.add("獎金請填數字.");
 				}
 
-				String mem_no = new String(req.getParameter("mem_no").trim());
-
+				String author_no = new String(req.getParameter("author_no").trim());
+//System.out.println("author_no: " + author_no);	
 				Pboard_ArticleVO pboard_articleVO = new Pboard_ArticleVO();
 				pboard_articleVO.setArticle_no(article_no);
 				pboard_articleVO.setArticle_title(article_title);
 				pboard_articleVO.setArticle_text(article_text);
 				pboard_articleVO.setArticle_post(article_post);
 				pboard_articleVO.setArticle_kind(article_kind);
-				pboard_articleVO.setAuthor_no(mem_no);
+				pboard_articleVO.setAuthor_no(author_no);
 
+//System.out.println(">>>>2:  "+pboard_articleVO.getArticle_no());
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("pboard_articleVO", pboard_articleVO); // 含有輸入格式錯誤的pboard_articleVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/pboard_article/update_pboard_article_input.jsp");
+							.getRequestDispatcher("update_pboard_article_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
-				
+//System.out.println(pboard_articleVO.getArticle_no());
 				/***************************2.開始修改資料*****************************************/
 				Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
-				pboard_articleVO = pboard_articleSvc.updatePboard_Article(article_no, mem_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
+				pboard_articleVO = pboard_articleSvc.updatePboard_Article(article_no, author_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/				
 				GeneralMemberService general_memberSvc = new GeneralMemberService();
 				if(requestURL.equals("/general_member/listPboard_Articles_ByGeneralMemberno.jsp") || requestURL.equals("/general_member/listAllGeneralMember.jsp"))
-					req.setAttribute("listPboard_Articles_ByGeneralMemberno", pboard_articleSvc.getPboard_ArticlesByGeneralMemberno(mem_no)); // 資料庫取出的list物件,存入request
+					req.setAttribute("listPboard_Articles_ByGeneralMemberno", pboard_articleSvc.getPboard_ArticlesByGeneralMemberno(author_no)); // 資料庫取出的list物件,存入request
 				
-				if(requestURL.equals("/pboard_article/listEmps_ByCompositeQuery.jsp")){
+				if(requestURL.equals("listEmps_ByCompositeQuery.jsp")){
 					HttpSession session = req.getSession();
 					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
 					List<Pboard_ArticleVO> list  = pboard_articleSvc.getAll(map);
@@ -206,7 +207,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/pboard_article/update_pboard_article_input.jsp");
+						.getRequestDispatcher("update_pboard_article_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -240,31 +241,31 @@ public class Pboard_ArticleServlet extends HttpServlet {
 					errorMsgs.add("獎金請填數字.");
 				}
 				
-				String mem_no = new String(req.getParameter("mem_no").trim());
+				String author_no = new String(req.getParameter("author_no").trim());
 
 				Pboard_ArticleVO pboard_articleVO = new Pboard_ArticleVO();
 				pboard_articleVO.setArticle_title(article_title);
 				pboard_articleVO.setArticle_text(article_text);
 				pboard_articleVO.setArticle_post(article_post);
 				pboard_articleVO.setArticle_kind(article_kind);
-				pboard_articleVO.setAuthor_no(mem_no);
+				pboard_articleVO.setAuthor_no(author_no);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("pboard_articleVO", pboard_articleVO); // 含有輸入格式錯誤的pboard_articleVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/pboard_article/addPboard_Article.jsp");
+							.getRequestDispatcher("addPboard_Article.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
 				Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
-				//pboard_articleVO = pboard_articleSvc.addPboard_Article(article_title, article_text, article_post,  article_kind, mem_no);
-				pboard_articleVO = pboard_articleSvc.addPboard_Article(mem_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
+				//pboard_articleVO = pboard_articleSvc.addPboard_Article(article_title, article_text, article_post,  article_kind, author_no);
+				pboard_articleVO = pboard_articleSvc.addPboard_Article(author_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/pboard_article/listAllPboard_Article.jsp";
+				String url = "listAllPboard_Article.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPboard_Article.jsp
 				successView.forward(req, res);				
 				
@@ -272,7 +273,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/pboard_article/addPboard_Article.jsp");
+						.getRequestDispatcher("addPboard_Article.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -301,7 +302,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				if(requestURL.equals("/general_member/listPboard_Articles_ByGeneralMemberno.jsp") || requestURL.equals("/general_member/listAllGeneralMember.jsp"))
 					req.setAttribute("listPboard_Articles_ByGeneralMemberno",pboard_articleSvc.getPboard_ArticlesByGeneralMemberno(pboard_articleVO.getAuthor_no())); // 資料庫取出的list物件,存入request
 				
-				if(requestURL.equals("/pboard_article/listPboard_Articles_ByCompositeQuery.jsp")){
+				if(requestURL.equals("listPboard_Articles_ByCompositeQuery.jsp")){
 					HttpSession session = req.getSession();
 					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
 					List<Pboard_ArticleVO> list  = pboard_articleSvc.getAll(map);
@@ -349,7 +350,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("listPboard_Articles_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
-				RequestDispatcher successView = req.getRequestDispatcher("/pboard_article/listEmps_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				RequestDispatcher successView = req.getRequestDispatcher("listEmps_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/

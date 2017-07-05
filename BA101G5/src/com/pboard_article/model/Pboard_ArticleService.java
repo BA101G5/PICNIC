@@ -21,7 +21,7 @@ public class Pboard_ArticleService {
 		pboardArticleVO.setArticle_title(article_title);
 		pboardArticleVO.setArticle_text(article_text);
 		pboardArticleVO.setArticle_post(article_post);
-		pboardArticleVO.setArticle_view(article_view);
+		pboardArticleVO.setArticle_views(article_view);
 		pboardArticleVO.setArticle_kind(article_kind);
 		dao.insert(pboardArticleVO);
 
@@ -39,7 +39,7 @@ public class Pboard_ArticleService {
 		pboardArticleVO.setArticle_text(article_text);
 		pboardArticleVO.setArticle_post(article_post);
 		pboardArticleVO.setArticle_edit(article_edit);
-		pboardArticleVO.setArticle_view(article_view);
+		pboardArticleVO.setArticle_views(article_view);
 		pboardArticleVO.setArticle_sta(article_sta);
 		pboardArticleVO.setArticle_kind(article_kind);
 		pboardArticleVO.setArticle_pw(article_pw);
@@ -58,7 +58,7 @@ public class Pboard_ArticleService {
 		pboardArticleVO.setArticle_title(article_title);
 		pboardArticleVO.setArticle_text(article_text);
 		pboardArticleVO.setArticle_post(article_post);
-		pboardArticleVO.setArticle_view(article_view);
+		pboardArticleVO.setArticle_views(article_view);
 		pboardArticleVO.setArticle_kind(article_kind);
 		dao.update(pboardArticleVO);
 
@@ -77,7 +77,7 @@ public class Pboard_ArticleService {
 		pboardArticleVO.setArticle_text(article_text);
 		pboardArticleVO.setArticle_post(article_post);
 		pboardArticleVO.setArticle_edit(article_edit);
-		pboardArticleVO.setArticle_view(article_view);
+		pboardArticleVO.setArticle_views(article_view);
 		pboardArticleVO.setArticle_sta(article_sta);
 		pboardArticleVO.setArticle_kind(article_kind);
 		pboardArticleVO.setArticle_pw(article_pw);
