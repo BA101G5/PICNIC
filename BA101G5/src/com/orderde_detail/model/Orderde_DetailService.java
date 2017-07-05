@@ -9,8 +9,8 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public Orderde_DetailVO addOrderde_Detail() {
-		return null;
+	public void addOrderde_Detail(Orderde_DetailVO orderde_detailVO) {
+		dao.insert(orderde_detailVO);
 	}
 
 	public Orderde_DetailVO updateOrderde_Detail() {

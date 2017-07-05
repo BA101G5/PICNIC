@@ -194,7 +194,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
 		ResultSet rs = null;
 		try {
-			con = ds.getConnection();
+		    con=ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -240,5 +240,4 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		}
 		return list;
 	}
-
 }
