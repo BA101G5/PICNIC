@@ -20,15 +20,14 @@ public class Orderde_detailServlet extends HttpServlet {
 
 		String action = req.getParameter("acton");
 
-		if (action.equals("actionA") || action.equals("actionB")) {
+		if (action.equals("insert") ) {
 			
 			Goods_SellVO goods_sellVo=(Goods_SellVO)req.getAttribute("values");
-			
+			System.out.printlrn();
 			
 			
 			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-			Orderde_DetailVO orderde_detailVO =
-			orderde_detailSvc.addOrderde_Detail(orderde_detailVO);
+		if(action.equals("insert")){}
 		}
 
 	}

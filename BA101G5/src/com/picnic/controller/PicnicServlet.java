@@ -41,8 +41,7 @@ public class PicnicServlet extends HttpServlet {
 				if (picnic_name == null || picnic_name.trim().length() == 0) {
 					errorMsgs.put("name", "團名不能為空");
 				} else if (!picnic_name.trim().matches(nameReg)) {
-					errorMsgs.put("name",
-							"團名不能為特殊符號 且必須在2~70字之間");
+					errorMsgs.put("name", "團名不能為特殊符號 且必須在2~70字之間");
 				}
 				String address = req.getParameter("address");
 				String area = req.getParameter("area");
@@ -51,14 +50,12 @@ public class PicnicServlet extends HttpServlet {
 				if (address == null || address.trim().length() == 0) {
 					errorMsgs.put("address", "地址不能為空");
 				} else if (!address.trim().matches(addressReg)) {
-					errorMsgs.put("address",
-							"地址必須文中文和數字 且在6~15字之間");
+					errorMsgs.put("address", "地址必須文中文和數字 且在6~15字之間");
 				}
-				JSONObject lonlat=  new JSONObject();
-				 
-				
+			
 
-				
+			
+
 				Timestamp picnic_date = null;
 				String date = null;
 				try {
@@ -68,12 +65,13 @@ public class PicnicServlet extends HttpServlet {
 				} catch (IllegalArgumentException e) {
 					errorMsgs.put("date", "請輸入日期資料");
 				}
-		
-				
+
 				Integer picnic_pl = null;
 				try {
 					picnic_pl = new Integer(req.getParameter("people").trim());
-					if(picnic_pl<0){errorMsgs.put("people", "人數不能小於零");}
+					if (picnic_pl < 0) {
+						errorMsgs.put("people", "人數不能小於零");
+					}
 				} catch (Exception e) {
 					errorMsgs.put("people", "請輸入數字");
 				}
@@ -106,26 +104,25 @@ public class PicnicServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {/***************移除不必要的資訊***************/
+			try {/*************** 移除不必要的資訊 ***************/
 				session.removeAttribute("area");
 				session.removeAttribute("address");
 				session.removeAttribute("date");
-				/*******************取得必要的資訊************************/
-				//String account=(String)session.getAttribute("accouent");
-				String account="MG00000002";
-				String picnic_name=(String) session.getAttribute("picnic_name");
-				String tladdress =(String) session.getAttribute("tladdress");
+				/******************* 取得必要的資訊 ************************/
+				// String account=(String)session.getAttribute("accouent");
+				String account = "MG00000002";
+				String picnic_name = (String) session.getAttribute("picnic_name");
+				String tladdress = (String) session.getAttribute("tladdress");
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
 				Integer picnic_pl = (Integer) session.getAttribute("people");
 
-
 				if (action.equals("insert")) {
-					 PicnicService picnicSvc = new PicnicService();
-					 String picnic_no= picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
-					 PicmemService picmemSvc = new PicmemService();
-					 picmemSvc.addowner(picnic_no, account);
-					 PlaceService placeSvc =new PlaceService();
-					
+					PicnicService picnicSvc = new PicnicService();
+					String picnic_no = picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
+					PicmemService picmemSvc = new PicmemService();
+					picmemSvc.addowner(picnic_no, account);
+					PlaceService placeSvc = new PlaceService();
+
 				}
 
 			} catch (Exception e) {

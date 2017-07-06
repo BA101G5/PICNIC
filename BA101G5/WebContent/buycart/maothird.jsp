@@ -31,15 +31,13 @@
 <p>${goods_sellVO.getGs_info()}</p><br>
 </div>
 <div class="col-sm-4 ">
-<form method="post" action="<%request.getContextPath(); %>/orderde_detail/orderde_detail.do" >
-	<Button type="submit">Ф■╬Е┘╔ХЁ╪Г┴╘Х╩┼</Button>
+<form method="post" action="<%=request.getContextPath() %>/orderde_detail/orderde_detail.do" >
+	<Button type="submit">╘Я╓Jай╙╚╗╝</Button>
 	<input type="hidden" name="action" values="insertA">
 	<input type="hidden" name="values" values=" ${goods_sellVO}">
 </form>
-<form method="post" action="<%request.getContextPath(); %>/orderde_detail/orderde_detail.do" >
-	<Button type="submit">Г╚▀Е█ЁГ╣░Е╦Ё</Button>
-	<input type="hidden" name="action" values="insertB">
-	<input type="hidden" name="values" values=" ${goods_sellVO}">
+<form method="post" action="<%=request.getContextPath() %>/buycart/maosecond.jsp" >
+	<Button type="submit">╓U╕╦╕A╤R</Button>
 </form>
 </div>
 </div>

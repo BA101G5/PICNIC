@@ -1,4 +1,4 @@
-package com.place.encoding;
+package com.util.encoding;
 
 import java.io.BufferedReader;
 import java.io.IOException;
