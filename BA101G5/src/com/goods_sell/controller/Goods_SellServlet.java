@@ -30,7 +30,6 @@ public class Goods_SellServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-                System.out.println("hello");
 				String gsno = new String(req.getParameter("gsno"));
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();

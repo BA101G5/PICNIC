@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 
 public class Orderde_DetailVO implements java.io.Serializable {
 		private String orderde_detailno;
+		private String mem_no;
 		private String picnic_no;
 		private String p_no;
 		private String gr_no;
@@ -12,6 +13,7 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		private Timestamp od_deliver;
 		private String od_place;
 		private String od_bs;
+		
 		public String getPicnic_no() {
 			return picnic_no;
 		}
@@ -71,6 +73,12 @@ public class Orderde_DetailVO implements java.io.Serializable {
 		}
 		public void setOd_place(String od_place) {
 			this.od_place = od_place;
+		}
+		public String getMem_no() {
+			return mem_no;
+		}
+		public void setMem_no(String mem_no) {
+			this.mem_no = mem_no;
 		}
 	
 }
