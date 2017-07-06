@@ -33,8 +33,8 @@
 <div class="col-sm-4 ">
 <form method="post" action="<%=request.getContextPath() %>/orderde_detail/orderde_detail.do" >
 	<Button type="submit">放入購物車</Button>
-	<input type="hidden" name="action" values="insertA">
-	<input type="hidden" name="values" values=" ${goods_sellVO}">
+	<input type="hidden" name="action" value="insert">
+	
 </form>
 <form method="post" action="<%=request.getContextPath() %>/buycart/maosecond.jsp" >
 	<Button type="submit">下次再買</Button>

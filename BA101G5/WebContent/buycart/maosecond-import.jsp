@@ -46,7 +46,7 @@
 											onclick="submit()">
 											<a href="#" class="btn btn-default btn-xs"> <span
 												class="glyphicon glyphicon-shopping-cart" />
-											</a><input type="hidden" name="number" value="${goods_sellVO.gs_no}">
+											</a><input type="hidden" name="action" value="$insert">
 										</FORM></td>
 								</tr>
 							</table>

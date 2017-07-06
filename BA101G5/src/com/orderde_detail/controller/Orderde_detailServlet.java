@@ -18,17 +18,13 @@ public class Orderde_detailServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
 		req.setCharacterEncoding("UTF-8");
 
-		String action = req.getParameter("acton");
+		String action = req.getParameter("action");
+		if (action.equals("insert")) {
+			
+			Goods_SellVO goods_sellVO= (Goods_SellVO) req.getAttribute("goods_sellVO");
+			System.out.println(goods_sellVO.getGs_name());
+			System.out.println("Hello");
 
-		if (action.equals("insert") ) {
-			
-			Goods_SellVO goods_sellVo=(Goods_SellVO)req.getAttribute("values");
-			System.out.printlrn();
-			
-			
-			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-		if(action.equals("insert")){}
 		}
-
 	}
 }
