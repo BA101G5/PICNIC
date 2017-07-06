@@ -40,7 +40,7 @@
 											<input type="hidden" name="gsno" value="${goods_sellVO.getGs_no()}">
 											<input type="hidden" name="action" value="getOne">
 										</FORM></td>
-									<td></td>
+									
 									<td><FORM METHOD="post"
 											ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do"
 											onclick="submit()">

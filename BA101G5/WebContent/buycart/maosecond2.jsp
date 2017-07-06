@@ -28,6 +28,10 @@
 .list-group {
 	margin-top: 15px;
 }
+
+.btn {
+	width: 50px;
+}
 </style>
 </head>
 <body>
@@ -38,13 +42,31 @@
 			<div class="col-sm-11 cal-sm-push-1">
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav side-nav">
-						<li><a href="index.html">aoeu</a></li>
-						<li class="active"><a href="charts.html">aoeu</a></li>
-						<li><a href="tables.html">aeou</a></li>
-						<li><a href="forms.html">aeoua</a></li>
-						<li><a href="bootstrap-elements.html">aoeu</a></li>
-						<li><a href="bootstrap-grid.html"> aeou</a></li>
-						<li><a href="blank-page.html"> aeou</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>A</p>
+								</FORM>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>B</p>
+								</FORM>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>C</p>
+								</FORM>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>D</p>
+								</FORM>
+						</a></li>
+
 					</ul>
 				</div>
 			</div>
@@ -56,15 +78,17 @@
 					<div class="btn-group btn-group-justified ">
 						<a href="# " class="btn btn-default " role="button ">¦^¼ÐÃD</a>
 					</div>
-					<div class="col-sm-9 col-sm-push-3 ">
+					<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
