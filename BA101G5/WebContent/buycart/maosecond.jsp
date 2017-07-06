@@ -45,25 +45,25 @@
 						<li><a href="#">
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
-									<p>食物</p>
+									<p>A</p>
 								</FORM>
 						</a></li>
 						<li><a href="#">
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
-									<p>野餐器具</p>
+									<p>B</p>
 								</FORM>
 						</a></li>
 						<li><a href="#">
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
-									<p>防曬</p>
+									<p>C</p>
 								</FORM>
 						</a></li>
 						<li><a href="#">
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
-									<p>其他</p>
+									<p>D</p>
 								</FORM>
 						</a></li>
 
@@ -76,7 +76,7 @@
 			<div class="col-sm-11 col-sm-push-1 ">
 				<div class="col-sm-9 col-sm-push-1 ">
 					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">回標題</a>
+						<a href="# " class="btn btn-default " role="button ">�^���D</a>
 					</div>
 					<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />

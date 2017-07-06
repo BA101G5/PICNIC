@@ -26,7 +26,7 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<h1>請重複確認您的資料</h1>
-				<p>團名 : ${sessionScope.picnic_name}</p>
+				<p>團名  : ${sessionScope.picnic_name}</p>
 				<p>地址 : ${sessionScope.tladdress}</p>
 				<p>日期: ${sessionScope.picnic_date}</p>
 				<p>限制人數 :${sessionScope.people}</p>

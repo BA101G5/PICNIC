@@ -1,7 +1,9 @@
 package com.orderde_detail.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,11 +15,11 @@ import com.orderde_detail.model.Orderde_DetailService;
 import com.orderde_detail.model.Orderde_DetailVO;
 
 public class Orderde_detailServlet extends HttpServlet {
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws UnsupportedEncodingException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session =req.getSession();
 		String action = req.getParameter("action");
@@ -30,9 +32,12 @@ public class Orderde_detailServlet extends HttpServlet {
 			
 			//String account=(String) session.getAttribute("account");
 			String account="";
-
-		
-
+			String url =null;
+			if(action.equals("insert")){
+				 url="/buycart/maothird.jsp";
+			}
+			javax.servlet.RequestDispatcher SuccessView =req.getRequestDispatcher(url);
+			SuccessView.forward(req, res);
 		}
 	}
 }

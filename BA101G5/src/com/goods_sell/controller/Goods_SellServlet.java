@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
@@ -19,7 +20,7 @@ public class Goods_SellServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+		HttpSession session =req.getSession();
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
@@ -35,7 +36,7 @@ public class Goods_SellServlet extends HttpServlet {
 				Goods_SellService goods_sellSvc = new Goods_SellService();
 				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno);
 
-				req.setAttribute("goods_sellVO", goods_sellVO);
+				session.setAttribute("goods_sellVO", goods_sellVO);
 				String url = null;
 				if ("getOne".equals(action)) {
 					 url="/buycart/maothird.jsp";

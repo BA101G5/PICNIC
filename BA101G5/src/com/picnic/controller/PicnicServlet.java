@@ -124,7 +124,13 @@ public class PicnicServlet extends HttpServlet {
 					PlaceService placeSvc = new PlaceService();
 
 				}
-
+				String url=null;
+			    if(action.equals("insert")){
+			    	url="/picnic/maosecondui3.jsp";
+			    }
+			    
+			    javax.servlet.RequestDispatcher SuccessView =req.getRequestDispatcher(url);
+			    SuccessView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
 
