@@ -37,7 +37,7 @@
 											onclick="submit()">
 										<a href="#"
 										class="btn btn-default">${goods_sellVO.getGs_price()}</a>
-											<input type="hidden" name="gsno" value="${goods_sellVO.gs_no}">
+											<input type="hidden" name="gsno" value="${goods_sellVO.getGs_no()}">
 											<input type="hidden" name="action" value="getOne">
 										</FORM></td>
 									<td></td>
@@ -46,7 +46,7 @@
 											onclick="submit()">
 											<a href="#" class="btn btn-default btn-xs"> <span
 												class="glyphicon glyphicon-shopping-cart" />
-											</a><input type="hidden" name="action" value="$insert">
+											</a><input type="hidden" name="actd" value="${goods_sellVO.gs_no}">
 										</FORM></td>
 								</tr>
 							</table>
