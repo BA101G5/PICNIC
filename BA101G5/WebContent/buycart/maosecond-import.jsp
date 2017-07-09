@@ -23,7 +23,7 @@
 				<div class="col-sm-4 ">
 					<div class="thumbnail">
 						<img
-							src="${request.getContextPath()}/images/${goods_sellVO.getGs_name()}.jpg"
+							src="${goods_sellVO.getUrl()}"
 							alt="">
 
 						<div class="caption">

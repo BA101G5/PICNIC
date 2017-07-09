@@ -26,6 +26,7 @@
 	<div class="container-fluid">
 		<div class="row ">
 			<div class="col-sm-8 col-sm-push-2">
+				<img src="<%=request.getContextPath()%>${goods_sellVO.getUrl()}">
 				<p>${goods_sellVO.getGs_name()}</p>
 				<br>
 				<p>»ù®æ :  ${goods_sellVO.getGs_price()}</p>

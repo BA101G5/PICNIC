@@ -10,6 +10,7 @@ public class Goods_SellVO implements java.io.Serializable{
 		private String gs_info;
 		private byte[] gs_img;
 		private String gs_sta;
+		private String url;
 		public String getGs_no() {
 			return gs_no;
 		}
@@ -57,5 +58,11 @@ public class Goods_SellVO implements java.io.Serializable{
 		}
 		public void setGs_sta(String gs_sta) {
 			this.gs_sta = gs_sta;
+		}
+		public String getUrl() {
+			return url;
+		}
+		public void setUrl(String url) {
+			this.url = url;
 		}
 }
