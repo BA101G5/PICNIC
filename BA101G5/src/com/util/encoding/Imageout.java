@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import java.io.Writer;
 
 public class Imageout {
-	public static String imageoutput(String contextpath, String table, String imgname, byte[] img) throws IOException {
+	public static String imageoutput(String contextpath, String table, String imgname, byte[] img) {
 		String url = String.format("%s\\%s\\%s.jpg", contextpath, table, imgname);
 		String urlloc = String.format("/images/%s/%s.jpg", table, imgname);
 		try {
@@ -20,12 +20,16 @@ public class Imageout {
 				file.mkdirs();
 			}
 			FileOutputStream fileout = new FileOutputStream(file);
-		//	BufferedOutputStream bos = new BufferedOutputStream(fileout);
-				
-			fileout.write(img);
+			BufferedOutputStream bos = new BufferedOutputStream(fileout);
 			try {
-			//	bos.close();
+				bos.flush();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
 				fileout.close();
+				bos.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
