@@ -52,7 +52,7 @@
 			<div class="col-sm-10 col-sm-push-1 ">
 
 				<div class="row">
-					<div class="col-sm-11 col-sm-push-1">
+					<div class="col-sm-10 col-sm-push-1">
 						<div id="carousel-id" class="carousel slide" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#carousel-id" data-slide-to="0" class=""></li>
@@ -88,29 +88,29 @@
 
 
 				<div class="row">
-					<div class="col-sm-11 col-sm-push-1">
+					<div class="col-sm-10 col-sm-push-1">
 						<div class="col-sm-4 ">
 
 							<a href="#" class="thumbnail">
-								<p>第一次預購商品？</p>
+								<p>嚙衝一嚙踝蕭嚙緩嚙褊商品嚙瘡</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往註冊</button>
+									<button type="button" class="btn btn-default">嚙箴嚙踝蕭嚙踝蕭嚙磊</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp" class="thumbnail"> 
-								<p>商品分類</p>
+								<p>嚙諉品嚙踝蕭嚙踝蕭</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往</button>
+									<button type="button" class="btn btn-default">嚙箴嚙踝蕭</button>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-4 ">
 							<a href="<%=request.getContextPath()%>/buycart/maosecond2.jsp" class="thumbnail">
-								<p>流行的商品</p>
+								<p>嚙緙嚙賣的嚙諉品</p>
 								<div class="caption">
-									<button type="button" class="btn btn-default">前往</button>
+									<button type="button" class="btn btn-default">嚙箴嚙踝蕭</button>
 								</div>
 							</a>
 						</div>
@@ -118,11 +118,11 @@
 				</div>
 
 				<div class="row ">
-					<div class="col-sm-11 col-sm-push-1 ">
+					<div class="col-sm-10 col-sm-push-1 ">
 						<div class="btn-group btn-group-justified ">
-							<a href="# " class="btn btn-default " role="button ">回到標題</a>
+							<a href="# " class="btn btn-default " role="button ">嚙稷嚙踝蕭嚙踝蕭D</a>
 						</div>
-						<div class="col-sm-11 col-sm-push-3 ">
+						<div class="col-sm-10 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />
 						</div>
 					</div>

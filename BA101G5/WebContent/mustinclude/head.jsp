@@ -10,3 +10,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mustinclude/left_nav.css">
+<style >html {
+	height: 100%;
+}
+
+body {
+	background-image:
+		url(http://ms-cache.walkerplus.com/walkertouch/wtd/images/n/103670.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	
+}</style>

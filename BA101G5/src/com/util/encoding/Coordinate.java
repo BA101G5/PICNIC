@@ -43,9 +43,11 @@ public class Coordinate {
 			while((data = br.readLine()) != null) {
 				sb.append(data);
 			}
+		
+		
+			 adr =JSONObject.fromObject(sb.toString());
+			 
 			insr.close();
-			 adr =JSONObject.fromObject(data);
-			
 		}
 		return adr;
 	}

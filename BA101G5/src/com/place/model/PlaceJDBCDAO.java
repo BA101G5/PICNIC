@@ -16,6 +16,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON from PLACE WHERE P_NO= ?";
 	private static final String DELETE_STMT = "delete from PLACE where P_NO = ?";
 	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=?,PICNIC_NO = ?,P_LAT = ?,P_LON = ? where P_NO=?";
+	private static final String INSERT_FROM_CUST_STMT = "insert into PLACE(P_NO,MEM_NO,P_PLACE,P_STA,PICNIC_NO,P_PRICE,P_LAT,P_LON)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,'I',?,'0',?,?)";
 
 	@Override
 	public void insert(PlaceVO placeVO) {
@@ -84,7 +85,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			pstmt.setInt(10, placeVO.getP_price());
 			pstmt.setString(11, placeVO.getPicnic_no());
 			pstmt.setDouble(12, placeVO.getP_lat());
-			pstmt.setDouble(13, placeVO.getP_lon());			
+			pstmt.setDouble(13, placeVO.getP_lon());
 			pstmt.setString(14, placeVO.getP_no());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -153,7 +154,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, p_no);
 			rs = pstmt.executeQuery();
-		
+
 			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
@@ -260,9 +261,49 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void insertplace(PlaceVO placeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con=DriverManager.getConnection(url,userid,passwd);
+				pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT);
+				pstmt.setString(1, placeVO.getMem_no());
+				pstmt.setString(2, placeVO.getP_place());
+				pstmt.setString(3, placeVO.getPicnic_no());
+				pstmt.setDouble(4,placeVO.getP_lat());
+				pstmt.setDouble(5, placeVO.getP_lon());
+
+				pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		PlaceJDBCDAO placejdbcdao = new PlaceJDBCDAO();
-// insert
+		// insert
 		// PlaceVO placeVO = new PlaceVO();
 		// placeVO.setMf_no("MM00000001");
 		// placeVO.setMem_no("MG00000003");
@@ -278,7 +319,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// placeVO.setP_lat(46.8545646);
 		// placeVO.setP_lon(46.8545646);
 		// placejdbcdao.insert(placeVO);
-// update
+		// update
 		// PlaceVO placeVO = new PlaceVO();
 		// placeVO.setP_no("P000000002");
 		// placeVO.setMf_no("MM00000001");
@@ -295,9 +336,9 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// placeVO.setP_lat(46.8545646);
 		// placeVO.setP_lon(46.8545646);
 		// placejdbcdao.update(placeVO);
-//delete
-		//placejdbcdao.delete("P000000001");
-//search one
+		// delete
+		// placejdbcdao.delete("P000000001");
+		// search one
 		// PlaceVO placeVO = placejdbcdao.findByPrimaryKey("P000000001");
 		// System.out.println(placeVO.getP_no());
 		// System.out.println(placeVO.getMf_no());
@@ -314,7 +355,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// System.out.println(placeVO.getP_lat());
 		// System.out.println(placeVO.getP_lon());
 		// System.out.println("---------------------");
-//search all
+		// search all
 		// List<PlaceVO> list=placejdbcdao.getAll();
 		// for(PlaceVO placeVO :list){
 		// System.out.println(placeVO.getP_no());
@@ -333,9 +374,14 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// System.out.println(placeVO.getP_lon());
 		// System.out.println("---------------------");
 		// }
-		
-		
-
+		//insertplace
+		PlaceVO placeVO = new PlaceVO();
+		placeVO.setMem_no("MG00000003");
+		placeVO.setP_place("aoeuaoeuaoeuaoeuaoeu");
+		placeVO.setP_sta("A");
+		placeVO.setP_lat(46.8545646);
+		placeVO.setP_lon(46.8545646);
+		placejdbcdao.insertplace(placeVO);
 	}
 
 	private static byte[] getPicture(String path) {
@@ -360,4 +406,5 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 
 		return data;
 	}
+
 }

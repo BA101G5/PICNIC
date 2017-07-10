@@ -24,6 +24,8 @@ public class Goods_SellServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		String contextpath=getServletContext().getRealPath("\\images");
+		System.out.println(contextpath);
 	
 		if ("getOne".equals(action)) {
 
@@ -34,7 +36,7 @@ public class Goods_SellServlet extends HttpServlet {
 				String gsno = new String(req.getParameter("gsno"));
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
-				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno);
+				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno,contextpath);
 
 				session.setAttribute("goods_sellVO", goods_sellVO);
 				String url = null;

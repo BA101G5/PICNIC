@@ -251,16 +251,15 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 	public static void main(String[] args) {
 		Goods_SellJDBCDAO goods_selljdbcdao = new Goods_SellJDBCDAO();
 // insert
-		// Goods_SellVO goods_sellVO = new Goods_SellVO();
-		// goods_sellVO.setMf_no("MM00000001");
-		// goods_sellVO.setGs_name("aoeu");
-		// goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01
-		// 0:0:0"));
-		// goods_sellVO.setGs_price(10);
-		// goods_sellVO.setGs_info("aeou");
-		// goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
-		// goods_sellVO.setGs_sta("A");
-		// goods_selljdbcdao.insert(goods_sellVO);
+		 Goods_SellVO goods_sellVO = new Goods_SellVO();
+		 goods_sellVO.setMf_no("MM00000001");
+		 goods_sellVO.setGs_name("aoeu");
+		 goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		 goods_sellVO.setGs_price(10);
+		 goods_sellVO.setGs_info("aeou");
+		 goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
+		 goods_sellVO.setGs_sta("A");
+		 goods_selljdbcdao.insert(goods_sellVO);
 // update
 		// Goods_SellVO goods_sellVO = new Goods_SellVO();
 		// goods_sellVO.setGs_no("GS00000001");
@@ -275,18 +274,18 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 // delete
 //		 goods_selljdbcdao.delete("GS00000001");
 // search one
-		 Goods_SellVO goods_sellVO =
-		 goods_selljdbcdao.findByPrimaryKey("GS00000002");
-		 System.out.println(goods_sellVO.getGs_no());
-		 System.out.println(goods_sellVO.getGs_no());
-		 System.out.println(goods_sellVO.getMf_no());
-		 System.out.println(goods_sellVO.getGs_name());
-		 System.out.println(goods_sellVO.getGs_date());
-		 System.out.println(goods_sellVO.getGs_price());
-		 System.out.println(goods_sellVO.getGs_info());
-		 System.out.println(goods_sellVO.getGs_img());
-		 System.out.println(goods_sellVO.getGs_date());
-		 System.out.println("---------------------");
+		// Goods_SellVO goods_sellVO =
+		// goods_selljdbcdao.findByPrimaryKey("GS00000002");
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getGs_no());
+		// System.out.println(goods_sellVO.getMf_no());
+		// System.out.println(goods_sellVO.getGs_name());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println(goods_sellVO.getGs_price());
+		// System.out.println(goods_sellVO.getGs_info());
+		// System.out.println(goods_sellVO.getGs_img());
+		// System.out.println(goods_sellVO.getGs_date());
+		// System.out.println("---------------------");
 //search all
 		// List<Goods_SellVO> list = goods_selljdbcdao.getAll();
 		// for(Goods_SellVO goods_sellVO : list){
