@@ -57,8 +57,21 @@
 }
 
 .breadcrumb {
-	margin-top: -25px;
+	margin-top: -20px;
 	background: skyblue;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background-image:
+		url(http://ms-cache.walkerplus.com/walkertouch/wtd/images/n/103670.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 }
 </style>
 
@@ -81,10 +94,9 @@
 			<div class="col-sm-2 col-sm-push-2">
 				<form method="post"
 					action="<%=request.getContextPath()%>/picnic/picnic.do">
-					<h3>請輸入開團資訊</h3>
-
 					<div class="list-group">
-						<a href="#" class="list-group-item active">First item</a> <a
+					<br>
+						<a href="#" class="list-group-item active">請輸入開團資訊</a> <a
 							href="#" class="list-group-item">
 							<table>
 								<tr>
@@ -110,18 +122,18 @@
 								</tr>
 								<tr>
 									<td>地點 : <input type="text" name="address"
-										value="${sessionScope.address} "><br>
-										<font color="red")>${errorMsgs.address}</font></td>
+										value="${sessionScope.address} "><br> <font
+										color="red")>${errorMsgs.address}</font></td>
 								</tr>
 								<tr>
 									<td>限制人數 : <input type="text" name="people"
-										value="${sessionScope.people}"><br>
-										<font color="red")>${errorMsgs.people}</font></td>
+										value="${sessionScope.people}"><br> <font
+										color="red")>${errorMsgs.people}</font></td>
 								</tr>
 								<tr>
 									<td>日 期 : <input type="text" id="datepicker" name="date"
-										value="${sessionScope.date}"><br>
-										<font color="red")>${errorMsgs.date}</font></td>
+										value="${sessionScope.date}"><br> <font
+										color="red")>${errorMsgs.date}</font></td>
 								</tr>
 								<tr>
 									<td>時間 : <br> <select id="SearchTime" name="hour"
@@ -167,10 +179,10 @@
 							</table>
 						</a> <a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
 							type="textarea" rows="4" cols="50" name="name"
-							value="${sessionScope.picnic_name}"></a><br>
-							<font color="red")>${errorMsgs.name}</font>
-					</div>
-
+							value="${sessionScope.picnic_name}"><br> <font
+							color="red")>${errorMsgs.name}</font></a>
+				
+<
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
 							<button type="reset" class="btn btn-default" value="Reset">重設</button>
@@ -179,6 +191,7 @@
 							<button type="submit" class="btn btn-default" value="Submit">送出</button>
 						</div>
 						<input type="hidden" name="action" value="checkbeforeinsert">
+					</div>
 					</div>
 				</form>
 			</div>
@@ -212,7 +225,7 @@
 		</div>
 	</div>
 
-	<%	
+	<%
 		session.removeAttribute("address");
 		session.removeAttribute("date");
 		session.removeAttribute("people");

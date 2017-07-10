@@ -28,7 +28,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			String gs_no =req.getParameter("gs_no");
 
 			Goods_SellService goods_sellSvc = new Goods_SellService();
-			Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gs_no);
+			Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gs_no, gs_no);
 			
 			//String account=(String) session.getAttribute("account");
 			String account="";

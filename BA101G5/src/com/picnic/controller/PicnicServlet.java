@@ -44,7 +44,7 @@ public class PicnicServlet extends HttpServlet {
 
 					errorMsgs.put("address", "地址不能為空");
 				} else if (!address.trim().matches(addressReg)) {
-					System.out.println("-------------------------------------------------");
+				
 					errorMsgs.put("address", "地址必須文中文和數字 且在6~15字之間");
 				} else if ((Integer.getInteger(address) != null)||address.substring(1,2).equals("[^0-9]")) {
 					errorMsgs.put("address", "請輸入正確地址");

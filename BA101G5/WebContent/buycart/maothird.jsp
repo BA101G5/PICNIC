@@ -29,22 +29,22 @@
 				<img src="<%=request.getContextPath()%>${goods_sellVO.getUrl()}">
 				<p>${goods_sellVO.getGs_name()}</p>
 				<br>
-				<p>»ù®æ :  ${goods_sellVO.getGs_price()}</p>
+				<p>ï¿½ï¿½ï¿½ï¿½ :  ${goods_sellVO.getGs_price()}</p>
 				<br>
 				<p>${goods_sellVO.getGs_info()}</p>
 				<br>
 			</div>
-			<div class="col-sm-4 ">
+			<div class="col-sm-4 col-sm-pull-1">
 				<form method="post"
 					action="<%=request.getContextPath() %>/orderde_detail/orderde_detail.do">
-					<Button type="submit">©ñ¤JÁÊª«¨®</Button>
+					<Button type="submit">ï¿½ï¿½Jï¿½Êªï¿½ï¿½ï¿½</Button>
 					<input type="hidden" name="gs_no" value="${goods_sellVO.getGs_no()}">
 					<input type="hidden" name="action" value="insert">
 
 				</form>
 				<form method="post"
 					action="<%=request.getContextPath() %>/buycart/maosecond.jsp">
-					<Button type="submit">¤U¦¸¦A¶R</Button>
+					<Button type="submit">ï¿½Uï¿½ï¿½ï¿½Aï¿½R</Button>
 				</form>
 			</div>
 		</div>

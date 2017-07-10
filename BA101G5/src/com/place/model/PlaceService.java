@@ -44,7 +44,7 @@ public class PlaceService {
 				.getJSONObject("location").get("lat").toString();
 		String lon = ((JSONObject) lonlat.getJSONArray("results").get(0)).getJSONObject("geometry")
 				.getJSONObject("location").get("lng").toString();
-
+		System.out.println(lat);
 		PlaceVO placeVO = new PlaceVO();
 		placeVO.setMem_no(mem_no);
 		placeVO.setP_place(p_place);

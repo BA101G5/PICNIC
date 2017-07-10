@@ -20,8 +20,8 @@ public class Orderde_DetailService {
 	public void deleteOrderde_Detail() {
 	}
 
-	public Orderde_DetailVO getOne() {
-		return null;
+	public Orderde_DetailVO getOne(String orderde_detailno) {
+		return dao.findByPrimaryKey(orderde_detailno);
 	}
 
 	public List<Orderde_DetailVO> getAll() {
