@@ -37,7 +37,7 @@
 <body>
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
-	<div class="container">
+	<div class="container-fulid">
 		<div class="row">
 			<div class="col-sm-11 cal-sm-push-1">
 				<div class="collapse navbar-collapse navbar-ex1-collapse">

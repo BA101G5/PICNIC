@@ -25,28 +25,41 @@
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<div class="container-fluid">
 		<div class="row ">
-			<div class="col-sm-8 col-sm-push-2">
-				<img src="<%=request.getContextPath()%>${goods_sellVO.getUrl()}">
-				<p>${goods_sellVO.getGs_name()}</p>
-				<br>
-				<p>ï¿½ï¿½ï¿½ï¿½ :  ${goods_sellVO.getGs_price()}</p>
-				<br>
-				<p>${goods_sellVO.getGs_info()}</p>
-				<br>
-			</div>
-			<div class="col-sm-4 col-sm-pull-1">
-				<form method="post"
-					action="<%=request.getContextPath() %>/orderde_detail/orderde_detail.do">
-					<Button type="submit">ï¿½ï¿½Jï¿½Êªï¿½ï¿½ï¿½</Button>
-					<input type="hidden" name="gs_no" value="${goods_sellVO.getGs_no()}">
-					<input type="hidden" name="action" value="insert">
 
-				</form>
-				<form method="post"
-					action="<%=request.getContextPath() %>/buycart/maosecond.jsp">
-					<Button type="submit">ï¿½Uï¿½ï¿½ï¿½Aï¿½R</Button>
-				</form>
+			<div class="col-sm-8 col-sm-push-2">
+				<div style="background: white;">
+					<img src="<%=request.getContextPath()%>${goods_sellVO.getUrl()}">
+					<p>${goods_sellVO.getGs_name()}</p>
+					<br>
+					<p>»ù®æ: ${goods_sellVO.getGs_price()}</p>
+					<br>
+					<p>${goods_sellVO.getGs_info()}</p>
+					<br>
+				</div>
 			</div>
+			<div class="col-sm-2 col-sm-pull-1">
+			<br>
+				<div class="list-group">
+					<a href="#" class="list-group-item"><form method="post"
+							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
+							<p>
+								<input type=text name="number" size="2">¼Æ¶q
+							</p>
+							<Button type="submit" class="btn btn-default">©ñ¤JÁÊª«¨®</Button>
+							<input type="hidden" name="gs_no"
+								value="${goods_sellVO.getGs_no()}"> <input type="hidden"
+								name="action" value="insertintocart">
+
+						</form></a> <a href="#" class="list-group-item"><form method="post"
+							action="<%=request.getContextPath()%>/buycart/maosecond.jsp">
+							<Button type="submit" class="btn btn-default">¤U¦¸¦A¶R</Button>
+						</form></a>
+
+				</div>
+
+
+			</div>
+
 		</div>
 	</div>
 	<div class="col-sm-8 col-sm-push-4">

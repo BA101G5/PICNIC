@@ -1,41 +1,35 @@
 package com.util.encoding;
-
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.Writer;
 
 public class Imageout {
 	public static String imageoutput(String contextpath, String table, String imgname, byte[] img) {
 		String url = String.format("%s\\%s\\%s.jpg", contextpath, table, imgname);
 		String urlloc = String.format("/images/%s/%s.jpg", table, imgname);
+		File file = new File(url);
+		FileOutputStream fileout = null;
 		try {
-			File file = new File(url);
+			fileout = new FileOutputStream(file);
 			if (!file.getParentFile().exists()) {
 				file.mkdirs();
 			}
-			FileOutputStream fileout = new FileOutputStream(file);
-			BufferedOutputStream bos = new BufferedOutputStream(fileout);
-			try {
-				bos.flush();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			fileout.write(img);
+
+		} catch (FileNotFoundException e2) {
+
+			e2.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 			try {
 				fileout.close();
-				bos.close();
 			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			}
 		}
+
 		return urlloc;
 	}
 

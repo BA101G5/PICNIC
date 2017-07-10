@@ -9,7 +9,12 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public void addOrderde_Detail(Orderde_DetailVO orderde_detailVO) {
+	public void addGsOrderde_Detail(String mem_no,String gs_no,Integer od_amount) {
+	
+		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();
+		orderde_detailVO.setGs_no(gs_no);
+		orderde_detailVO.setMem_no(mem_no);
+		orderde_detailVO.setOd_amount(od_amount);
 		dao.insert(orderde_detailVO);
 	}
 
@@ -27,4 +32,5 @@ public class Orderde_DetailService {
 	public List<Orderde_DetailVO> getAll() {
 		return null;
 	}
+
 }

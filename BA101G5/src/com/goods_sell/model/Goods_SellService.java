@@ -23,8 +23,7 @@ public class Goods_SellService {
 		String table="goods_sells";
 		Goods_SellVO goods_sellVO =dao.findByPrimaryKey(gs_no);
 		Imageout img=new Imageout();
-		System.out.println("hello");
-		String url=img.imageoutput(contextpath,table, goods_sellVO.getGs_name(), goods_sellVO.getGs_img());
+		String url=img.imageoutput(contextpath,table, goods_sellVO.getGs_no(), goods_sellVO.getGs_img());
 		goods_sellVO.setUrl(url);
 		return goods_sellVO;
 	}
@@ -33,5 +32,11 @@ public class Goods_SellService {
 		
 		return dao.getAll();
 	}
+
+	public Goods_SellVO getOne(String gs_no) {
+		
+		return dao.findByPrimaryKey(gs_no);
+	}
+
 
 }

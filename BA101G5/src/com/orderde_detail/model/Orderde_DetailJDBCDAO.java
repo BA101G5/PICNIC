@@ -264,20 +264,19 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 
 	public static void main(String[] args) {
 		Orderde_DetailJDBCDAO orderde_detailjdbcdao = new Orderde_DetailJDBCDAO();
-		// insert
-		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-		// orderde_detailVO.setMem_no("MG00000001");
-		//
-		// orderde_detailVO.setP_no("P000000001");
-		// orderde_detailVO.setGs_no("GS00000001");
-		// orderde_detailVO.setOd_amount(1);
-		// orderde_detailVO.setOd_price(100);
-		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01
-		// 0:0:0"));
-		// orderde_detailVO.setOd_bs("A");
-		// orderde_detailjdbcdao.insert(orderde_detailVO);
-		// update
-		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+//		 insert
+		 Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+		 orderde_detailVO.setMem_no("MG00000001");
+		 orderde_detailVO.setOd_bs("A");
+		 orderde_detailVO.setP_no("P000000001");
+		 orderde_detailVO.setGs_no("GS00000001");
+		 orderde_detailVO.setOd_amount(7);
+		 orderde_detailVO.setOd_price(0);
+		 orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		 
+		 orderde_detailjdbcdao.insert(orderde_detailVO);
+//		 update
+//		 Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
 		//
 		// orderde_detailVO.setOrderde_detailno("OD00000014");
 		// orderde_detailVO.setMem_no("MG00000001");
@@ -295,20 +294,20 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		// delete
 		// orderde_detailjdbcdao.delete("OD00000001");
 		// search one
-		 Orderde_DetailVO orderde_detailVO =
-		 orderde_detailjdbcdao.findByPrimaryKey("OD00000001");
-		 System.out.println(orderde_detailVO.getOrderde_detailno());
-	  	System.out.println(orderde_detailVO.getMem_no());
-		System.out.println(orderde_detailVO.getPicnic_no());
-		System.out.println(orderde_detailVO.getP_no());
-		System.out.println(orderde_detailVO.getGr_no());
-		System.out.println(orderde_detailVO.getGs_no());
-		System.out.println(orderde_detailVO.getOd_amount());
-		System.out.println(orderde_detailVO.getOd_price());
-		System.out.println(orderde_detailVO.getOd_deliver());
-		System.out.println(orderde_detailVO.getOd_place());
-		System.out.println(orderde_detailVO.getOd_bs());
-		System.out.println("---------------------");
+//		 Orderde_DetailVO orderde_detailVO =
+//		 orderde_detailjdbcdao.findByPrimaryKey("OD00000001");
+//		 System.out.println(orderde_detailVO.getOrderde_detailno());
+//	  	System.out.println(orderde_detailVO.getMem_no());
+//		System.out.println(orderde_detailVO.getPicnic_no());
+//		System.out.println(orderde_detailVO.getP_no());
+//		System.out.println(orderde_detailVO.getGr_no());
+//		System.out.println(orderde_detailVO.getGs_no());
+//		System.out.println(orderde_detailVO.getOd_amount());
+//		System.out.println(orderde_detailVO.getOd_price());
+//		System.out.println(orderde_detailVO.getOd_deliver());
+//		System.out.println(orderde_detailVO.getOd_place());
+//		System.out.println(orderde_detailVO.getOd_bs());
+//		System.out.println("---------------------");
 		// search all
 		// List<Orderde_DetailVO> list = orderde_detailjdbcdao.getAll();
 		// for(Orderde_DetailVO orderde_detailVO : list){

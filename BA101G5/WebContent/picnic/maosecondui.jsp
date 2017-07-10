@@ -121,17 +121,17 @@ body {
 									</select><br></td>
 								</tr>
 								<tr>
-									<td>地點 : <input type="text" name="address"
+									<td>地點 :<br> <input type="text" name="address"
 										value="${sessionScope.address} "><br> <font
 										color="red")>${errorMsgs.address}</font></td>
 								</tr>
 								<tr>
-									<td>限制人數 : <input type="text" name="people"
+									<td>限制人數 :<br> <input type="text" name="people"
 										value="${sessionScope.people}"><br> <font
 										color="red")>${errorMsgs.people}</font></td>
 								</tr>
 								<tr>
-									<td>日 期 : <input type="text" id="datepicker" name="date"
+									<td>日 期 :<br> <input type="text" id="datepicker" name="date"
 										value="${sessionScope.date}"><br> <font
 										color="red")>${errorMsgs.date}</font></td>
 								</tr>
@@ -181,6 +181,7 @@ body {
 							type="textarea" rows="4" cols="50" name="name"
 							value="${sessionScope.picnic_name}"><br> <font
 							color="red")>${errorMsgs.name}</font></a>
+							
 				
 <
 					<div class="btn-group btn-group-justified">

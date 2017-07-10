@@ -23,7 +23,6 @@ public class PicnicServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println(action);
 
 		if (action.equals("checkbeforeinsert")) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
