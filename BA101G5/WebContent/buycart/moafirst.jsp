@@ -20,20 +20,16 @@
 	padding-left: 40px;
 	padding: 20px;
 }
-
 .banner-top {
 	clear: left;
 }
-
 .caption {
 	text-align: center;
 }
-
 .btn {
 	margin: 0px;
 	margin-bottom: 0px;
 }
-
 .thumbnail {
 	height: 350px;
 	text-align: center;
@@ -41,7 +37,6 @@
 	margin-top: 0px;
 	bgcolor: blue;
 }
-
 .breadcrumb {
 	margin-top: -20px;
 	background: skyblue;
@@ -56,8 +51,8 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<ol class="breadcrumb">
-					<li><a href="<%=request.getContextPath()%>/index.jsp">­º­¶</a></li>
-					<li><a href="#" class="active">¹wÁÊ°Ó«~</a></li>
+					<li><a href="<%=request.getContextPath()%>/index.jsp">é¦–é </a></li>
+					<li><a href="#" class="active">é è³¼å•†å“</a></li>
 
 				</ol>
 			</div>
@@ -106,27 +101,27 @@
 							<div class="col-sm-4 ">
 
 								<a href="#" class="thumbnail">
-									<p>²Ä¤@¦¸¹wÁÊ°Ó«~?</p>
+									<p>ç¬¬ä¸€æ¬¡é è³¼å•†å“?</p>
 									<div class="caption">
-										<button type="button" class="btn btn-default">«e©¹µù¥U</button>
+										<button type="button" class="btn btn-default">å‰å¾€è¨»å†Š</button>
 									</div>
 								</a>
 							</div>
 							<div class="col-sm-4 ">
 								<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp"
 									class="thumbnail">
-									<p>¬y¦æ°Ó«~</p>
+									<p>æµè¡Œå•†å“</p>
 									<div class="caption">
-										<button type="button" class="btn btn-default">«e©¹</button>
+										<button type="button" class="btn btn-default">å‰å¾€</button>
 									</div>
 								</a>
 							</div>
 							<div class="col-sm-4 ">
 								<a href="<%=request.getContextPath()%>/buycart/maosecond2.jsp"
 									class="thumbnail">
-									<p>°Ó«~¤ÀÃş</p>
+									<p>å•†å“åˆ†é¡</p>
 									<div class="caption">
-										<button type="button" class="btn btn-default">«e©¹</button>
+										<button type="button" class="btn btn-default">å‰å¾€</button>
 									</div>
 								</a>
 							</div>
@@ -136,7 +131,7 @@
 					<div class="row ">
 						<div class="col-sm-8 col-sm-push-1 ">
 							<div class="btn-group btn-group-justified ">
-								<a href="# " class="btn btn-default " role="button ">¦^¼ĞÃD</a>
+								<a href="# " class="btn btn-default " role="button ">å›æ¨™é¡Œ</a>
 							</div>
 							<div class="col-sm-10 col-sm-push-3 ">
 								<jsp:include page="/mustinclude/footer.jsp" />

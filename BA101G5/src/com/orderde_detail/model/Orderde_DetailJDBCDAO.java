@@ -277,19 +277,18 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		 orderde_detailjdbcdao.insert(orderde_detailVO);
 //		 update
 //		 Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-		//
-		// orderde_detailVO.setOrderde_detailno("OD00000014");
+		
+		 orderde_detailVO.setOrderde_detailno("OD00000014");
 		// orderde_detailVO.setMem_no("MG00000001");
 		// orderde_detailVO.setPicnic_no("PG00000001");
 		// orderde_detailVO.setP_no("P000000005");
 		// orderde_detailVO.setGs_no("GS00000001");
-		// orderde_detailVO.setOd_amount(1);
-		// orderde_detailVO.setOd_price(100);
-		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01
-		// 0:0:0"));
-		// orderde_detailVO.setOd_place("somewhere");
-		// orderde_detailVO.setOd_bs("A");
-		// orderde_detailjdbcdao.update(orderde_detailVO);
+		 orderde_detailVO.setOd_amount(1);
+		 orderde_detailVO.setOd_price(100);
+		 orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+		 orderde_detailVO.setOd_place("somewhere");
+		 orderde_detailVO.setOd_bs("A");
+		 orderde_detailjdbcdao.update(orderde_detailVO);
 		 
 		// delete
 		// orderde_detailjdbcdao.delete("OD00000001");

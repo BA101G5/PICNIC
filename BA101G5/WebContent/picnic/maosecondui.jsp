@@ -5,8 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <title>Title Page</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <script
@@ -26,25 +25,89 @@
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
-			dateFormat: 'yy-mm-dd',
-	        minDate: 0
+			dateFormat : 'yy-mm-dd',
+			minDate : 0
 		});
 	});
 </script>
 
 <script>
-	var array={aoeu,aoeu,aoeu};
-	var map;
+	var customLabel = {
+		restaurant : {
+			label : 'R'
+		},
+		bar : {
+			label : 'B'
+		}
+	};
 
 	function initMap() {
-		map = new google.maps.Map(document.getElementById('map'), {
-			center : {
-				lat : 25.1942462,
-				lng : 121.56093629999998
-			},
-			zoom : 13
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center : new google.maps.LatLng(-33.863276, 151.207977),
+			zoom : 12
 		});
+		var infoWindow = new google.maps.InfoWindow;
+
+		// Change this depending on the name of your PHP or XML file
+		downloadUrl(
+				'https://storage.googleapis.com/mapsdevsite/json/mapmarkers2.xml',
+				function(data) {
+					var xml = data.responseXML;
+					var markers = xml.documentElement
+							.getElementsByTagName('marker');
+					Array.prototype.forEach.call(markers, function(markerElem) {
+						var name = markerElem.getAttribute('name');
+						var address = markerElem.getAttribute('address');
+						var type = markerElem.getAttribute('type');
+						var point = new google.maps.LatLng(
+								parseFloat(markerElem.getAttribute('lat')),
+								parseFloat(markerElem.getAttribute('lng')));
+
+						var infowincontent = document.createElement('div');
+						var strong = document.createElement('strong');
+						strong.textContent = name
+						infowincontent.appendChild(strong);
+						infowincontent
+								.appendChild(document.createElement('br'));
+
+						var text = document.createElement('text');
+						text.textContent = address
+						infowincontent.appendChild(text);
+						var icon = customLabel[type] || {};
+						var marker = new google.maps.Marker({
+							map : map,
+							position : point,
+							label : icon.label
+						});
+						marker.addListener('click', function() {
+							infoWindow.setContent(infowincontent);
+							infoWindow.open(map, marker);
+						});
+					});
+				});
 	}
+
+	function downloadUrl(url, callback) {
+		var request = window.ActiveXObject ? new ActiveXObject(
+				'Microsoft.XMLHTTP') : new XMLHttpRequest;
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+				request.onreadystatechange = doNothing;
+				callback(request, request.status);
+			}
+		};
+
+		request.open('GET', url, true);
+		request.send(null);
+	}
+
+	function doNothing() {
+	}
+</script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxmcF3GtUMJYpT78-gvq2jG3ER8wE15tg&callback=initMap">
+	
 </script>
 <style>
 #map {
@@ -95,8 +158,7 @@ body {
 				<form method="post"
 					action="<%=request.getContextPath()%>/picnic/picnic.do">
 					<div class="list-group">
-					<br>
-						<a href="#" class="list-group-item active">請輸入開團資訊</a> <a
+						<br> <a href="#" class="list-group-item active">請輸入開團資訊</a> <a
 							href="#" class="list-group-item">
 							<table>
 								<tr>
@@ -131,8 +193,8 @@ body {
 										color="red")>${errorMsgs.people}</font></td>
 								</tr>
 								<tr>
-									<td>日 期 :<br> <input type="text" id="datepicker" name="date"
-										value="${sessionScope.date}"><br> <font
+									<td>日 期 :<br> <input type="text" id="datepicker"
+										name="date" value="${sessionScope.date}"><br> <font
 										color="red")>${errorMsgs.date}</font></td>
 								</tr>
 								<tr>
@@ -180,19 +242,16 @@ body {
 						</a> <a href="#" class="list-group-item">請輸入可以清楚表達揪團性質的名子: <input
 							type="textarea" rows="4" cols="50" name="name"
 							value="${sessionScope.picnic_name}"><br> <font
-							color="red")>${errorMsgs.name}</font></a>
-							
-				
-<
-					<div class="btn-group btn-group-justified">
-						<div class="btn-group">
-							<button type="reset" class="btn btn-default" value="Reset">重設</button>
+							color="red")>${errorMsgs.name}</font></a> <
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+								<button type="reset" class="btn btn-default" value="Reset">重設</button>
+							</div>
+							<div class="btn-group">
+								<button type="submit" class="btn btn-default" value="Submit">送出</button>
+							</div>
+							<input type="hidden" name="action" value="checkbeforeinsert">
 						</div>
-						<div class="btn-group">
-							<button type="submit" class="btn btn-default" value="Submit">送出</button>
-						</div>
-						<input type="hidden" name="action" value="checkbeforeinsert">
-					</div>
 					</div>
 				</form>
 			</div>

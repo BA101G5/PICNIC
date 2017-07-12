@@ -1,6 +1,6 @@
 package com.goods_sell.model;
 import java.util.List;
-import com.util.encoding.Imageout;
+
 public class Goods_SellService {
 	private Goods_SellDAO dao = null;
 
@@ -19,14 +19,7 @@ public class Goods_SellService {
 	public void deleteGoods_Sell() {
 	}
 
-	public Goods_SellVO getOne(String gs_no,String contextpath) {
-		String table="goods_sells";
-		Goods_SellVO goods_sellVO =dao.findByPrimaryKey(gs_no);
-		Imageout img=new Imageout();
-		String url=img.imageoutput(contextpath,table, goods_sellVO.getGs_no(), goods_sellVO.getGs_img());
-		goods_sellVO.setUrl(url);
-		return goods_sellVO;
-	}
+
 
 	public List<Goods_SellVO> getAll() {
 		

@@ -16,7 +16,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/java/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

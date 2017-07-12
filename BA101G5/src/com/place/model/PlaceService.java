@@ -22,9 +22,9 @@ public class PlaceService {
 	public void deletePlace() {
 	}
 
-	public PlaceVO getOne() {
-		return null;
-	}
+	public PlaceVO getOne(String P_place) {
+		return dao.findByPrimaryKey(P_place);
+		}
 
 	public List<PlaceVO> getAll() {
 		return null;

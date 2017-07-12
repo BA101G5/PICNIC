@@ -20,6 +20,7 @@
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<div class="Container">
 		<div class="row">
+		<c:foreach var="list" )></c:foreach>
 			<div class="col-sm-8 col-sm-push-2">
 				<P>新增完成.我們為為您準備了一些可供租賃的商品</P>
 				<div class="btn-group btn-group-justified">

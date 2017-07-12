@@ -1,4 +1,5 @@
 package com.picnic.controller;
+
 import java.io.IOException;
 import java.sql.Timestamp;
 import javax.servlet.ServletException;
@@ -6,12 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.goods_rent.model.Goods_RentService;
+import com.goods_rent.model.Goods_RentVO;
+import com.orderde_detail.model.Orderde_DetailService;
 import com.picmem.model.PicmemService;
 import com.picnic.model.PicnicService;
 import com.place.model.PlaceService;
+import com.place.model.PlaceVO;
+
 import javax.servlet.ServletException;
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class PicnicServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -43,12 +51,12 @@ public class PicnicServlet extends HttpServlet {
 
 					errorMsgs.put("address", "地址不能為空");
 				} else if (!address.trim().matches(addressReg)) {
-				
+
 					errorMsgs.put("address", "地址必須文中文和數字 且在6~15字之間");
-				} else if ((Integer.getInteger(address) != null)||address.substring(1,2).equals("[^0-9]")) {
+				} else if ((Integer.getInteger(address) != null) || address.substring(1, 2).equals("[^0-9]")) {
 					errorMsgs.put("address", "請輸入正確地址");
 				}
-				
+
 				Timestamp picnic_date = null;
 				String date = null;
 				try {
@@ -68,15 +76,14 @@ public class PicnicServlet extends HttpServlet {
 				} catch (Exception e) {
 					errorMsgs.put("people", "請輸入數字");
 				}
-				
-				
-				String tladdress=null;
-				if (address.substring(3,4).equals("市")) {
-					 tladdress = address;
+
+				String tladdress = null;
+				if (address.substring(3, 4).equals("市")) {
+					tladdress = address;
 				} else {
-					 tladdress = area + address;
+					tladdress = area + address;
 				}
-				
+
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
 				session.setAttribute("tladdress", tladdress);
@@ -105,7 +112,7 @@ public class PicnicServlet extends HttpServlet {
 		if (action.equals("insert")) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+
 			try {/*************** 移除不必要的資訊 ***************/
 				session.removeAttribute("area");
 				session.removeAttribute("address");
@@ -119,16 +126,25 @@ public class PicnicServlet extends HttpServlet {
 				Integer picnic_pl = (Integer) session.getAttribute("people");
 
 				if (action.equals("insert")) {
-					
+
 					PicnicService picnicSvc = new PicnicService();
 					String picnic_no = picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
 					PicmemService picmemSvc = new PicmemService();
 					picmemSvc.addowner(picnic_no, account);
-					
+					System.out.println("Hello");
 					PlaceService placeSvc = new PlaceService();
-					placeSvc.insertplace(account, tladdress, picnic_no);
-					
+					// PlaceVO placeVO = placeSvc.getOne(tladdress);
+
+					// if (placeVO.getMf_no() != null) {
+					// Orderde_DetailService orderde_detailSvc = new
+					// Orderde_DetailService();
+					// orderde_detailSvc.addPlaceOrderde_Detail();
+					// session.setAttribute("mem_no", placeVO.getMf_no());
+					// } else {
+					// placeSvc.insertplace(account, tladdress, picnic_no);
+					// }
 				}
+
 				String url = null;
 				if (action.equals("insert")) {
 					url = "/picnic/maosecondui3.jsp";
@@ -138,9 +154,8 @@ public class PicnicServlet extends HttpServlet {
 				SuccessView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-
 			}
-
 		}
+
 	}
 }

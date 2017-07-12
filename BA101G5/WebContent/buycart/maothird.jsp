@@ -28,7 +28,7 @@
 
 			<div class="col-sm-8 col-sm-push-2">
 				<div style="background: white;">
-					<img src="<%=request.getContextPath()%>${goods_sellVO.getUrl()}">
+					<img src="<%= request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}" height="420px" width="420px">
 					<p>${goods_sellVO.getGs_name()}</p>
 					<br>
 					<p>價格: ${goods_sellVO.getGs_price()}</p>
@@ -43,13 +43,12 @@
 					<a href="#" class="list-group-item"><form method="post"
 							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 							<p>
-								<input type=text name="number" size="2">數量
+								<input type=text name="amount" size="2">數量<c:if test="${not empty errorMsgs}"><font color="red">${errorMsgs.amount}<font></font></c:if>
 							</p>
 							<Button type="submit" class="btn btn-default">放入購物車</Button>
-							<input type="hidden" name="gs_no"
-								value="${goods_sellVO.getGs_no()}"> <input type="hidden"
-								name="action" value="insertintocart">
-
+							<input type="hidden" name="gs_no" value="${goods_sellVO.getGs_no()}"> 
+							<input type="hidden" name="action" value="insertintocartB">
+						
 						</form></a> <a href="#" class="list-group-item"><form method="post"
 							action="<%=request.getContextPath()%>/buycart/maosecond.jsp">
 							<Button type="submit" class="btn btn-default">下次再買</Button>

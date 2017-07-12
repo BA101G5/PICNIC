@@ -23,7 +23,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 
 	private static final String INSERT_STMT = "insert into PLACE (P_NO,MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PLACE ORDER BY P_NO";
-	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON from PLACE WHERE P_NO= ?";
+	private static final String GET_ONE_STMT = "select MF_NO,MEM_NO,P_NAME,P_UNTIL,P_PLACE,P_POP,PIMG,P_INFO,P_STA,P_PRICE,PICNIC_NO,P_LAT,P_LON from PLACE WHERE P_PLACE= ?";
 	private static final String DELETE_STMT = "delete from PLACE where P_NO = ?";
 	private static final String UPDATE_STMT = "update PLACE set MF_NO=?,MEM_NO=?,P_NAME=?,P_UNTIL=?,P_PLACE=?,P_POP=?,PIMG=?,P_INFO=?,P_STA=?,P_PRICE=?,PICNIC_NO = ?,P_LAT = ?,P_LON = ? where P_NO=?";
 	private static final String INSERT_FROM_CUST_STMT = "insert into PLACE(P_NO,MEM_NO,P_PLACE,P_STA,PICNIC_NO,P_PRICE,P_LAT,P_LON)values('P'||LPAD(P_NO_SQ.NEXTVAL,9,0),?,?,'I',?,'0',?,?)";
@@ -146,7 +146,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 	}
 
 	@Override
-	public PlaceVO findByPrimaryKey(String p_no) {
+	public PlaceVO findByPrimaryKey(String P_place) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		PlaceVO placeVO = null;
@@ -154,7 +154,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 		try {
 			con= ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setString(1, p_no);
+			pstmt.setString(1, P_place);
 			rs = pstmt.executeQuery();
 		
 			rs.next();
