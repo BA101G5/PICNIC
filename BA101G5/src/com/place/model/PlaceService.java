@@ -52,7 +52,7 @@ public class PlaceService {
 		
 		dao.insertplace(placeVO);
 	}
-	public void insertMFplace(String mem_no, String picnic_no,PlaceVO placeVO2,Integer picnic_pl) {
+	public String insertMFplace(String mem_no, String picnic_no,PlaceVO placeVO2,Integer picnic_pl) {
 		PlaceVO placeVO = new PlaceVO();
 		placeVO.setMem_no(mem_no);
 		placeVO.setP_place(placeVO2.getP_place());
@@ -65,6 +65,7 @@ public class PlaceService {
 		placeVO.setP_sta("A");
 		placeVO.setP_price(placeVO2.getP_price());
 		placeVO.setP_pop(picnic_pl);
-		dao.insert(placeVO);
+		String p_no = dao.insertone(placeVO);
+		return p_no;
 	}
 }

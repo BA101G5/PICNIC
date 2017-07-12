@@ -12,9 +12,11 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public void addPlaceOrderde_Detail(PlaceVO placeVO){
+	public void addPlaceOrderde_Detail(PlaceVO placeVO, String p_no){
 		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();
-		orderde_detailVO.setP_no(placeVO.getP_no());
+		orderde_detailVO.setP_no(p_no);
+// 		orderde_detailVO.setMem_no(mem_no);
+		dao.insert(orderde_detailVO);
 	}
 	public void addGsOrderde_Detail(Goods_SellVO goods_sellVO ,Integer amount,String account) {
 	

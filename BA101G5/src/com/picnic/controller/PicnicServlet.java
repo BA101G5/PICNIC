@@ -139,9 +139,9 @@ public class PicnicServlet extends HttpServlet {
 					try {
 						placeVO = placeSvc.getOne(tladdress);
 						if (placeVO.getMf_no() != null) {
-							placeSvc.insertMFplace(account, picnic_no, placeVO,picnic_pl);
+							String p_no= placeSvc.insertMFplace(account, picnic_no, placeVO,picnic_pl);
 							Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-							orderde_detailSvc.addPlaceOrderde_Detail(placeVO);
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO,p_no);
 							session.setAttribute("mem_no", placeVO.getMf_no());
 						}
 					} catch (Exception e) {

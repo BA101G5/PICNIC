@@ -319,6 +319,55 @@ public class PlaceDAO implements PlaceDAO_interface {
 				}
 			}
 		}
+	}
+	
+
+	public String insertone(PlaceVO placeVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			System.out.println("hello");
+		    con=ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT,new int[]{1});
+			pstmt.setString(1, placeVO.getMf_no());
+			pstmt.setString(2, placeVO.getMem_no());
+			pstmt.setString(3, placeVO.getP_name());
+			pstmt.setTimestamp(4, placeVO.getP_until());
+			pstmt.setString(5, placeVO.getP_place());
+			pstmt.setInt(6, placeVO.getP_pop());
+			pstmt.setBytes(7, placeVO.getPimg());
+			pstmt.setString(8, placeVO.getP_info());
+			pstmt.setString(9, placeVO.getP_sta());
+			pstmt.setInt(10, placeVO.getP_price());
+			pstmt.setString(11, placeVO.getPicnic_no());
+			pstmt.setDouble(12, placeVO.getP_lat());
+			pstmt.setDouble(13, placeVO.getP_lon());
+
+			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			rs.next();
+			String p_no=rs.getString(1);
+
+			return p_no;
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 
 	}
 }
