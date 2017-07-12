@@ -339,22 +339,23 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// delete
 		// placejdbcdao.delete("P000000001");
 		// search one
-		PlaceVO placeVO = placejdbcdao.findByPrimaryKey("972花蓮縣秀林鄉富世村富世291號");
-		System.out.println(placeVO.getP_no());
-		System.out.println(placeVO.getMf_no());
-		System.out.println(placeVO.getMem_no());
-		System.out.println(placeVO.getP_name());
-		System.out.println(placeVO.getP_until());
-		System.out.println(placeVO.getP_place());
-		System.out.println(placeVO.getP_pop());
-		System.out.println(placeVO.getPimg());
-		System.out.println(placeVO.getP_info());
-		System.out.println(placeVO.getP_sta());
-		System.out.println(placeVO.getP_price());
-		System.out.println(placeVO.getPicnic_no());
-		System.out.println(placeVO.getP_lat());
-		System.out.println(placeVO.getP_lon());
-		System.out.println("---------------------");
+		// PlaceVO placeVO =
+		// placejdbcdao.findByPrimaryKey("972花蓮縣秀林鄉富世村富世291號");
+		// System.out.println(placeVO.getP_no());
+		// System.out.println(placeVO.getMf_no());
+		// System.out.println(placeVO.getMem_no());
+		// System.out.println(placeVO.getP_name());
+		// System.out.println(placeVO.getP_until());
+		// System.out.println(placeVO.getP_place());
+		// System.out.println(placeVO.getP_pop());
+		// System.out.println(placeVO.getPimg());
+		// System.out.println(placeVO.getP_info());
+		// System.out.println(placeVO.getP_sta());
+		// System.out.println(placeVO.getP_price());
+		// System.out.println(placeVO.getPicnic_no());
+		// System.out.println(placeVO.getP_lat());
+		// System.out.println(placeVO.getP_lon());
+		// System.out.println("---------------------");
 		// search all
 		// List<PlaceVO> list=placejdbcdao.getAll();
 		// for(PlaceVO placeVO :list){

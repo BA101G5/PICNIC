@@ -3,6 +3,7 @@ package com.orderde_detail.model;
 import java.util.List;
 
 import com.goods_sell.model.Goods_SellVO;
+import com.place.model.PlaceVO;
 
 public class Orderde_DetailService {
 	private Orderde_DetailDAO dao = null;
@@ -11,7 +12,10 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public void addPlaceOrderde_Detail(){}
+	public void addPlaceOrderde_Detail(PlaceVO placeVO){
+		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();
+		orderde_detailVO.setP_no(placeVO.getP_no());
+	}
 	public void addGsOrderde_Detail(Goods_SellVO goods_sellVO ,Integer amount,String account) {
 	
 		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();

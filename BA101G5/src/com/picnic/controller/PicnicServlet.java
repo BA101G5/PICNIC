@@ -43,8 +43,8 @@ public class PicnicServlet extends HttpServlet {
 				} else if (!picnic_name.trim().matches(nameReg)) {
 					errorMsgs.put("name", "團名不能為特殊符號 且必須在2~70字之間");
 				}
-				String address = req.getParameter("address");
-				String area = req.getParameter("area");
+				String address = req.getParameter("address").trim();
+				String area = req.getParameter("area").trim();
 
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";
 				if (address == null || address.trim().length() == 0) {
@@ -78,7 +78,9 @@ public class PicnicServlet extends HttpServlet {
 				}
 
 				String tladdress = null;
-				if (address.substring(3, 4).equals("市")) {
+				System.out.println();
+
+				if (address.contains("市")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
@@ -131,27 +133,30 @@ public class PicnicServlet extends HttpServlet {
 					String picnic_no = picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
 					PicmemService picmemSvc = new PicmemService();
 					picmemSvc.addowner(picnic_no, account);
-					System.out.println("Hello");
+
 					PlaceService placeSvc = new PlaceService();
-					// PlaceVO placeVO = placeSvc.getOne(tladdress);
+					PlaceVO placeVO = null;
+					try {
+						placeVO = placeSvc.getOne(tladdress);
+						if (placeVO.getMf_no() != null) {
+							placeSvc.insertMFplace(account, picnic_no, placeVO,picnic_pl);
+							Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO);
+							session.setAttribute("mem_no", placeVO.getMf_no());
+						}
+					} catch (Exception e) {
+						placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
+					} finally {
+						String url = null;
+						if (action.equals("insert")) {
+							url = "/picnic/maosecondui3.jsp";
+						}
 
-					// if (placeVO.getMf_no() != null) {
-					// Orderde_DetailService orderde_detailSvc = new
-					// Orderde_DetailService();
-					// orderde_detailSvc.addPlaceOrderde_Detail();
-					// session.setAttribute("mem_no", placeVO.getMf_no());
-					// } else {
-					// placeSvc.insertplace(account, tladdress, picnic_no);
-					// }
+						javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+						SuccessView.forward(req, res);
+					}
 				}
 
-				String url = null;
-				if (action.equals("insert")) {
-					url = "/picnic/maosecondui3.jsp";
-				}
-
-				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
-				SuccessView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
 			}
