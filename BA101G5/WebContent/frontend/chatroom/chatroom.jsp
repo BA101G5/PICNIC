@@ -73,13 +73,13 @@
 	</head>
 	<body>
 
-		<div class="col-sm-4 container chatroom-container">
+		<div class="col-sm-4 container chatroom-list-container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12" id="chatroom">
-					<a class="btn btn-primary col-xs-12" role="button" data-toggle="collapse" href="#chatroom-body" aria-expanded="false" aria-controls="#chatroom-body">
+				<div class="col-xs-12 col-sm-12" id="chatroom-list">
+					<a class="btn btn-primary col-xs-12" role="button" data-toggle="collapse" href="#chatroom-list-body" aria-expanded="false" aria-controls="#chatroom-list-body">
 						聊天室
 					</a>
-					<div class="collapse" id="chatroom-body">
+					<div class="collapse" id="chatroom-list-body">
 						<!-- bs-panel -->
 						<div class="bs-panel panel panel-danger">
 							<div class="panel-heading">
@@ -114,17 +114,17 @@
 							<!-- END: bs-list-group -->
 						</div><!-- END: .bs-panel -->
 
-					</div><!-- END: #chatroom-body -->
+					</div><!-- END: #chatroom-list-body -->
 
 				</div>
 
 			</div><!-- END: .row -->
-		</div><!-- END: .chatroom-container -->
+		</div><!-- END: .chatroom-list-container -->
 
 
 
-<!-- .aChat-container -->
-<div class="col-sm-4 container aChat-container">
+<!-- .aChatroom-container -->
+<div class="col-sm-4 container aChatroom-container" id="aChatroom-container">
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-primary">
@@ -222,14 +222,28 @@
         </div>
     </div>
 </div>
-<!-- END: .aChat-container -->
+<!-- END: .aChatroom-container -->
 
 
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script>
-			var intViewportHeight = window.innerHeight;
-			document.querySelector('#chatroom').style.maxHeight = (intViewportHeight - 100) + 'px';
+
+			var onWinResize = function(){
+				var numViewportHeight = window.innerHeight;
+				var hightLimit = numViewportHeight - 150;
+				document.querySelector('#chatroom-list').style.maxHeight = hightLimit + 'px';
+
+				var elAChatroomContainer = document.querySelector('#aChatroom-container');
+				var numAChatroomContainerOffsetWidth = elAChatroomContainer.offsetWidth;
+
+				elAChatroomContainer.style.right = numAChatroomContainerOffsetWidth + 'px';
+
+				elAChatroomContainer.querySelector('.panel-body').style.maxHeight = hightLimit + 'px';
+			};
+			onWinResize();
+			$( window ).on('resize', onWinResize);
+
 		</script>
 
 	</body>
