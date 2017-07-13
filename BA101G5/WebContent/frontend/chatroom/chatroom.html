@@ -99,7 +99,7 @@
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                        <span class="glyphicon glyphicon-time"></span>52 mins ago</small>
                                 </div>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
@@ -112,7 +112,7 @@
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>43 mins ago</small>
                                     <strong class="pull-right primary-font">Bhaumik Patel</strong>
                                 </div>
                                 <p>
@@ -127,7 +127,7 @@
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                        <span class="glyphicon glyphicon-time"></span>34 mins ago</small>
                                 </div>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
@@ -140,7 +140,7 @@
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>25 mins ago</small>
                                     <strong class="pull-right primary-font">Bhaumik Patel</strong>
                                 </div>
                                 <p>
@@ -181,7 +181,12 @@
 
 				elAChatroomContainer.style.right = numAChatroomContainerOffsetWidth + 'px';
 
-				elAChatroomContainer.querySelector('.panel-body').style.maxHeight = hightLimit + 'px';
+				// elAChatroomContainer.querySelector('.panel-body').style.maxHeight = hightLimit + 'px';
+				var jqAChatroomContainerPanelBody = $(elAChatroomContainer).find('.panel-body');
+				jqAChatroomContainerPanelBody
+						.css('max-height', hightLimit + 'px')
+						.scrollTop(jqAChatroomContainerPanelBody[0].scrollHeight);
+
 			};
 			onWinResize();
 			$( window ).on('resize', onWinResize);

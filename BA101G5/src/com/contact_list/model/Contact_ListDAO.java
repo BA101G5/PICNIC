@@ -20,7 +20,7 @@ public class Contact_ListDAO implements Contact_ListDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +29,9 @@ public class Contact_ListDAO implements Contact_ListDAO_interface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO CONTACT_LIST (MEM_NO, CONTACT_NO, RELATIONSHIP) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST order by MEM_NO";
+		"SELECT MEM_NO, CONTACT_NO, RELATIONSHIP FROM CONTACT_LIST order by MEM_NO";
+	private static final String GET_ALL_STMT_COND = 
+		"SELECT MEM_NO, CONTACT_NO, RELATIONSHIP FROM CONTACT_LIST WHERE MEM_NO= ? and RELATIONSHIP=? order by MEM_NO";
 	private static final String GET_ONE_STMT = 
 		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST where MEM_NO= ? and CONTACT_NO=?";
 	private static final String DELETE = 
@@ -270,4 +272,61 @@ public class Contact_ListDAO implements Contact_ListDAO_interface {
 		}
 		return list;
 	}
+	
+	public List<Contact_ListVO> getAll(String mem_no, String relationship) {
+		List<Contact_ListVO> list = new ArrayList<Contact_ListVO>();
+		Contact_ListVO contact_listVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_COND);
+			pstmt.setString(1, mem_no);
+			pstmt.setString(2, relationship);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO ¤]ºÙ¬° Domain objects
+				contact_listVO = new Contact_ListVO();
+				contact_listVO.setMem_no(rs.getString("MEM_NO"));
+				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
+				contact_listVO.setRelationship(rs.getString("RELATIONSHIP"));
+				list.add(contact_listVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 }

@@ -6,12 +6,14 @@
 <%@ page import="com.picnic.model.*"%>
 <%@ page import="com.chatroom_members.model.*"%>
 <%@ page import="com.chatroom.model.*"%>
+<%@ page import="com.contact_list.model.*"%>
+<%@ page import="com.general_member.model.*"%>
 
 <%
 // 	ChatroomService pboard_articleSvc = new ChatroomService();
 // 	List<ChatroomVO> list = chatroomSvc.getAll();
 // 	pageContext.setAttribute("list", list);
-	String mem_no = "MG00000001";
+	String mem_no = "MG00000002";
 
 	PicmemService picmemSvc = new PicmemService();
 	List<PicmemVO> listPicmemVO = picmemSvc.getAll();
@@ -29,32 +31,50 @@
 		}
 	}
 
-    pageContext.setAttribute("mapPG", mapPG);
+  pageContext.setAttribute("mapPG", mapPG);
     
 //     for(Map.Entry<String, String> entry : mapPG.entrySet()){
 //         System.out.println(entry.getKey() + "/" + entry.getValue());
 //     }
 	
 
-	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
-	List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
-	ChatroomService chatroomSvc = new ChatroomService();
-	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
+// 	// 群組聊天
+// 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
+// 	List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
+// 	ChatroomService chatroomSvc = new ChatroomService();
+// 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
 	
-	Map<String, String> mapFriendRoom = new HashMap<String, String>();
-	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
-		if(listChatroom_MembersVO.get(idx).getMem_no().equals(mem_no)){
-			mapFriendRoom.put(
-				listChatroom_MembersVO.get(idx).getChatroom_no(),
-				chatroomSvc.getOneChatroom(listChatroom_MembersVO.get(idx).getChatroom_no()).getChatroom_name()
-			);
-			//System.out.println(chatroomSvc.getOneChatroom(listChatroom_MembersVO.get(idx).getChatroom_no()).getChatroom_name());
-		}
-	}
+// 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
+// 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
+// 		if(listChatroom_MembersVO.get(idx).getMem_no().equals(mem_no)){
+// 			mapGroupRoom.put(
+// 				listChatroom_MembersVO.get(idx).getChatroom_no(),
+// 				chatroomSvc.getOneChatroom(listChatroom_MembersVO.get(idx).getChatroom_no()).getChatroom_name()
+// 			);
+// 			//System.out.println(chatroomSvc.getOneChatroom(listChatroom_MembersVO.get(idx).getChatroom_no()).getChatroom_name());
+// 		}
+// 	}
 	
-    pageContext.setAttribute("mapFriendRoom", mapFriendRoom);
-%>
+// 	pageContext.setAttribute("mapGroupRoom", mapGroupRoom);
 
+
+	GeneralMemberService generalMemberSvc = new GeneralMemberService();
+	List<GeneralMemberVO> generalMemberVO = generalMemberSvc.getAll();
+	Contact_ListService contactListSvc = new Contact_ListService();
+	List<Contact_ListVO> listContactListVO = contactListSvc.getAll(mem_no, "F");
+	Map<String, String> mapFriendRoom = new HashMap<String, String>();
+	for(int idx = 0; idx < listContactListVO.size(); idx++){
+		mapFriendRoom.put(
+			listContactListVO.get(idx).getContact_no(),
+			generalMemberSvc.getOneGeneralMember(listContactListVO.get(idx).getContact_no()).getMEM_NAME()
+		);
+		System.out.println(listContactListVO.get(idx).getContact_no());
+	}
+
+
+	pageContext.setAttribute("mapFriendRoom", mapFriendRoom);
+
+%>
 
 <!DOCTYPE html>
 <html lang="">
@@ -157,7 +177,7 @@
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                        <span class="glyphicon glyphicon-time"></span>52 mins ago</small>
                                 </div>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
@@ -170,7 +190,7 @@
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>43 mins ago</small>
                                     <strong class="pull-right primary-font">Bhaumik Patel</strong>
                                 </div>
                                 <p>
@@ -185,7 +205,7 @@
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                        <span class="glyphicon glyphicon-time"></span>34 mins ago</small>
                                 </div>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
@@ -198,7 +218,7 @@
                         </span>
                             <div class="chat-body clearfix">
                                 <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>25 mins ago</small>
                                     <strong class="pull-right primary-font">Bhaumik Patel</strong>
                                 </div>
                                 <p>
@@ -239,7 +259,11 @@
 
 				elAChatroomContainer.style.right = numAChatroomContainerOffsetWidth + 'px';
 
-				elAChatroomContainer.querySelector('.panel-body').style.maxHeight = hightLimit + 'px';
+				var jqAChatroomContainerPanelBody = $(elAChatroomContainer).find('.panel-body');
+				jqAChatroomContainerPanelBody
+						.css('max-height', hightLimit + 'px')
+						.scrollTop(jqAChatroomContainerPanelBody[0].scrollHeight);
+
 			};
 			onWinResize();
 			$( window ).on('resize', onWinResize);

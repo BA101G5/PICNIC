@@ -19,16 +19,16 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STATE,MEM_PHONE,MEM_PBOARD)"
+	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD)"
 			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STATE=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
+	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
 	private static final String DELETE = "DELETE FROM GENERAL_MEMBER WHERE MEM_NO=?";
-	private static final String FINDBYKEY = "SELECT MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STATE,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
+	private static final String FINDBYKEY = "SELECT MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
 	private static final String FINDALL = "SELECT * FROM GENERAL_MEMBER";
 
 	@Override
@@ -169,7 +169,7 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STATE").charAt(0));
+				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 
@@ -227,7 +227,7 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STATE").charAt(0));
+				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 				list.add(gVO);
