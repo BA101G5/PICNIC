@@ -12,10 +12,14 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public void addPlaceOrderde_Detail(PlaceVO placeVO, String p_no){
+	public void addPlaceOrderde_Detail(PlaceVO placeVO, String p_no,String mem_no,String picnic_no){
 		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();
 		orderde_detailVO.setP_no(p_no);
-// 		orderde_detailVO.setMem_no(mem_no);
+ 		orderde_detailVO.setMem_no(mem_no);
+ 		orderde_detailVO.setOd_amount(1);
+ 		orderde_detailVO.setOd_price(placeVO.getP_price());
+ 		orderde_detailVO.setPicnic_no(picnic_no);
+ 		System.out.println(picnic_no);
 		dao.insert(orderde_detailVO);
 	}
 	public void addGsOrderde_Detail(Goods_SellVO goods_sellVO ,Integer amount,String account) {
@@ -24,7 +28,6 @@ public class Orderde_DetailService {
 		orderde_detailVO.setGs_no(goods_sellVO.getGs_no());
 		Integer price=goods_sellVO.getGs_price();
 		Integer totalprice=price*amount;
-		
 		orderde_detailVO.setOd_amount(amount);
 		orderde_detailVO.setOd_price(totalprice);
 		orderde_detailVO.setMem_no(account);

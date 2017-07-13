@@ -7,6 +7,7 @@ public interface Goods_RentDAO_interface {
 		public void delete(String gr_no);
 		public Goods_RentVO findByPrimaryKey(String gr_no);
 		public List<Goods_RentVO> getAll();
+		public List<Goods_RentVO> findbyplace(String mf_no,String place);
 		
 	
 }

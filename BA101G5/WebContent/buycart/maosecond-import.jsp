@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; Charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.goods_sell.model.*"%>
 
@@ -65,7 +65,4 @@
 			</c:forEach>
 		</div>
 	</div>
-</div>
-
-
 </div>
