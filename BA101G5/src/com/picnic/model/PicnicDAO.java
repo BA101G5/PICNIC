@@ -14,7 +14,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -170,7 +170,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
 			picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-			picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+			picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
 			picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
 			picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
 			picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
@@ -180,7 +180,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 			picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 			picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 			picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-			picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+			picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -229,7 +229,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
 				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-				picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+				picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
 				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
 				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
 				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
@@ -239,7 +239,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+				picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 
 				list.add(picnicVO);
 			}

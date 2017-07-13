@@ -22,12 +22,16 @@ public class PicnicService {
 	public void deletePicnic() {
 	}
 
+	public PicnicVO getOnePicnic(String picnic_no) {
+		return dao.findByPrimaryKey(picnic_no);
+	}
+	
 	public PicnicVO getOne() {
 		return null;
 	}
 
 	public List<PicnicVO> getAll() {
-		return null;
+		return dao.getAll();
 	}
 	public String addPicnic(String picnic_name,Timestamp picnic_date,Integer picnic_pl){
 		PicnicVO picnicVO=new PicnicVO();
