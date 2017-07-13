@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; Charset=UTF-8" pageEncoding="Big5"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.goods_rent.model.*"%>
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -20,8 +23,24 @@
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<div class="Container">
 		<div class="row">
-			<div class="col-sm-8 col-sm-push-2">
-				<P>新增完成.我們為為您準備了一些可供租賃的商品</P>
+			<div class="col-sm-8 col-sm-push-2" style="color:white;">
+				<h3>新增完成.我們為為您準備了一些可供租賃的商品</h3>
+				<c:forEach var="goods_rentVO" items="${list}">
+					<div class="col-sm-4">
+						<a href="#" class="thumbnail"> <img
+							src="https://api.fnkr.net/testimg/350x200/aaaaaa" alt="">
+							<div class="caption">
+								<h2>${goods_rentVO.getGr_name() }</h2>
+								<p>${goods_rentVO.getGr_info() }</p>
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+
+
+
+
+
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
 						<a href="<%=request.getContextPath()%>/index.jsp"

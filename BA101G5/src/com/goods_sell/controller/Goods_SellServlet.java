@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
+import com.orderde_detail.model.Orderde_DetailService;
 
 public class Goods_SellServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -24,19 +25,23 @@ public class Goods_SellServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
-		String contextpath=getServletContext().getRealPath("\\images");
-		System.out.println(contextpath);
 	
 		if ("getOne".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
+
+			
+			//String account = req.getParameter("account");
+			String account ="M000000001";
+			
 			try {
 				String gsno = new String(req.getParameter("gsno"));
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
-				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno,contextpath);
+				Goods_SellVO goods_sellVO = goods_sellSvc.getOne(gsno);
+				
 
 				session.setAttribute("goods_sellVO", goods_sellVO);
 				String url = null;

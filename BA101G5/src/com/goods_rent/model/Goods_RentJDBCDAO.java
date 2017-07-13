@@ -20,6 +20,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 	private static final String GET_ONE_STMT = "select GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA from GOODS_RENT where GR_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_RENT where GR_NO =?";
 	private static final String UPDATE_STMT = "update GOODS_RENT set P_NO=?,GR_NAME=?,GR_DATE=?,GR_PRICE=?,GR_COUNT=?,GR_INFO=?,GR_IMG=?,GR_UNTIL=?,GR_STA=? where GR_NO=?";
+	private static final String FINDBYPLACE_STMT = "select * from GOODS_RENT where MF_NO=? and GR_PLACE=? order by GR_NO";
 
 	@Override
 	public void insert(Goods_RentVO goods_rentVO) {
@@ -271,7 +272,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 
 	public static void main(String[] args) {
 		Goods_RentJDBCDAO goods_rentjdbcdao = new Goods_RentJDBCDAO();
-// insert
+		// insert
 		// Goods_RentVO goods_rentVO = new Goods_RentVO();
 		// goods_rentVO.setMf_no("MM00000001");
 		// goods_rentVO.setP_no("P000000001");
@@ -286,7 +287,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		// 0:0:0"));
 		// goods_rentVO.setGr_sta("A");
 		// goods_rentjdbcdao.insert(goods_rentVO);
-// update
+		// update
 		// Goods_RentVO goods_rentVO = new Goods_RentVO();
 		// goods_rentVO.setGr_no("");
 		// goods_rentVO.setMf_no("");
@@ -300,9 +301,9 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		// goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
 		// goods_rentVO.setGr_sta("");
 		// goods_rentjdbcdao.update(goods_rentVO);
-// delete
+		// delete
 		// goods_rentjdbcdao.delete("");
-// search one
+		// search one
 		// Goods_RentVO goods_rentVO = goods_rentjdbcdao.findByPrimaryKey("");
 		// System.out.println(goods_rentVO.getGr_no());
 		// System.out.println(goods_rentVO.getMf_no());
@@ -316,7 +317,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		// System.out.println(goods_rentVO.getGr_until());
 		// System.out.println(goods_rentVO.getGr_sta());
 		// System.out.println("---------------------");
-// search all
+		// search all
 		// List<Goods_RentVO> list = goods_rentjdbcdao.getAll();
 		// for (Goods_RentVO goods_rentVO : list) {
 		// System.out.println(goods_rentVO.getGr_no());
@@ -356,5 +357,67 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		}
 
 		return data;
+	}
+
+	@Override
+	public List<Goods_RentVO> findbyplace(String mf_no, String place) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Goods_RentVO> list = new ArrayList<Goods_RentVO>();
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(FINDBYPLACE_STMT);
+			pstmt.setString(1, mf_no);
+			pstmt.setString(2, place);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Goods_RentVO goods_rentVO = new Goods_RentVO();
+				goods_rentVO.setGr_no(rs.getString("GR_NO"));
+				goods_rentVO.setMf_no(rs.getString("MF_NO"));
+				goods_rentVO.setP_no(rs.getString("P_NO"));
+				goods_rentVO.setGr_name(rs.getString("GR_NAME"));
+				goods_rentVO.setGr_date(rs.getTimestamp("GR_DATE"));
+				goods_rentVO.setGr_price(rs.getInt("GR_PRICE"));
+				goods_rentVO.setGr_count(rs.getInt("GR_COUNT"));
+				goods_rentVO.setGr_info(rs.getString("GR_INFO"));
+				goods_rentVO.setGr_img(rs.getBytes("GR_IMG"));
+				goods_rentVO.setGr_until(rs.getTimestamp("GR_UNTIL"));
+				goods_rentVO.setGr_sta(rs.getString("GR_STA"));
+
+				list.add(goods_rentVO);
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

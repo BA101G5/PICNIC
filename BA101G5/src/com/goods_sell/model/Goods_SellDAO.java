@@ -148,7 +148,6 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gs_no);
 			rs = pstmt.executeQuery();
-
 			rs.next();
 				goods_sellVO = new Goods_SellVO();
 				goods_sellVO.setGs_no(rs.getString("GS_NO"));

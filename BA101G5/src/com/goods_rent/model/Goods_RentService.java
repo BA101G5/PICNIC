@@ -28,4 +28,7 @@ public class Goods_RentService {
 		return dao.getAll();
 	}
 
+	public List<Goods_RentVO> findbyplace(String mf_no, String place) {
+		return dao.findbyplace(mf_no, place);
+	}
 }

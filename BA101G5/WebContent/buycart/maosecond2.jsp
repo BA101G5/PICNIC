@@ -32,54 +32,68 @@
 .btn {
 	width: 50px;
 }
+
+.breadcrumb {
+	margin-top: -20px;
+	background: skyblue;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-11 cal-sm-push-1">
-				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					<ul class="nav navbar-nav side-nav">
-						<li><a href="#">
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-									onclick="submit()">
-									<p>A</p>
-								</FORM>
-						</a></li>
-						<li><a href="#">
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-									onclick="submit()">
-									<p>B</p>
-								</FORM>
-						</a></li>
-						<li><a href="#">
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-									onclick="submit()">
-									<p>C</p>
-								</FORM>
-						</a></li>
-						<li><a href="#">
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-									onclick="submit()">
-									<p>D</p>
-								</FORM>
-						</a></li>
+			<div class="col-sm-8 col-sm-push-2">
+				<ol class="breadcrumb">
+					<li><a href="<%=request.getContextPath()%>/index.jsp">首頁</a></li>
+					<li><a href="#" class="active">預購商品</a></li>
+					<li><a href="#" class="active">商品</a></li>
+				</ol>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 cal-sm-push-1">
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						<ul class="nav navbar-nav side-nav">
+							<li><a href="#">
+									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										onclick="submit()">
+										<p>A</p>
+									</FORM>
+							</a></li>
+							<li><a href="#">
+									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										onclick="submit()">
+										<p>B</p>
+									</FORM>
+							</a></li>
+							<li><a href="#">
+									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										onclick="submit()">
+										<p>C</p>
+									</FORM>
+							</a></li>
+							<li><a href="#">
+									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										onclick="submit()">
+										<p>D</p>
+									</FORM>
+							</a></li>
 
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<jsp:include page="/buycart/maosecond-import.jsp" />
-		<div class="row ">
-			<div class="col-sm-11 col-sm-push-1 ">
-				<div class="col-sm-9 col-sm-push-1 ">
-					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">回標題</a>
-					</div>
-					<div class="col-sm-11 col-sm-push-3 ">
-						<jsp:include page="/mustinclude/footer.jsp" />
+			<jsp:include page="/buycart/maosecond-import.jsp" />
+			<div class="row ">
+				<div class="col-sm-10 col-sm-push-1 ">
+					<div class="col-sm-10 col-sm-push-1 ">
+						<div class="btn-group btn-group-justified ">
+							<a href="# " class="btn btn-default " role="button ">回標題</a>
+						</div>
+						<div class="col-sm-11 col-sm-push-3 ">
+							<jsp:include page="/mustinclude/footer.jsp" />
+						</div>
 					</div>
 				</div>
 			</div>

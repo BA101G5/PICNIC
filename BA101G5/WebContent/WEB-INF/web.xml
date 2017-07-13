@@ -30,6 +30,14 @@
   </resource-ref>
 	
 	<servlet>
+		<servlet-name>Imageoutput1</servlet-name>
+		<servlet-class>com.util.encoding.imageoutput1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Imageoutput1</servlet-name>
+		<url-pattern>/Image/</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>Goods_RentServlet</servlet-name>
 		<servlet-class>com.goods_rent.controller.Goods_rentServlet</servlet-class>
 	</servlet>
