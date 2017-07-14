@@ -26,7 +26,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB3");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/c");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
