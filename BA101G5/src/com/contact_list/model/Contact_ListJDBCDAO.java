@@ -290,42 +290,42 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 
 		// 新增
 		Contact_ListVO contact_listVO1 = new Contact_ListVO();
-		contact_listVO1.setMem_no("MG00000001");
-		contact_listVO1.setContact_no("MG00000002");
+		contact_listVO1.setMem_no("MG00000011");
+		contact_listVO1.setContact_no("MG00000004");
 		contact_listVO1.setRelationship("F");
 
 		dao.insert(contact_listVO1);
-
-		// 修改
-		Contact_ListVO contact_listVO2 = new Contact_ListVO();
-		contact_listVO2.setMem_no("MG00000001");
-		contact_listVO2.setContact_no("MG00000002");
-		contact_listVO2.setRelationship("B");
-		
-		dao.update(contact_listVO2);
+//
+//		// 修改
+//		Contact_ListVO contact_listVO2 = new Contact_ListVO();
+//		contact_listVO2.setMem_no("MG00000001");
+//		contact_listVO2.setContact_no("MG00000002");
+//		contact_listVO2.setRelationship("B");
+//		
+//		dao.update(contact_listVO2);
 
 		// 刪除
 //		dao.delete("MG00000001", "MG00000002");
 
 		// 查詢
-		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
-		for (Contact_ListVO aEmp : list) {
-			System.out.print(aEmp.getMem_no() + ",");
-			System.out.print(aEmp.getContact_no() + ",");
-			System.out.print(aEmp.getRelationship() + ",");
-		}
-
-		System.out.println();
-		System.out.println("---------------------");
-		System.out.println();
+//		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
+//		for (Contact_ListVO aEmp : list) {
+//			System.out.print(aEmp.getMem_no() + ",");
+//			System.out.print(aEmp.getContact_no() + ",");
+//			System.out.print(aEmp.getRelationship() + ",");
+//		}
+//
+//		System.out.println();
+//		System.out.println("---------------------");
+//		System.out.println();
 
 		// 查詢
-		List<Contact_ListVO> list2 = dao.getAll();
-		for (Contact_ListVO aEmp : list2) {
-			System.out.print(aEmp.getMem_no() + ",");
-			System.out.print(aEmp.getContact_no() + ",");
-			System.out.print(aEmp.getRelationship() + ",");
-			System.out.println();
-		}
+//		List<Contact_ListVO> list2 = dao.getAll();
+//		for (Contact_ListVO aEmp : list2) {
+//			System.out.print(aEmp.getMem_no() + ",");
+//			System.out.print(aEmp.getContact_no() + ",");
+//			System.out.print(aEmp.getRelationship() + ",");
+//			System.out.println();
+//		}
 	}
 }

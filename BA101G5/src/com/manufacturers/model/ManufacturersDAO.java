@@ -19,14 +19,14 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 			+ "VALUES('MM' || LPAD(MF_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE MANUFACTURERS SET MF_NAME=?,MF_PHONE=?,MF_MAIL=?, MF_ACCO=?, MF_PSW=? ,MF_LOGO=? ,MF_SELF=?, MF_BS=?, MF_ADDR=? ,MF_FAX=?,MF_STA=?,MF_REPORTNUM=? WHERE MF_NO=?";
 	private static final String DELETE = "DELETE FROM MANUFACTURERS WHERE MF_NO=?";
-	private static final String FINDBYKEY = "SELECT MF_NAME, MF_PHONE, MF_MAIL, MF_ACCO, MF_PSW, MF_SELF,MF_LOGO, MF_BS, MF_ADDR,MF_FAX,MF_STA,MF_REPORTNUM FROM MANUFACTURERS WHERE MF_NO=?";
-	private static final String FINDALL = "SELECT * FROM MANUFACTURERS";
+	private static final String FINDBYKEY = "SELECT MF_NO,MF_NAME, MF_PHONE, MF_MAIL, MF_ACCO, MF_PSW, MF_SELF,MF_LOGO, MF_BS, MF_ADDR,MF_FAX,MF_STA,MF_REPORTNUM FROM MANUFACTURERS WHERE MF_NO=?";
+	private static final String FINDALL = "SELECT * FROM MANUFACTURERS ORDER BY MF_NO DESC";
 
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -166,6 +166,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				mVO = new ManufacturersVO();
+				mVO.setMF_NO(rs.getString("MF_NO"));
 				mVO.setMF_NAME(rs.getString("MF_NAME"));
 				mVO.setMF_PHONE(rs.getString("MF_PHONE"));
 				mVO.setMF_MAIL(rs.getString("MF_MAIL"));
@@ -224,6 +225,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				mVO = new ManufacturersVO();
+				mVO.setMF_NO(rs.getString("MF_NO"));
 				mVO.setMF_NAME(rs.getString("MF_NAME"));
 				mVO.setMF_PHONE(rs.getString("MF_PHONE"));
 				mVO.setMF_MAIL(rs.getString("MF_MAIL"));
