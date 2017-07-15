@@ -8,4 +8,5 @@ public interface PicmemDAO_interface {
 	public PicmemVO findByPrimaryKey(String picnic_no,String mem_no);
 	public List<PicmemVO> getAll();
 	public void insertowner(PicmemVO picmemVO);
+	public List<String> findByMem_no(String mem_no);
 }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; Charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.picnic.model.*"%>
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
-<title>Title Page</title>
+<title>Picnic野餐網</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
 					<p>團名 : ${sessionScope.picnic_name}</p>
 					<p>地址 : ${sessionScope.tladdress}</p>
 					<p>日期: ${sessionScope.picnic_date}</p>
-					<p>限制人數 :${sessionScope.people}</p>
+					<p>限制人數 :  ${sessionScope.people}</p>
 					<br>
 
 					<div class="btn-group btn-group-justified">

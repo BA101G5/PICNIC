@@ -2,6 +2,7 @@ package com.orderde_detail.model;
 
 import java.util.List;
 
+import com.goods_rent.model.Goods_RentVO;
 import com.goods_sell.model.Goods_SellVO;
 import com.place.model.PlaceVO;
 
@@ -47,6 +48,22 @@ public class Orderde_DetailService {
 
 	public List<Orderde_DetailVO> getAll() {
 		return null;
+	}
+
+	public List<Orderde_DetailVO> getAllPICNICNO(String picnic_no){
+		
+		return dao.getAllPICNICNO(picnic_no);
+	}
+	
+	public void addGrOrderde_Detail(Goods_RentVO goods_rentVO, Integer amount, String account, String picnic_no) {
+	Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+	orderde_detailVO.setPicnic_no(picnic_no);
+	orderde_detailVO.setP_no(goods_rentVO.getP_no());
+	orderde_detailVO.setGr_no(goods_rentVO.getGr_no());
+	orderde_detailVO.setOd_amount(amount);
+	orderde_detailVO.setOd_price(goods_rentVO.getGr_price());
+	orderde_detailVO.setMem_no(account);		
+	dao.insert(orderde_detailVO);	
 	}
 
 }

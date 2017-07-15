@@ -8,5 +8,6 @@ public interface Orderde_DetailDAO_interface {
 	public void delete(String orderde_detailno);
 	public Orderde_DetailVO findByPrimaryKey(String orderde_detailno);
 	public List<Orderde_DetailVO> getAll();
+	public List<Orderde_DetailVO> getAllPICNICNO(String picnic_no);
 	
 }

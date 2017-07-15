@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Title Page</title>
+<title>Picnicé‡é¤ç¶²</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -76,7 +76,7 @@
 			<div class="col-sm-11 col-sm-push-1 ">
 				<div class="col-sm-9 col-sm-push-1 ">
 					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">¦^¼ĞÃD</a>
+						<a href="# " class="btn btn-default " role="button ">ï¿½^ï¿½ï¿½ï¿½D</a>
 					</div>
 					<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />

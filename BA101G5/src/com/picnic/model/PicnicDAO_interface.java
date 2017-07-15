@@ -10,4 +10,6 @@ public interface PicnicDAO_interface {
 		public PicnicVO findByPrimaryKey(String picnic_no);
 		public List<PicnicVO> getAll();
 		public String addPicnic(PicnicVO picnicVO);
+		
+
 }

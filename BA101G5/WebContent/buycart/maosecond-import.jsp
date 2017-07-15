@@ -44,8 +44,7 @@
 									</td>
 									<td>
 										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do"
-											onclick="submit()">
+											ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 											<button type="submit" class="btn btn-default btn-xs"
 												value="Submit">
 												<span class="glyphicon glyphicon-shopping-cart"

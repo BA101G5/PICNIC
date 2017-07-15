@@ -139,12 +139,13 @@ public class PicnicServlet extends HttpServlet {
 					try {
 						placeVO = placeSvc.getOne(tladdress);
 						if (placeVO.getMf_no() != null) {
-							String p_no= placeSvc.insertMFplace(account, picnic_no, placeVO,picnic_pl);
 							Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-							orderde_detailSvc.addPlaceOrderde_Detail(placeVO,p_no,account,picnic_no);
-					
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO,placeVO.getP_no(),account,picnic_no);
+
 							Goods_RentService goods_rentSvc = new Goods_RentService();
 							List<Goods_RentVO> list= goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
+							session.setAttribute("picnic_no", picnic_no);
+							System.out.println(list);
 							if(!list.isEmpty()){
 								session.setAttribute("list", list);
 							}
