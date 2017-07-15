@@ -18,7 +18,8 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'�ΥD')";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'�ΥD')";
+	private static final String GET_BYMEMNO_STMT = "select P_NO form PICMEM where MEM_NO =?";
 
 	@Override
 	public void insert(PicmemVO picmemVO) {
@@ -281,7 +282,7 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 
 	public static void main(String[] args) {
 		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
-// insert
+		// insert
 		// PicmemVO picmemVO = new PicmemVO();
 		// picmemVO.setPicnic_no("PG00000006");
 		// picmemVO.setMem_no("MG00000001");
@@ -290,7 +291,7 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 		// picmemVO.setMem_longi(44.012);
 		// picmemVO.setMem_latit(44.022);
 		// picmemjdbcdao.insert(picmemVO);
-// update
+		// update
 		// PicmemVO picmemVO = new PicmemVO();
 		// picmemVO.setPicnic_no("PG00000001");
 		// picmemVO.setMem_no("MG00000001");
@@ -299,9 +300,9 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 		// picmemVO.setMem_longi(44.012);
 		// picmemVO.setMem_latit(44.022);
 		// picmemjdbcdao.update(picmemVO);
-// delete
+		// delete
 		// picmemjdbcdao.delete("PG00000001", "MG00000001");
-// search one
+		// search one
 		// PicmemVO picmemVO = picmemjdbcdao.findByPrimaryKey("PG00000001",
 		// "MG00000001");
 		// System.out.println(picmemVO.getPicnic_no());
@@ -311,23 +312,69 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 		// System.out.println(picmemVO.getMem_longi());
 		// System.out.println(picmemVO.getMem_latit());
 		// System.out.println("---------------------");
-// search all
-//		 List<PicmemVO> list = picmemjdbcdao.getAll();
-//		 for (PicmemVO picmemVO : list) {
-//		 System.out.println(picmemVO.getPicnic_no());
-//		 System.out.println(picmemVO.getMem_no());
-//		 System.out.println(picmemVO.getPicmem_iden());
-//		 System.out.println(picmemVO.getPicmem_sta());
-//		 System.out.println(picmemVO.getMem_longi());
-//		 System.out.println(picmemVO.getMem_latit());
-//		 System.out.println("---------------------");
-//		 }
-		//insert owner
-		PicmemVO picmemVO =new PicmemVO();
-		picmemVO.setPicnic_no("PG00000007");
-		picmemVO.setMem_no("MG00000002");
-		picmemjdbcdao.insertowner(picmemVO);
+		// search all
+		// List<PicmemVO> list = picmemjdbcdao.getAll();
+		// for (PicmemVO picmemVO : list) {
+		// System.out.println(picmemVO.getPicnic_no());
+		// System.out.println(picmemVO.getMem_no());
+		// System.out.println(picmemVO.getPicmem_iden());
+		// System.out.println(picmemVO.getPicmem_sta());
+		// System.out.println(picmemVO.getMem_longi());
+		// System.out.println(picmemVO.getMem_latit());
+		// System.out.println("---------------------");
+		// }
+		// insert owner
+		// PicmemVO picmemVO =new PicmemVO();
+		// picmemVO.setPicnic_no("PG00000007");
+		// picmemVO.setMem_no("MG00000002");
+		// picmemjdbcdao.insertowner(picmemVO);
 
 	}
+
+	@Override
+	public List<String> findByMem_no(String mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list = new ArrayList<String>();
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BYMEMNO_STMT);
+			pstmt.setString(1,mem_no);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+			list.add(rs.getString("PICNIC_NO"));	
+			}} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			} catch (SQLException e) {
+				throw new RuntimeException("A database error occured. " + e.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+		return list;
+		}
 
 }
