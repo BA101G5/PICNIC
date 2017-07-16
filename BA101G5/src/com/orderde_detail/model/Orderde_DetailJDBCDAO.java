@@ -15,7 +15,8 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
-	private static final String GET_ALL_PICNICNO_STMT = " select * from ORDERDE_DETAIL where PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL where PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL where MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
 	
 	@Override
 	public void insert(Orderde_DetailVO orderde_detailVO) {
@@ -266,30 +267,31 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 	public static void main(String[] args) {
 		Orderde_DetailJDBCDAO orderde_detailjdbcdao = new Orderde_DetailJDBCDAO();
 //		 insert
-		 Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-		 orderde_detailVO.setMem_no("MG00000001");
-		 orderde_detailVO.setOd_bs("A");
-		 orderde_detailVO.setP_no("P000000001");
-		 orderde_detailVO.setGs_no("GS00000001");
-		 orderde_detailVO.setOd_amount(7);
-		 orderde_detailVO.setOd_price(0);
-		 orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
-		 
-		 orderde_detailjdbcdao.insert(orderde_detailVO);
+		// Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+		// orderde_detailVO.setMem_no("MG00000001");
+		// orderde_detailVO.setOd_bs("A");
+		// orderde_detailVO.setP_no("P000000001");
+		// orderde_detailVO.setGs_no("GS00000001");
+		// orderde_detailVO.setOd_amount(7);
+		// orderde_detailVO.setOd_price(0);
+		// orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01
+		// 0:0:0"));
+		//
+		// orderde_detailjdbcdao.insert(orderde_detailVO);
 //		 update
 //		 Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
 		
-		 orderde_detailVO.setOrderde_detailno("OD00000014");
+	//	 orderde_detailVO.setOrderde_detailno("OD00000014");
 		// orderde_detailVO.setMem_no("MG00000001");
 		// orderde_detailVO.setPicnic_no("PG00000001");
 		// orderde_detailVO.setP_no("P000000005");
 		// orderde_detailVO.setGs_no("GS00000001");
-		 orderde_detailVO.setOd_amount(1);
-		 orderde_detailVO.setOd_price(100);
-		 orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
-		 orderde_detailVO.setOd_place("somewhere");
-		 orderde_detailVO.setOd_bs("A");
-		 orderde_detailjdbcdao.update(orderde_detailVO);
+//		 orderde_detailVO.setOd_amount(1);
+//		 orderde_detailVO.setOd_price(100);
+//		 orderde_detailVO.setOd_deliver(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+//		 orderde_detailVO.setOd_place("somewhere");
+//		 orderde_detailVO.setOd_bs("A");
+//		 orderde_detailjdbcdao.update(orderde_detailVO);
 		 
 		// delete
 		// orderde_detailjdbcdao.delete("OD00000001");
@@ -324,6 +326,23 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		// System.out.println(orderde_detailVO.getOd_bs());
 		// System.out.println("---------------------");
 		// }
+		// getAllPICNICNO
+			 List<Orderde_DetailVO> list = orderde_detailjdbcdao.getAllPICNICNO("PG00000014");
+			 for(Orderde_DetailVO orderde_detailVO : list){
+			 System.out.println(orderde_detailVO.getOrderde_detailno());
+			 System.out.println(orderde_detailVO.getPicnic_no());
+			 System.out.println(orderde_detailVO.getMem_no());
+			 System.out.println(orderde_detailVO.getP_no());
+			 System.out.println(orderde_detailVO.getGr_no());
+			 System.out.println(orderde_detailVO.getGs_no());
+			 System.out.println(orderde_detailVO.getOd_amount());
+			 System.out.println(orderde_detailVO.getOd_price());
+			 System.out.println(orderde_detailVO.getOd_deliver());
+			 System.out.println(orderde_detailVO.getOd_place());
+			 System.out.println(orderde_detailVO.getOd_bs());
+			 System.out.println("---------------------");
+			 }
+		 
 	}
 
 	@Override
@@ -336,7 +355,7 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_PICNICNO_STMT);
+			pstmt = con.prepareStatement(GET_GR_PICNICNO_STMT);
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
@@ -389,6 +408,68 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		}
 		return list;
 	}
-	
+	@Override
+	public List<Orderde_DetailVO> getGsByMenno(String mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Orderde_DetailVO> list = new ArrayList<Orderde_DetailVO>();
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_GS_MEMNO_STMT);
+			pstmt.setString(1, mem_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+
+				orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
+				orderde_detailVO.setMem_no(rs.getString("MEM_NO"));
+				orderde_detailVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				orderde_detailVO.setP_no(rs.getString("P_NO"));
+				orderde_detailVO.setGr_no(rs.getString("GR_NO"));
+				orderde_detailVO.setGs_no(rs.getString("GS_NO"));
+				orderde_detailVO.setOd_amount(rs.getInt("OD_AMOUNT"));
+				orderde_detailVO.setOd_price(rs.getInt("OD_PRICE"));
+				orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
+				orderde_detailVO.setOd_place(rs.getString("OD_PLACE"));
+				orderde_detailVO.setOd_bs(rs.getString("OD_BS"));
+
+				list.add(orderde_detailVO);
+
+			}
+		
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 }

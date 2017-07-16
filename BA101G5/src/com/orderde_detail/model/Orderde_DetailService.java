@@ -13,13 +13,14 @@ public class Orderde_DetailService {
 		dao = new Orderde_DetailDAO();
 	}
 
-	public void addPlaceOrderde_Detail(PlaceVO placeVO, String p_no,String mem_no,String picnic_no){
+	public void addPlaceOrderde_Detail(Integer P_price, String p_no,String mem_no,String picnic_no,String od_place){
 		Orderde_DetailVO orderde_detailVO=new Orderde_DetailVO();
 		orderde_detailVO.setP_no(p_no);
  		orderde_detailVO.setMem_no(mem_no);
  		orderde_detailVO.setOd_amount(1);
- 		orderde_detailVO.setOd_price(placeVO.getP_price());
+ 		orderde_detailVO.setOd_price(P_price);
  		orderde_detailVO.setPicnic_no(picnic_no);
+ 		orderde_detailVO.setOd_place(od_place);
  		System.out.println(picnic_no);
 		dao.insert(orderde_detailVO);
 	}
@@ -39,7 +40,9 @@ public class Orderde_DetailService {
 		return null;
 	}
 
-	public void deleteOrderde_Detail() {
+	public void deleteOrderde_Detail(String orderde_detailno) {
+		
+		dao.delete(orderde_detailno);
 	}
 
 	public Orderde_DetailVO getOne(String orderde_detailno) {
@@ -64,6 +67,16 @@ public class Orderde_DetailService {
 	orderde_detailVO.setOd_price(goods_rentVO.getGr_price());
 	orderde_detailVO.setMem_no(account);		
 	dao.insert(orderde_detailVO);	
+	}
+	public List<Orderde_DetailVO> getGsByMem(String mem_no){
+		
+		
+		return dao.getGsByMenno(mem_no);
+	}
+
+	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs) {
+	
+		
 	}
 
 }

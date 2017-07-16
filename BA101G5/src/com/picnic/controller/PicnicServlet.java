@@ -136,11 +136,13 @@ public class PicnicServlet extends HttpServlet {
 
 					PlaceService placeSvc = new PlaceService();
 					PlaceVO placeVO = null;
+					Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+					
 					try {
 						placeVO = placeSvc.getOne(tladdress);
 						if (placeVO.getMf_no() != null) {
-							Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-							orderde_detailSvc.addPlaceOrderde_Detail(placeVO,placeVO.getP_no(),account,picnic_no);
+							
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(),placeVO.getP_no(),account,picnic_no,tladdress);
 
 							Goods_RentService goods_rentSvc = new Goods_RentService();
 							List<Goods_RentVO> list= goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
@@ -148,11 +150,14 @@ public class PicnicServlet extends HttpServlet {
 							System.out.println(list);
 							if(!list.isEmpty()){
 								session.setAttribute("list", list);
+								
 							}
 						}
 						
 					} catch (Exception e) {
-						placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
+						String p_no= placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
+						Integer P_price=0;
+						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no,tladdress);
 					} finally {
 						String url = null;
 						if (action.equals("insert")) {
