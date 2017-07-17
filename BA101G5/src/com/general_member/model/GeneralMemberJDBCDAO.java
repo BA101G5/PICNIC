@@ -17,7 +17,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
 	private static final String DELETE = "DELETE FROM GENERAL_MEMBER WHERE MEM_NO=?";
-	private static final String FINDBYKEY = "SELECT MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
+	private static final String FINDBYKEY = "SELECT MEM_NO,MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
 	private static final String FINDALL ="SELECT * FROM GENERAL_MEMBER";
 	static {
 		try {
@@ -41,7 +41,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 			pstmt.setString(5, generalmemberVO.getMEM_MAIL());
 			pstmt.setString(6, generalmemberVO.getMEM_PSW());
 			pstmt.setInt(7, generalmemberVO.getMEM_COIN());
-			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STATE()));
+			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STA()));
 			pstmt.setString(9, generalmemberVO.getMEM_PHONE());
 			pstmt.setString(10, String.valueOf(generalmemberVO.getMEM_PBOARD()));
 
@@ -83,7 +83,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 			pstmt.setString(5, generalmemberVO.getMEM_MAIL());
 			pstmt.setString(6, generalmemberVO.getMEM_PSW());
 			pstmt.setInt(7, generalmemberVO.getMEM_COIN());
-			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STATE()));
+			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STA()));
 			pstmt.setString(9, generalmemberVO.getMEM_PHONE());
 			pstmt.setString(10, String.valueOf(generalmemberVO.getMEM_PBOARD()));
 			pstmt.setString(11, generalmemberVO.getMEM_NO());
@@ -158,6 +158,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				gVO = new GeneralMemberVO();
+				gVO.setMEM_NO(rs.getString("MEM_NO"));
 				gVO.setMEM_NAME(rs.getString("MEM_NAME"));
 				gVO.setMEM_GEN(rs.getString("MEM_GEN").charAt(0));
 				gVO.setMEM_BIRTH(rs.getDate("MEM_BIRTH"));
@@ -165,7 +166,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
+				gVO.setMEM_STA(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 
@@ -223,7 +224,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
+				gVO.setMEM_STA(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 				list.add(gVO);
@@ -267,14 +268,14 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		// 1.insert
 		// try {
 		// GeneralMemberVO gVO =new GeneralMemberVO();
-		// gVO.setMEM_NAME("¶˘æß");
+		// gVO.setMEM_NAME("‰º∏ÂÑí");
 		// gVO.setMEM_GEN('M');
 		// gVO.setMEM_BIRTH(java.sql.Date.valueOf("2002-01-01"));
-		// gVO.setMEM_ADDR("ªO§§•´¶Ë∞œ•¡•Õ∏Ù140∏π");
+		// gVO.setMEM_ADDR("Ëá∫‰∏≠Â∏ÇË•øÂçÄÊ∞ëÁîüË∑Ø140Ëôü");
 		// gVO.setMEM_MAIL("hyyhhyhyy@lirtft.com");
 		// gVO.setMEM_PSW("896de0bf7b6894f5189c9c7c3f066910");
 		// gVO.setMEM_COIN(2898);
-		// gVO.setMEM_STATE('M');
+		// gVO.setMEM_STA('M');
 		// gVO.setMEM_PHONE("0912484797");
 		// gVO.setMEM_PBOARD('Y');
 		// dao.insert(gVO);
@@ -290,11 +291,11 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		// gVO.setMEM_NAME("123");
 		// gVO.setMEM_GEN('F');
 		// gVO.setMEM_BIRTH(java.sql.Date.valueOf("2012-01-01"));
-		// gVO.setMEM_ADDR("ªO§§•´¶Ë∞œ•¡•Õ∏Ù140∏π");
+		// gVO.setMEM_ADDR("Ëá∫‰∏≠Â∏ÇË•øÂçÄÊ∞ëÁîüË∑Ø140Ëôü");
 		// gVO.setMEM_MAIL("123@lirtft.com");
 		// gVO.setMEM_PSW("896de0bf7b6894f5189c9c7c3f066910");
 		// gVO.setMEM_COIN(2898);
-		// gVO.setMEM_STATE('U');
+		// gVO.setMEM_STA('U');
 		// gVO.setMEM_PHONE("0912484797");
 		// gVO.setMEM_PBOARD('N');
 		// gVO.setMEM_NO("MG00000015");
@@ -316,7 +317,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 //		System.out.println("MEM_MAIL : " + gVO.getMEM_MAIL());
 //		System.out.println("MEM_PSW : " + gVO.getMEM_PSW());
 //		System.out.println("MEM_COIN : " + gVO.getMEM_COIN());
-//		System.out.println("MEM_STATE : " + gVO.getMEM_STATE());
+//		System.out.println("MEM_STA : " + gVO.getMEM_STA());
 //		System.out.println("MEM_PHONE : " + gVO.getMEM_PHONE());
 //		System.out.println("MEM_PBOARD : " + gVO.getMEM_PBOARD());
 		
@@ -330,11 +331,17 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 			System.out.println("MEM_MAIL : " + gVO.getMEM_MAIL());
 			System.out.println("MEM_PSW : " + gVO.getMEM_PSW());
 			System.out.println("MEM_COIN : " + gVO.getMEM_COIN());
-			System.out.println("MEM_STA : " + gVO.getMEM_STATE());
+			System.out.println("MEM_STA : " + gVO.getMEM_STA());
 			System.out.println("MEM_PHONE : " + gVO.getMEM_PHONE());
 			System.out.println("MEM_PBOARD : " + gVO.getMEM_PBOARD());
 			System.out.println("-----------------");
 		}
+		
+	}
+
+	@Override
+	public void updatefromcoin(GeneralMemberVO generalmemberVO) {
+		// TODO Auto-generated method stub
 		
 	}
 

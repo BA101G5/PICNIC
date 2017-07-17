@@ -183,7 +183,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo §]∫Ÿ¨∞ Domain objects
+				// empVo ÓòÉÂòøÓÉã Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -243,7 +243,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO §]∫Ÿ¨∞ Domain objects
+				// empVO ÓòÉÂòøÓÉã Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -304,7 +304,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO §]∫Ÿ¨∞ Domain objects
+				// empVO ÓòÉÂòøÓÉã Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -351,38 +351,38 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 
 		Contact_ListJDBCDAO dao = new Contact_ListJDBCDAO();
 
-		// ∑sºW
+		// Á©ùÁ≥§
 		Contact_ListVO contact_listVO1 = new Contact_ListVO();
-		contact_listVO1.setMem_no("MG00000001");
-		contact_listVO1.setContact_no("MG00000002");
+		contact_listVO1.setMem_no("MG00000011");
+		contact_listVO1.setContact_no("MG00000004");
 		contact_listVO1.setRelationship("F");
 
 		dao.insert(contact_listVO1);
+//
+//		// ÓÖê—ç
+//		Contact_ListVO contact_listVO2 = new Contact_ListVO();
+//		contact_listVO2.setMem_no("MG00000001");
+//		contact_listVO2.setContact_no("MG00000002");
+//		contact_listVO2.setRelationship("B");
+//		
+//		dao.update(contact_listVO2);
 
-		// ≠◊ßÔ
-		Contact_ListVO contact_listVO2 = new Contact_ListVO();
-		contact_listVO2.setMem_no("MG00000001");
-		contact_listVO2.setContact_no("MG00000002");
-		contact_listVO2.setRelationship("B");
-		
-		dao.update(contact_listVO2);
-
-		// ßR∞£
+		// ÓúòÂüÉ
 //		dao.delete("MG00000001", "MG00000002");
 
-		// ¨d∏ﬂ
-		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
-		for (Contact_ListVO aEmp : list) {
-			System.out.print(aEmp.getMem_no() + ",");
-			System.out.print(aEmp.getContact_no() + ",");
-			System.out.print(aEmp.getRelationship() + ",");
-		}
+		// Áê©È´ò
+//		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
+//		for (Contact_ListVO aEmp : list) {
+//			System.out.print(aEmp.getMem_no() + ",");
+//			System.out.print(aEmp.getContact_no() + ",");
+//			System.out.print(aEmp.getRelationship() + ",");
+//		}
+//
+//		System.out.println();
+//		System.out.println("---------------------");
+//		System.out.println();
 
-		System.out.println();
-		System.out.println("---------------------");
-		System.out.println();
-
-		// ¨d∏ﬂ
+		// Áê©È´ò
 //		List<Contact_ListVO> list2 = dao.getAll();
 //		for (Contact_ListVO aEmp : list2) {
 //			System.out.print(aEmp.getMem_no() + ",");
@@ -390,14 +390,14 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 //			System.out.print(aEmp.getRelationship() + ",");
 //			System.out.println();
 //		}
-		
-		// ¨d∏ﬂ
-		List<Contact_ListVO> list3 = dao.getAll("MG00000002", "F");
-		for (Contact_ListVO aEmp : list3) {
-			System.out.print(aEmp.getMem_no() + ",");
-			System.out.print(aEmp.getContact_no() + ",");
-			System.out.print(aEmp.getRelationship() + ",");
-			System.out.println();
-		}
+
+		// Áê©È´ò
+//		List<Contact_ListVO> list3 = dao.getAll("MG00000002", "F");
+//		for (Contact_ListVO aEmp : list3) {
+//			System.out.print(aEmp.getMem_no() + ",");
+//			System.out.print(aEmp.getContact_no() + ",");
+//			System.out.print(aEmp.getRelationship() + ",");
+//			System.out.println();
+//		}
 	}
 }

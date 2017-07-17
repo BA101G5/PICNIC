@@ -10,4 +10,5 @@ public interface GeneralMemberDAO_interface {
     public void delete(String MEM_NO);
     public GeneralMemberVO findByPrimaryKey(String MEM_NO);
     public List<GeneralMemberVO> getAll();
+    public void updatefromcoin(GeneralMemberVO generalmemberVO);
 }

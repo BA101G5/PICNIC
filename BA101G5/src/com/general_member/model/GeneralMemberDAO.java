@@ -1,5 +1,6 @@
 package com.general_member.model;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,13 +25,16 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD)"
-			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
-	private static final String DELETE = "DELETE FROM GENERAL_MEMBER WHERE MEM_NO=?";
-	private static final String FINDBYKEY = "SELECT MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
-	private static final String FINDALL = "SELECT * FROM GENERAL_MEMBER";
+  
+	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD,MEM_PIC,MEM_SELF)"
+			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=?,MEM_PIC=?,MEM_SELF=? WHERE MEM_NO=?";
 
+	private static final String DELETE = "DELETE FROM GENERAL_MEMBER WHERE MEM_NO=?";
+	private static final String FINDBYKEY = "SELECT * FROM GENERAL_MEMBER WHERE MEM_NO=?";
+	private static final String FINDALL = "SELECT * FROM GENERAL_MEMBER ORDER BY MEM_NO DESC";
+	private static final String FINDBYACCOUNT ="SELECT * FROM GENERAL_MEMBER WHERE MEM_MAIL=?";
+	private static final String UPDATECOIN="UPDATE GENERAL_MEMBER SET MEM_COIN=? WHERE MEM_NO=?";
 	@Override
 	public void insert(GeneralMemberVO generalmemberVO) {
 		Connection con = null;
@@ -45,10 +49,11 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			pstmt.setString(5, generalmemberVO.getMEM_MAIL());
 			pstmt.setString(6, generalmemberVO.getMEM_PSW());
 			pstmt.setInt(7, generalmemberVO.getMEM_COIN());
-			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STATE()));
+			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STA()));
 			pstmt.setString(9, generalmemberVO.getMEM_PHONE());
 			pstmt.setString(10, String.valueOf(generalmemberVO.getMEM_PBOARD()));
-
+			pstmt.setBytes(11, generalmemberVO.getMEM_PIC());
+			pstmt.setString(12,generalmemberVO.getMEM_SELF());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,10 +92,12 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			pstmt.setString(5, generalmemberVO.getMEM_MAIL());
 			pstmt.setString(6, generalmemberVO.getMEM_PSW());
 			pstmt.setInt(7, generalmemberVO.getMEM_COIN());
-			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STATE()));
+			pstmt.setString(8, String.valueOf(generalmemberVO.getMEM_STA()));
 			pstmt.setString(9, generalmemberVO.getMEM_PHONE());
 			pstmt.setString(10, String.valueOf(generalmemberVO.getMEM_PBOARD()));
-			pstmt.setString(11, generalmemberVO.getMEM_NO());
+			pstmt.setBytes(11, generalmemberVO.getMEM_PIC());
+			pstmt.setString(12, generalmemberVO.getMEM_SELF());
+			pstmt.setString(13, generalmemberVO.getMEM_NO());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +121,7 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 		}
 
 	}
-
+	
 	@Override
 	public void delete(String MEM_NO) {
 		Connection con = null;
@@ -162,14 +169,17 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				gVO = new GeneralMemberVO();
+				gVO.setMEM_NO(rs.getString("MEM_NO"));
 				gVO.setMEM_NAME(rs.getString("MEM_NAME"));
 				gVO.setMEM_GEN(rs.getString("MEM_GEN").charAt(0));
 				gVO.setMEM_BIRTH(rs.getDate("MEM_BIRTH"));
 				gVO.setMEM_ADDR(rs.getString("MEM_ADDR"));
+				gVO.setMEM_SELF(rs.getString("MEM_SELF"));
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
+				gVO.setMEM_PIC(rs.getBytes("MEM_PIC"));
+				gVO.setMEM_STA(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 
@@ -217,7 +227,9 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(FINDALL);
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
+								
 				gVO = new GeneralMemberVO();
 				gVO.setMEM_NO(rs.getString("MEM_NO"));
 				gVO.setMEM_NAME(rs.getString("MEM_NAME"));
@@ -225,9 +237,11 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 				gVO.setMEM_BIRTH(rs.getDate("MEM_BIRTH"));
 				gVO.setMEM_ADDR(rs.getString("MEM_ADDR"));
 				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
+				gVO.setMEM_SELF(rs.getString("MEM_SELF"));
+				gVO.setMEM_PIC(rs.getBytes("MEM_PIC"));
 				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
 				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
-				gVO.setMEM_STATE(rs.getString("MEM_STA").charAt(0));
+				gVO.setMEM_STA(rs.getString("MEM_STA").charAt(0));
 				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
 				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
 				list.add(gVO);
@@ -262,6 +276,100 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 		}
 
 		return list;
+	}
+	public GeneralMemberVO findByAccount(String MEM_MAIL) {
+		GeneralMemberVO gVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDBYACCOUNT);
+			pstmt.setString(1, MEM_MAIL);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				gVO = new GeneralMemberVO();
+				gVO.setMEM_NO(rs.getString("MEM_NO"));
+				gVO.setMEM_NAME(rs.getString("MEM_NAME"));
+				gVO.setMEM_GEN(rs.getString("MEM_GEN").charAt(0));
+				gVO.setMEM_BIRTH(rs.getDate("MEM_BIRTH"));
+				gVO.setMEM_ADDR(rs.getString("MEM_ADDR"));
+				gVO.setMEM_SELF(rs.getString("MEM_SELF"));
+				gVO.setMEM_MAIL(rs.getString("MEM_MAIL"));
+				gVO.setMEM_PSW(rs.getString("MEM_PSW"));
+				gVO.setMEM_COIN(rs.getInt("MEM_COIN"));
+				gVO.setMEM_PIC(rs.getBytes("MEM_PIC"));
+				gVO.setMEM_STA(rs.getString("MEM_STA").charAt(0));
+				gVO.setMEM_PHONE(rs.getString("MEM_PHONE"));
+				gVO.setMEM_PBOARD(rs.getString("MEM_PBOARD").charAt(0));
+
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return gVO;
+	}
+
+	@Override
+	public void updatefromcoin(GeneralMemberVO generalmemberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATECOIN);
+			pstmt.setInt(1, generalmemberVO.getMEM_COIN());
+			pstmt.setString(2, generalmemberVO.getMEM_NO());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+
+		
 	}
 
 }

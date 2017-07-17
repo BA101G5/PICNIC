@@ -10,11 +10,11 @@ public class Buy_RecordService {
 		dao = new Buy_RecordDAO();
 	}
 
-	public Buy_RecordVO addBuy_record(String BR_ID,String MEM_NO, Date BR_DATE,Integer BR_CASH) {
+	public Buy_RecordVO addBuy_record(String MEM_NO, Date BR_DATE,Integer BR_CASH) {
 		Buy_RecordVO bVO = new Buy_RecordVO();
-		bVO.setBR_ID(BR_ID);
+		
 		bVO.setMEM_NO(MEM_NO);
-		bVO.setBR_DATE(BR_DATE);;
+		bVO.setBR_DATE(BR_DATE);
 		bVO.setBR_CASH(BR_CASH);
 		
 		dao.insert(bVO);
@@ -42,5 +42,8 @@ public class Buy_RecordService {
 
 	public List<Buy_RecordVO> getAll() {
 		return dao.getAll();
+	}
+	public List<Buy_RecordVO> getForMG(String MEM_NO) {
+		return dao.findByMG(MEM_NO);
 	}
 }

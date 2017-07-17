@@ -12,6 +12,9 @@ public class AdvertisementVO {
 	private Integer AD_CASH;
 	private Character AD_STA;
 	
+	
+	
+	
 	public String getAD_NO() {
 		return AD_NO;
 	}
@@ -57,8 +60,8 @@ public class AdvertisementVO {
 	public Character getAD_STA() {
 		return AD_STA;
 	}
-	public void setAD_STA(Character aD_STATE) {
-		AD_STA = aD_STATE;
+	public void setAD_STA(Character aD_STA) {
+		AD_STA = aD_STA;
 	}
 	
 }

@@ -13,6 +13,8 @@ public interface AdvertisementDAO_interface {
 	public AdvertisementVO findByPrimaryKey(String AD_NO);
 
 	public List<AdvertisementVO> getAll();
+	
+	public List<AdvertisementVO> findByMM(String MF_NO);
 
 	
 }

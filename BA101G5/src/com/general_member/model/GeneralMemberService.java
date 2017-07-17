@@ -10,12 +10,12 @@ public class GeneralMemberService {
 		dao = new GeneralMemberDAO();
 	}
 
-	public GeneralMemberVO addGeneralMember(String MEM_NO, String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
+	public GeneralMemberVO addGeneralMember(String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
 			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
-			Character MEM_STATE, String MEM_PHONE, Character MEM_PBOARD) {
+			Character MEM_STA, String MEM_PHONE, Character MEM_PBOARD) {
 		GeneralMemberVO gVO = new GeneralMemberVO();
 
-		gVO.setMEM_NO(MEM_NO);
+
 		gVO.setMEM_GEN(MEM_GEN);
 		gVO.setMEM_NAME(MEM_NAME);
 		gVO.setMEM_BIRTH(MEM_BIRTH);
@@ -25,7 +25,7 @@ public class GeneralMemberService {
 		gVO.setMEM_SELF(MEM_SELF);
 		gVO.setMEM_PIC(MEM_PIC);
 		gVO.setMEM_COIN(MEM_COIN);
-		gVO.setMEM_STATE(MEM_STATE);
+		gVO.setMEM_STA(MEM_STA);
 		gVO.setMEM_PHONE(MEM_PHONE);
 		gVO.setMEM_PBOARD(MEM_PBOARD);
 		dao.insert(gVO);
@@ -34,7 +34,7 @@ public class GeneralMemberService {
 
 	public GeneralMemberVO updateGeneralMember(String MEM_NO, String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
 			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
-			Character MEM_STATE, String MEM_PHONE, Character MEM_PBOARD) {
+			Character MEM_STA, String MEM_PHONE, Character MEM_PBOARD) {
 		GeneralMemberVO gVO = new GeneralMemberVO();
 		
 		gVO.setMEM_NO(MEM_NO);
@@ -47,13 +47,14 @@ public class GeneralMemberService {
 		gVO.setMEM_SELF(MEM_SELF);
 		gVO.setMEM_PIC(MEM_PIC);
 		gVO.setMEM_COIN(MEM_COIN);
-		gVO.setMEM_STATE(MEM_STATE);
+		gVO.setMEM_STA(MEM_STA);
 		gVO.setMEM_PHONE(MEM_PHONE);
 		gVO.setMEM_PBOARD(MEM_PBOARD);
 		dao.update(gVO);
 
 		return gVO;
 	}
+	
 
 	public void deleteGeneralMember(String MEM_NO) {
 		dao.delete(MEM_NO);
@@ -65,5 +66,18 @@ public class GeneralMemberService {
 
 	public List<GeneralMemberVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public void updatecoin(String MEM_NO,Integer MEM_COIN)
+			 {
+		GeneralMemberVO gVO = new GeneralMemberVO();
+		
+		gVO.setMEM_NO(MEM_NO);
+		
+		gVO.setMEM_COIN(MEM_COIN);
+		
+		dao.updatefromcoin(gVO);
+
+		
 	}
 }
