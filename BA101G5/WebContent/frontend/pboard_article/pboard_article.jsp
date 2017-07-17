@@ -63,6 +63,9 @@ body{
 				font-size: 18px;
 				font-weight: 600;
 			}
+			#divBoardPostNewpost{
+				overflow-y: auto;
+			}
 		</style>
 	</head>
 	<body>
@@ -111,7 +114,7 @@ body{
 			</div>
 			<div class="col-xs-12 col-sm-12 board-post-newpost" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
 			</div>
-			<div class="btn-group">
+			<div class="btn-group" id="btnInsertImg">
 				<a href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</a>
 			</div>
 			<div class="btn-group" id="btnPostNewPost">
@@ -152,6 +155,9 @@ body{
 		<td><input id="author_no" type="TEXT" name="author_no" size="45" 
 			value="<%= (pboard_articleVO==null)? "MG00000001" : pboard_articleVO.getAuthor_no()%>" /></td>
 	</tr>
+	<tr>
+		<input id="inputFile" type="file" onchange="encodeImageFileAsURL(this)" />
+	</tr>
 
 </table>
 <br>
@@ -191,11 +197,22 @@ body{
 
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="<%=request.getContextPath()%>/js/encodeImageFileAsURL.js"></script>
 		<script>
 			$('#btnPostNewPost').on('click', function(){
 				$('#article_title')[0].value = $('#divBoardPostNewpostTitle').html();
 				$('#article_text')[0].value = $('#divBoardPostNewpost').html();
 				$('#formPost').submit();
+			});
+
+			$('#btnInsertImg').on('click', function(){
+				// alert(encodeImageFileAsURL);
+				$('#inputFile').click();
+				$('#inputFile').on('change', function(){
+					encodeImageFileAsURL(this, function(base64){
+						$('#divBoardPostNewpost')[0].innerHTML = $('#divBoardPostNewpost').html() +'<br><img src="' + base64 + '">';
+					});
+				});
 			});
 		</script>
 	</body>
