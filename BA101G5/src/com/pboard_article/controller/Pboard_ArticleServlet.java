@@ -213,7 +213,8 @@ public class Pboard_ArticleServlet extends HttpServlet {
 		}
 
         if ("insert".equals(action)) { // 來自addPboard_Article.jsp的請求  
-			
+//        	System.out.println("getServletPath: " + req.getServletPath()); // /frontend/pboard_article/pboard_article.do
+//        	System.out.println("getRequestURI: " + req.getRequestURI()); // /BA101G5/frontend/pboard_article/pboard_article.do
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -262,7 +263,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("pboard_articleVO", pboard_articleVO); // 含有輸入格式錯誤的pboard_articleVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("addPboard_Article.jsp");
+							.getRequestDispatcher(req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -273,7 +274,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				pboard_articleVO = pboard_articleSvc.addPboard_Article(author_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "listAllPboard_Article.jsp";
+				String url = req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPboard_Article.jsp
 				successView.forward(req, res);				
 				
@@ -281,7 +282,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("addPboard_Article.jsp");
+						.getRequestDispatcher(req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp");
 				failureView.forward(req, res);
 			}
 		}
