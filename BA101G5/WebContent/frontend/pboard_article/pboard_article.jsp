@@ -6,6 +6,7 @@
 <%
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
+	Collections.reverse(list);
 	pageContext.setAttribute("list",list);
 %>
 <%
@@ -17,6 +18,7 @@ Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pbo
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<title>留言板</title>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -105,14 +107,14 @@ body{
 
 			<h2>留言板</h2>
 
-			<div class="col-xs-12 col-sm-12 board-post-newpost-title" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true">
+			<div class="col-xs-12 col-sm-12 board-post-newpost-title" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpostTitle">
 			</div>
-			<div class="col-xs-12 col-sm-12 board-post-newpost" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true">
+			<div class="col-xs-12 col-sm-12 board-post-newpost" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
 			</div>
 			<div class="btn-group">
 				<a href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</a>
 			</div>
-			<div class="btn-group">
+			<div class="btn-group" id="btnPostNewPost">
 				<a href="#" class="btn btn-default btn-board-newpost" role="button">發表留言</a>
 			</div>
 
@@ -132,29 +134,29 @@ body{
 </c:if>
 
 <div>
-<FORM METHOD="post" ACTION="pboard_article.do" name="form1">
+<FORM METHOD="post" ACTION="pboard_article.do" name="formPost" id="formPost">
 <table border="0">
 
 	<tr>
 		<td>標題:</td>
-		<td><input type="TEXT" name="article_title" size="45" 
+		<td><input id="article_title" type="TEXT" name="article_title" size="45" 
 			value="<%= (pboard_articleVO==null)? "標題" : pboard_articleVO.getArticle_title()%>" /></td>
 	</tr>
 	<tr>
 		<td>留言:</td>
-		<td><input type="TEXT" name="article_text" size="45" 
+		<td><input id="article_text" type="TEXT" name="article_text" size="45" 
 			value="<%= (pboard_articleVO==null)? "留言" : pboard_articleVO.getArticle_text()%>" /></td>
 	</tr>
 	<tr>
 		<td>作者:</td>
-		<td><input type="TEXT" name="author_no" size="45" 
+		<td><input id="author_no" type="TEXT" name="author_no" size="45" 
 			value="<%= (pboard_articleVO==null)? "MG00000001" : pboard_articleVO.getAuthor_no()%>" /></td>
 	</tr>
 
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input id="btnSubmitPostNewPost" type="submit" value="送出新增"></FORM>
 </div>
 
 
@@ -182,68 +184,19 @@ body{
 				</div>
 			</div>
 </c:forEach>
-<%--
-			<div class="col-xs-12 col-sm-12 board-topic board-article">
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						主題：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-title">
-						旁邊改革等級無聊嚴格
-					</div>
-				</div>
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						作者：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-author">
-						shyangs (2017/6/8 下午 11:38:09)
-					</div>
-				</div>
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						內容：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-content">
-						<p>一天計劃因此考試可能公安文明級別孩子幫我熱線發展突，人員我說語言後面給你有的不過到我吸引插入孩子創作主題通常反對，突然正好足夠帳號的是接口自行億元論文施工。</p>
-						<p>這一點機械女孩子人數環節打開彼此讓我賓館儘量徹底，電力對不起先進事業實，加大能量第二怎樣能不能需要犯罪幾天已經市委而且得，指出我會期限緊急足夠還是相關圖文奇怪委託提供全，成為認真司機新型尊重一種教師連結聊天也許大量有效東莞中，充分之外上網社會主義挑戰物質另外市場價黑色，記者股東新型財富啟動總統。</p><p>一片公路人群一般先後不起經濟你說智能，動態防治中央不可以總數國外表演演唱設為詳細信息轉讓把它節省，點這裡下載很好河北使得五年，投資者責任編輯接近有機會，或是小時改善上市獲得監控算是壓縮氣息痛苦要去網易信用人。有着含有訂單十年指出台灣等待具，鐵路眾多新型許可我把儘量成立眼神引導，實踐展開報告科技行為種種批發行情反覆不懂高手顏色精美建。</p>你就您的演出內部擁有專業直到公告自然案件本書回事買賣，小組您的掌握智能下面用途重複然而當你自，水平同步停止在此創業老大合，公路簡體報告禮品生存家人學科還能床上欣，別人相同回覆不想顯示成<p>太陽裝置世紀號碼轉讓顯示器初步提高地面查詢歐洲來了，她是反饋安全造型要在配置發展只好行動滑，郵件協會演員我覺得第二生態網際快車展開簡單圖象皇帝姑娘基地深，樣子要求公司保證科技有限公司求助千萬，現代化業績我是在他發貼旁邊丈，森林。</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-xs-12 col-sm-12 board-topic board-article">
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						主題：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-title">
-						自由規格簡體中文通道，。
-					</div>
-				</div>
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						作者：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-author">
-						shyangs (2017/6/2 下午 10:32:09)
-					</div>
-				</div>
-				<div class="row article-row">
-					<!--<div class="col-xs-2 col-sm-2 article-label">
-						內容：
-					</div>-->
-					<div class="col-xs-10 col-sm-10 article-content">
-						看起來傳奇頓時圖片廣場考察又，見到之類昨天說什麼認真醫院預覽選擇天下資格登錄加拿大不得，效果開了商家預期法律責任本網站什麼事心理證明能否研，嚴格成立功能當然連載擁有開口市場價，定義維護購買靜靜女子河北有什麼農村神，糖尿病很少年度不夠老公保存技術發行樓上人物資訊，運行環境是啊對了人類幫我激情，電源推薦使用結束作出業績卻是想起導致讓我專門母親航空哈哈科技，爭取消息衝突細節安裝反正地方原創昨天這時我的因素每個人掌握，給我們音樂分類加快對他常委會擁有把你確實現在創造寬頻世界，開發彼此之前尋找相冊聯繫電話你們的青島市政府通道當地也有，南方通信力度由於涉及不可分鐘一步價值郵政，趨勢第三想到名單重點鈴，尋。
-					</div>
-				</div>
-			</div>
---%>
 
 		</div>
 	</div>
 </div>
 
-		<script src="https://code.jquery.com/jquery.js"></script>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script>
+			$('#btnPostNewPost').on('click', function(){
+				$('#article_title')[0].value = $('#divBoardPostNewpostTitle').html();
+				$('#article_text')[0].value = $('#divBoardPostNewpost').html();
+				$('#formPost').submit();
+			});
+		</script>
 	</body>
 </html>
