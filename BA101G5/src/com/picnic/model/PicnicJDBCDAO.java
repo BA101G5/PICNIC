@@ -182,7 +182,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 			picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 			picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 			picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-			picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+			picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -233,7 +233,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
 				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-				picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+				picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
 				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
 				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
 				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
@@ -243,7 +243,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+				picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 
 				list.add(picnicVO);
 			}
@@ -412,11 +412,33 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		// }
 
 		// insert
-		PicnicVO picnicVO = new PicnicVO();
-		picnicVO.setPicnic_name("天線寶寶");
-		picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-02 0:0:0"));
-		picnicVO.setPicnic_pl(10);
-		picnicjdbcdao.addPicnic(picnicVO);
+//		PicnicVO picnicVO = new PicnicVO();
+//		picnicVO.setPicnic_name("天線寶寶");
+//		picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-02 0:0:0"));
+//		picnicVO.setPicnic_pl(10);
+//		picnicjdbcdao.addPicnic(picnicVO);
+		
+		
+		
+		// 查詢 全部
+		List<PicnicVO> list = picnicjdbcdao.getAll();
+		for (PicnicVO aEmp : list) {
+			System.out.print(aEmp.getPicnic_no() + ",");
+			System.out.print(aEmp.getPicnic_name() + ",");
+			System.out.print(aEmp.getPicnic_desc() + ",");
+			System.out.print(aEmp.getPicupdate() + ",");
+			System.out.print(aEmp.getPicnic_startup() + ",");
+			System.out.print(aEmp.getPicnic_setup() + ",");
+			System.out.print(aEmp.getPicnic_chk() + ",");
+			System.out.print(aEmp.getPicnic_date() + ",");
+			System.out.print(aEmp.getPicnic_pl() + ",");
+			System.out.print(aEmp.getPicnic_sta() + ",");
+			System.out.print(aEmp.getOrd_total() + ",");
+			System.out.print(aEmp.getOrd_date() + ",");
+			System.out.print(aEmp.getOrd_dm() + ",");
+			System.out.print(aEmp.getOrd_sta());
+			System.out.println();
+		}
 	}
 
 }

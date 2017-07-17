@@ -43,6 +43,10 @@ public class ChatroomService {
 		return dao.findByPrimaryKey(chatroom_no);
 	}
 
+	public ChatroomVO getOneChatroom(String chatroom_no) {
+		return dao.findByPrimaryKey(chatroom_no);
+	}
+	
 	public List<ChatroomVO> getAll() {
 		return dao.getAll();
 	}		

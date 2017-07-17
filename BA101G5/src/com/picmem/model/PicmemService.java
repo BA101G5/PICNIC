@@ -25,7 +25,7 @@ public class PicmemService {
 	}
 
 	public List<PicmemVO> getAll() {
-		return null;
+		return dao.getAll();
 	}
 
 	public void addowner(String picnic_no, String mem_no) {
