@@ -116,13 +116,23 @@
   </servlet-mapping>
 
 	<servlet>
+		<servlet-name>Pboard_ArticleServlet0</servlet-name>
+		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Pboard_ArticleServlet0</servlet-name>
+		<url-pattern>/backend/pboard_article/pboard_article.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>Pboard_ArticleServlet</servlet-name>
 		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Pboard_ArticleServlet</servlet-name>
-		<url-pattern>/backend/pboard_article/pboard_article.do</url-pattern>
+		<url-pattern>/frontend/pboard_article/pboard_article.do</url-pattern>
 	</servlet-mapping>
+
+  
 <!-- wei's xml -->
 	<servlet>
     <servlet-name>General_MemberServlet</servlet-name>
@@ -207,4 +217,6 @@
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
 <!-- wei's xml -->	
+ 
+ 
 </web-app>

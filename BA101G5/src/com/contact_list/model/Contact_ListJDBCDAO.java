@@ -17,7 +17,9 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO CONTACT_LIST (MEM_NO, CONTACT_NO, RELATIONSHIP) VALUES (?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST order by MEM_NO";
+		"SELECT MEM_NO, CONTACT_NO, RELATIONSHIP FROM CONTACT_LIST order by MEM_NO";
+	private static final String GET_ALL_STMT_COND = 
+		"SELECT MEM_NO, CONTACT_NO, RELATIONSHIP FROM CONTACT_LIST WHERE MEM_NO= ? and RELATIONSHIP=? order by MEM_NO";
 	private static final String GET_ONE_STMT = 
 		"SELECT MEM_NO,CONTACT_NO,RELATIONSHIP FROM CONTACT_LIST where MEM_NO= ? and CONTACT_NO=?";
 	private static final String DELETE = 
@@ -181,7 +183,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo §]∫Ÿ¨∞ Domain objects
+				// empVo ÓòÉÂòøÓÉã Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -241,7 +243,68 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO §]∫Ÿ¨∞ Domain objects
+				// empVO ÓòÉÂòøÓÉã Domain objects
+				contact_listVO = new Contact_ListVO();
+				contact_listVO.setMem_no(rs.getString("MEM_NO"));
+				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
+				contact_listVO.setRelationship(rs.getString("RELATIONSHIP"));
+				list.add(contact_listVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public List<Contact_ListVO> getAll(String mem_no, String relationship) {
+		List<Contact_ListVO> list = new ArrayList<Contact_ListVO>();
+		Contact_ListVO contact_listVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_STMT_COND);
+			pstmt.setString(1, mem_no);
+			pstmt.setString(2, relationship);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO ÓòÉÂòøÓÉã Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -288,7 +351,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 
 		Contact_ListJDBCDAO dao = new Contact_ListJDBCDAO();
 
-		// ∑sºW
+		// Á©ùÁ≥§
 		Contact_ListVO contact_listVO1 = new Contact_ListVO();
 		contact_listVO1.setMem_no("MG00000011");
 		contact_listVO1.setContact_no("MG00000004");
@@ -296,7 +359,7 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 
 		dao.insert(contact_listVO1);
 //
-//		// ≠◊ßÔ
+//		// ÓÖê—ç
 //		Contact_ListVO contact_listVO2 = new Contact_ListVO();
 //		contact_listVO2.setMem_no("MG00000001");
 //		contact_listVO2.setContact_no("MG00000002");
@@ -304,10 +367,10 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 //		
 //		dao.update(contact_listVO2);
 
-		// ßR∞£
+		// ÓúòÂüÉ
 //		dao.delete("MG00000001", "MG00000002");
 
-		// ¨d∏ﬂ
+		// Áê©È´ò
 //		List<Contact_ListVO> list = dao.findByPrimaryKey("MG00000001", "MG00000002");
 //		for (Contact_ListVO aEmp : list) {
 //			System.out.print(aEmp.getMem_no() + ",");
@@ -319,9 +382,18 @@ public class Contact_ListJDBCDAO implements Contact_ListDAO_interface {
 //		System.out.println("---------------------");
 //		System.out.println();
 
-		// ¨d∏ﬂ
+		// Áê©È´ò
 //		List<Contact_ListVO> list2 = dao.getAll();
 //		for (Contact_ListVO aEmp : list2) {
+//			System.out.print(aEmp.getMem_no() + ",");
+//			System.out.print(aEmp.getContact_no() + ",");
+//			System.out.print(aEmp.getRelationship() + ",");
+//			System.out.println();
+//		}
+
+		// Áê©È´ò
+//		List<Contact_ListVO> list3 = dao.getAll("MG00000002", "F");
+//		for (Contact_ListVO aEmp : list3) {
 //			System.out.print(aEmp.getMem_no() + ",");
 //			System.out.print(aEmp.getContact_no() + ",");
 //			System.out.print(aEmp.getRelationship() + ",");

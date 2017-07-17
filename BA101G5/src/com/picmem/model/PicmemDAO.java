@@ -17,17 +17,18 @@ public class PicmemDAO implements PicmemDAO_interface {
 
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	private static final String INSERT_STMT = "insert into PICMEM (PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT) values(?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";
-	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
+	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? and MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'�ΥD')";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'團主')";
+	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'團主\'";
 	@Override
 	public void insert(PicmemVO picmemVO) {
 		Connection con = null;
@@ -272,5 +273,50 @@ public class PicmemDAO implements PicmemDAO_interface {
 
 	}
 
+	@Override
+	public List<String> findByMem_no(String mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list = new ArrayList<String>();
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BYMEMNO_STMT);
+			pstmt.setString(1, mem_no);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				list.add(rs.getString("PICNIC_NO"));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return list;
+	}
 
 }

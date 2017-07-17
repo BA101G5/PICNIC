@@ -14,7 +14,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -26,7 +26,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 	private static final String DELETE_STMT = "delete from PICNIC where PICNIC = ?";
 	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNICNO=?";
 	private static final String INSERT_INITIATESTMT = "insert into PICNIC (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
-
+	private static final String GET_ONEWHERE_STMT = "select PICNIC_NO,PICNIC_NAME from PICNIC WHERE PICNIC_NO=? and PICNIC_CHK =\'N\' and ORD_STA=\'N\'";
 	@Override
 	public void insert(PicnicVO picnicVO) {
 		Connection con = null;
@@ -170,7 +170,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
 			picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-			picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+			picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
 			picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
 			picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
 			picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
@@ -180,7 +180,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 			picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 			picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 			picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-			picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+			picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -229,7 +229,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
 				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
 				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
-				picnicVO.setPicupdate(rs.getTimestamp("PICKPUDATE"));
+				picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
 				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
 				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
 				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
@@ -239,7 +239,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
 				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
 				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
-				picnicVO.setOrd_sta(rs.getString("Ord_sta"));
+				picnicVO.setOrd_sta(rs.getString("ORD_STA"));
 
 				list.add(picnicVO);
 			}
@@ -322,4 +322,53 @@ public class PicnicDAO implements PicnicDAO_interface {
 
 	}
 
+	
+	public PicnicVO findByPrimaryKeywherepicnic_no(String picnic_no) {
+	
+		PicnicVO picnicVO = null;
+		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONEWHERE_STMT);
+			pstmt.setString(1, picnic_no);
+		
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+			
+			
+			picnicVO = new PicnicVO();
+			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));		
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
+		}
+		return picnicVO;
+
+	}
 }

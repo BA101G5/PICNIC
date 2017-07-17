@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<title>Title Page</title>
+<title>Picnic³¥À\ºô</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK_1dtxdSOtLRWPJy6ntqCm9kxqrLmRPs&callback=initMap"
