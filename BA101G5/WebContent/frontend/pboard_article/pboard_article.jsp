@@ -2,8 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pboard_article.model.*"%>
+<%@ page import="com.general_member.model.*"%>
 
 <%
+	GeneralMemberService gmSvc = new GeneralMemberService();
+	pageContext.setAttribute("gmSvc", gmSvc);
+
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
 	Collections.reverse(list);
@@ -179,7 +183,7 @@ body{
 				<div class="row article-row">
 
 					<div class="col-xs-10 col-sm-10 article-author">
-						shyangs (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
+						${gmSvc.getOneGeneralMember(pboard_articleVO.author_no).getMEM_NAME()} (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
 					</div>
 				</div>
 				<div class="row article-row">
