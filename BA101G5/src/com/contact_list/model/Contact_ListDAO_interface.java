@@ -7,4 +7,5 @@ public interface Contact_ListDAO_interface {
 		public void delete(String mem_no,String contact_no);
 		public List<Contact_ListVO> findByPrimaryKey(String mem_no,String contact_no);
 		public List<Contact_ListVO>getAll();
+		public List<Contact_ListVO> getAll(String mem_no, String relationship);
 }

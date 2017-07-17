@@ -223,22 +223,30 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String article_title = req.getParameter("article_title").trim();
 				String article_text = req.getParameter("article_text").trim();
+//System.out.println("insert/ article_title:" + article_title);
+//System.out.println("insert/ article_text:" + article_text);
 				
 				java.sql.Timestamp article_post = null;
 				try {
-					article_post = java.sql.Timestamp.valueOf(req.getParameter("article_post").trim());
-				} catch (IllegalArgumentException e) {
+//System.out.println("insert/ article_post000");
+//					article_post = java.sql.Timestamp.valueOf(req.getParameter("article_post").trim());
 					article_post=new java.sql.Timestamp(System.currentTimeMillis());
+//System.out.println("insert/ article_post1:" + article_post);
+				} catch (Exception e) {
+//System.out.println("insert/ article_post0000");
+					article_post=new java.sql.Timestamp(System.currentTimeMillis());
+//System.out.println("insert/ article_post2:" + article_post);
 					errorMsgs.add("請輸入日期!");
 				}
 				
 				
 				Integer article_kind = null;
 				try {
-					article_kind = new Integer(req.getParameter("article_kind").trim());
-				} catch (NumberFormatException e) {
+//					article_kind = new Integer(req.getParameter("article_kind").trim());
+					article_kind = new Integer(1);
+				} catch (Exception e) {
 					article_kind = 0;
-					errorMsgs.add("獎金請填數字.");
+					errorMsgs.add("Exception: article_kind.");
 				}
 				
 				String author_no = new String(req.getParameter("author_no").trim());
