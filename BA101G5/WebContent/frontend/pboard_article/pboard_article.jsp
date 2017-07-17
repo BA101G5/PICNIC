@@ -136,7 +136,7 @@ body{
 	</font>
 </c:if>
 
-<div>
+<div style="display:none">
 <FORM METHOD="post" ACTION="pboard_article.do" name="formPost" id="formPost">
 <table border="0">
 
