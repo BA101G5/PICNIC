@@ -322,4 +322,53 @@ public class PicnicDAO implements PicnicDAO_interface {
 
 	}
 
+	
+	public PicnicVO findByPrimaryKeywherepicnic_no(String picnic_no) {
+	
+		PicnicVO picnicVO = null;
+		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONEWHERE_STMT);
+			pstmt.setString(1, picnic_no);
+		
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+			
+			
+			picnicVO = new PicnicVO();
+			picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
+			picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));		
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
+		}
+		return picnicVO;
+
+	}
 }
