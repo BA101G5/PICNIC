@@ -34,7 +34,6 @@ public class PicnicService {
 	public List<PicnicVO> getAll() {
 		return dao.getAll();
 	}
-
 	public String addPicnic(String picnic_name, Timestamp picnic_date, Integer picnic_pl) {
 		PicnicVO picnicVO = new PicnicVO();
 		picnicVO.setPicnic_name(picnic_name);
