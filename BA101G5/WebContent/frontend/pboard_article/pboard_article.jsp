@@ -8,7 +8,9 @@
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
 	pageContext.setAttribute("list",list);
 %>
-
+<%
+Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
+%>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -103,9 +105,60 @@ body{
 
 			<h2>留言板</h2>
 
-			<div class="btn-group">
-				<a href="#" class="btn btn-default btn-board-newpost" role="button">我要留言</a>
+			<div class="col-xs-12 col-sm-12 board-post-newpost-title" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true">
 			</div>
+			<div class="col-xs-12 col-sm-12 board-post-newpost" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true">
+			</div>
+			<div class="btn-group">
+				<a href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</a>
+			</div>
+			<div class="btn-group">
+				<a href="#" class="btn btn-default btn-board-newpost" role="button">發表留言</a>
+			</div>
+
+
+
+
+
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font color='red'>請修正以下錯誤:
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li>${message}</li>
+		</c:forEach>
+	</ul>
+	</font>
+</c:if>
+
+<div>
+<FORM METHOD="post" ACTION="pboard_article.do" name="form1">
+<table border="0">
+
+	<tr>
+		<td>標題:</td>
+		<td><input type="TEXT" name="article_title" size="45" 
+			value="<%= (pboard_articleVO==null)? "標題" : pboard_articleVO.getArticle_title()%>" /></td>
+	</tr>
+	<tr>
+		<td>留言:</td>
+		<td><input type="TEXT" name="article_text" size="45" 
+			value="<%= (pboard_articleVO==null)? "留言" : pboard_articleVO.getArticle_text()%>" /></td>
+	</tr>
+	<tr>
+		<td>作者:</td>
+		<td><input type="TEXT" name="author_no" size="45" 
+			value="<%= (pboard_articleVO==null)? "MG00000001" : pboard_articleVO.getAuthor_no()%>" /></td>
+	</tr>
+
+</table>
+<br>
+<input type="hidden" name="action" value="insert">
+<input type="submit" value="送出新增"></FORM>
+</div>
+
+
+
 
 <c:forEach var="pboard_articleVO" items="${list}">
 			<div class="col-xs-12 col-sm-12 board-topic board-article">
@@ -118,7 +171,7 @@ body{
 				<div class="row article-row">
 
 					<div class="col-xs-10 col-sm-10 article-author">
-						shyangs (2017/6/8 下午 11:38:09)
+						shyangs (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
 					</div>
 				</div>
 				<div class="row article-row">
