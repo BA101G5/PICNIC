@@ -123,11 +123,11 @@
 <!-- </ul> -->
 
 
-<!-- <h3>留言管理</h3> -->
+<h3>留言管理</h3>
 
-<!-- <ul> -->
-<%--   <li><a href='<%=request.getContextPath()%>/pboard_article/addPboard_Article.jsp'>Add</a> a new Pboard_Article.</li> --%>
-<!-- </ul> -->
+<ul>
+  <li><a href='<%=request.getContextPath()%>/backend/pboard_article/addPboard_Article.jsp'>Add</a> a new Pboard_Article.</li>
+</ul>
 
 <!-- <h3><font color=orange>作者管理</font></h3> -->
 
