@@ -13,6 +13,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/mylib/ezmorph-1.0.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/mylib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/mylib/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/mylib/javax.mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
