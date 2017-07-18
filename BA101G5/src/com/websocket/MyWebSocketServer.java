@@ -27,7 +27,7 @@ public class MyWebSocketServer {
 //	private Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 //  Map<Chatroom_NO, SET<SESSION>>
 
-	Set<Session> allWebsocktConnectedSessions = Collections.synchronizedSet(new HashSet<Session>());
+	private static final Set<Session> allWebsocktConnectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 	
 	private String room;
 	private static final Map<String, Set<Session>> mapChatroomNo = new HashMap<String, Set<Session>>();
