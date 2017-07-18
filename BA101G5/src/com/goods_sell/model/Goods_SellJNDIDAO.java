@@ -18,7 +18,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta());
+			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -80,7 +80,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta());
+			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
 			pstmt.setString(8, goods_sellVO.getGs_no());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -158,7 +158,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -207,7 +207,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
 				list.add(goods_sellVO);
 
 			}

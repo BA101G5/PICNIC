@@ -44,8 +44,4 @@ public class Contact_ListService {
 	public List<Contact_ListVO> getAll() {
 		return dao.getAll();
 	}
-	
-	public List<Contact_ListVO> getAll(String mem_no, String relationship) {
-		return dao.getAll(mem_no, relationship);
-	}
 }

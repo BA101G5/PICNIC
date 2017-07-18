@@ -10,16 +10,16 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
-	String driver = "oracle.jdbc.driver.Oracledriver";
+	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA101G5";
-	String passwd = "III";
+	String passwd = "BA101G5";
 
-	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA) values('GR'||LPAD(GR_NO_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA,GR_PLACE) values('GR'||LPAD(GR_NO_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_RENT order by GR_NO";
-	private static final String GET_ONE_STMT = "select GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA from GOODS_RENT where GR_NO =?";
+	private static final String GET_ONE_STMT = "select * from GOODS_RENT where GR_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_RENT where GR_NO =?";
-	private static final String UPDATE_STMT = "update GOODS_RENT set P_NO=?,GR_NAME=?,GR_DATE=?,GR_PRICE=?,GR_COUNT=?,GR_INFO=?,GR_IMG=?,GR_UNTIL=?,GR_STA=? where GR_NO=?";
+	private static final String UPDATE_STMT = "update GOODS_RENT set MF_NO=?,P_NO=?,GR_NAME=?,GR_DATE=?,GR_PRICE=?,GR_COUNT=?,GR_INFO=?,GR_IMG=?,GR_UNTIL=?,GR_STA=?,GR_PLACE=? where GR_NO=?";
 	private static final String FINDBYPLACE_STMT = "select * from GOODS_RENT where MF_NO=? and GR_PLACE=? order by GR_NO";
 
 	@Override
@@ -41,6 +41,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 			pstmt.setBytes(8, goods_rentVO.getGr_img());
 			pstmt.setTimestamp(9, goods_rentVO.getGr_date());
 			pstmt.setString(10, goods_rentVO.getGr_sta());
+			pstmt.setString(11, goods_rentVO.getGr_place());
 
 			pstmt.executeUpdate();
 
@@ -78,6 +79,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
+			
 			pstmt.setString(1, goods_rentVO.getMf_no());
 			pstmt.setString(2, goods_rentVO.getP_no());
 			pstmt.setString(3, goods_rentVO.getGr_name());
@@ -88,7 +90,8 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 			pstmt.setBytes(8, goods_rentVO.getGr_img());
 			pstmt.setTimestamp(9, goods_rentVO.getGr_date());
 			pstmt.setString(10, goods_rentVO.getGr_sta());
-			pstmt.setString(11, goods_rentVO.getGr_no());
+			pstmt.setString(11, goods_rentVO.getGr_place());
+			pstmt.setString(12, goods_rentVO.getGr_no());
 
 			pstmt.executeUpdate();
 
@@ -165,7 +168,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gr_no);
 			rs = pstmt.executeQuery();
-
+			rs.next() ;
 			goods_rentVO = new Goods_RentVO();
 			goods_rentVO.setGr_no(rs.getString("GR_NO"));
 			goods_rentVO.setMf_no(rs.getString("MF_NO"));
@@ -178,6 +181,7 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 			goods_rentVO.setGr_img(rs.getBytes("GR_IMG"));
 			goods_rentVO.setGr_until(rs.getTimestamp("GR_UNTIL"));
 			goods_rentVO.setGr_sta(rs.getString("GR_STA"));
+			goods_rentVO.setGr_place(rs.getString("GR_PLACE"));
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -273,50 +277,51 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 	public static void main(String[] args) {
 		Goods_RentJDBCDAO goods_rentjdbcdao = new Goods_RentJDBCDAO();
 		// insert
-		// Goods_RentVO goods_rentVO = new Goods_RentVO();
-		// goods_rentVO.setMf_no("MM00000001");
-		// goods_rentVO.setP_no("P000000001");
-		// goods_rentVO.setGr_name("aoeuaoeu");
-		// goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("2055-01-01
-		// 0:0:0"));
-		// goods_rentVO.setGr_price(10);
-		// goods_rentVO.setGr_count(14);
-		// goods_rentVO.setGr_info("aoeuaoeu");
-		// goods_rentVO.setGr_img(getPicture("WebContent\nothing-here.jpg"));
-		// goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("2055-01-01
-		// 0:0:0"));
-		// goods_rentVO.setGr_sta("A");
-		// goods_rentjdbcdao.insert(goods_rentVO);
+//		 Goods_RentVO goods_rentVO = new Goods_RentVO();
+//		 goods_rentVO.setMf_no("MM00000001");
+//		 goods_rentVO.setP_no("P000000001");
+//		 goods_rentVO.setGr_name("aoeuaoeu");
+//		 goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+//		 goods_rentVO.setGr_price(10);
+//		 goods_rentVO.setGr_count(14);
+//		 goods_rentVO.setGr_info("aoeuaoeu");
+//		 goods_rentVO.setGr_img(null);
+//		 goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+//		 goods_rentVO.setGr_sta("A");
+//		 goods_rentVO.setGr_place("оч╢щел");
+//		 goods_rentjdbcdao.insert(goods_rentVO);
 		// update
-		// Goods_RentVO goods_rentVO = new Goods_RentVO();
-		// goods_rentVO.setGr_no("");
-		// goods_rentVO.setMf_no("");
-		// goods_rentVO.setP_no("");
-		// goods_rentVO.setGr_name("");
-		// goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_rentVO.setGr_price(0);
-		// goods_rentVO.setGr_count(1);
-		// goods_rentVO.setGr_info("");
-		// goods_rentVO.setGr_img(getPicture("nothing-here.jpg"));
-		// goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("0-0-0 0:0:0"));
-		// goods_rentVO.setGr_sta("");
-		// goods_rentjdbcdao.update(goods_rentVO);
+//		 Goods_RentVO goods_rentVO = new Goods_RentVO();
+//		 goods_rentVO.setGr_no("GR00000012");
+//		 goods_rentVO.setMf_no("MM00000003");
+//		 goods_rentVO.setP_no("P000000001");
+//		 goods_rentVO.setGr_name("123");
+//		 goods_rentVO.setGr_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+//		 goods_rentVO.setGr_price(0);
+//		 goods_rentVO.setGr_count(1);
+//		 goods_rentVO.setGr_info("132");
+//		 goods_rentVO.setGr_img(null);
+//		 goods_rentVO.setGr_until(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
+//		 goods_rentVO.setGr_place("123");
+//		 goods_rentVO.setGr_sta("A");
+//		 goods_rentjdbcdao.update(goods_rentVO);
 		// delete
 		// goods_rentjdbcdao.delete("");
 		// search one
-		// Goods_RentVO goods_rentVO = goods_rentjdbcdao.findByPrimaryKey("");
-		// System.out.println(goods_rentVO.getGr_no());
-		// System.out.println(goods_rentVO.getMf_no());
-		// System.out.println(goods_rentVO.getP_no());
-		// System.out.println(goods_rentVO.getGr_name());
-		// System.out.println(goods_rentVO.getGr_date());
-		// System.out.println(goods_rentVO.getGr_price());
-		// System.out.println(goods_rentVO.getGr_count());
-		// System.out.println(goods_rentVO.getGr_info());
-		// System.out.println(goods_rentVO.getGr_img());
-		// System.out.println(goods_rentVO.getGr_until());
-		// System.out.println(goods_rentVO.getGr_sta());
-		// System.out.println("---------------------");
+		 Goods_RentVO goods_rentVO = goods_rentjdbcdao.findByPrimaryKey("GR00000011");
+		 System.out.println(goods_rentVO.getGr_no());
+		 System.out.println(goods_rentVO.getMf_no());
+		 System.out.println(goods_rentVO.getP_no());
+		 System.out.println(goods_rentVO.getGr_name());
+		 System.out.println(goods_rentVO.getGr_date());
+		 System.out.println(goods_rentVO.getGr_price());
+		 System.out.println(goods_rentVO.getGr_count());
+		 System.out.println(goods_rentVO.getGr_info());
+		 System.out.println(goods_rentVO.getGr_img());
+		 System.out.println(goods_rentVO.getGr_until());
+		 System.out.println(goods_rentVO.getGr_sta());
+		 System.out.println(goods_rentVO.getGr_place());
+		 System.out.println("---------------------");
 		// search all
 		// List<Goods_RentVO> list = goods_rentjdbcdao.getAll();
 		// for (Goods_RentVO goods_rentVO : list) {

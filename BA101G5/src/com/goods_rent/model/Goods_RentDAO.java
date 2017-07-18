@@ -15,17 +15,17 @@ public class Goods_RentDAO implements Goods_RentDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA) values('GR'||LPAD(GR_NO_SQ.nexval,8,0),?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_RENT(GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA,GR_PLACE) values('GR'||LPAD(GR_NO_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_RENT order by GR_NO";
-	private static final String GET_ONE_STMT = "select GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA from GOODS_RENT where GR_NO =?";
+	private static final String GET_ONE_STMT = "select GR_NO,MF_NO,P_NO,GR_NAME,GR_DATE,GR_PRICE,GR_COUNT,GR_INFO,GR_IMG,GR_UNTIL,GR_STA,GR_PLACE from GOODS_RENT where GR_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_RENT where GR_NO =?";
-	private static final String UPDATE_STMT = "update GOODS_RENT set P_NO=?,GR_NAME=?,GR_DATE=?,GR_PRICE=?,GR_COUNT=?,GR_INFO=?,GR_IMG=?,GR_UNTIL=?,GR_STA=? where GR_NO=?";
+	private static final String UPDATE_STMT = "update GOODS_RENT set MF_NO=?,P_NO=?,GR_NAME=?,GR_DATE=?,GR_PRICE=?,GR_COUNT=?,GR_INFO=?,GR_IMG=?,GR_UNTIL=?,GR_STA=?,GR_PLACE=? where GR_NO=?";
 	private static final String FINDBYPLACE_STMT = "select * from GOODS_RENT where MF_NO=? and GR_PLACE=? order by GR_NO";
 
 	@Override
@@ -37,21 +37,33 @@ public class Goods_RentDAO implements Goods_RentDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, goods_rentVO.getMf_no());
+		
 			pstmt.setString(2, goods_rentVO.getP_no());
+			
 			pstmt.setString(3, goods_rentVO.getGr_name());
+			
 			pstmt.setTimestamp(4, goods_rentVO.getGr_date());
+			
 			pstmt.setInt(5, goods_rentVO.getGr_price());
+			
 			pstmt.setInt(6, goods_rentVO.getGr_count());
+			
 			pstmt.setString(7, goods_rentVO.getGr_info());
+			
 			pstmt.setBytes(8, goods_rentVO.getGr_img());
-			pstmt.setTimestamp(9, goods_rentVO.getGr_date());
+		
+			pstmt.setTimestamp(9, goods_rentVO.getGr_until());
+			
 			pstmt.setString(10, goods_rentVO.getGr_sta());
+			
+			pstmt.setString(11, goods_rentVO.getGr_place());
+			
 
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
-			throw new RuntimeException("A database error occured. " + e.getMessage());
+		throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -90,7 +102,8 @@ public class Goods_RentDAO implements Goods_RentDAO_interface {
 			pstmt.setBytes(8, goods_rentVO.getGr_img());
 			pstmt.setTimestamp(9, goods_rentVO.getGr_date());
 			pstmt.setString(10, goods_rentVO.getGr_sta());
-			pstmt.setString(11, goods_rentVO.getGr_no());
+			pstmt.setString(11, goods_rentVO.getGr_place());
+			pstmt.setString(12, goods_rentVO.getGr_no());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -174,6 +187,7 @@ public class Goods_RentDAO implements Goods_RentDAO_interface {
 			goods_rentVO.setGr_img(rs.getBytes("GR_IMG"));
 			goods_rentVO.setGr_until(rs.getTimestamp("GR_UNTIL"));
 			goods_rentVO.setGr_sta(rs.getString("GR_STA"));
+			goods_rentVO.setGr_place(rs.getString("GR_PLACE"));
 
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());

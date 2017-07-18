@@ -375,6 +375,7 @@ textarea {
 			showOn : "button",
 			buttonImage : "../images/calendar.gif",
 			buttonImageOnly : true,
+			yearRange: "-40:+0",
 			changeMonth : true,
 			changeYear : true,
 			dateFormat : 'yy-mm-dd',

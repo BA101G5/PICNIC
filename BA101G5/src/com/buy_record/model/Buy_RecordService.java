@@ -1,6 +1,7 @@
 package com.buy_record.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Buy_RecordService {
@@ -10,7 +11,7 @@ public class Buy_RecordService {
 		dao = new Buy_RecordDAO();
 	}
 
-	public Buy_RecordVO addBuy_record(String MEM_NO, Date BR_DATE,Integer BR_CASH) {
+	public Buy_RecordVO addBuy_record(String MEM_NO, Timestamp BR_DATE,Integer BR_CASH) {
 		Buy_RecordVO bVO = new Buy_RecordVO();
 		
 		bVO.setMEM_NO(MEM_NO);
@@ -21,7 +22,7 @@ public class Buy_RecordService {
 		return bVO;
 	}
 
-	public Buy_RecordVO updateBuy_record(String BR_ID,String MEM_NO, Date BR_DATE,Integer BR_CASH) {
+	public Buy_RecordVO updateBuy_record(String BR_ID,String MEM_NO, Timestamp BR_DATE,Integer BR_CASH) {
 		Buy_RecordVO bVO = new Buy_RecordVO();
 		bVO.setBR_ID(BR_ID);
 		bVO.setMEM_NO(MEM_NO);

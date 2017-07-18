@@ -39,7 +39,7 @@ public class LoginFilter implements Filter {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/signin.jsp");
 		} else {
-			
+		
 			chain.doFilter(request, response);
 			
 		}

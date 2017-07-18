@@ -27,7 +27,7 @@ public class PlaceService {
 		}
 
 	public List<PlaceVO> getAll() {
-		return null;
+		return dao.getAll();
 	}
 
 	public void insertplace(String mem_no, String p_place, String picnic_no,Integer picnic_pl) {

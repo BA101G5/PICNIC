@@ -21,7 +21,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 	private static final String DELETE = "DELETE FROM MANUFACTURERS WHERE MF_NO=?";
 	private static final String FINDBYKEY = "SELECT MF_NO,MF_NAME, MF_PHONE, MF_MAIL, MF_ACCO, MF_PSW, MF_SELF,MF_LOGO, MF_BS, MF_ADDR,MF_FAX,MF_STA,MF_REPORTNUM FROM MANUFACTURERS WHERE MF_NO=?";
 	private static final String FINDALL = "SELECT * FROM MANUFACTURERS ORDER BY MF_NO DESC";
-
+	private static final String UPDATEFORSTA ="UPDATE  MANUFACTURERS SET MF_STA=? WHERE MF_ACCO=?";
 	private static DataSource ds = null;
 	static {
 		try {
@@ -270,6 +270,40 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 		}
 
 		return list;
+	}
+
+	@Override
+	public void updateforSTA(ManufacturersVO ManufacturersVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEFORSTA);
+			pstmt.setString(1, ManufacturersVO.getMF_STA().toString());
+			pstmt.setString(2, ManufacturersVO.getMF_ACCO());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 
 	

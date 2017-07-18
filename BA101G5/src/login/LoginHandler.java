@@ -28,7 +28,8 @@ public class LoginHandler extends HttpServlet {
     
 	List<GeneralMemberVO> list = gs.getAll();
 	for(GeneralMemberVO gvo : list){
-		if(gvo.getMEM_MAIL().contains(account) == true && gvo.getMEM_PSW().contains(password)== true){
+		if(((gvo.getMEM_MAIL().equals(account))== true && (gvo.getMEM_PSW().equals(password)) == true)){
+			
 			return gvo;
 		}
 	}
@@ -43,13 +44,19 @@ public class LoginHandler extends HttpServlet {
 	      
 	  	List<ManufacturersVO> list = ms.getAll();
 	  	for(ManufacturersVO mvo : list){
-	  		if(mvo.getMF_ACCO().contains(account) == true && mvo.getMF_PSW().contains(password)== true){
+	  		if(((mvo.getMF_ACCO().equals(account))== true && (mvo.getMF_PSW().equals(password)) == true)){
+ 			
 	  			return mvo;
 	  		}
 	  	}
 	  	return null;
 	  	
  }	
+  
+  
+  
+  
+  
   
   public void doPost(HttpServletRequest req, HttpServletResponse res)
                                 throws ServletException, IOException {
@@ -60,8 +67,30 @@ public class LoginHandler extends HttpServlet {
     // 【取得使用者 帳號(account) 密碼(password)】
     String account = req.getParameter("account");
     String password = md5(req.getParameter("password"));
-
-    // 【檢查該帳號 , 密碼是否有效】
+    //驗證
+    
+    if(allowUser(account,password)!= null){
+    	if(!allowUser(account,password).getMEM_STA().equals('E')){
+    		req.setAttribute("errorMsgs"," * 尚未驗證"); 
+    		RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
+    		failureView.forward(req, res);
+    		return;
+    	}
+    }
+    
+    
+    if(allowUser1(account,password)!= null){
+    	if(!allowUser1(account,password).getMF_STA().equals('E')){
+    		req.setAttribute("errorMsgs"," * 尚未驗證請去驗證"); 
+    		RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
+    		failureView.forward(req, res);
+    		return;
+    	}
+    }
+    
+    
+    
+    // 【檢查該帳號 , 密碼是否有效】 
     if (allowUser(account, password) == null && allowUser1(account, password) == null) {          //【帳號 , 密碼無效時】
     	req.setAttribute("errorMsgs"," * 帳密錯誤"); 
     	RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
@@ -73,11 +102,11 @@ public class LoginHandler extends HttpServlet {
     	if(allowUser(account, password) != null && allowUser1(account, password) == null){
     		//generalmember
         	session1.setAttribute("gVO", allowUser(account, password));
-        	
+  	
           session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
     	}else if(allowUser1(account, password) != null && allowUser(account, password) == null){
     		//manufacturers
-    		
+   		
         	session1.setAttribute("mVO", allowUser1(account, password));
           session.setAttribute("account", account);
     	}
