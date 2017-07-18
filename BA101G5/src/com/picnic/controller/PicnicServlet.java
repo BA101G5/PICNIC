@@ -116,6 +116,8 @@ public class PicnicServlet extends HttpServlet {
 		}
 
 		if (action.equals("insert")) {
+		
+		
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -131,7 +133,7 @@ public class PicnicServlet extends HttpServlet {
 				String tladdress = (String) session.getAttribute("tladdress");
 
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
-
+				
 				Integer picnic_pl = (Integer) session.getAttribute("people");
 
 				if (action.equals("insert")) {
@@ -142,15 +144,18 @@ public class PicnicServlet extends HttpServlet {
 					PlaceService placeSvc = new PlaceService();
 					PlaceVO placeVO = null;
 					Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-
+					
 					try {
-						placeVO = placeSvc.getOne(tladdress);		
+						
+						placeVO = placeSvc.getOne(tladdress);	
+						System.out.println(placeVO);
 						
 						if (placeVO.getMf_no() != null) {
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
 							List<Goods_RentVO> list = goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
+							System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);
 							if (!list.isEmpty()) {
 								session.setAttribute("list", list);
@@ -158,6 +163,7 @@ public class PicnicServlet extends HttpServlet {
 						}
 					} catch (Exception e) {
 						String p_no = placeSvc.insertplace(account, tladdress, picnic_no, picnic_pl);
+						System.out.println(p_no);
 						Integer P_price = 0;
 						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no, tladdress);
 					} finally {

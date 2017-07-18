@@ -29,6 +29,7 @@ public class PicmemService {
 	}
 	
 	public void addowner(String picnic_no, String mem_no) {
+		
 		PicmemVO picmemVO = new PicmemVO();
 		picmemVO.setPicnic_no(picnic_no);
 		picmemVO.setMem_no(mem_no);

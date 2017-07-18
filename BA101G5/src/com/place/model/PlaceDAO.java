@@ -151,6 +151,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 		PreparedStatement pstmt = null;
 		PlaceVO placeVO = null;
 		ResultSet rs = null;
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);

@@ -27,8 +27,8 @@ public class PicmemDAO implements PicmemDAO_interface {
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? and MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'團主')";
-	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'團主\'";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'A')";
+	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'A\'";
 	@Override
 	public void insert(PicmemVO picmemVO) {
 		Connection con = null;
