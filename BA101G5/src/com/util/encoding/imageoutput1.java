@@ -54,12 +54,13 @@ public class imageoutput1 extends HttpServlet {
 		String picturename2 = new String(picturename.getBytes("ISO-8859-1"),"Big5");
 		
 		String images=null;
-		if(table.equals("GOODS_SELL")){images="GS_IMG";}else if(table.equals("GOODS_RENT")){images="GR_IMG";}
+		String columl =null;
+		if(table.equals("GOODS_SELL")){images="GS_IMG"; columl="GS_NO";}else if(table.equals("GOODS_RENT")){images="GR_IMG"; columl="GR_NO";}
 		
 		
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT "+images+" FROM " + table2 + " where GS_NO = \'" + picturename2+"\'");
+			ResultSet rs = stmt.executeQuery("SELECT "+images+" FROM " + table2 + " where "+columl+" = \'" + picturename2+"\'");
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("GS_IMG"));

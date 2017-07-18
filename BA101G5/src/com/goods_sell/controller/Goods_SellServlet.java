@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.general_member.model.GeneralMemberVO;
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
 import com.orderde_detail.model.Orderde_DetailService;
@@ -31,8 +32,8 @@ public class Goods_SellServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			//String account = req.getParameter("account");
-			String account ="M000000001";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 			
 			try {
 				String gsno = new String(req.getParameter("gsno"));
@@ -59,8 +60,8 @@ public class Goods_SellServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			//String account = req.getParameter("account");
-			String account ="M000000001";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 
 			try {
 				Orderde_DetailService orderde_detailSvc =new Orderde_DetailService();
