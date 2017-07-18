@@ -19,9 +19,9 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 	private static final String GET_ALL_STMT = 
 			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL order by ADM_NO";
 	private static final String GET_ONE_STMT = 
-			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL where ADM_NO || PURVIEW_NO = ?";
+			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL where ADM_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM PURVIEW_DETAIL where ADM_NO || PURVIEW_NO = ?";
+			"DELETE FROM PURVIEW_DETAIL where ADM_NO = ?";
 	private static final String UPDATE = 
 			"UPDATE PURVIEW_DETAIL set PURVIEW_NO=? where ADM_NO || PURVIEW_NO = ?";
 	
@@ -158,8 +158,10 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 	}
 	
 	@Override
-	public Purview_DetailVO findByPrimaryKey(String adm_no) {
+	public List<Purview_DetailVO> findByPrimaryKey(String adm_no) {
+		List<Purview_DetailVO> list = new ArrayList<Purview_DetailVO>();
 		Purview_DetailVO pudVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -178,7 +180,7 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 				pudVO = new Purview_DetailVO();
 				pudVO.setAdm_no(rs.getString("ADM_NO"));
 				pudVO.setPurview_no(rs.getString("PURVIEW_NO"));
-
+				list.add(pudVO); // Store the row in the list	
 			}
 
 			// Handle any driver errors
@@ -213,11 +215,11 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 				}
 			}
 		}
-		return pudVO;
+		return list;
 	}
 	
 	@Override
-	public List<Purview_DetailVO> getAll() {
+	public List<Purview_DetailVO> getAll(String adm_no) {
 		List<Purview_DetailVO> list = new ArrayList<Purview_DetailVO>();
 		Purview_DetailVO pudVO = null;
 
@@ -281,7 +283,7 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 		// 新增
 		Purview_DetailVO pudVO1 = new Purview_DetailVO();
 		pudVO1.setAdm_no("MA00000008");
-		pudVO1.setPurview_no("PU00000011");
+		pudVO1.setPurview_no("PU00000010");
 
 		pudJD.insert(pudVO1);
 	
@@ -293,16 +295,17 @@ public class Purview_DetailJDBCDAO implements Purview_Detail_interface{
 		pudJD.update(pudVO2);
 		
 		// 刪除
-		pudJD.delete("MA00000004PU00000008");
+		pudJD.delete("MA00000004");
 		
 		// 查詢
-		Purview_DetailVO pudVO3 = pudJD.findByPrimaryKey("MA00000005PU00000003");
-		System.out.print(pudVO3.getAdm_no() + ",");
-		System.out.println(pudVO3.getPurview_no() + ",");
-	
-		System.out.println("---------------------");
+		List<Purview_DetailVO> pudVO3 = pudJD.findByPrimaryKey("MA00000005");
+			for(Purview_DetailVO pud : pudVO3){
+				System.out.print(pud.getAdm_no() + ",");
+				System.out.println(pud.getPurview_no() + ",");
+			}
+				System.out.println("---------------------");
 
-		List<Purview_DetailVO> list = pudJD.getAll();
+		List<Purview_DetailVO> list = pudJD.getAll("MA00000004");
 			for (Purview_DetailVO purd : list) {
 				System.out.print(purd.getAdm_no() + ",");
 				System.out.print(purd.getPurview_no() + ",");
