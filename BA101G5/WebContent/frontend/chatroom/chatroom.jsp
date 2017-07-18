@@ -13,13 +13,23 @@
 // 	ChatroomService pboard_articleSvc = new ChatroomService();
 // 	List<ChatroomVO> list = chatroomSvc.getAll();
 // 	pageContext.setAttribute("list", list);
-	String mem_no = "MG00000002";
+// 	String mem_no = "MG00000002";
+//  ${sessionScope.gVO.getMEM_NO()}
+	String mem_no;
+	GeneralMemberVO gVO = (GeneralMemberVO)session.getAttribute("gVO");
+	if(gVO == null){
+		mem_no = "";
+	}else{
+		mem_no = gVO.getMEM_NO();
+	}
+	System.out.println("chatroom.jsp/ mem_no=" + mem_no);
+
 
 	PicmemService picmemSvc = new PicmemService();
 	List<PicmemVO> listPicmemVO = picmemSvc.getAll();
 	PicnicService picnicSvc = new PicnicService();
 	List<PicnicVO> listPicnicVO = picnicSvc.getAll();
-	
+
 	Map<String, String> mapPG = new HashMap<String, String>();
 	for(int idx = 0; idx < listPicmemVO.size(); idx++){
 		if(listPicmemVO.get(idx).getMem_no().equals(mem_no)){
@@ -32,18 +42,18 @@
 	}
 
   pageContext.setAttribute("mapPG", mapPG);
-    
+
 //     for(Map.Entry<String, String> entry : mapPG.entrySet()){
 //         System.out.println(entry.getKey() + "/" + entry.getValue());
 //     }
-	
+
 
 // 	// 群組聊天
 // 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
 // 	List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
 // 	ChatroomService chatroomSvc = new ChatroomService();
 // 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
-	
+
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
 // 		if(listChatroom_MembersVO.get(idx).getMem_no().equals(mem_no)){
@@ -54,7 +64,7 @@
 // 			//System.out.println(chatroomSvc.getOneChatroom(listChatroom_MembersVO.get(idx).getChatroom_no()).getChatroom_name());
 // 		}
 // 	}
-	
+
 // 	pageContext.setAttribute("mapGroupRoom", mapGroupRoom);
 
 
@@ -68,7 +78,7 @@
 			listContactListVO.get(idx).getContact_no(),
 			generalMemberSvc.getOneGeneralMember(listContactListVO.get(idx).getContact_no()).getMEM_NAME()
 		);
-		System.out.println(listContactListVO.get(idx).getContact_no());
+		//System.out.println(listContactListVO.get(idx).getContact_no());
 	}
 
 
@@ -248,27 +258,10 @@
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script>
-
-			var onWinResize = function(){
-				var numViewportHeight = window.innerHeight;
-				var hightLimit = numViewportHeight - 150;
-				document.querySelector('#chatroom-list').style.maxHeight = hightLimit + 'px';
-
-				var elAChatroomContainer = document.querySelector('#aChatroom-container');
-				var numAChatroomContainerOffsetWidth = elAChatroomContainer.offsetWidth;
-
-				elAChatroomContainer.style.right = numAChatroomContainerOffsetWidth + 'px';
-
-				var jqAChatroomContainerPanelBody = $(elAChatroomContainer).find('.panel-body');
-				jqAChatroomContainerPanelBody
-						.css('max-height', hightLimit + 'px')
-						.scrollTop(jqAChatroomContainerPanelBody[0].scrollHeight);
-
-			};
-			onWinResize();
-			$( window ).on('resize', onWinResize);
-
+			var gObjCR = {};
+			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
 		</script>
-
+		<script src="chatroom_resize.js"></script>
+		<script src="chatroom_websocket.js"></script>
 	</body>
 </html>
