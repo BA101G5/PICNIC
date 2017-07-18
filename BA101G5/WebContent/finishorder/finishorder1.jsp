@@ -195,8 +195,6 @@
 									</tr>
 								</thead>
 								<tbody>
-
-
 									<c:forEach var="Orderde_DetailVO"
 										items="${listOrderde_DetailVO}">
 										<c:if test="${Orderde_DetailVO.getGr_no() == null}">
@@ -208,12 +206,10 @@
 												<td></td>
 												<td></td>
 												<td class="adc">NT$ ${Orderde_DetailVO.getOd_price()}</td>
-
 											</tr>
 										</c:if>
 									</c:forEach>
-								</tbody>
-						
+								</tbody>	
 							</table>
 							<c:forEach var="Orderde_DetailVO" items="${listOrderde_DetailVO}">
 						<c:if test=" ${Orderde_DetailVO.getOd_price()==0 && Orderde_DetailVO.getGr_no()==null}">
