@@ -16,13 +16,13 @@ public class AdministratorJDBCDAO implements Administrator_interface{
 	String passwd = "1234";
 	
 	private static final String INSERT_STMT = 
-			"INSERT INTO ADMINISTRATOR (ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA) VALUES ('MA' || LPAD(ADM_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?)";
+			"INSERT INTO ADMINISTRATOR (ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA) VALUES ('MA' || LPAD(ADM_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?,'N')";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR order by ADM_NO";
+			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR where ADM_STA='N' order by ADM_NO";
 	private static final String GET_ONE_STMT = 
 			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR where ADM_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM ADMINISTRATOR where ADM_NO = ?";
+			"UPDATE ADMINISTRATOR set ADM_STA='U' where ADM_NO = ?";
 	private static final String UPDATE = 
 			"UPDATE ADMINISTRATOR set ADM_ACC=?, ADM_PW=?, ADM_IDEN=?, ADM_NAME=?, ADM_STA=? where ADM_NO = ?";
 	
@@ -42,7 +42,6 @@ public class AdministratorJDBCDAO implements Administrator_interface{
 			pstmt.setString(2, administratorVO.getAdm_pw());
 			pstmt.setString(3, administratorVO.getAdm_iden());
 			pstmt.setString(4, administratorVO.getAdm_name());
-			pstmt.setString(5, administratorVO.getAdm_sta());
 
 			pstmt.executeUpdate();
 
@@ -308,7 +307,6 @@ public class AdministratorJDBCDAO implements Administrator_interface{
 		admVO1.setAdm_pw("passwordadm00009");
 		admVO1.setAdm_iden("員工管理員");
 		admVO1.setAdm_name("吳永志");
-		admVO1.setAdm_sta("N");
 		adm.insert(admVO1);
 	
 		// 修改
