@@ -86,7 +86,7 @@ public class LoginHandler extends HttpServlet {
       
        try {                                                        
          String location = (String) session.getAttribute("location");
-
+         //System.out.println("***** LoginHandle /  location = " + req.getContextPath());
        
          
          if (location != null) {   
@@ -97,7 +97,9 @@ public class LoginHandler extends HttpServlet {
          }
        }catch (Exception ignored) { }
 
-      res.sendRedirect(req.getContextPath()+"/general_member/formu.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
+//      res.sendRedirect(req.getContextPath()+"/general_member/formu.jsp");  //*工作3: (-->如無來源網頁:則重導至login_success.jsp)
+      //System.out.println("****** LoginHandle /*****/" + req.getContextPath());
+      res.sendRedirect(req.getContextPath()+"/index.jsp");
     }
   }
   public static String md5(String str) {
