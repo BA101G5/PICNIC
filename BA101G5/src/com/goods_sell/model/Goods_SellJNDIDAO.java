@@ -18,7 +18,7 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
