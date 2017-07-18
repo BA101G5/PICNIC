@@ -16,7 +16,7 @@ public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/java/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -27,7 +27,8 @@ public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
-	private static final String GET_ALL_PICNICNO_STMT = " select * from ORDERDE_DETAIL where PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL where PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL where MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
 	
 	@Override
 	public void insert(Orderde_DetailVO orderde_detailVO) {
@@ -208,7 +209,7 @@ public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			ds.getConnection();
+			con= ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -268,8 +269,8 @@ public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_PICNICNO_STMT);
+			con= ds.getConnection();
+			pstmt = con.prepareStatement(GET_GR_PICNICNO_STMT);
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
@@ -321,7 +322,67 @@ public class Orderde_DetailJNDIDAO implements Orderde_DetailDAO_interface {
 		return list;
 	}
 	
+	@Override
+	public List<Orderde_DetailVO> getGsByMenno(String mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Orderde_DetailVO> list = new ArrayList<Orderde_DetailVO>();
+		ResultSet rs = null;
 
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_GS_MEMNO_STMT);
+			pstmt.setString(1, mem_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
+
+				orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
+				orderde_detailVO.setMem_no(rs.getString("MEM_NO"));
+				orderde_detailVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				orderde_detailVO.setP_no(rs.getString("P_NO"));
+				orderde_detailVO.setGr_no(rs.getString("GR_NO"));
+				orderde_detailVO.setGs_no(rs.getString("GS_NO"));
+				orderde_detailVO.setOd_amount(rs.getInt("OD_AMOUNT"));
+				orderde_detailVO.setOd_price(rs.getInt("OD_PRICE"));
+				orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
+				orderde_detailVO.setOd_place(rs.getString("OD_PLACE"));
+				orderde_detailVO.setOd_bs(rs.getString("OD_BS"));
+
+				list.add(orderde_detailVO);
+
+			}
+		
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 	
 
 }

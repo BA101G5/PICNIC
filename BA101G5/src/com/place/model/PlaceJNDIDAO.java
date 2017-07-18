@@ -284,20 +284,26 @@ public class PlaceJNDIDAO implements PlaceDAO_interface {
 	}
 	
 	@Override
-	public void insertplace(PlaceVO placeVO) {
+	public String insertplace(PlaceVO placeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs =null;
 		try {
-			con=ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT,new int[]{1});
 			pstmt.setString(1, placeVO.getMem_no());
 			pstmt.setString(2, placeVO.getP_place());
 			pstmt.setString(3, placeVO.getPicnic_no());
-			pstmt.setDouble(4,placeVO.getP_lat());
+			pstmt.setDouble(4, placeVO.getP_lat());
 			pstmt.setDouble(5, placeVO.getP_lon());
-
+			pstmt.setInt(6, placeVO.getP_pop());
 			pstmt.executeUpdate();
-		
+			rs=pstmt.getGeneratedKeys();
+			rs.next();
+			String p_no = rs.getString(1);
+
+			return p_no;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -317,6 +323,6 @@ public class PlaceJNDIDAO implements PlaceDAO_interface {
 				}
 			}
 		}
-
 	}
+
 }

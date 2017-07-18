@@ -7,6 +7,6 @@ public interface PlaceDAO_interface {
 		public void delete(String p_no);
 		public PlaceVO findByPrimaryKey(String P_Place);
 		public List<PlaceVO> getAll();
-		public void insertplace(PlaceVO placeVO);
+		public String insertplace(PlaceVO placeVO);
 
 }

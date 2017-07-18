@@ -43,7 +43,7 @@ public class PicnicServlet extends HttpServlet {
 				} else if (!picnic_name.trim().matches(nameReg)) {
 					errorMsgs.put("name", "團名不能為特殊符號 且必須在2~70字之間");
 				}
-				String address = req.getParameter("address").trim();
+				String address = req.getParameter("address").trim().split(" ")[1];
 				String area = req.getParameter("area").trim();
 
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";
@@ -136,11 +136,13 @@ public class PicnicServlet extends HttpServlet {
 
 					PlaceService placeSvc = new PlaceService();
 					PlaceVO placeVO = null;
+					Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+					
 					try {
 						placeVO = placeSvc.getOne(tladdress);
 						if (placeVO.getMf_no() != null) {
-							Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-							orderde_detailSvc.addPlaceOrderde_Detail(placeVO,placeVO.getP_no(),account,picnic_no);
+							
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(),placeVO.getP_no(),account,picnic_no,tladdress);
 
 							Goods_RentService goods_rentSvc = new Goods_RentService();
 							List<Goods_RentVO> list= goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
@@ -148,11 +150,14 @@ public class PicnicServlet extends HttpServlet {
 							System.out.println(list);
 							if(!list.isEmpty()){
 								session.setAttribute("list", list);
+								
 							}
 						}
 						
 					} catch (Exception e) {
-						placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
+						String p_no= placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
+						Integer P_price=0;
+						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no,tladdress);
 					} finally {
 						String url = null;
 						if (action.equals("insert")) {
