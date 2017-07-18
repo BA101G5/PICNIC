@@ -21,6 +21,14 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
+	  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/BA101G5</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+	
 	<servlet>
 		<servlet-name>Imageoutput1</servlet-name>
 		<servlet-class>com.util.encoding.imageoutput1</servlet-class>
@@ -81,21 +89,134 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>Chatroom_MembersServlet</servlet-name>
-		<servlet-class>com.chatroom_members.controller.Chatroom_MembersServlet</servlet-class>
+    <servlet-name>Chatroom_MembersServlet</servlet-name>
+    <servlet-class>com.chatroom_members.controller.Chatroom_MembersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Chatroom_MembersServlet</servlet-name>
+    <url-pattern>/chatroom_members/chatroom_members.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>Chatroom_MessageServlet</servlet-name>
+    <servlet-class>com.chatroom_message.controller.Chatroom_MessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Chatroom_MessageServlet</servlet-name>
+    <url-pattern>/chatroom_message/chatroom_message.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>DBGifReader</servlet-name>
+    <servlet-class>com.chatroom_message.controller.DBGifReader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGifReader</servlet-name>
+    <url-pattern>/chatroom_message/DBGifReader.do</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
+		<servlet-name>Pboard_ArticleServlet0</servlet-name>
+		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Chatroom_MembersServlet</servlet-name>
-		<url-pattern>/chatroom_members/chatroom_members.do</url-pattern>
+		<servlet-name>Pboard_ArticleServlet0</servlet-name>
+		<url-pattern>/backend/pboard_article/pboard_article.do</url-pattern>
 	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>Pboard_ArticleServlet</servlet-name>
 		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Pboard_ArticleServlet</servlet-name>
-		<url-pattern>/backend/pboard_article/pboard_article.do</url-pattern>
+		<url-pattern>/frontend/pboard_article/pboard_article.do</url-pattern>
 	</servlet-mapping>
 
+  
+<!-- wei's xml -->
+	<servlet>
+    <servlet-name>General_MemberServlet</servlet-name>
+    <servlet-class>com.general_member.controller.General_MemberServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>General_MemberServlet</servlet-name>
+    <url-pattern>/general_member/General_Member.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGift</servlet-name>
+    <servlet-class>com.general_member.controller.DBGift</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift</servlet-name>
+    <url-pattern>/general_member/DBGift.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ManufacturersServlet</servlet-name>
+    <servlet-class>com.manufacturers.controller.ManufacturersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManufacturersServlet</servlet-name>
+    <url-pattern>/manufacturers/Manufacturers.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGift1</servlet-name>
+    <servlet-class>com.manufacturers.controller.DBGift1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift1</servlet-name>
+    <url-pattern>/manufacturers/DBGift1.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdvertisementServlet</servlet-name>
+    <servlet-class>com.advertisement.controller.AdvertisementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdvertisementServlet</servlet-name>
+    <url-pattern>/advertisement/advertisement.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGift2</servlet-name>
+    <servlet-class>com.advertisement.controller.DBGift2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift2</servlet-name>
+    <url-pattern>/advertisement/DBGift2.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Buy_recordServlet</servlet-name>
+    <servlet-class>com.buy_record.controller.Buy_recordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Buy_recordServlet</servlet-name>
+    <url-pattern>/buy_record/buy_record.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>Contact_ListServlet</servlet-name>
+    <servlet-class>com.contact_list.controller.Contact_ListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Contact_ListServlet</servlet-name>
+    <url-pattern>/contact_list/contact_list.do</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>filters.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/personal/personal.jsp</url-pattern>
+   
+
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+<!-- wei's xml -->	
+ 
+ 
 </web-app>

@@ -213,7 +213,8 @@ public class Pboard_ArticleServlet extends HttpServlet {
 		}
 
         if ("insert".equals(action)) { // 來自addPboard_Article.jsp的請求  
-			
+//        	System.out.println("getServletPath: " + req.getServletPath()); // /frontend/pboard_article/pboard_article.do
+//        	System.out.println("getRequestURI: " + req.getRequestURI()); // /BA101G5/frontend/pboard_article/pboard_article.do
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -223,22 +224,30 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String article_title = req.getParameter("article_title").trim();
 				String article_text = req.getParameter("article_text").trim();
+//System.out.println("insert/ article_title:" + article_title);
+//System.out.println("insert/ article_text:" + article_text);
 				
 				java.sql.Timestamp article_post = null;
 				try {
-					article_post = java.sql.Timestamp.valueOf(req.getParameter("article_post").trim());
-				} catch (IllegalArgumentException e) {
+//System.out.println("insert/ article_post000");
+//					article_post = java.sql.Timestamp.valueOf(req.getParameter("article_post").trim());
 					article_post=new java.sql.Timestamp(System.currentTimeMillis());
+//System.out.println("insert/ article_post1:" + article_post);
+				} catch (Exception e) {
+//System.out.println("insert/ article_post0000");
+					article_post=new java.sql.Timestamp(System.currentTimeMillis());
+//System.out.println("insert/ article_post2:" + article_post);
 					errorMsgs.add("請輸入日期!");
 				}
 				
 				
 				Integer article_kind = null;
 				try {
-					article_kind = new Integer(req.getParameter("article_kind").trim());
-				} catch (NumberFormatException e) {
+//					article_kind = new Integer(req.getParameter("article_kind").trim());
+					article_kind = new Integer(1);
+				} catch (Exception e) {
 					article_kind = 0;
-					errorMsgs.add("獎金請填數字.");
+					errorMsgs.add("Exception: article_kind.");
 				}
 				
 				String author_no = new String(req.getParameter("author_no").trim());
@@ -254,7 +263,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("pboard_articleVO", pboard_articleVO); // 含有輸入格式錯誤的pboard_articleVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("addPboard_Article.jsp");
+							.getRequestDispatcher(req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -265,7 +274,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 				pboard_articleVO = pboard_articleSvc.addPboard_Article(author_no, picnic_no, article_title, article_text, article_post, article_views, article_kind);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "listAllPboard_Article.jsp";
+				String url = req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllPboard_Article.jsp
 				successView.forward(req, res);				
 				
@@ -273,7 +282,7 @@ public class Pboard_ArticleServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("addPboard_Article.jsp");
+						.getRequestDispatcher(req.getServletPath().indexOf("frontend") == -1  ? "listAllPboard_Article.jsp" : "/frontend/pboard_article/pboard_article.jsp");
 				failureView.forward(req, res);
 			}
 		}

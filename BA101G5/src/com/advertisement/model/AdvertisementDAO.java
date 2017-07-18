@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -19,16 +20,16 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 	
 	private static final String INSERT = "INSERT INTO Advertisement(AD_NO,MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA)"
 			+ "VALUES('AD' || LPAD(AD_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE Advertisement SET  AD_SELF=?,AD_PHOTO=?,DAY_START=?,DAY_END=?,AD_CASH=?,AD_STA=? WHERE AD_NO=?";
+	private static final String UPDATE = "UPDATE Advertisement SET AD_SELF=?,AD_PHOTO=?,DAY_START=?,DAY_END=?,AD_CASH=?,AD_STA=? WHERE AD_NO=?";
 	private static final String DELETE = "DELETE FROM Advertisement WHERE AD_NO=?";
-	private static final String FINDBYKEY = "SELECT MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA FROM Advertisement WHERE AD_NO=?";
+	private static final String FINDBYKEY = "SELECT AD_NO,MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA FROM Advertisement WHERE AD_NO=?";
 	private static final String FINDALL = "SELECT * FROM Advertisement";
-
+	private static final String FINDBYMM ="SELECT AD_NO,MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA FROM Advertisement WHERE MF_NO=?";
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -80,6 +81,7 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
+			
 			pstmt.setString(1, AdvertisementVO.getAD_SELF());
 			pstmt.setBytes(2, AdvertisementVO.getAD_PHOTO());
 			pstmt.setDate(3, AdvertisementVO.getDAY_START());
@@ -151,14 +153,16 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
+			System.out.println("!!!!!!!!!!!");
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(FINDBYKEY);
 			pstmt.setString(1, AD_NO);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				aVO = new AdvertisementVO();
+				aVO.setAD_NO(rs.getString("AD_NO"));
 				aVO.setMF_NO(rs.getString("MF_NO"));
 				aVO.setAD_SELF(rs.getString("AD_SELF"));
 				aVO.setAD_PHOTO(rs.getBytes("AD_PHOTO"));
@@ -166,7 +170,7 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 				aVO.setDAY_END(rs.getDate("DAY_END"));
 				aVO.setAD_CASH(rs.getInt("AD_CASH"));
 				aVO.setAD_STA(rs.getString("AD_STA").charAt(0));
-
+				
 			}
 		} catch (SQLException e) {
 
@@ -213,6 +217,63 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				aVO = new AdvertisementVO();
+				aVO.setAD_NO(rs.getString("AD_NO"));
+				aVO.setMF_NO(rs.getString("MF_NO"));
+				aVO.setAD_SELF(rs.getString("AD_SELF"));
+				aVO.setAD_PHOTO(rs.getBytes("AD_PHOTO"));
+				aVO.setDAY_START(rs.getDate("DAY_START"));
+				aVO.setDAY_END(rs.getDate("DAY_END"));
+				aVO.setAD_CASH(rs.getInt("AD_CASH"));
+				aVO.setAD_STA(rs.getString("AD_STA").charAt(0));
+				list.add(aVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<AdvertisementVO> findByMM(String MF_NO) {
+		List<AdvertisementVO> list = new ArrayList<AdvertisementVO>();
+		AdvertisementVO aVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDBYMM);
+			pstmt.setString(1, MF_NO);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				aVO = new AdvertisementVO();
+				aVO.setAD_NO(rs.getString("AD_NO"));
 				aVO.setMF_NO(rs.getString("MF_NO"));
 				aVO.setAD_SELF(rs.getString("AD_SELF"));
 				aVO.setAD_PHOTO(rs.getBytes("AD_PHOTO"));

@@ -2,7 +2,7 @@ package com.manufacturers.model;
 
 import java.util.List;
 
-
+import com.general_member.model.GeneralMemberVO;
 
 public interface ManufacturersDAO_interface {
 
