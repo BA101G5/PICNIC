@@ -26,6 +26,9 @@ public class MyWebSocketServer {
 //	private Map<String, Map<String, Session>> chatroom_no = new HashMap<String, Map<String, Session>>();
 //	private Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 //  Map<Chatroom_NO, SET<SESSION>>
+
+	Set<Session> allWebsocktConnectedSessions = Collections.synchronizedSet(new HashSet<Session>());
+	
 	private String room;
 	private static final Map<String, Set<Session>> mapChatroomNo = new HashMap<String, Set<Session>>();
 
@@ -42,19 +45,19 @@ public class MyWebSocketServer {
 		this.room = room;
 
 //      測試 二
-		Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 
 
 		if (mapChatroomNo.containsKey(room)){
-			System.out.println("有近來麻1 // 當前使用者在 mapChatroomNo 裡");
+			System.out.println("有近來麻1 // 當前使用者 ("+ room +") 在 mapChatroomNo 裡");
 			Set<Session> session = mapChatroomNo.get(room);
 			session.add(userSession);
 			mapChatroomNo.put(room, session);
 
 		}else{
-			System.out.println("有近來麻2 // 當前使用者不在 mapChatroomNo 裡");
-			connectedSessions.add(userSession);
-			mapChatroomNo.put(room, connectedSessions);
+			System.out.println("有近來麻2 // 當前使用者 ("+ room +") 不在 mapChatroomNo 裡");
+			allWebsocktConnectedSessions.add(userSession);
+			System.out.println("MyWebSocketServer / onOpen / allWebsocktConnectedSessions.size(): " + allWebsocktConnectedSessions.size());
+			mapChatroomNo.put(room, allWebsocktConnectedSessions);
 		}
 
 		System.out.println("MYWebSocket name : " + name);
@@ -73,7 +76,7 @@ public class MyWebSocketServer {
 
 		// 確認Map
 		// if( mapChatroomNo.containsKey(room)){
-			System.out.println("有近來麻3");
+			System.out.println("有近來麻3 //// " + message);
 			Set<Session> set = mapChatroomNo.get(room);
 			String people= String.valueOf(set.size());
 
@@ -85,10 +88,12 @@ public class MyWebSocketServer {
 			message = jsonObject.toString();
 			//
 
-			for(Session session:set){
-
+			
+			//for(Session session:set){
+			System.out.println("MyWebSocketServer / onMessage / allWebsocktConnectedSessions.size(): " + allWebsocktConnectedSessions.size());
+			for(Session session:allWebsocktConnectedSessions){	
 				session.getAsyncRemote().sendText(message);
-				System.out.println("有近來麻4");
+				System.out.println("有近來麻4 /// session.getId() = " + session.getId());
 
 			}
 			System.out.println("Message received: " + message);

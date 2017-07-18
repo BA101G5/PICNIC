@@ -14,7 +14,9 @@ var MyPoint = "/MyWebSocketServer/peter/" + myRoom;
 var host = window.location.host;
 var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
+updateStatus(' webCtx = ' + webCtx);
 var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+updateStatus(' endPointURL = ' + endPointURL);
 var webSocket;
 
 if( myRoom !== '' ) connect();
@@ -32,6 +34,7 @@ function connect() {
 
   webSocket.onmessage = function(event) {
     var messagesArea = document.getElementById("ulChat");
+    updateStatus(' chatroom_websocket.js / onmessage / event.data = ' + event.data);
     var jsonObj = JSON.parse(event.data);
     var message = jsonObj.userName + ": " + jsonObj.message;// + "\r\n";
     messagesArea.innerHTML += '<li class="left clearfix">' + message + '</li>';
@@ -64,6 +67,7 @@ function sendMessage() {
         inputMessage.focus();
     }else{
         var jsonObj = {"userName" : userName, "message" : message, "myRoom": myRoom};
+        updateStatus(' sendMessage / json  = ' + JSON.stringify(jsonObj));
         webSocket.send(JSON.stringify(jsonObj));
         inputMessage.value = "";
         inputMessage.focus();
@@ -71,11 +75,14 @@ function sendMessage() {
 }
 
 
-function disconnect () {
+function disconnect() {
   webSocket.close();
   // document.getElementById('sendMessage').disabled = true;
   // document.getElementById('connect').disabled = false;
   // document.getElementById('disconnect').disabled = true;
 }
 
+$(window).unload(function(){
+  disconnect();
+});
 
