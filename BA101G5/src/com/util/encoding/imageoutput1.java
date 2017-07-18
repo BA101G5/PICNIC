@@ -25,7 +25,7 @@ public class imageoutput1 extends HttpServlet {
 	public void init() {
 		try {
 			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 			con = ds.getConnection();
 		} catch (NamingException e) {
 			if (con != null) {
