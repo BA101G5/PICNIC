@@ -115,8 +115,8 @@
 				<div class="col-sm-9 ">
 				
 					<c:if test="${not empty goods_sellSvc }">
-						<%@ include file="/buycart/page.file" %>
-						<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+
+						<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}" >
 							<div class="col-sm-12 ">
 								<div class="thumbnail">
 									<img

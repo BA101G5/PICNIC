@@ -14,7 +14,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 
 			e.printStackTrace();
@@ -156,7 +156,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, P_place);
 			rs = pstmt.executeQuery();
-
+			System.out.println(rs.next()+"hello");
 			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));

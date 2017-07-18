@@ -31,7 +31,7 @@ public class PicnicServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		System.out.println(action);
 		if (action.equals("checkbeforeinsert")) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -43,7 +43,11 @@ public class PicnicServlet extends HttpServlet {
 				} else if (!picnic_name.trim().matches(nameReg)) {
 					errorMsgs.put("name", "團名不能為特殊符號 且必須在2~70字之間");
 				}
-				String address = req.getParameter("address").trim().split(" ")[1];
+				String address = null;
+				try {
+					address = req.getParameter("address").trim();
+				} catch (Exception e) {
+				}
 				String area = req.getParameter("area").trim();
 
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";
@@ -85,7 +89,7 @@ public class PicnicServlet extends HttpServlet {
 				} else {
 					tladdress = area + address;
 				}
-
+				System.out.println("hello");
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
 				session.setAttribute("tladdress", tladdress);
@@ -123,52 +127,49 @@ public class PicnicServlet extends HttpServlet {
 				// String account=(String)session.getAttribute("accouent");
 				String account = "MG00000002";
 				String picnic_name = (String) session.getAttribute("picnic_name");
+
 				String tladdress = (String) session.getAttribute("tladdress");
+
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
+
 				Integer picnic_pl = (Integer) session.getAttribute("people");
 
 				if (action.equals("insert")) {
-
 					PicnicService picnicSvc = new PicnicService();
 					String picnic_no = picnicSvc.addPicnic(picnic_name, picnic_date, picnic_pl);
 					PicmemService picmemSvc = new PicmemService();
 					picmemSvc.addowner(picnic_no, account);
-
 					PlaceService placeSvc = new PlaceService();
 					PlaceVO placeVO = null;
 					Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-					
-					try {
-						placeVO = placeSvc.getOne(tladdress);
-						if (placeVO.getMf_no() != null) {
-							
-							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(),placeVO.getP_no(),account,picnic_no,tladdress);
 
+					try {
+						placeVO = placeSvc.getOne(tladdress);		
+						
+						if (placeVO.getMf_no() != null) {
+							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
+									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
-							List<Goods_RentVO> list= goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
+							List<Goods_RentVO> list = goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
 							session.setAttribute("picnic_no", picnic_no);
-							System.out.println(list);
-							if(!list.isEmpty()){
+							if (!list.isEmpty()) {
 								session.setAttribute("list", list);
-								
 							}
 						}
-						
 					} catch (Exception e) {
-						String p_no= placeSvc.insertplace(account, tladdress, picnic_no,picnic_pl);
-						Integer P_price=0;
-						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no,tladdress);
+						String p_no = placeSvc.insertplace(account, tladdress, picnic_no, picnic_pl);
+						Integer P_price = 0;
+						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no, tladdress);
 					} finally {
 						String url = null;
+						System.out.println(action);
 						if (action.equals("insert")) {
 							url = "/picnic/maosecondui3.jsp";
 						}
-
 						javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
 						SuccessView.forward(req, res);
 					}
 				}
-
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
 			}

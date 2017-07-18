@@ -16,7 +16,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -27,8 +27,8 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
-	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL WHERE PICNIC_NO = \'PG00000014\' ORDER BY ORDERDE_DETAILNO";
-	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL WHERE MEM_NO = \'MG00000001\' AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL WHERE PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL WHERE MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
 	
 	@Override
 	public void insert(Orderde_DetailVO orderde_detailVO) {
@@ -271,7 +271,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		try {
 			con= ds.getConnection();
 			pstmt = con.prepareStatement(GET_GR_PICNICNO_STMT);
-			//pstmt.setString(1, picnic_no);
+			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -333,7 +333,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_GS_MEMNO_STMT);
-			//pstmt.setString(1, mem_no);
+			pstmt.setString(1, mem_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
