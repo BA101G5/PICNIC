@@ -79,4 +79,9 @@ public class Orderde_DetailService {
 		
 	}
 
+	public void getNumberByGsNo() {
+		
+		
+	}
+
 }

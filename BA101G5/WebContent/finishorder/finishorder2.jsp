@@ -40,10 +40,6 @@
 						<a href="<%=request.getContextPath()%>/index.jsp"
 							class="btn btn-default" role="button">帶我回首頁</a>
 					</div>
-					<div class="btn-group">
-						<a href="<%=request.getContextPath()%>/buycart/moafirst.jsp"
-							class="btn btn-default" role="button">成團</a>
-					</div>
 				</div>
 			</div>
 		</div>

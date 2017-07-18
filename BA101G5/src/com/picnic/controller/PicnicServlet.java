@@ -43,7 +43,7 @@ public class PicnicServlet extends HttpServlet {
 				} else if (!picnic_name.trim().matches(nameReg)) {
 					errorMsgs.put("name", "團名不能為特殊符號 且必須在2~70字之間");
 				}
-				String address = req.getParameter("address").trim();
+				String address = req.getParameter("address").trim().split(" ")[1];
 				String area = req.getParameter("area").trim();
 
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";

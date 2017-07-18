@@ -36,7 +36,7 @@
 					<c:forEach var="goods_rentVO" items="${list}">
 						<div class="col-sm-4">
 							<form action="<%= request.getContextPath() %>/orderde_detail/orderde_detail.do" method="Post">
-								 <img src="https://api.fnkr.net/testimg/350x200/aaaaaa" alt="">
+								 <img src="<%=request.getContextPath( )%>/Image/?table=GOODS_RENT&picturename=${goods_rentVO.getGr_img()}" alt="">
 									<div class="caption">
 										<h2>${goods_rentVO.getGr_name()}</h2>
 										<p>${goods_rentVO.getGr_info()}</p>

@@ -52,10 +52,14 @@ public class imageoutput1 extends HttpServlet {
 		String table2 =new String(table.getBytes("ISO-8859-1"), "Big5");
 		String picturename = req.getParameter("picturename");
 		String picturename2 = new String(picturename.getBytes("ISO-8859-1"),"Big5");
+		
+		String images=null;
+		if(table.equals("GOODS_SELL")){images="GS_IMG";}else if(table.equals("GOODS_RENT")){images="GR_IMG";}
+		
+		
 		try {
 			Statement stmt = con.createStatement();
-			System.out.println("SELECT GS_IMG FROM " + table2 + " where GS_NO = \'" + picturename2+"\';");
-			ResultSet rs = stmt.executeQuery("SELECT GS_IMG FROM " + table2 + " where GS_NO = \'" + picturename2+"\'");
+			ResultSet rs = stmt.executeQuery("SELECT "+images+" FROM " + table2 + " where GS_NO = \'" + picturename2+"\'");
 
 			if (rs.next()) {
 				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("GS_IMG"));

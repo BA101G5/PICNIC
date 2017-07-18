@@ -26,13 +26,11 @@ public class Goods_SellServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 	
-		if ("getOne".equals(action)) {
+		if (action.equals("getOne")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-
-			
 			//String account = req.getParameter("account");
 			String account ="M000000001";
 			
@@ -47,6 +45,34 @@ public class Goods_SellServlet extends HttpServlet {
 				String url = null;
 				if ("getOne".equals(action)) {
 					 url="/buycart/maothird.jsp";
+				}
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+		}
+		
+		if (action.equals("selectgoods_sell")) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			//String account = req.getParameter("account");
+			String account ="M000000001";
+
+			try {
+				Orderde_DetailService orderde_detailSvc =new Orderde_DetailService();
+				orderde_detailSvc.getNumberByGsNo();
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				List<Goods_SellVO> list=goods_sellSvc.getAll();
+				
+				
+				
+				String url = null;
+				if (action.equals("selectgoods_sell")) {
+					 url="/buycart/maosecond2.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

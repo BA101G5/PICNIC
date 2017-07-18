@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Picnicé‡é¤ç¶²</title>
+<title>Picnic³¥À\ºô</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,16 +20,20 @@
 	padding-left: 40px;
 	padding: 20px;
 }
+
 .banner-top {
 	clear: left;
 }
+
 .caption {
 	text-align: center;
 }
+
 .btn {
 	margin: 0px;
 	margin-bottom: 0px;
 }
+
 .thumbnail {
 	height: 350px;
 	text-align: center;
@@ -37,6 +41,7 @@
 	margin-top: 0px;
 	bgcolor: blue;
 }
+
 .breadcrumb {
 	margin-top: -20px;
 	background: skyblue;
@@ -51,8 +56,8 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<ol class="breadcrumb">
-					<li><a href="<%=request.getContextPath()%>/index.jsp">é¦–é </a></li>
-					<li><a href="#" class="active">é è³¼å•†å“</a></li>
+					<li><a href="<%=request.getContextPath()%>/index.jsp">­º­¶</a></li>
+					<li><a href="#" class="active">¹wÁÊ°Ó«~</a></li>
 
 				</ol>
 			</div>
@@ -101,29 +106,35 @@
 							<div class="col-sm-4 ">
 
 								<a href="#" class="thumbnail">
-									<p>ç¬¬ä¸€æ¬¡é è³¼å•†å“?</p>
+									<p>²Ä¤@¦¸¹wÁÊ°Ó«~?</p>
 									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€è¨»å†Š</button>
+										<button type="button" class="btn btn-default">«e©¹µù¥U</button>
 									</div>
 								</a>
 							</div>
 							<div class="col-sm-4 ">
+
 								<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp"
 									class="thumbnail">
-									<p>æµè¡Œå•†å“</p>
+
 									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€</button>
+										<p>¯²¸î°Ó«~</p>
+										<button type="button" class="btn btn-default">«e©¹</button>
 									</div>
 								</a>
 							</div>
 							<div class="col-sm-4 ">
-								<a href="<%=request.getContextPath()%>/buycart/maosecond2.jsp"
-									class="thumbnail">
-									<p>å•†å“åˆ†é¡</p>
-									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€</button>
-									</div>
-								</a>
+								<form method="POST"
+									action="<%=request.getContextPath()%>//goods_sell/goods_sell.do">
+									<a href="#" class="thumbnail">
+										<div class="caption">
+											<p>¹wÁÊ°Ó«~</p>
+											<button type="submit" class="btn btn-default">«e©¹</button>
+											<input type="hidden" name="action" value="selectgoods_sell">
+										</div>
+									</a>
+									
+								</form>
 							</div>
 						</div>
 					</div>
@@ -131,7 +142,7 @@
 					<div class="row ">
 						<div class="col-sm-8 col-sm-push-1 ">
 							<div class="btn-group btn-group-justified ">
-								<a href="# " class="btn btn-default " role="button ">å›æ¨™é¡Œ</a>
+								<a href="# " class="btn btn-default " role="button ">¦^¼ĞÃD</a>
 							</div>
 							<div class="col-sm-10 col-sm-push-3 ">
 								<jsp:include page="/mustinclude/footer.jsp" />
@@ -142,7 +153,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
