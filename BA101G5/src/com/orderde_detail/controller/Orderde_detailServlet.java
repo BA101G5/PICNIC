@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.general_member.model.GeneralMemberVO;
 import com.goods_rent.model.Goods_RentService;
 import com.goods_rent.model.Goods_RentVO;
 import com.goods_sell.model.Goods_SellService;
@@ -40,8 +41,8 @@ public class Orderde_detailServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				// String account = (String)session.getAttribute("account");
-				String account = "MG00000002";
+				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+				String account = gVO.getMEM_NO();
 				PicmemService picmemSvc = new PicmemService();
 				List<String> list = picmemSvc.findbymem_no(account);
 
@@ -70,9 +71,8 @@ public class Orderde_detailServlet extends HttpServlet {
 
 			try {
 				String picnic_no = req.getParameter("picnic");
-				// String account = (String)session.getAttribute("account");
-				String account = "MG00000002";
-
+				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+				String account = gVO.getMEM_NO();
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
 
@@ -109,8 +109,8 @@ public class Orderde_detailServlet extends HttpServlet {
 			if (amount < 0) {
 				errorMsgs.put("amount", "�п�J���T�ƶq");
 			}
-			// String account=(String) session.getAttribute("account");
-			String account = "MG00000002";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 
 			Orderde_DetailService orderde_detailSvc = null;
 			if (action.equals("insertintocartA") || action.equals("insertintocartB")) {
@@ -140,8 +140,8 @@ public class Orderde_detailServlet extends HttpServlet {
 		if (action.equals("delete")) {
 			String picnic_no = (String) session.getAttribute("picnic_no");
 			String delete = req.getParameter("delete");
-			// String account = (String)session.getAttribute("account");
-			String account = "MG00000002";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 
 			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 			orderde_detailSvc.deleteOrderde_Detail(delete);
@@ -161,8 +161,8 @@ public class Orderde_detailServlet extends HttpServlet {
 		}
 
 		if (action.equals("finishorder")) {
-			// String account = (String)session.getAttribute("account");
-			String account = "MG00000002";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 			String picnic_no = (String) session.getAttribute("picnic_no");
 			String address = req.getParameter("address").trim();
 

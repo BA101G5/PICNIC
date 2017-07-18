@@ -151,25 +151,30 @@ public class PlaceDAO implements PlaceDAO_interface {
 		PreparedStatement pstmt = null;
 		PlaceVO placeVO = null;
 		ResultSet rs = null;
+		
 		try {
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, P_place);
 			rs = pstmt.executeQuery();
-			System.out.println(rs.next()+"hello");
+			
 			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
 			placeVO.setMem_no(rs.getString("MEM_NO"));
 			placeVO.setP_no(rs.getString("P_NO"));
 			placeVO.setP_name(rs.getString("P_NAME"));
+			System.out.println("helloasdfadsf");
 			placeVO.setP_until(rs.getTimestamp("P_UNTIL"));
 			placeVO.setP_place(rs.getString("P_PLACE"));
 			placeVO.setP_pop(rs.getInt("P_POP"));
 			placeVO.setPimg(rs.getBytes("PIMG"));
+			System.out.println("helloasdfadsf");
 			placeVO.setP_info(rs.getString("P_INFO"));
 			placeVO.setP_sta(rs.getString("P_STA"));
 			placeVO.setP_price(rs.getInt("P_PRICE"));
+			System.out.println("helloasdfadsf");
 			placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
 			placeVO.setP_lat(rs.getDouble("P_LAT"));
 			placeVO.setP_lon(rs.getDouble("P_LON"));
