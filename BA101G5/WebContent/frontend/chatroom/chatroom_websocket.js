@@ -5,6 +5,8 @@ function updateStatus(newStatus) {
   console.log('chatroom_websocket.js / ' + newStatus);
 }
 
+// gObjCR.memNo = '';
+// gObjCR.memNo = 'MG00000002';
 var myRoom = gObjCR.memNo;
 updateStatus(' memNo = ' + gObjCR.memNo);
 
@@ -14,7 +16,7 @@ var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
 var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
 var webSocket;
-myRoom = '';
+
 if( myRoom !== '' ) connect();
 
 function connect() {
@@ -29,11 +31,12 @@ function connect() {
   };
 
   webSocket.onmessage = function(event) {
-    var messagesArea = document.getElementById("messagesArea");
+    var messagesArea = document.getElementById("ulChat");
     var jsonObj = JSON.parse(event.data);
-    var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-    messagesArea.value = messagesArea.value + message;
-    messagesArea.scrollTop = messagesArea.scrollHeight;
+    var message = jsonObj.userName + ": " + jsonObj.message;// + "\r\n";
+    messagesArea.innerHTML += '<li class="left clearfix">' + message + '</li>';
+    // messagesArea.scrollTop = messagesArea.scrollHeight;
+    onWinResize();
   };
 
   webSocket.onclose = function(event) {
@@ -46,14 +49,14 @@ function connect() {
 // inputUserName.focus();
 
 function sendMessage() {
-    var userName = inputUserName.value.trim();
-    if (userName === ""){
-        alert ("使用者名稱請勿空白!");
-        inputUserName.focus();
-    return;
-    }
+    var userName = gObjCR.memName;//inputUserName.value.trim();
+    // if (userName === ""){
+    //     alert ("使用者名稱請勿空白!");
+    //     inputUserName.focus();
+    // return;
+    // }
 
-    var inputMessage = document.getElementById("message");
+    var inputMessage = document.getElementById("inputCRMessage");
     var message = inputMessage.value.trim();
 
     if (message === ""){
@@ -70,9 +73,9 @@ function sendMessage() {
 
 function disconnect () {
   webSocket.close();
-  document.getElementById('sendMessage').disabled = true;
-  document.getElementById('connect').disabled = false;
-  document.getElementById('disconnect').disabled = true;
+  // document.getElementById('sendMessage').disabled = true;
+  // document.getElementById('connect').disabled = false;
+  // document.getElementById('disconnect').disabled = true;
 }
 
 
