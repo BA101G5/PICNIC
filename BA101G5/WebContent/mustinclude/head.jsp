@@ -16,6 +16,8 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/mustinclude/left_nav.css">
 

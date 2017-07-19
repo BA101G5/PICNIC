@@ -48,6 +48,7 @@ body{
 
 <%-- 	<jsp:include page="/mustinclude/left_nav.jsp" /> --%>
 	<jsp:include page="/mustinclude/top_nav.jsp" />
+	<jsp:include page="/mustinclude/marquee.jsp" />
 
 <!-- .cr -->
 <div class="container-fluid">
