@@ -1,21 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="big5"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>野太美 - 首頁</title>
+<title>���Ӭ� - ����</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
-<!-- 最新編譯和最佳化的 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<!-- 選擇性佈景主題 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-<!-- 最新編譯和最佳化的 JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+	<jsp:include page="/mustinclude/head.jsp" />
+<%--
 <style type="text/css">
 html {
 	height: 100%;
@@ -53,12 +46,13 @@ body{
 	font-size: 36px;
 	color: #091e4c;
 }
-</style>
+</style>--%>
 </head>
 <body>
 
-	<jsp:include page="/mustinclude/left_nav.jsp" />
+<%-- 	<jsp:include page="/mustinclude/left_nav.jsp" /> --%>
 	<jsp:include page="/mustinclude/top_nav.jsp" />
+	<jsp:include page="/mustinclude/marquee.jsp" />
 
 <!-- .cr -->
 <div class="container-fluid">
@@ -67,11 +61,10 @@ body{
 
 
 		</div>
-					    <ol class="carousel-indicators">
+					    <%--<ol class="carousel-indicators">
 					        <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
 					        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-<!-- 					        <li data-target="#carousel-id" data-slide-to="2" class="active"></li> -->
-					    </ol>
+					    </ol>--%>
 	</div>
 
 <!-- 	<div class="row">
@@ -82,20 +75,20 @@ body{
 
 					<!-- bs-slider
 					<div id="carousel-id" class="carousel slide" data-ride="carousel" style="position: fixed; top: 0; left:0;  z-index: -1;">
-					    <!-- 幻燈片小圓點區 
+					    <!-- �ۿO���p���I�� 
 					    <ol class="carousel-indicators">
 					        <li data-target="#carousel-id" data-slide-to="0" class=""></li>
 					        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
 					        <li data-target="#carousel-id" data-slide-to="2" class="active"></li>
 					    </ol>
-					    <!-- 幻燈片主圖區
+					    <!-- �ۿO���D�ϰ�
 					    <div class="carousel-inner">
 					        <div class="item">
 					            <img src="https://api.fnkr.net/testimg/800x700/aaaaaa" alt="">
 					            <div class="container">
 					                <div class="carousel-caption">
-					                    <h1>CSS可樂好喝超爽快</h1>
-					                    <p>你喝過了嗎？</p>
+					                    <h1>CSS�i�֦n�ܶW�n��</h1>
+					                    <p>�A�ܹL�F�ܡH</p>
 					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
 					                </div>
 					            </div>
@@ -104,9 +97,9 @@ body{
 					            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
 					            <div class="container">
 					                <div class="carousel-caption">
-					                    <h1>CSS可樂的外掛真方便</h1>
-					                    <p>你安裝了嗎？</p>
-					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">更多</a></p>
+					                    <h1>CSS�i�֪��~���u��K</h1>
+					                    <p>�A�w�ˤF�ܡH</p>
+					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">��h</a></p>
 					                </div>
 					            </div>
 					        </div>
@@ -114,14 +107,14 @@ body{
 					            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
 					            <div class="container">
 					                <div class="carousel-caption">
-					                    <h1>我是標題喔～自己改文案吧</h1>
-					                    <p>我是內文喔，你可以把字打在這裡呦</p>
-					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+					                    <h1>�ڬO���D���ۤv���קa</h1>
+					                    <p>�ڬO�����A�A�i�H��r���b�o����</p>
+					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">�ԲӤ��e</a></p>
 					                </div>
 					            </div>
 					        </div>
 					    </div>
-					    <!-- 上下頁控制區
+					    <!-- �W�U�������
 					    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 					    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>

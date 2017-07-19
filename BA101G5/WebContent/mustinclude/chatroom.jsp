@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.picmem.model.*"%>
@@ -48,11 +48,20 @@
 //     }
 
 
-// 	// Áæ§ÁµÑËÅäÂ§©
-// 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
-// 	List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
-// 	ChatroomService chatroomSvc = new ChatroomService();
+// 	// ∏s≤’≤·§—
+ 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
+ 	//List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
+ 	ChatroomService chatroomSvc = new ChatroomService();
 // 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
+
+// *** bug
+// Chatroom_MembersVO2 cmVO2 = chatroom_membersSvc.getOnewCond("MG00000002", "MG00000003");
+// System.out.println("chatroom.jsp / cmVO2.getMem_no() = " + cmVO2.getMem_no());
+// *** bug
+// *** ¥¿•N
+ 	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
+// 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
+// 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
 
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
@@ -86,37 +95,21 @@
 
 %>
 
-<!DOCTYPE html>
-<html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>chatroom</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-		<!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
 
-		<link rel="stylesheet" href="chatroom.css">
-	</head>
-	<body>
-
-		<div class="col-sm-4 container chatroom-list-container">
+		<div class="col-sm-4 container-fulid chatroom-list-container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12" id="chatroom-list">
 					<a class="btn btn-primary col-xs-12" role="button" data-toggle="collapse" href="#chatroom-list-body" aria-expanded="false" aria-controls="#chatroom-list-body">
-						ËÅäÂ§©ÂÆ§
+						≤·§—´«
 					</a>
 					<div class="collapse" id="chatroom-list-body">
 						<!-- bs-panel -->
 						<div class="bs-panel panel panel-danger">
 							<div class="panel-heading">
-								<h3 class="panel-title">ÈáéÈ§êÂúò</h3>
+								<h3 class="panel-title">≥•¿\πŒ</h3>
 							</div>
 							<!-- bs-list-group -->
-							<div class="list-group bs-list-group">
+							<div class="list-group bs-list-group chatroom-list-picnic-group">
 <c:forEach var="entryOfMapPG" items="${ mapPG.entrySet() }">
 								<a href="#" class="list-group-item" id="${ entryOfMapPG.getKey() }"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapPG.getValue() }</a>
 </c:forEach>
@@ -124,10 +117,10 @@
 							<!-- END: bs-list-group -->
 
 							<div class="panel-heading">
-								<h3 class="panel-title">Â•ΩÂèã</h3>
+								<h3 class="panel-title">¶n§Õ</h3>
 							</div>
 							<!-- bs-list-group -->
-							<div class="list-group bs-list-group">
+							<div class="list-group bs-list-group chatroom-list-friend-room">
 <c:forEach var="entryOfMapFriendRoom" items="${ mapFriendRoom.entrySet() }">
 								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapFriendRoom.getValue() }</a>
 </c:forEach>
@@ -135,11 +128,11 @@
 							<!-- END: bs-list-group -->
 
 							<%--<div class="panel-heading">
-								<h3 class="panel-title">ÈªëÂêçÂñÆ</h3>
+								<h3 class="panel-title">∂¬¶W≥Ê</h3>
 							</div>
 							<!-- bs-list-group -->
 							<div class="list-group bs-list-group">
-								<a href="#" class="list-group-item"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>Âñ¨Â∑¥</a>
+								<a href="#" class="list-group-item"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>≥Ï§⁄</a>
 							</div>--%>
 
 							<!-- END: bs-list-group -->
@@ -155,7 +148,7 @@
 
 
 <!-- .aChatroom-container -->
-<div class="col-sm-4 container aChatroom-container" id="aChatroom-container">
+<div class="col-sm-4 container-fulid aChatroom-container" id="aChatroom-container">
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-primary">
@@ -256,14 +249,19 @@
 <!-- END: .aChatroom-container -->
 
 
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>
 		<script>
 			var gObjCR = {};
 			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
 			gObjCR.memName = '${sessionScope.gVO.getMEM_NAME()}';
+
+            $('.chatroom-list-friend-room .list-group-item').on('click', function(){
+                $('#aChatroom-container').css('display', 'block');
+                //alert(this.id); //"MG00000003"
+                gObjCR.chatWithMemNo = this.id;
+                // gObjCR.myRoomNo = 
+                onWinResize();
+            });
 		</script>
-		<script src="chatroom_resize.js"></script>
-		<script src="chatroom_websocket.js"></script>
-	</body>
-</html>
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_websocket.js"></script>

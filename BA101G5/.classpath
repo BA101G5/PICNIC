@@ -6,17 +6,16 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
 
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-collections-3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-fileupload.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-lang-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/ezmorph-1.0.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/ojdbc6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/servlet-api.jar"/>
+	<classpathentry exported="true"  kind="lib" path="C:/mylib/javax.mail.jar"/>
+	<classpathentry kind="output" path="bin"/>
 
-	<classpathentry exported="true" kind="lib" path="C:/myLib/commons-beanutils-1.7.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/commons-collections-3.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/commons-fileupload.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/commons-lang-2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/ezmorph-1.0.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/json-lib-2.4-jdk15.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/jsp-api.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/ojdbc6.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/myLib/servlet-api.jar"/>
-
-
-</classpath>
