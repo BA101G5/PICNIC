@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12">
+		<div class="col-xs-12 col-sm-12" style="background: white;">
 
 			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
 				<img
