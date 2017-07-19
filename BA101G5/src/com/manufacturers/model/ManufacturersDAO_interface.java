@@ -11,4 +11,5 @@ public interface ManufacturersDAO_interface {
     public void delete(String MF_NO);
     public ManufacturersVO findByPrimaryKey(String MF_NO);
     public List<ManufacturersVO> getAll();
+    public void updateforSTA(ManufacturersVO ManufacturersVO);
 }

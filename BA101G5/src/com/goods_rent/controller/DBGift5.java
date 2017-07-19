@@ -1,4 +1,4 @@
-package com.buy_record.controller;
+package com.goods_rent.controller;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
-public class DBGift2 extends HttpServlet {
+public class DBGift5 extends HttpServlet {
 	Connection con;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -31,15 +31,15 @@ public class DBGift2 extends HttpServlet {
 		
 		//System.out.println(MEM_NO2);
 		try {
-			String AD_NO = req.getParameter("AD_NO");
+			String GR_NO = req.getParameter("GR_NO");
 			
-			String AD_NO2 = new String(AD_NO.getBytes("ISO-8859-1"), "Big5");
+			String GR_NO2 = new String(GR_NO.getBytes("ISO-8859-1"), "Big5");
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT AD_PHOTO FROM ADVERTISEMENT WHERE AD_NO = '" + AD_NO2 + "'");
+			ResultSet rs = stmt.executeQuery("SELECT GR_IMG FROM GOODS_RENT WHERE GR_NO = '" + GR_NO2 + "'");
 
 			if (rs.next()) {
 				
-				ByteArrayInputStream in = new ByteArrayInputStream(rs.getBytes("AD_PHOTO"));
+				ByteArrayInputStream in = new ByteArrayInputStream(rs.getBytes("gr_img"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
@@ -67,7 +67,7 @@ public class DBGift2 extends HttpServlet {
 	public void init() throws ServletException {
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB3");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 			con = ds.getConnection();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

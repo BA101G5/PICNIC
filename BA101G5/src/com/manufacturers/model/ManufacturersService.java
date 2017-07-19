@@ -3,6 +3,8 @@ package com.manufacturers.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.general_member.model.GeneralMemberVO;
+
 
 public class ManufacturersService {
 	ManufacturersDAO_interface dao;
@@ -66,5 +68,15 @@ public class ManufacturersService {
 
 	public List<ManufacturersVO> getAll() {
 		return dao.getAll();
+	}
+	public void updateforSTA(String MF_ACCO, Character MF_STA) {
+		ManufacturersVO mVO = new ManufacturersVO();
+
+		mVO.setMF_ACCO(MF_ACCO);
+
+		mVO.setMF_STA(MF_STA);
+
+		dao.updateforSTA(mVO);
+
 	}
 }

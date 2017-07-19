@@ -3,9 +3,6 @@
 <%@ page import="com.goods_sell.model.*"%>
 <%@ page import="java.util.*"%>
 
-<jsp:useBean id="goods_sellSvc" scope="page"
-	class="com.goods_sell.model.Goods_SellService" />
-
 <html>
 <head>
 <meta charset="utf-8">

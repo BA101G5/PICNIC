@@ -10,11 +10,10 @@ public class GeneralMemberService {
 		dao = new GeneralMemberDAO();
 	}
 
-	public GeneralMemberVO addGeneralMember(String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
-			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
-			Character MEM_STA, String MEM_PHONE, Character MEM_PBOARD) {
+	public GeneralMemberVO addGeneralMember(String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH, String MEM_ADDR,
+			String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN, Character MEM_STA,
+			String MEM_PHONE, Character MEM_PBOARD) {
 		GeneralMemberVO gVO = new GeneralMemberVO();
-
 
 		gVO.setMEM_GEN(MEM_GEN);
 		gVO.setMEM_NAME(MEM_NAME);
@@ -36,7 +35,7 @@ public class GeneralMemberService {
 			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
 			Character MEM_STA, String MEM_PHONE, Character MEM_PBOARD) {
 		GeneralMemberVO gVO = new GeneralMemberVO();
-		
+
 		gVO.setMEM_NO(MEM_NO);
 		gVO.setMEM_GEN(MEM_GEN);
 		gVO.setMEM_NAME(MEM_NAME);
@@ -54,7 +53,6 @@ public class GeneralMemberService {
 
 		return gVO;
 	}
-	
 
 	public void deleteGeneralMember(String MEM_NO) {
 		dao.delete(MEM_NO);
@@ -67,17 +65,27 @@ public class GeneralMemberService {
 	public List<GeneralMemberVO> getAll() {
 		return dao.getAll();
 	}
-	
-	public void updatecoin(String MEM_NO,Integer MEM_COIN)
-			 {
+
+	public void updatecoin(String MEM_NO, Integer MEM_COIN) {
 		GeneralMemberVO gVO = new GeneralMemberVO();
-		
+
 		gVO.setMEM_NO(MEM_NO);
-		
+
 		gVO.setMEM_COIN(MEM_COIN);
-		
+
 		dao.updatefromcoin(gVO);
 
-		
 	}
+
+	public void updateforSTA(String MEM_MAIL, Character MEM_STA) {
+		GeneralMemberVO gVO = new GeneralMemberVO();
+
+		gVO.setMEM_MAIL(MEM_MAIL);
+
+		gVO.setMEM_STA(MEM_STA);
+
+		dao.updateforSTA(gVO);
+
+	}
+
 }

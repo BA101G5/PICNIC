@@ -159,7 +159,7 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="password" name="MF_PSW" id="MF_PSW"
 											placeholder="請輸入密碼" style="width: 200px;"
-											value="${MfVO.MF_PSW}">
+											value="">
 										<c:if test="${not empty errorMsgs}">
 											<font color='red' id="PSW"><b>${errorMsgs.MF_PSW}</b></font>
 											<font color='red'><b>${errorMsgs.MF_PSW_1}</b></font>
@@ -297,7 +297,7 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<textarea rows="7" cols="50" name="MF_SELF" id="MF_SELF"
-											value="${MfVO.MF_SELF}"></textarea>
+											value="${MfVO.MF_SELF}">${MfVO.MF_SELF}</textarea>
 									</div>
 								</div>
 							</li>
@@ -404,7 +404,7 @@ textarea {
 				document.getElementById("MF_PSW_1").focus();
 				document.getElementById("MF_PSW_1").select();
 				document.getElementById('PSW_1').innerText = "*密碼輸入錯誤";
-			} else if (email == '') {
+			} else if (email.trim() == '') {
 				// 				alert('請輸入電子信箱');
 				document.getElementById('MF_MAIL').focus();
 				document.getElementById('MF_MAIL').select();

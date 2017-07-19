@@ -25,7 +25,6 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			e.printStackTrace();
 		}
 	}
-  
 	private static final String INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD,MEM_PIC,MEM_SELF)"
 			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=?,MEM_PIC=?,MEM_SELF=? WHERE MEM_NO=?";
@@ -35,6 +34,7 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 	private static final String FINDALL = "SELECT * FROM GENERAL_MEMBER ORDER BY MEM_NO DESC";
 	private static final String FINDBYACCOUNT ="SELECT * FROM GENERAL_MEMBER WHERE MEM_MAIL=?";
 	private static final String UPDATECOIN="UPDATE GENERAL_MEMBER SET MEM_COIN=? WHERE MEM_NO=?";
+	private static final String UPDATEFORSTA ="UPDATE GENERAL_MEMBER SET MEM_STA=? WHERE MEM_MAIL=?";
 	@Override
 	public void insert(GeneralMemberVO generalmemberVO) {
 		Connection con = null;
@@ -369,6 +369,40 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 			}
 		}
 
+		
+	}
+
+	@Override
+	public void updateforSTA(GeneralMemberVO generalmemberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEFORSTA);
+			pstmt.setString(1, generalmemberVO.getMEM_STA().toString());
+			pstmt.setString(2, generalmemberVO.getMEM_MAIL());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
 		
 	}
 

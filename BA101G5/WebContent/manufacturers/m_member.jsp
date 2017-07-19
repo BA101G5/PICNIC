@@ -365,13 +365,13 @@ textarea {
 				.addEventListener(
 						'click',
 						function() {
-							document.getElementById("MF_MAIL").value = "h2208339@yahoo.com.tw";
-							document.getElementById("MF_PSW").value = "ae01fe56d48e11f8e";
+							document.getElementById("MF_MAIL").value = "h2208339@gmail.com";
+							document.getElementById("MF_PSW").value = "123456789";
 							document.getElementById("MF_NAME").value = "邱治傑小妹";
 							document.getElementById("MF_ADDR").value = "桃園區中壢區中央二十路108號";
 							document.getElementById("MF_PHONE").value = "0975321555";
 							document.getElementById("MF_BS").value = "00000000";
-							document.getElementById("MF_PSW_1").value = "ae01fe56d48e11f8e";
+							document.getElementById("MF_PSW_1").value = "123456789";
 							document.getElementById("MF_SELF").innerText = "我是邱小妹， 呵呵";
 						}, false);
 	</script>
