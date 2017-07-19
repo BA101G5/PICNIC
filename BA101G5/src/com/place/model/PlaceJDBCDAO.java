@@ -417,5 +417,11 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 
 		return data;
 	}
-
+//-------------------------------------------------------------------
+	public void k_insert(PlaceVO placeVO){}
+	public void k_update(PlaceVO placeVO){}
+	public void k_delete(String p_no){}
+	public PlaceVO k_findByPrimaryKey(String p_no){return null;}
+	public List<PlaceVO> k_getAll(){return null;}
+	public void k_insertplace(PlaceVO placeVO){}
 }

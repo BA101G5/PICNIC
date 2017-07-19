@@ -10,5 +10,10 @@ public interface Orderde_DetailDAO_interface {
 	public List<Orderde_DetailVO> getAll();
 	public List<Orderde_DetailVO> getAllPICNICNO(String picnic_no);
 	public List<Orderde_DetailVO> getGsByMenno(String mem_no);
-	
+	//----------------------------------------------
+	public void k_insert(Orderde_DetailVO orderde_detailVO);
+	public void k_update(Orderde_DetailVO orderde_detailVO);
+	public void k_delete(String orderde_detailno);
+	public Orderde_DetailVO k_findByPrimaryKey(String orderde_detailno);
+	public List<Orderde_DetailVO> k_getAll();
 }

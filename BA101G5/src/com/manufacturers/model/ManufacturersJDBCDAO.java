@@ -352,5 +352,10 @@ public class ManufacturersJDBCDAO implements ManufacturersDAO_interface {
 		
 
 	}
-
+	//----------------------------------------------
+	public void k_insert(ManufacturersVO MANUFACTURERSVO){}
+    public void k_update(ManufacturersVO MANUFACTURERSVO){}
+    public void k_delete(String MF_NO){}
+    public ManufacturersVO k_findByPrimaryKey(String MF_NO){return null;}
+    public List<ManufacturersVO> k_getAll(){return null;}
 }

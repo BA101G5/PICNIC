@@ -10,6 +10,12 @@ public interface PicnicDAO_interface {
 		public PicnicVO findByPrimaryKey(String picnic_no);
 		public List<PicnicVO> getAll();
 		public String addPicnic(PicnicVO picnicVO);
-		
+		//-------------------------------------------------
+		public void k_insert(PicnicVO picnicVO);
+		public void k_update(PicnicVO picnicVO);
+		public void k_delete(String picnic_no);
+		public PicnicVO k_findByPrimaryKey(String picnic_no);
+		public List<PicnicVO> k_getAll();
+		public String k_addPicnic(PicnicVO picnicVO);
 
 }
