@@ -268,10 +268,10 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		// 1.insert
 		// try {
 		// GeneralMemberVO gVO =new GeneralMemberVO();
-		// gVO.setMEM_NAME("ä¼¸å„’");
+		// gVO.setMEM_NAME("¦ù¾§");
 		// gVO.setMEM_GEN('M');
 		// gVO.setMEM_BIRTH(java.sql.Date.valueOf("2002-01-01"));
-		// gVO.setMEM_ADDR("è‡ºä¸­å¸‚è¥¿å€æ°‘ç”Ÿè·¯140è™Ÿ");
+		// gVO.setMEM_ADDR("»O¤¤¥«¦è°Ï¥Á¥Í¸ô140¸¹");
 		// gVO.setMEM_MAIL("hyyhhyhyy@lirtft.com");
 		// gVO.setMEM_PSW("896de0bf7b6894f5189c9c7c3f066910");
 		// gVO.setMEM_COIN(2898);
@@ -291,7 +291,7 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		// gVO.setMEM_NAME("123");
 		// gVO.setMEM_GEN('F');
 		// gVO.setMEM_BIRTH(java.sql.Date.valueOf("2012-01-01"));
-		// gVO.setMEM_ADDR("è‡ºä¸­å¸‚è¥¿å€æ°‘ç”Ÿè·¯140è™Ÿ");
+		// gVO.setMEM_ADDR("»O¤¤¥«¦è°Ï¥Á¥Í¸ô140¸¹");
 		// gVO.setMEM_MAIL("123@lirtft.com");
 		// gVO.setMEM_PSW("896de0bf7b6894f5189c9c7c3f066910");
 		// gVO.setMEM_COIN(2898);
@@ -345,4 +345,15 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		
 	}
 
+	//-------------------------------
+	@Override
+	public List<GeneralMemberVO> k_getAll(){return null;}
+	@Override
+	public GeneralMemberVO k_findByPrimaryKey(String MEM_NO) {return null;}
+	@Override
+	public void k_delete(String MEM_NO) {}
+	@Override
+	public void k_update(GeneralMemberVO generalmemberVO) {}
+	@Override
+	public void k_insert(GeneralMemberVO generalmemberVO) {}
 }
