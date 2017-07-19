@@ -21,6 +21,7 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 	private static final String DELETE = "DELETE FROM BUY_RECORD WHERE BR_ID=?";
 	private static final String FINDBYKEY = "SELECT MEM_NO,BR_DATE,BR_CASH FROM BUY_RECORD WHERE BR_ID=?";
 	private static final String FINDALL = "SELECT * FROM BUY_RECORD";
+	private static final String FINDMG ="SELECT * FROM BUY_RECORD WHERE MEM_NO=?";
 	static {
 		try {
 			Class.forName(DRIVER);
@@ -37,7 +38,7 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = con.prepareStatement(INSERT);
 			pstmt.setString(1, Buy_recordVO.getMEM_NO());
-			pstmt.setDate(2, Buy_recordVO.getBR_DATE());
+			pstmt.setTimestamp(2, Buy_recordVO.getBR_DATE());
 			pstmt.setInt(3, Buy_recordVO.getBR_CASH());
 
 			pstmt.executeUpdate();
@@ -72,7 +73,7 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setString(1, Buy_recordVO.getMEM_NO());
-			pstmt.setDate(2, Buy_recordVO.getBR_DATE());
+			pstmt.setTimestamp(2, Buy_recordVO.getBR_DATE());
 			pstmt.setInt(3, Buy_recordVO.getBR_CASH());
 			pstmt.setString(4, Buy_recordVO.getBR_ID());
 
@@ -148,7 +149,7 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 			while (rs.next()) {
 				bVO = new Buy_RecordVO();
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
-				bVO.setBR_DATE(rs.getDate("BR_DATE"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
 				
 
@@ -201,7 +202,7 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 			while(rs.next()){
 				bVO = new Buy_RecordVO();
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
-				bVO.setBR_DATE(rs.getDate("BR_DATE"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
 				
 				list.add(bVO);
@@ -277,14 +278,80 @@ public class Buy_RecordJDBCDAO implements Buy_RecordDAO_interface {
 		 
 
 		//5. FIND ALL
-				List<Buy_RecordVO> listgVO =dao.getAll();
-				for(Buy_RecordVO gVO :listgVO ){
-					System.out.println("MEM_NO : " + gVO.getMEM_NO());
-					System.out.println("BR_DATE : " + gVO.getBR_DATE());
-					System.out.println("BR_CASH : " + gVO.getBR_CASH());
-					
-					System.out.println("-----------------");
+//				List<Buy_RecordVO> listgVO =dao.getAll();
+//				for(Buy_RecordVO gVO :listgVO ){
+//					System.out.println("MEM_NO : " + gVO.getMEM_NO());
+//					System.out.println("BR_DATE : " + gVO.getBR_DATE());
+//					System.out.println("BR_CASH : " + gVO.getBR_CASH());
+//					
+//					System.out.println("-----------------");
+//				}
+		//6. FIND BY MEMNO
+		List<Buy_RecordVO> listgVO =dao.findByMG("MG00000001");
+		for(Buy_RecordVO gVO :listgVO ){
+			System.out.println("BR_ID : " + gVO.getBR_ID());
+			System.out.println("MEM_NO : " + gVO.getMEM_NO());
+			
+			System.out.println("BR_DATE : " + gVO.getBR_DATE());
+			System.out.println("BR_CASH : " + gVO.getBR_CASH());
+			
+			System.out.println("-----------------");
+		}
+	}
+
+	@Override
+	public List<Buy_RecordVO> findByMG(String MEM_NO) {
+		
+		List<Buy_RecordVO> list = new ArrayList<Buy_RecordVO>();
+		Buy_RecordVO bVO = null;
+		Connection con =null;
+		PreparedStatement pstmt= null;
+		ResultSet rs= null;
+		try {
+			con =DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			pstmt = con.prepareStatement(FINDMG);
+			pstmt.setString(1, MEM_NO);
+			rs =pstmt.executeQuery();
+			while(rs.next()){
+				bVO = new Buy_RecordVO();
+				bVO.setBR_ID(rs.getString("BR_ID"));
+				bVO.setMEM_NO(rs.getString("MEM_NO"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
+				bVO.setBR_CASH(rs.getInt("BR_CASH"));
+				
+				list.add(bVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+			}
+			if(pstmt !=null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		return list;
 	}
 
 }

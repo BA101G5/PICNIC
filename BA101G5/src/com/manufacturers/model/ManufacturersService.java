@@ -3,6 +3,8 @@ package com.manufacturers.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.general_member.model.GeneralMemberVO;
+
 
 public class ManufacturersService {
 	ManufacturersDAO_interface dao;
@@ -11,12 +13,12 @@ public class ManufacturersService {
 		dao = new ManufacturersDAO();
 	}
 
-	public ManufacturersVO addManufacturers(String MF_NO, String MF_NAME, String MF_PHONE, String MF_MAIL,
+	public ManufacturersVO addManufacturers(String MF_NAME, String MF_PHONE, String MF_MAIL,
 			String MF_ACCO, String MF_PSW, byte[] MF_LOGO, String MF_SELF, String MF_BS, String MF_ADDR,
 			String MF_FAX, Character MF_STA, Integer MF_REPORTNUM) {
 		ManufacturersVO mVO = new ManufacturersVO();
 		
-		mVO.setMF_NO(MF_NO);
+//		mVO.setMF_NO(MF_NO);
 		mVO.setMF_NAME(MF_NAME);
 		mVO.setMF_PHONE(MF_PHONE);
 		mVO.setMF_MAIL(MF_MAIL);
@@ -66,5 +68,15 @@ public class ManufacturersService {
 
 	public List<ManufacturersVO> getAll() {
 		return dao.getAll();
+	}
+	public void updateforSTA(String MF_ACCO, Character MF_STA) {
+		ManufacturersVO mVO = new ManufacturersVO();
+
+		mVO.setMF_ACCO(MF_ACCO);
+
+		mVO.setMF_STA(MF_STA);
+
+		dao.updateforSTA(mVO);
+
 	}
 }

@@ -12,27 +12,27 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class AdministratorDAO implements Administrator_interface{
+public class AdministratorDAO implements AdministratorDAO_interface{
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private static final String INSERT_STMT = 
-			"INSERT INTO ADMINISTRATOR (ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA) VALUES ('MA' || LPAD(ADM_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?)";
+			"INSERT INTO ADMINISTRATOR (ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA) VALUES ('MA' || LPAD(ADM_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?,'N')";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR order by ADM_NO";
+			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR where ADM_STA='N' order by ADM_NO";
 	private static final String GET_ONE_STMT = 
 			"SELECT ADM_NO,ADM_ACC,ADM_PW,ADM_IDEN,ADM_NAME,ADM_STA FROM ADMINISTRATOR where ADM_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM ADMINISTRATOR where ADM_NO = ?";
+			"UPDATE ADMINISTRATOR set ADM_STA='U' where ADM_NO = ?";
 	private static final String UPDATE = 
-			"UPDATE ADMINISTRATOR set ADM_ACC=?, ADM_PW=?, ADM_IDEN=?, ADM_NAME=?, ADM_STA=? where ADM_NO = ?";
+			"UPDATE ADMINISTRATOR set ADM_ACC=?, ADM_PW=?, ADM_IDEN=?, ADM_NAME=? where ADM_NO = ?";
 	
 	@Override
 	public void insert(AdministratorVO administratorVO) {
@@ -47,7 +47,6 @@ public class AdministratorDAO implements Administrator_interface{
 			pstmt.setString(2, administratorVO.getAdm_pw());
 			pstmt.setString(3, administratorVO.getAdm_iden());
 			pstmt.setString(4, administratorVO.getAdm_name());
-			pstmt.setString(5, administratorVO.getAdm_sta());
 
 			pstmt.executeUpdate();
 
@@ -85,8 +84,7 @@ public class AdministratorDAO implements Administrator_interface{
 			pstmt.setString(2, administratorVO.getAdm_pw());
 			pstmt.setString(3, administratorVO.getAdm_iden());
 			pstmt.setString(4, administratorVO.getAdm_name());
-			pstmt.setString(5, administratorVO.getAdm_sta());
-			pstmt.setString(6, administratorVO.getAdministrator());
+			pstmt.setString(5, administratorVO.getAdministrator());
 		
 			pstmt.executeUpdate();
 

@@ -2,7 +2,7 @@ package com.manufacturers.model;
 
 import java.util.List;
 
-
+import com.general_member.model.GeneralMemberVO;
 
 public interface ManufacturersDAO_interface {
 
@@ -11,4 +11,5 @@ public interface ManufacturersDAO_interface {
     public void delete(String MF_NO);
     public ManufacturersVO findByPrimaryKey(String MF_NO);
     public List<ManufacturersVO> getAll();
+    public void updateforSTA(ManufacturersVO ManufacturersVO);
 }

@@ -353,4 +353,10 @@ public class ManufacturersJDBCDAO implements ManufacturersDAO_interface {
 
 	}
 
+	@Override
+	public void updateforSTA(ManufacturersVO ManufacturersVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

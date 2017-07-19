@@ -12,6 +12,7 @@ public class Goods_RentVO implements java.io.Serializable {
 		private byte[] gr_img;
 		private Timestamp gr_until;
 		private String gr_sta;
+		private String gr_place;
 		public String getGr_no() {
 			return gr_no;
 		}
@@ -77,5 +78,11 @@ public class Goods_RentVO implements java.io.Serializable {
 		}
 		public void setGr_sta(String gr_sta) {
 			this.gr_sta = gr_sta;
+		}
+		public String getGr_place() {
+			return gr_place;
+		}
+		public void setGr_place(String gr_place) {
+			this.gr_place = gr_place;
 		}
 }

@@ -14,7 +14,7 @@ public class GeneralMemberVO implements Serializable{
 	private String MEM_SELF;
 	private byte[] MEM_PIC;
 	private Integer MEM_COIN;
-	private Character MEM_STATE;
+	private Character MEM_STA;
 	private String MEM_PHONE;
 	private Character MEM_PBOARD;
 	
@@ -79,11 +79,11 @@ public class GeneralMemberVO implements Serializable{
 	public void setMEM_COIN(Integer MEM_COIN) {
 		this.MEM_COIN = MEM_COIN;
 	}
-	public Character getMEM_STATE() {
-		return MEM_STATE;
+	public Character getMEM_STA() {
+		return MEM_STA;
 	}
-	public void setMEM_STATE(Character MEM_STATE) {
-		this.MEM_STATE = MEM_STATE;
+	public void setMEM_STA(Character MEM_STA) {
+		this.MEM_STA = MEM_STA;
 	}
 	public String getMEM_PHONE() {
 		return MEM_PHONE;

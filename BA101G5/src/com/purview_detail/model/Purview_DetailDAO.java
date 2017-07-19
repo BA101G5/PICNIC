@@ -12,12 +12,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class Purview_DetailDAO implements Purview_Detail_interface{
+public class Purview_DetailDAO implements Purview_DetailDAO_interface{
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -26,11 +26,13 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 	private static final String INSERT_STMT = 
 			"INSERT INTO PURVIEW_DETAIL (ADM_NO,PURVIEW_NO) VALUES (?,?)";
 	private static final String GET_ALL_STMT = 
-			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL order by ADM_NO";
+			"SELECT pur.ADM_NO, PURVIEW.PURVIEW_NAME ,PURVIEW.PURVIEW_NO "
+			+ "FROM PURVIEW left outer JOIN (SELECT PURVIEW_DETAIL.ADM_NO, PURVIEW_NO FROM PURVIEW_DETAIL Where ADM_NO = ?) pur ON pur.PURVIEW_NO=PURVIEW.PURVIEW_NO "
+			+ "order by PURVIEW.PURVIEW_NO";
 	private static final String GET_ONE_STMT = 
-			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL where ADM_NO || PURVIEW_NO = ?";
+			"SELECT ADM_NO,PURVIEW_NO FROM PURVIEW_DETAIL where ADM_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM PURVIEW_DETAIL where ADM_NO || PURVIEW_NO = ?";
+			"DELETE FROM PURVIEW_DETAIL where ADM_NO = ?";
 	private static final String UPDATE = 
 			"UPDATE PURVIEW_DETAIL set PURVIEW_NO=? where ADM_NO || PURVIEW_NO = ?";
 	
@@ -113,14 +115,11 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
 		try {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-
 			pstmt.setString(1, adm_no);
-
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -144,8 +143,11 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 	}
 	
 	@Override
-	public Purview_DetailVO findByPrimaryKey(String adm_no) {
+	public List<Purview_DetailVO> findByPrimaryKey(String adm_no) {
+		
+		List<Purview_DetailVO> list = new ArrayList<Purview_DetailVO>();
 		Purview_DetailVO pudVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -162,7 +164,7 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 				pudVO = new Purview_DetailVO();
 				pudVO.setAdm_no(rs.getString("ADM_NO"));
 				pudVO.setPurview_no(rs.getString("PURVIEW_NO"));
-
+				list.add(pudVO);
 			}
 
 		} catch (SQLException se) {
@@ -191,11 +193,11 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 				}
 			}
 		}
-		return pudVO;
+		return list;
 	}
 	
 	@Override
-	public List<Purview_DetailVO> getAll() {
+	public List<Purview_DetailVO> getAll(String adm_no) {
 		List<Purview_DetailVO> list = new ArrayList<Purview_DetailVO>();
 		Purview_DetailVO pudVO = null;
 
@@ -204,14 +206,17 @@ public class Purview_DetailDAO implements Purview_Detail_interface{
 		ResultSet rs = null;
 
 		try {
-
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
+			
+			pstmt.setString(1,adm_no);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				pudVO = new Purview_DetailVO();
 				pudVO.setAdm_no(rs.getString("ADM_NO"));
+				pudVO.setPurview_name(rs.getString("PURVIEW_NAME"));
 				pudVO.setPurview_no(rs.getString("PURVIEW_NO"));
 				list.add(pudVO); 
 			}

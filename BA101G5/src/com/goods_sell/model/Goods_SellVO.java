@@ -9,7 +9,14 @@ public class Goods_SellVO implements java.io.Serializable{
 		private Integer gs_price;
 		private String gs_info;
 		private byte[] gs_img;
-		private String gs_sta;
+		private Character gs_sta;
+		private Character gs_type;
+		public Character getGs_type() {
+			return gs_type;
+		}
+		public void setGs_type(Character gs_type) {
+			this.gs_type = gs_type;
+		}
 		public String getGs_no() {
 			return gs_no;
 		}
@@ -52,10 +59,11 @@ public class Goods_SellVO implements java.io.Serializable{
 		public void setGs_img(byte[] gs_img) {
 			this.gs_img = gs_img;
 		}
-		public String getGs_sta() {
+		public Character getGs_sta() {
 			return gs_sta;
 		}
-		public void setGs_sta(String gs_sta) {
+		public void setGs_sta(Character gs_sta) {
 			this.gs_sta = gs_sta;
 		}
+		
 }
