@@ -1,5 +1,7 @@
 package com.checklist.model;
+
 import java.sql.Timestamp;
+
 public class ChecklistVO implements java.io.Serializable {
 	private String chli_no;
 	private Integer chli_cate;
@@ -12,6 +14,11 @@ public class ChecklistVO implements java.io.Serializable {
 	private String chli_reason;
 	private Timestamp chli_date;
 	private String chli_sta;
+	private String mf_no;
+	private String mem_no;
+	private String gs_no;
+	private String picnic_no;
+	private String article_no;
 	public String getChli_no() {
 		return chli_no;
 	}
@@ -78,4 +85,37 @@ public class ChecklistVO implements java.io.Serializable {
 	public void setChli_sta(String chli_sta) {
 		this.chli_sta = chli_sta;
 	}
+	public String getMf_no() {
+		return mf_no;
+	}
+	public void setMf_no(String mf_no) {
+		this.mf_no = mf_no;
+	}
+	public String getMem_no() {
+		return mem_no;
+	}
+	public void setMem_no(String mem_no) {
+		this.mem_no = mem_no;
+	}
+	public String getGs_no() {
+		return gs_no;
+	}
+	public void setGs_no(String gs_no) {
+		this.gs_no = gs_no;
+	}
+	public String getPicnic_no() {
+		return picnic_no;
+	}
+	public void setPicnic_no(String picnic_no) {
+		this.picnic_no = picnic_no;
+	}
+	public String getArticle_no() {
+		return article_no;
+	}
+	public void setArticle_no(String article_no) {
+		this.article_no = article_no;
+	}
+	
+	
+
 }
