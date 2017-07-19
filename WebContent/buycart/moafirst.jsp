@@ -153,7 +153,7 @@
 								<%@ include file="/buycart/page.file"%>
 								<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
 									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-									<div class="col-sm-7">
+									<div class="col-sm-12">
 										<div class="thumbnail"  style="display: inline-block;" ;>
 											<img
 												src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
