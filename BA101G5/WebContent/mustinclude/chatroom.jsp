@@ -49,10 +49,19 @@
 
 
 // 	// 群組聊天
-// 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
-// 	List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
-// 	ChatroomService chatroomSvc = new ChatroomService();
+ 	Chatroom_MembersService chatroom_membersSvc = new Chatroom_MembersService();
+ 	//List<Chatroom_MembersVO> listChatroom_MembersVO = chatroom_membersSvc.getAll();
+ 	ChatroomService chatroomSvc = new ChatroomService();
 // 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
+
+// *** bug
+// Chatroom_MembersVO2 cmVO2 = chatroom_membersSvc.getOnewCond("MG00000002", "MG00000003");
+// System.out.println("chatroom.jsp / cmVO2.getMem_no() = " + cmVO2.getMem_no());
+// *** bug
+// *** 替代
+ 	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
+// 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
+// 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
 
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
@@ -100,7 +109,7 @@
 								<h3 class="panel-title">野餐團</h3>
 							</div>
 							<!-- bs-list-group -->
-							<div class="list-group bs-list-group">
+							<div class="list-group bs-list-group chatroom-list-picnic-group">
 <c:forEach var="entryOfMapPG" items="${ mapPG.entrySet() }">
 								<a href="#" class="list-group-item" id="${ entryOfMapPG.getKey() }"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapPG.getValue() }</a>
 </c:forEach>
@@ -111,7 +120,7 @@
 								<h3 class="panel-title">好友</h3>
 							</div>
 							<!-- bs-list-group -->
-							<div class="list-group bs-list-group">
+							<div class="list-group bs-list-group chatroom-list-friend-room">
 <c:forEach var="entryOfMapFriendRoom" items="${ mapFriendRoom.entrySet() }">
 								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapFriendRoom.getValue() }</a>
 </c:forEach>
@@ -241,10 +250,18 @@
 
 
 
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>
 		<script>
 			var gObjCR = {};
 			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
 			gObjCR.memName = '${sessionScope.gVO.getMEM_NAME()}';
+
+            $('.chatroom-list-friend-room .list-group-item').on('click', function(){
+                $('#aChatroom-container').css('display', 'block');
+                //alert(this.id); //"MG00000003"
+                gObjCR.chatWithMemNo = this.id;
+                // gObjCR.myRoomNo = 
+                onWinResize();
+            });
 		</script>
-		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>
 		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_websocket.js"></script>

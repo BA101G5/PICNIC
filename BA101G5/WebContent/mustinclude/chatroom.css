@@ -37,6 +37,7 @@
   position: fixed;
   bottom: 0px;
   right: 0px;
+  display: none;
 }
 #aChatroom-container .panel{
   margin-bottom: 0px;

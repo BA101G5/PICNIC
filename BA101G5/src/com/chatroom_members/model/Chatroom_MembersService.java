@@ -49,5 +49,11 @@ public class Chatroom_MembersService {
 		return dao.getAll();
 	}
 	
-
+	public List<Chatroom_MembersVO2> getAllwCond() {
+		return dao.getAllwCond();
+	}
+	
+	public Chatroom_MembersVO2 getOnewCond(String mem_no, String mem_no2) {
+		return dao.getOnewCond(mem_no, mem_no2);
+	}
 }
