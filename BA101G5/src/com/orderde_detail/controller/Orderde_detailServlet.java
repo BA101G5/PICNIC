@@ -128,12 +128,10 @@ public class Orderde_detailServlet extends HttpServlet {
 
 			String url = null;
 			if (action.equals("insertintocartA")) {
-				url = "/buycart/maosecond.jsp";
+				url = "/buycart/moafirst.jsp";
 			} else if (action.equals("insertintocartB")) {
 				url = "/buycart/maothird.jsp";
-			} else {
-				url = "/picnic/maosecondui3.jsp";
-			}
+			} 
 			javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
 			SuccessView.forward(req, res);
 		}

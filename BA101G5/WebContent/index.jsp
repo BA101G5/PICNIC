@@ -24,6 +24,10 @@ body{
 	min-height: 100%;
 	/*background-image:url(1-12030R10P4.jpg);*/
 	background-image:url(4878670-full-hdtv-wallpapers--ed.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 }
 .navbar{
 	opacity: 0.9;
