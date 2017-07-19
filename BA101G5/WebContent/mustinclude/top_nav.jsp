@@ -32,7 +32,7 @@
 
 					<!-- ¥k¿ï³æ -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">shyangs</a></li>
+						<li><a href="<%=request.getContextPath()%>/personal/personal.jsp">shyangs</a></li>
 						<li><a href="#"><form method="POST"
 								action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?"
 								onclick="submit()">

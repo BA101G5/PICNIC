@@ -42,12 +42,12 @@
 			<div class="col-sm-11 cal-sm-push-1">
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav side-nav">
-						<li><a href="#">
+						<li>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
 									<p>A</p>
 								</FORM>
-						</a></li>
+					</li>
 						<li><a href="#">
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
 									onclick="submit()">
@@ -76,7 +76,7 @@
 			<div class="col-sm-11 col-sm-push-1 ">
 				<div class="col-sm-9 col-sm-push-1 ">
 					<div class="btn-group btn-group-justified ">
-						<a href="# " class="btn btn-default " role="button ">�^���D</a>
+						<a href="# " class="btn btn-default " role="button ">回標題</a>
 					</div>
 					<div class="col-sm-11 col-sm-push-3 ">
 						<jsp:include page="/mustinclude/footer.jsp" />

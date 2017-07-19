@@ -14,7 +14,7 @@ public class PlaceDAO implements PlaceDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		} catch (NamingException e) {
 
 			e.printStackTrace();
@@ -151,25 +151,30 @@ public class PlaceDAO implements PlaceDAO_interface {
 		PreparedStatement pstmt = null;
 		PlaceVO placeVO = null;
 		ResultSet rs = null;
+		
 		try {
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, P_place);
 			rs = pstmt.executeQuery();
-
+			
 			rs.next();
 			placeVO = new PlaceVO();
 			placeVO.setMf_no(rs.getString("MF_NO"));
 			placeVO.setMem_no(rs.getString("MEM_NO"));
 			placeVO.setP_no(rs.getString("P_NO"));
 			placeVO.setP_name(rs.getString("P_NAME"));
+			System.out.println("helloasdfadsf");
 			placeVO.setP_until(rs.getTimestamp("P_UNTIL"));
 			placeVO.setP_place(rs.getString("P_PLACE"));
 			placeVO.setP_pop(rs.getInt("P_POP"));
 			placeVO.setPimg(rs.getBytes("PIMG"));
+			System.out.println("helloasdfadsf");
 			placeVO.setP_info(rs.getString("P_INFO"));
 			placeVO.setP_sta(rs.getString("P_STA"));
 			placeVO.setP_price(rs.getInt("P_PRICE"));
+			System.out.println("helloasdfadsf");
 			placeVO.setPicnic_no(rs.getString("PICNIC_NO"));
 			placeVO.setP_lat(rs.getDouble("P_LAT"));
 			placeVO.setP_lon(rs.getDouble("P_LON"));
@@ -285,12 +290,13 @@ public class PlaceDAO implements PlaceDAO_interface {
 	}
 
 	@Override
-	public void insertplace(PlaceVO placeVO) {
+	public String insertplace(PlaceVO placeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs =null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT);
+			pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT,new int[]{1});
 			pstmt.setString(1, placeVO.getMem_no());
 			pstmt.setString(2, placeVO.getP_place());
 			pstmt.setString(3, placeVO.getPicnic_no());
@@ -298,7 +304,12 @@ public class PlaceDAO implements PlaceDAO_interface {
 			pstmt.setDouble(5, placeVO.getP_lon());
 			pstmt.setInt(6, placeVO.getP_pop());
 			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			rs.next();
+			String p_no = rs.getString(1);
 
+			return p_no;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
