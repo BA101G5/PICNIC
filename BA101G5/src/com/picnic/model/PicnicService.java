@@ -60,4 +60,37 @@ public class PicnicService {
 		return picnicname;
 
 	}
+	//----------------------------------------------------------
+			public PicnicVO k_addPicnic() {
+				return null;
+			}
+
+			public PicnicVO k_updatePicnic() {
+				return null;
+			}
+
+			public void k_deletePicnic() {
+			}
+
+			public PicnicVO k_getOne(String picnic_no) {
+				return dao.findByPrimaryKey(picnic_no);
+			}
+
+			public List<PicnicVO> k_getAll() {
+				return dao.getAll();
+			}
+			
+			public List<String> k_getAllandMEM(String MEM_NO){
+				return dao.k_getAllandMEM(MEM_NO);
+			}
+			
+			public String k_addPicnic(String picnic_name,Timestamp picnic_date,Integer picnic_pl){
+				PicnicVO picnicVO=new PicnicVO();
+				picnicVO.setPicnic_name(picnic_name);
+				picnicVO.setPicnic_date(picnic_date);
+				picnicVO.setPicnic_pl(picnic_pl);
+				String picnic_no = dao.addPicnic(picnicVO);
+					return picnic_no;
+				
+			}
 }
