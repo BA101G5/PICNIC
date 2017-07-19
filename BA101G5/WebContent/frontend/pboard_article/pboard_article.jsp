@@ -2,15 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pboard_article.model.*"%>
+<%@ page import="com.general_member.model.*"%>
 
 <%
+	GeneralMemberService gmSvc = new GeneralMemberService();
+	pageContext.setAttribute("gmSvc", gmSvc);
+
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
 	Collections.reverse(list);
 	pageContext.setAttribute("list",list);
 %>
 <%
-Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
+	Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
 %>
 <html>
 	<head>
@@ -66,6 +70,9 @@ body{
 			#divBoardPostNewpost{
 				overflow-y: auto;
 			}
+			.mem-guest{
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -110,14 +117,14 @@ body{
 
 			<h2>留言板</h2>
 
-			<div class="col-xs-12 col-sm-12 board-post-newpost-title" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpostTitle">
+			<div class="col-xs-12 col-sm-12 board-post-newpost-title mem-guest" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpostTitle">
 			</div>
-			<div class="col-xs-12 col-sm-12 board-post-newpost" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
+			<div class="col-xs-12 col-sm-12 board-post-newpost mem-guest" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
 			</div>
-			<div class="btn-group" id="btnInsertImg">
+			<div class="btn-group mem-guest" id="btnInsertImg">
 				<a href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</a>
 			</div>
-			<div class="btn-group" id="btnPostNewPost">
+			<div class="btn-group mem-guest" id="btnPostNewPost">
 				<a href="#" class="btn btn-default btn-board-newpost" role="button">發表留言</a>
 			</div>
 
@@ -179,7 +186,7 @@ body{
 				<div class="row article-row">
 
 					<div class="col-xs-10 col-sm-10 article-author">
-						shyangs (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
+						${gmSvc.getOneGeneralMember(pboard_articleVO.author_no).getMEM_NAME()} (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
 					</div>
 				</div>
 				<div class="row article-row">
@@ -195,13 +202,18 @@ body{
 	</div>
 </div>
 
-		
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="<%=request.getContextPath()%>/js/encodeImageFileAsURL.js"></script>
 		<script>
+			// sessionScope.gVO.getMEM_NO(): "${sessionScope.gVO.getMEM_NO()}"
+			var memNO = '${sessionScope.gVO.getMEM_NO()}';
+			if(memNO !== ''){ $('.mem-guest').css('display', 'block'); }
+
 			$('#btnPostNewPost').on('click', function(){
 				$('#article_title')[0].value = $('#divBoardPostNewpostTitle').html();
 				$('#article_text')[0].value = $('#divBoardPostNewpost').html();
+				$('#author_no')[0].value = memNO;
 				$('#formPost').submit();
 			});
 

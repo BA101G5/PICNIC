@@ -123,7 +123,7 @@ textarea {
 	
 	<!-- title -->
 
-	<div class="container">
+	<div class="container" " style="background: white;">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-push-1 dd">
 				<label><h1>¤@¯ë·|­ûµù¥U</h1></label>

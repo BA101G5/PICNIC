@@ -14,7 +14,6 @@
 
 					<!-- 左選單 -->
 					<ul class="nav navbar-nav">
-						<li><a href="#">參團</a></li>
 						<li><a
 							href="<%=request.getContextPath()%>/picnic/maosecondui.jsp">開團</a></li>
 						<li><a
@@ -25,24 +24,22 @@
 								<p>成團</p>
 								<input type="hidden" name="action" value="insert">
 							</form></a></li>
-
-						<li><a href="forum.html">討論區</a></li>
-
 					</ul>
 
 					<!-- 右選單 -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">shyangs</a></li>
+						<li><a href="<%=request.getContextPath()%>/personal/personal.jsp">shyangs</a></li>
 						<li><a href="#"><form method="POST"
 								action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?"
 								onclick="submit()">
 								<span class="glyphicon glyphicon-shopping-cart"></span> 
 								<input type="hidden" name="action" value="insert">
 							</form></a></li>
+				
 					</ul>
 
 					<!-- 搜尋表單 -->
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-right" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="請輸入關鍵字">
 						</div>

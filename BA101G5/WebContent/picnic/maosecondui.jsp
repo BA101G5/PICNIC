@@ -31,84 +31,7 @@
 	});
 </script>
 
-<script>
-	var customLabel = {
-		restaurant : {
-			label : 'R'
-		},
-		bar : {
-			label : 'B'
-		}
-	};
 
-	function initMap() {
-		var map = new google.maps.Map(document.getElementById('map'), {
-			center : new google.maps.LatLng(-33.863276, 151.207977),
-			zoom : 12
-		});
-		var infoWindow = new google.maps.InfoWindow;
-
-		// Change this depending on the name of your PHP or XML file
-		downloadUrl(
-				'https://storage.googleapis.com/mapsdevsite/json/mapmarkers2.xml',
-				function(data) {
-					var xml = data.responseXML;
-					var markers = xml.documentElement
-							.getElementsByTagName('marker');
-					Array.prototype.forEach.call(markers, function(markerElem) {
-						var name = markerElem.getAttribute('name');
-						var address = markerElem.getAttribute('address');
-						var type = markerElem.getAttribute('type');
-						var point = new google.maps.LatLng(
-								parseFloat(markerElem.getAttribute('lat')),
-								parseFloat(markerElem.getAttribute('lng')));
-
-						var infowincontent = document.createElement('div');
-						var strong = document.createElement('strong');
-						strong.textContent = name
-						infowincontent.appendChild(strong);
-						infowincontent
-								.appendChild(document.createElement('br'));
-
-						var text = document.createElement('text');
-						text.textContent = address
-						infowincontent.appendChild(text);
-						var icon = customLabel[type] || {};
-						var marker = new google.maps.Marker({
-							map : map,
-							position : point,
-							label : icon.label
-						});
-						marker.addListener('click', function() {
-							infoWindow.setContent(infowincontent);
-							infoWindow.open(map, marker);
-						});
-					});
-				});
-	}
-
-	function downloadUrl(url, callback) {
-		var request = window.ActiveXObject ? new ActiveXObject(
-				'Microsoft.XMLHTTP') : new XMLHttpRequest;
-
-		request.onreadystatechange = function() {
-			if (request.readyState == 4) {
-				request.onreadystatechange = doNothing;
-				callback(request, request.status);
-			}
-		};
-
-		request.open('GET', url, true);
-		request.send(null);
-	}
-
-	function doNothing() {
-	}
-</script>
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxmcF3GtUMJYpT78-gvq2jG3ER8wE15tg&callback=initMap">
-	
-</script>
 <style>
 #map {
 	height: 600px;
@@ -163,27 +86,28 @@ body {
 							<table>
 								<tr>
 									<td>縣市: <select name="area" id="input"
-										class="form-control" required="required">
-											<option value="台北市">台北市</option>
-											<option value="aoeu">新北市</option>
-											<option value="aoeu">桃園市</option>
-											<option value="aoeu">臺中市</option>
-											<option value="aoeu">臺南市</option>
-											<option value="aoeu">基隆市</option>
-											<option value="aoeu">新竹市</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
-											<option value="aoeu">aeou</option>
+										class="form-control" required="required" onmouseup="change(this.value)">
+											<option value="新北市">新北市</option>
+											<option value="高雄市">高雄市</option>
+											<option value="臺中市">臺中市</option>
+											<option value="桃園縣">桃園縣</option>
+											<option value="臺南市">臺南市</option>
+											<option value="彰化縣">彰化縣</option>
+											<option value="屏東縣">屏東縣</option>
+											<option value="雲林縣">雲林縣</option>
+											<option value="苗栗縣">苗栗縣</option>
+											<option value="嘉義縣">嘉義縣</option>
+											<option value="新竹縣">新竹縣</option>
+											<option value="南投縣">南投縣</option>
+											<option value="宜蘭縣">宜蘭縣</option>
+											<option value="基隆市">基隆市</option>
+											<option value="花蓮縣">花蓮縣</option>
+											<option value="嘉義市">嘉義市</option>
+											<option value="臺東縣">臺東縣</option>
 									</select><br></td>
 								</tr>
 								<tr>
-									<td>地點 :<br> <input type="text" name="address"
+									<td>地點 :<br> <input type="text"  name="address"  id="address"
 										value="${sessionScope.address} "><br> <font
 										color="red")>${errorMsgs.address}</font></td>
 								</tr>
@@ -197,6 +121,199 @@ body {
 										name="date" value="${sessionScope.date}"><br> <font
 										color="red")>${errorMsgs.date}</font></td>
 								</tr>
+								
+								<script>
+var Latitude =22.6158015;
+var Longitude =120.7120023;
+var zoom =7;
+ function change(value){
+
+	 switch(value) {
+	    case '新北市':
+	    	Latitude =24.91571;
+	        Longitude =121.6739;
+	        zoom =12;
+	        break;
+	    case '高雄市':
+	    	Latitude =23.01087;
+	        Longitude =120.666;
+	        zoom =12;
+	        break;
+	    case '臺中市':
+	    	Latitude =24.23321;
+	        Longitude =120.9417;
+	        zoom =12;
+	        break;
+	    case '臺北市':
+	    	Latitude =25.09108;
+	        Longitude =121.5598;
+	        zoom =12;
+	        break;
+	    case '桃園縣':
+	    	Latitude =24.93759;
+	        Longitude =121.2168;
+	        zoom =12;
+	        break;
+	    case '臺南市':
+	    	Latitude =23.1417;
+	        Longitude =120.2513;
+	        zoom =12;
+	        break;
+	    case '彰化縣':
+	    	Latitude =23.99297;
+	        Longitude =120.4818;
+	        zoom =12;
+	        break;
+	    case '屏東縣':
+	    	Latitude =22.54951;
+	        Longitude =120.62;
+	        zoom =12;
+	        break;
+	    case '雲林縣':
+	    	Latitude =23.75585;
+	        Longitude =120.3897;
+	        zoom =12;
+	        break;
+	    case '苗栗縣':
+	    	Latitude =24.48927;
+	        Longitude =120.9417;
+	        zoom =12;
+	        break;
+	    case '嘉義縣':
+	    	Latitude =23.45889;
+	        Longitude =120.574;
+	        zoom =12;
+	        break;
+	    case '新竹縣':
+	    	Latitude =24.70328;
+	        Longitude =121.1252;
+	        zoom =12;
+	        break;
+	    case '南投縣':
+	    	Latitude =23.83876;
+	        Longitude =120.9876;
+	        zoom =12;
+	        break;
+	    case '宜蘭縣':
+	    	Latitude =24.69295;
+	        Longitude =121.7195;
+	        zoom =12;
+	        break;
+	    case '基隆市':
+	    	Latitude =25.10898;
+	        Longitude =121.7081;
+	        zoom =12;
+	        break;
+	    case '花蓮縣':
+	    	Latitude =23.7569;
+	        Longitude =121.3542;
+	        zoom =12;
+	        break;
+	    case '嘉義市':
+	    	Latitude =23.47545;
+	        Longitude =120.4473;
+	        zoom =12;
+	        break;
+	    case '臺東縣':
+	    	Latitude =22.98461;
+	        Longitude =120.9876;
+	        zoom =12;
+	        break;
+	    default:    	
+	} 
+	 initMap()
+ }
+
+
+
+	var customLabel = {
+		restaurant : {
+			label : 'R'
+		},
+		bar : {
+			label : 'B'
+		}
+	};
+
+	function initMap() {
+	
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center :{lat:Latitude, lng: Longitude},
+			zoom : zoom
+		});
+		var infoWindow = new google.maps.InfoWindow;
+
+		// Change this depending on the name of your PHP or XML file
+		downloadUrl(
+				'<%=request.getContextPath()%>/place.xml',
+				function(data) {
+					var xml = data.responseXML;
+					var markers = xml.documentElement
+							.getElementsByTagName('marker');
+					Array.prototype.forEach.call(markers, function(markerElem) {
+						var name = markerElem.getAttribute('name');
+						var address = markerElem.getAttribute('address');
+						var type = markerElem.getAttribute('type');
+						var point = new google.maps.LatLng(
+								parseFloat(markerElem.getAttribute('lat')),
+								parseFloat(markerElem.getAttribute('lng')));
+
+						var infowincontent = document.createElement('div');
+						var strong = document.createElement('strong');
+						strong.textContent = name
+						infowincontent.appendChild(strong);
+						infowincontent
+								.appendChild(document.createElement('br'));
+
+						var text = document.createElement('text');
+						text.textContent = address
+						infowincontent.appendChild(text);
+						var icon = customLabel[type] || {};
+						var marker = new google.maps.Marker({		
+							map : map,
+							position : point,
+							label : icon.label
+						});
+						marker.addListener('click', function() {
+							infoWindow.setContent(infowincontent);
+							infoWindow.open(map, marker);	
+						});
+		
+						marker.addListener('click', function() {
+							address=address.split(' ')[1];
+							document.getElementById("address").value=address;
+						}(address),false);
+					       
+					
+					});
+				});
+	}
+	function downloadUrl(url, callback) {
+		var request = window.ActiveXObject ? new ActiveXObject(
+				'Microsoft.XMLHTTP') : new XMLHttpRequest;
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+				request.onreadystatechange = doNothing;
+				callback(request, request.status);
+			}
+		};
+
+		request.open('GET', url, true);
+		request.send(null);
+	}
+
+	function doNothing() {
+	}
+</script>
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxmcF3GtUMJYpT78-gvq2jG3ER8wE15tg&callback=initMap">
+    </script>
+								
+								
+								
+								
+								
 								<tr>
 									<td>時間 : <br> <select id="SearchTime" name="hour"
 										style="width: 85px;"><option value="">請選擇</option>

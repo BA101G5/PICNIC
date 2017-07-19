@@ -90,9 +90,9 @@ li+a {
 					class="com.general_member.model.GeneralMemberService" />
 <jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
-<div class="container">
+<div class="container" >
 	<div class="row">
-		<div class="col-xs-12 col-sm-12">
+		<div class="col-xs-12 col-sm-12" style="background: white;">
 
 			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
 				<img

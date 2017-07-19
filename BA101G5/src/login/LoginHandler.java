@@ -19,8 +19,8 @@ import javax.servlet.annotation.WebServlet;
 public class LoginHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-   //¡iÀË¬d¨Ï¥ÎªÌ¿é¤Jªº±b¸¹(account) ±K½X(password)¬O§_¦³®Ä¡j
-   //¡i¹ê»Ú¤WÀ³¦Ü¸ê®Æ®w·j´M¤ñ¹ï¡j
+   //ã€æª¢æŸ¥ä½¿ç”¨è€…è¼¸å…¥çš„å¸³è™Ÿ(account) å¯†ç¢¼(password)æ˜¯å¦æœ‰æ•ˆã€‘
+   //ã€å¯¦éš›ä¸Šæ‡‰è‡³è³‡æ–™åº«æœå°‹æ¯”å°ã€‘
   protected GeneralMemberVO allowUser(String account, String password) {
 
 	GeneralMemberService gs = new GeneralMemberService();
@@ -64,14 +64,15 @@ public class LoginHandler extends HttpServlet {
     res.setContentType("text/html; charset=Big5");
     PrintWriter out = res.getWriter();
 
-    // ¡i¨ú±o¨Ï¥ÎªÌ ±b¸¹(account) ±K½X(password)¡j
+    // ã€å–å¾—ä½¿ç”¨è€… å¸³è™Ÿ(account) å¯†ç¢¼(password)ã€‘
     String account = req.getParameter("account");
     String password = md5(req.getParameter("password"));
-    //ÅçÃÒ
+
+    //ï¿½ï¿½ï¿½ï¿½
     
     if(allowUser(account,password)!= null){
     	if(!allowUser(account,password).getMEM_STA().equals('E')){
-    		req.setAttribute("errorMsgs"," * ©|¥¼ÅçÃÒ"); 
+    		req.setAttribute("errorMsgs"," * ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"); 
     		RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
     		failureView.forward(req, res);
     		return;
@@ -81,7 +82,7 @@ public class LoginHandler extends HttpServlet {
     
     if(allowUser1(account,password)!= null){
     	if(!allowUser1(account,password).getMF_STA().equals('E')){
-    		req.setAttribute("errorMsgs"," * ©|¥¼ÅçÃÒ½Ğ¥hÅçÃÒ"); 
+    		req.setAttribute("errorMsgs"," * ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½Ò½Ğ¥hï¿½ï¿½ï¿½ï¿½"); 
     		RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
     		failureView.forward(req, res);
     		return;
@@ -90,20 +91,23 @@ public class LoginHandler extends HttpServlet {
     
     
     
-    // ¡iÀË¬d¸Ó±b¸¹ , ±K½X¬O§_¦³®Ä¡j 
-    if (allowUser(account, password) == null && allowUser1(account, password) == null) {          //¡i±b¸¹ , ±K½XµL®Ä®É¡j
-    	req.setAttribute("errorMsgs"," * ±b±K¿ù»~"); 
+    // ï¿½iï¿½Ë¬dï¿½Ó±bï¿½ï¿½ , ï¿½Kï¿½Xï¿½Oï¿½_ï¿½ï¿½ï¿½Ä¡j 
+    if (allowUser(account, password) == null && allowUser1(account, password) == null) {          //ï¿½iï¿½bï¿½ï¿½ , ï¿½Kï¿½Xï¿½Lï¿½Ä®É¡j
+    	req.setAttribute("errorMsgs"," * ï¿½bï¿½Kï¿½ï¿½~"); 
+
     	RequestDispatcher failureView = req.getRequestDispatcher("/signin.jsp");
 		failureView.forward(req, res);
      
-    }else {                                       //¡i±b¸¹ , ±K½X¦³®Ä®É, ¤~°µ¥H¤U¤u§@¡j
+    }else {                                       //ã€å¸³è™Ÿ , å¯†ç¢¼æœ‰æ•ˆæ™‚, æ‰åšä»¥ä¸‹å·¥ä½œã€‘
     	HttpSession session = req.getSession();
     	HttpSession session1 = req.getSession();
     	if(allowUser(account, password) != null && allowUser1(account, password) == null){
     		//generalmember
         	session1.setAttribute("gVO", allowUser(account, password));
+
   	
-          session.setAttribute("account", account);   //*¤u§@1: ¤~¦bsession¤º°µ¤w¸gµn¤J¹Lªº¼ĞÃÑ
+          session.setAttribute("account", account);   //*ï¿½uï¿½@1: ï¿½~ï¿½bsessionï¿½ï¿½ï¿½ï¿½ï¿½wï¿½gï¿½nï¿½Jï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
     	}else if(allowUser1(account, password) != null && allowUser(account, password) == null){
     		//manufacturers
    		
@@ -115,29 +119,31 @@ public class LoginHandler extends HttpServlet {
       
        try {                                                        
          String location = (String) session.getAttribute("location");
-
+         //System.out.println("***** LoginHandle /  location = " + req.getContextPath());
        
          
          if (location != null) {   
         	 session.removeAttribute("location");
-        	 res.sendRedirect(location);//*¤u§@2: ¬İ¬İ¦³µL¨Ó·½ºô­¶ (-->¦p¦³¨Ó·½ºô­¶:«h­«¾É¦Ü¨Ó·½ºô­¶)
+        	 res.sendRedirect(location);//*å·¥ä½œ2: çœ‹çœ‹æœ‰ç„¡ä¾†æºç¶²é  (-->å¦‚æœ‰ä¾†æºç¶²é :å‰‡é‡å°è‡³ä¾†æºç¶²é )
         	
            return;
          }
        }catch (Exception ignored) { }
 
-      res.sendRedirect(req.getContextPath()+"/general_member/formu.jsp");  //*¤u§@3: (-->¦pµL¨Ó·½ºô­¶:«h­«¾É¦Ülogin_success.jsp)
+//      res.sendRedirect(req.getContextPath()+"/general_member/formu.jsp");  //*å·¥ä½œ3: (-->å¦‚ç„¡ä¾†æºç¶²é :å‰‡é‡å°è‡³login_success.jsp)
+      //System.out.println("****** LoginHandle /*****/" + req.getContextPath());
+      res.sendRedirect(req.getContextPath()+"/index.jsp");
     }
   }
   public static String md5(String str) {
 	    String md5=null;
 	    try {
 	      MessageDigest md=MessageDigest.getInstance("MD5");
-	      byte[] barr=md.digest(str.getBytes());  //±N byte °}¦C¥[±K
-	      StringBuffer sb=new StringBuffer();  //±N byte °}¦CÂà¦¨ 16 ¶i¨î
+	      byte[] barr=md.digest(str.getBytes());  //å°‡ byte é™£åˆ—åŠ å¯†
+	      StringBuffer sb=new StringBuffer();  //å°‡ byte é™£åˆ—è½‰æˆ 16 é€²åˆ¶
 	      for (int i=0; i < barr.length; i++) {sb.append(byte2Hex(barr[i]));}
 	      String hex=sb.toString();
-	      md5=hex.toUpperCase(); //¤@«ßÂà¦¨¤j¼g
+	      md5=hex.toUpperCase(); //ä¸€å¾‹è½‰æˆå¤§å¯«
 	      }
 	    catch(Exception e) {e.printStackTrace();}
 	    return md5;

@@ -262,25 +262,33 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 	}
 
 	@Override
-	public void insertplace(PlaceVO placeVO) {
+	public String insertplace(PlaceVO placeVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String p_no =null;
 		try {
 			Class.forName(driver);
-			con=DriverManager.getConnection(url,userid,passwd);
-				pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT);
-				pstmt.setString(1, placeVO.getMem_no());
-				pstmt.setString(2, placeVO.getP_place());
-				pstmt.setString(3, placeVO.getPicnic_no());
-				pstmt.setDouble(4,placeVO.getP_lat());
-				pstmt.setDouble(5, placeVO.getP_lon());
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(INSERT_FROM_CUST_STMT,new int[]{1});
+			pstmt.setString(1, placeVO.getMem_no());
+			pstmt.setString(2, placeVO.getP_place());
+			pstmt.setString(3, placeVO.getPicnic_no());
+			pstmt.setDouble(4, placeVO.getP_lat());
+			pstmt.setDouble(5, placeVO.getP_lon());
+			pstmt.setInt(6, placeVO.getP_pop());
+			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			rs.next();
+			 p_no = rs.getString(1);
 
-				pstmt.executeUpdate();
+
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
 		} finally {
 
 			if (pstmt != null) {
@@ -298,8 +306,10 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 				}
 			}
 		}
-
+		return p_no;
+		
 	}
+
 
 	public static void main(String[] args) {
 		PlaceJDBCDAO placejdbcdao = new PlaceJDBCDAO();
@@ -340,7 +350,7 @@ public class PlaceJDBCDAO implements PlaceDAO_interface {
 		// placejdbcdao.delete("P000000001");
 		// search one
 		// PlaceVO placeVO =
-		// placejdbcdao.findByPrimaryKey("972ªá½¬¿¤¨qªL¶m´I¥@§ø´I¥@291¸¹");
+		// placejdbcdao.findByPrimaryKey("972ï¿½á½¬ï¿½ï¿½ï¿½qï¿½Lï¿½mï¿½Iï¿½@ï¿½ï¿½ï¿½Iï¿½@291ï¿½ï¿½");
 		// System.out.println(placeVO.getP_no());
 		// System.out.println(placeVO.getMf_no());
 		// System.out.println(placeVO.getMem_no());

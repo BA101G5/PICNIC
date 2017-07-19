@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+
 import com.general_member.model.GeneralMemberService;
+
 import com.general_member.model.GeneralMemberVO;
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
@@ -36,15 +38,13 @@ public class Goods_SellServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 	
-		if ("getOne".equals(action)) {
+		if (action.equals("getOne")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-
-			
-			//String account = req.getParameter("account");
-			String account ="M000000001";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 			
 			try {
 				String gsno = new String(req.getParameter("gsno"));
@@ -65,6 +65,7 @@ public class Goods_SellServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
+
 		if ("insert".equals(action)) {
 
 			Map<String,String> errorMsgs = new HashMap<String,String>();
@@ -77,7 +78,7 @@ public class Goods_SellServlet extends HttpServlet {
 System.out.println(MF_NO);
 				String GS_NAME =req.getParameter("gs_name").trim();
 				if(GS_NAME.equals("")){
-					errorMsgs.put("gs_name","*½Ð¿é¤J°Ó«~¦WºÙ");
+					errorMsgs.put("gs_name","*ï¿½Ð¿ï¿½Jï¿½Ó«~ï¿½Wï¿½ï¿½");
 				}
 System.out.println(GS_NAME);				
 				byte[] GS_IMG = null;
@@ -94,12 +95,12 @@ System.out.println(GS_NAME);
 				
 				Integer GS_PRICE = Integer.parseInt(req.getParameter("gs_price").trim());
 				if(GS_PRICE.equals("")){
-					errorMsgs.put("gs_price","*½Ð¿é¤J°Ó«~»ù®æ");
+					errorMsgs.put("gs_price","*ï¿½Ð¿ï¿½Jï¿½Ó«~ï¿½ï¿½ï¿½");
 				}
 System.out.println(GS_DATE);				
 				String GS_INFO = req.getParameter("gs_info");
 				if(GS_INFO.equals("")){
-					errorMsgs.put("gs_info","*½Ð¿é¤J°Ó«~¸ê°T");
+					errorMsgs.put("gs_info","*ï¿½Ð¿ï¿½Jï¿½Ó«~ï¿½ï¿½T");
 				}
 System.out.println(GS_INFO);				
 				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
@@ -126,10 +127,34 @@ System.out.println(GS_STA);
 				
 				url = "/personal/personal.jsp";
 				
+=======
+		
+		if (action.equals("selectgoods_sell")) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
+
+			try {
+				Orderde_DetailService orderde_detailSvc =new Orderde_DetailService();
+				orderde_detailSvc.getNumberByGsNo();
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				List<Goods_SellVO> list=goods_sellSvc.getAll();
+				
+				
+				
+				String url = null;
+				if (action.equals("selectgoods_sell")) {
+					 url="/buycart/maosecond2.jsp";
+				}
+
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 			} catch (Exception e) {
+
 				
 				System.out.println("errorrrrrr");
 				throw new ServletException(e);
@@ -144,34 +169,34 @@ System.out.println(GS_STA);
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try {
-				/*************************** 1.±µ¦¬½Ð¨D°Ñ¼Æ ****************************************/
+				/*************************** 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ð¨Dï¿½Ñ¼ï¿½ ****************************************/
 				String GS_NO = new String(req.getParameter("GS_NO"));
 				
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ ****************************************/
+				/*************************** 2.ï¿½}ï¿½lï¿½dï¿½ß¸ï¿½ï¿½ ****************************************/
 				Goods_SellService gsSvc =  new Goods_SellService();
 				Goods_SellVO GSVO = gsSvc.getOne(GS_NO);
 
 				/***************************
-				 * 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)
+				 * 3.ï¿½dï¿½ß§ï¿½ï¿½ï¿½,ï¿½Ç³ï¿½ï¿½ï¿½ï¿½(Send the Success view)
 				 ************/
 				req.setAttribute("GSVO", GSVO);
 
-				// ¸ê®Æ®w¨ú¥XªºGeneralMemberVOª«¥ó,¦s¤Jreq
+				// ï¿½ï¿½Æ®wï¿½ï¿½Xï¿½ï¿½GeneralMemberVOï¿½ï¿½ï¿½ï¿½,ï¿½sï¿½Jreq
 				String url = "/good_update.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// ¦¨¥\Âà¥æ
+				RequestDispatcher successView = req.getRequestDispatcher(url);// ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½
 				// update_general_member_input.jsp
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** ï¿½ï¿½Lï¿½iï¿½àªºï¿½ï¿½~ï¿½Bï¿½z **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ï¿½Lï¿½kï¿½ï¿½oï¿½nï¿½×§ïªºï¿½ï¿½ï¿½:" + e.getMessage());
 				System.out.println("----------------");
 				RequestDispatcher failureView = req.getRequestDispatcher("/personal/personal.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // ¨Ó¦Ûupdate_emp_input.jspªº½Ð¨D
+		if ("update".equals(action)) { // ï¿½Ó¦ï¿½update_emp_input.jspï¿½ï¿½ï¿½Ð¨D
 
 			Map<String, String> errorMsgs = new HashMap<String, String>();
 			// Store this set in the request scope, in case we need to
@@ -180,14 +205,14 @@ System.out.println(GS_STA);
 
 			try {
 				/***************************
-				 * 1.±µ¦¬½Ð¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z
+				 * 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ð¨Dï¿½Ñ¼ï¿½ - ï¿½ï¿½Jï¿½æ¦¡ï¿½ï¿½ï¿½ï¿½~ï¿½Bï¿½z
 				 **********************/
 				String GS_NO = req.getParameter("gs_no").trim();
 				String MF_NO = req.getParameter("MF_NO").trim();
 				
 				String GS_NAME = req.getParameter("gs_name").trim();
 				if(GS_NAME.equals("")){
-					errorMsgs.put("gs_name","¤£¥iªÅ¥Õ");
+					errorMsgs.put("gs_name","ï¿½ï¿½ï¿½iï¿½Å¥ï¿½");
 				}
 				
 
@@ -198,7 +223,7 @@ System.out.println(GS_STA);
 				String GS_INFO = req.getParameter("gs_info").trim();
 
 				if(GS_INFO.equals("")){
-					errorMsgs.put("gs_info","¤£¥iªÅ¥Õ");
+					errorMsgs.put("gs_info","ï¿½ï¿½ï¿½iï¿½Å¥ï¿½");
 				}
 
 				Integer GS_PRICE = null;
@@ -206,7 +231,7 @@ System.out.println(GS_STA);
 				try {//"7011" "aaa"
 					GS_PRICE = new Integer(req.getParameter("gs_price").trim());
 				} catch (Exception e) {
-					errorMsgs.put("gs_price","½Ð¿é¤J¥¿½Tªº»ù®æ");
+					errorMsgs.put("gs_price","ï¿½Ð¿ï¿½Jï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 				Part part = req.getPart("gs_img");
 				byte[] GS_IMG = null;
@@ -231,30 +256,30 @@ System.out.println(GS_STA);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("GSVO", GSVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºMemVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("GSVO", GSVO); // ï¿½tï¿½ï¿½ï¿½ï¿½Jï¿½æ¦¡ï¿½ï¿½~ï¿½ï¿½MemVOï¿½ï¿½ï¿½ï¿½,ï¿½]ï¿½sï¿½Jreq
 					RequestDispatcher failureView = req.getRequestDispatcher("/good_update.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½_
 				}
 
-				/*************************** 2.¶}©l­×§ï¸ê®Æ *****************************************/
+				/*************************** 2.ï¿½}ï¿½lï¿½×§ï¿½ï¿½ï¿½ *****************************************/
 Goods_SellService gSvc = new Goods_SellService();
 				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA);
 
 				/***************************
-				 * 3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)
+				 * 3.ï¿½×§ï§¹ï¿½ï¿½,ï¿½Ç³ï¿½ï¿½ï¿½ï¿½(Send the Success view)
 				 *************/
 
-				req.setAttribute("GSVO", GSVO); // ¸ê®Æ®wupdate¦¨¥\«á,¥¿½TªºªºMemVOª«¥ó,¦s¤Jreq
+				req.setAttribute("GSVO", GSVO); // ï¿½ï¿½Æ®wupdateï¿½ï¿½ï¿½\ï¿½ï¿½,ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½MemVOï¿½ï¿½ï¿½ï¿½,ï¿½sï¿½Jreq
 //				HttpSession session1 = req.getSession();
 //				session1.removeAttribute("gVO");
 //				session1.setAttribute("gVO", MemVO);
 
-				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // ­×§ï¦¨¥\«á,Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // ï¿½×§ï¦¨ï¿½\ï¿½ï¿½,ï¿½ï¿½ï¿½listOneEmp.jsp
 
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** ï¿½ï¿½Lï¿½iï¿½àªºï¿½ï¿½~ï¿½Bï¿½z *************************************/
 			} catch (Exception e) {
 System.out.println("--------------");
 				errorMsgs.put("error", "error");
@@ -268,9 +293,9 @@ System.out.println("--------------");
 	}
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		// System.out.println("header=" + header); // ´ú¸Õ¥Î
+		// System.out.println("header=" + header); // ï¿½ï¿½Õ¥ï¿½
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		// System.out.println("filename=" + filename); // ´ú¸Õ¥Î
+		// System.out.println("filename=" + filename); // ï¿½ï¿½Õ¥ï¿½
 		if (filename.length() == 0) {
 			return null;
 		}
@@ -285,5 +310,10 @@ System.out.println("--------------");
 			baos.write(b, 0, i);
 		}
 		return baos.toByteArray();
+
+				throw new ServletException(e);
+			}
+		}
+
 	}
 }

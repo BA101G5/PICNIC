@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.general_member.model.GeneralMemberVO;
 import com.goods_rent.model.Goods_RentService;
 import com.goods_rent.model.Goods_RentVO;
 import com.goods_sell.model.Goods_SellService;
@@ -35,53 +36,61 @@ public class Orderde_detailServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 		System.out.println(action);
+
 		if (action.equals("insert")) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			try {
+				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+				String account = gVO.getMEM_NO();
+				PicmemService picmemSvc = new PicmemService();
+				List<String> list = picmemSvc.findbymem_no(account);
 
-			// String account = (String)session.getAttribute("account");
-			String account = "MG00000002";
-			PicmemService picmemSvc = new PicmemService();
-			List<String> list = picmemSvc.findbymem_no(account);
+				PicnicService picnicSvc = new PicnicService();
+				List<PicnicVO> ListPicnic = picnicSvc.getByPicnic_Nos(list);
 
-			PicnicService picnicSvc = new PicnicService();
-			List<PicnicVO> list2 = picnicSvc.getByPicnic_Nos(list);
+				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+				List<Orderde_DetailVO> listGS = orderde_detailSvc.getGsByMem(account);
 
-			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-			// orderde_detailSvc.getby
+				session.setAttribute("ListPicnicVO", ListPicnic);
+				session.setAttribute("listGs", listGS);
 
-			System.out.println(list2);
-			session.setAttribute("ListPicnicVO", list2);
+				String url = null;
+				if (action.equals("insert")) {
+					url = "/finishorder/finishorder1.jsp";
 
-			String url = null;
-			if (action.equals("insert")) {
-				url = "/finishorder/finishorder1.jsp";
-
+				}
+				RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+				SuccessView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			RequestDispatcher SuccessView = req.getRequestDispatcher(url);
-			SuccessView.forward(req, res);
-		}
 
+		}
 		if (action.equals("get_gr_no")) {
-			String picnic_no = req.getParameter("picnic");
-			System.out.println(picnic_no + "picnic");
-			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-			List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
-			System.out.println(list);
-			if (!list.isEmpty()) {
-				req.setAttribute("listOrderde_DetailVO", list);
-			}
-			
 
-			String url = null;
-			if (action.equals("get_gr_no")) {
-				url = "/finishorder/finishorder1.jsp";
+			try {
+				String picnic_no = req.getParameter("picnic");
+				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+				String account = gVO.getMEM_NO();
+				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
 
+				if (!list.isEmpty()) {
+					req.setAttribute("listOrderde_DetailVO", list);
+				}
+				session.setAttribute("picnic_no", picnic_no);
+				String url = null;
+				if (action.equals("get_gr_no")) {
+					url = "/finishorder/finishorder1.jsp";
+
+				}
+				RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+				SuccessView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			RequestDispatcher SuccessView = req.getRequestDispatcher(url);
-			SuccessView.forward(req, res);
 		}
-
 		if (action.equals("insertintocartA") || action.equals("insertintocartB") || action.equals("insertintocartC")) {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -100,8 +109,8 @@ public class Orderde_detailServlet extends HttpServlet {
 			if (amount < 0) {
 				errorMsgs.put("amount", "�п�J���T�ƶq");
 			}
-			// String account=(String) session.getAttribute("account");
-			String account = "MG00000001";
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
 
 			Orderde_DetailService orderde_detailSvc = null;
 			if (action.equals("insertintocartA") || action.equals("insertintocartB")) {
@@ -119,14 +128,78 @@ public class Orderde_detailServlet extends HttpServlet {
 
 			String url = null;
 			if (action.equals("insertintocartA")) {
-				url = "/buycart/maosecond.jsp";
+				url = "/buycart/moafirst.jsp";
 			} else if (action.equals("insertintocartB")) {
 				url = "/buycart/maothird.jsp";
-			} else {
-				url = "/picnic/maosecondui3.jsp";
-			}
+			} 
 			javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
 			SuccessView.forward(req, res);
+		}
+		if (action.equals("delete")) {
+			String picnic_no = (String) session.getAttribute("picnic_no");
+			String delete = req.getParameter("delete");
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
+
+			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+			orderde_detailSvc.deleteOrderde_Detail(delete);
+			List<Orderde_DetailVO> listGr = orderde_detailSvc.getAllPICNICNO(picnic_no);
+			List<Orderde_DetailVO> listGS = orderde_detailSvc.getGsByMem(account);
+
+			session.setAttribute("listGs", listGS);
+			if (!listGr.isEmpty()) {
+				session.setAttribute("listOrderde_DetailVO", listGr);
+			}
+
+			String url = null;
+			if (action.equals("delete")) {
+				url = "/finishorder/finishorder1.jsp";
+			}
+			res.sendRedirect(req.getContextPath() + url);
+		}
+
+		if (action.equals("finishorder")) {
+			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
+			String picnic_no = (String) session.getAttribute("picnic_no");
+			String address = req.getParameter("address").trim();
+
+			List<Orderde_DetailVO> listGr = (List<Orderde_DetailVO>) session.getAttribute("listOrderde_DetailVO");
+			List<Orderde_DetailVO> listGs = (List<Orderde_DetailVO>) session.getAttribute("listGs");
+			try {
+				if (!listGr.isEmpty()) {
+
+				}
+			} catch (Exception e) {
+			}
+
+			if (!listGs.isEmpty()) {
+				for (Orderde_DetailVO orderde_detailVO : listGs) {
+					String orderde_detailno = orderde_detailVO.getOrderde_detailno().toString();
+					System.out.println(orderde_detailno);
+					Integer preamount = orderde_detailVO.getOd_amount();
+					Integer price = orderde_detailVO.getOd_price();
+					price = price / preamount;
+					Integer amount = Integer
+							.valueOf(req.getParameter(orderde_detailVO.getOrderde_detailno().toString() + "amount"));
+					price = amount * price;
+					orderde_detailVO.setOd_price(price);
+					orderde_detailVO.setOd_amount(amount);
+					orderde_detailVO.setPicnic_no(picnic_no);
+					orderde_detailVO.setOd_place(address);
+				}
+				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+				orderde_detailSvc.updateOrderde_Detail(listGr, listGs);
+			}
+
+			String url = null;
+			if (action.equals("finishorder")) {
+				url = "/finishorder/finishorder2.jsp";
+
+			}
+			RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+			SuccessView.forward(req, res);
+
 		}
 	}
 }

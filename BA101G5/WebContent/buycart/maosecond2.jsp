@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.goods_sell.model.*"%>
-
-<jsp:useBean id="goods_sellSvc" scope="page"
-	class="com.goods_sell.model.Goods_SellService" />
+<%@ page import="java.util.*"%>
 
 <html>
 <head>
@@ -51,53 +49,128 @@
 					<li><a href="#" class="active">商品</a></li>
 				</ol>
 			</div>
-			<div class="row">
-				<div class="col-sm-12 cal-sm-push-1">
-					<div class="collapse navbar-collapse navbar-ex1-collapse">
-						<ul class="nav navbar-nav side-nav">
-							<li><a href="#">
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-										onclick="submit()">
-										<p>A</p>
-									</FORM>
-							</a></li>
-							<li><a href="#">
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-										onclick="submit()">
-										<p>B</p>
-									</FORM>
-							</a></li>
-							<li><a href="#">
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-										onclick="submit()">
-										<p>C</p>
-									</FORM>
-							</a></li>
-							<li><a href="#">
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-										onclick="submit()">
-										<p>D</p>
-									</FORM>
-							</a></li>
 
-						</ul>
-					</div>
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<font color='red'>請修正以下錯誤:
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li>${message}</li>
+						</c:forEach>
+					</ul>
+				</font>
+			</c:if>
+
+			<div class="col-sm-8 col-sm-push-2">
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav side-nav">
+						<li><a href="#">
+								<form METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>野餐</p>
+								</form>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>食物</p>
+								</FORM>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>器具</p>
+								</FORM>
+						</a></li>
+						<li><a href="#">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+									onclick="submit()">
+									<p>其他</p>
+								</FORM>
+						</a></li>
+					</ul>
 				</div>
 			</div>
-			<jsp:include page="/buycart/maosecond-import.jsp" />
-			<div class="row ">
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-push-2">
+				<div class="col-sm-3  ">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">熱銷商品</h3>
+						</div>
+						<table class="table">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm-9 ">
+				
+					<c:if test="${not empty goods_sellSvc }">
+
+						<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}" >
+							<div class="col-sm-12 ">
+								<div class="thumbnail">
+									<img
+										src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
+										style="display: inline-block; height: 200px; width: 200px;">
+									<div style="display: inline-block;">
+										<h2>${goods_sellVO.getGs_name()}</h2>
+										<p>
+										<table>
+											<tr>
+												<td>
+													<FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
+														<button type="submit" class="btn btn-info btn-lg"
+															style="width: 250px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
+														<input type="hidden" name="gsno"
+															value="${goods_sellVO.getGs_no()}"> <input
+															type="hidden" name="action" value="getOne">
+													</FORM>
+												</td>
+												<td>
+													<FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
+														<button type="submit" class="btn btn-default btn-xs"
+															value="Submit">
+															<span class="glyphicon glyphicon-shopping-cart"
+																aria-hidden="true"></span>
+														</button>
+														<input type="hidden" name="gs_no"
+															value="${goods_sellVO.getGs_no()}"> <input
+															type="hidden" name="action" value="insertintocartA">
+														<input type="hidden" name="amount" value="1">
+													</FORM>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="col-sm-10 col-sm-push-1 ">
 				<div class="col-sm-10 col-sm-push-1 ">
-					<div class="col-sm-10 col-sm-push-1 ">
-						<div class="btn-group btn-group-justified ">
-							<a href="# " class="btn btn-default " role="button ">回標題</a>
-						</div>
-						<div class="col-sm-11 col-sm-push-3 ">
-							<jsp:include page="/mustinclude/footer.jsp" />
-						</div>
+					<div class="btn-group btn-group-justified ">
+						<a href="# " class="btn btn-default " role="button ">回標題</a>
+					</div>
+					<div class="col-sm-11 col-sm-push-3 ">
+						<jsp:include page="/mustinclude/footer.jsp" />
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 

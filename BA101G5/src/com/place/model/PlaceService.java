@@ -30,7 +30,8 @@ public class PlaceService {
 		return dao.getAll();
 	}
 
-	public void insertplace(String mem_no, String p_place, String picnic_no,Integer picnic_pl) {
+	public String insertplace(String mem_no, String p_place, String picnic_no,Integer picnic_pl) {
+		System.out.println("hello");
 		JSONObject lonlat = null;
 		try {
 			lonlat = com.util.encoding.Coordinate.getCoordinate(p_place);
@@ -42,6 +43,7 @@ public class PlaceService {
 				.getJSONObject("location").get("lat").toString();
 		String lon = ((JSONObject) lonlat.getJSONArray("results").get(0)).getJSONObject("geometry")
 				.getJSONObject("location").get("lng").toString();
+		System.out.println(lat);
 		PlaceVO placeVO = new PlaceVO();
 		placeVO.setMem_no(mem_no);
 		placeVO.setP_place(p_place);
@@ -50,7 +52,9 @@ public class PlaceService {
 		placeVO.setP_lat(Double.valueOf(lat));
 		placeVO.setP_lon(Double.valueOf(lon));
 		
-		dao.insertplace(placeVO);
+		String p_no= dao.insertplace(placeVO);
+		
+		return p_no;
 	}
 	public String insertMFplace(String mem_no, String picnic_no,PlaceVO placeVO2,Integer picnic_pl) {
 		PlaceVO placeVO = new PlaceVO();

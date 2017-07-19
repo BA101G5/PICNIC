@@ -1,18 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Picnicé‡é¤ç¶²</title>
+<title>Picnic³¥À\ºô</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<jsp:useBean id="goods_sellSvc" scope="page"
+	class="com.goods_sell.model.Goods_SellService" />
+
+
 
 <style>
 .banner {
@@ -20,23 +21,28 @@
 	padding-left: 40px;
 	padding: 20px;
 }
+
 .banner-top {
 	clear: left;
 }
+
 .caption {
 	text-align: center;
 }
+
 .btn {
 	margin: 0px;
 	margin-bottom: 0px;
 }
+
 .thumbnail {
-	height: 350px;
+	height: 250px;
 	text-align: center;
-	line-height: 180px;
+	line-height: 80px;
 	margin-top: 0px;
-	bgcolor: blue;
+	bgcolor: white;
 }
+
 .breadcrumb {
 	margin-top: -20px;
 	background: skyblue;
@@ -51,8 +57,8 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<ol class="breadcrumb">
-					<li><a href="<%=request.getContextPath()%>/index.jsp">é¦–é </a></li>
-					<li><a href="#" class="active">é è³¼å•†å“</a></li>
+					<li><a href="<%=request.getContextPath()%>/index.jsp">­º­¶</a></li>
+					<li><a href="#" class="active">¹wÁÊ°Ó«~</a></li>
 
 				</ol>
 			</div>
@@ -94,46 +100,111 @@
 							</div>
 						</div>
 					</div>
-
-
-					<div class="row">
-						<div class="col-sm-8 col-sm-push-1">
-							<div class="col-sm-4 ">
-
-								<a href="#" class="thumbnail">
-									<p>ç¬¬ä¸€æ¬¡é è³¼å•†å“?</p>
-									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€è¨»å†Š</button>
-									</div>
-								</a>
-							</div>
-							<div class="col-sm-4 ">
-								<a href="<%=request.getContextPath()%>/buycart/maosecond.jsp"
-									class="thumbnail">
-									<p>æµè¡Œå•†å“</p>
-									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€</button>
-									</div>
-								</a>
-							</div>
-							<div class="col-sm-4 ">
-								<a href="<%=request.getContextPath()%>/buycart/maosecond2.jsp"
-									class="thumbnail">
-									<p>å•†å“åˆ†é¡</p>
-									<div class="caption">
-										<button type="button" class="btn btn-default">å‰å¾€</button>
-									</div>
-								</a>
-							</div>
+					<div class="col-sm-8 col-sm-push-2">
+						<div class="collapse navbar-collapse navbar-ex1-collapse">
+							<ul class="nav navbar-nav side-nav">
+								<li><a href="#">
+										<form METHOD="post" ACTION="<%=request.getContextPath()%>"
+											onclick="submit()">
+											<p>¾¹¨ã</p>
+										</form>
+								</a></li>
+								<li><a href="#">
+										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+											onclick="submit()">
+											<p>­¹ª«</p>
+										</FORM>
+								</a></li>
+								<li><a href="#">
+										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+											onclick="submit()">
+											<p>³¥À\¹Ô</p>
+										</FORM>
+								</a></li>					
+								<li><a href="#">
+										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+											onclick="submit()">
+											<p>¯²¸î°Ó«~</p>
+										</FORM>
+								</a></li>
+							</ul>
 						</div>
 					</div>
+				</div>
 
-					<div class="row ">
-						<div class="col-sm-8 col-sm-push-1 ">
-							<div class="btn-group btn-group-justified ">
-								<a href="# " class="btn btn-default " role="button ">å›æ¨™é¡Œ</a>
+				<div class="row">
+					<div class="col-sm-8 col-sm-push-2">
+						<div class="col-sm-3  ">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">¼ö¾P°Ó«~</h3>
+								</div>
+								<table class="table">
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
 							</div>
-							<div class="col-sm-10 col-sm-push-3 ">
+						</div>
+						<div class="col-sm-9">
+							<c:if test="${not empty goods_sellSvc }">
+								<%@ include file="/buycart/page.file"%>
+								<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
+									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+									<div class="col-sm-7">
+										<div class="thumbnail"  style="display: inline-block;" ;>
+											<img
+												src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
+												style="display: inline-block; height: 200px; width: 200px;">
+											<div style="display: inline-block;">
+												<h2>${goods_sellVO.getGs_name()}</h2>
+												<p>
+												<table style="display: inline-block; ">
+													<tr>
+														<td>
+															<FORM METHOD="post"
+																ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
+																<button type="submit" class="btn btn-info btn-lg"
+																	style="width: 150px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
+																<input type="hidden" name="gsno"
+																	value="${goods_sellVO.getGs_no()}"> <input
+																	type="hidden" name="action" value="getOne">
+															</FORM>
+														</td>	
+														<td>
+															<FORM METHOD="post"
+																ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
+																<button type="submit" class="btn btn-default btn-xs"
+																	value="Submit">
+																	<span class="glyphicon glyphicon-shopping-cart"
+																		aria-hidden="true"></span>
+																</button>
+																<input type="hidden" name="gs_no"
+																	value="${goods_sellVO.getGs_no()}"> <input
+																	type="hidden" name="action" value="insertintocartA">
+																<input type="hidden" name="amount" value="1">
+															</FORM>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+										<%@ include file="/buycart/page2.file"%>
+								</c:forEach>
+							</c:if>
+						</div>
+					</div>
+				</div>
+				<div class="row ">
+					<div class="col-sm-10 col-sm-push-1 ">
+						<div class="col-sm-10 col-sm-push-1 ">
+							<div class="btn-group btn-group-justified ">
+								<a href="# " class="btn btn-default " role="button ">¦^¼ĞÃD</a>
+							</div>
+							<div class="col-sm-11 col-sm-push-3 ">
 								<jsp:include page="/mustinclude/footer.jsp" />
 							</div>
 						</div>
@@ -142,7 +213,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
