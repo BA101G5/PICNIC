@@ -36,7 +36,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta());
+			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -75,7 +75,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta());
+			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
 			pstmt.setString(8, goods_sellVO.getGs_no());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -158,7 +158,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 			goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 			goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-			goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+			goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
 			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -211,7 +211,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
 				list.add(goods_sellVO);
 
 			}
@@ -257,8 +257,8 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		 goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
 		 goods_sellVO.setGs_price(10);
 		 goods_sellVO.setGs_info("aeou");
-		 goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
-		 goods_sellVO.setGs_sta("A");
+		 goods_sellVO.setGs_img(null);
+		 goods_sellVO.setGs_sta('A');
 		 goods_selljdbcdao.insert(goods_sellVO);
 // update
 		// Goods_SellVO goods_sellVO = new Goods_SellVO();

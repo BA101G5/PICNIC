@@ -1,9 +1,9 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.advertisement.model.*"%>
+<%@ page import="com.goods_sell.model.*"%>
 <%
-	AdvertisementVO ADVO = (AdvertisementVO) request.getAttribute("ADVO");
+Goods_SellVO GSVO = (Goods_SellVO) request.getAttribute("GSVO");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -124,7 +124,7 @@ textarea {
 
 	<!-- 表單 -->
 
-	<form METHOD="post" ACTION="<%=request.getContextPath() %>/advertisement/advertisement.do" name="form1"
+	<form METHOD="post" ACTION="<%=request.getContextPath() %>/goods_sell/goods_sell.do" name="form1" id="form1"
 		enctype="multipart/form-data">
 		<div class="container">
 			<div class="row">
@@ -132,17 +132,17 @@ textarea {
 					
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title title">廣告購買資料</h3>
+							<h3 class="panel-title title">修改商品</h3>
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item bb">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">廣告照片</label>
+										<label for="aa" class="control-label">商品照片</label>
 									</div>
 									<div class="col-xs-12 col-sm-4">
-										<input type="file" name="AD_PHOTO" size="45" class="upl"
-											value="<%=(ADVO == null) ? "" : ADVO.getAD_PHOTO()%>" />
+										<input type="file" name="gs_img" size="45" class="upl"
+											value="${GSVO.gs_img}" />
 									</div>
 									<div class="col-xs-12 col-sm-4">
 										<img class="preview"
@@ -155,28 +155,13 @@ textarea {
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">開始日期</label>
+										<label for="aa" class="control-label">商品名稱</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
-										<input type="text" name="DAY_START" id="datepicker"
-											value="<%=(ADVO == null) ? "" : ADVO.getDAY_START()%>" />
+										<input type="text" name="gs_name" id="gs_name"
+											value="${GSVO.gs_name}" />
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="START"><b>${errorMsgs.DAY_START}</b></font>
-										</c:if>
-
-									</div>
-								</div>
-							</li>
-							<li class="list-group-item">
-								<div class="form-group">
-									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">結束日期</label>
-									</div>
-									<div class="col-xs-12 col-sm-8">
-										<input type="text" name="DAY_END" id="datepicker3"
-											value="<%=(ADVO == null) ? "" : ADVO.getDAY_END()%>" />
-										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="END"><b>${errorMsgs.DAY_END}</b></font>
+											<font color='red' id="name"><b>${errorMsgs.gs_name}</b></font>
 										</c:if>
 
 									</div>
@@ -185,29 +170,78 @@ textarea {
 							<li class="list-group-item cc">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">廣告介紹</label>
+										<label for="aa" class="control-label">商品資訊</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
-										<textarea name="AD_SELF" rows="7" cols="50" id="AD_SELF"
-											value="<%=(ADVO == null) ? "廣告" : ADVO.getAD_SELF()%>" />
+										<textarea name="gs_info" rows="7" cols="50" id="gs_info"
+											value="${GSVO.gs_info}" />${GSVO.gs_info}
 										</textarea>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="SELF"><b>${errorMsgs.AD_SELF}</b></font>
+											<font color='red' id="info"><b>${errorMsgs.gs_info}</b></font>
 										</c:if>
-									</div>
 
+									</div>
 								</div>
 							</li>
+							
 						
 							
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">金額</label>
+										<label for="aa" class="control-label">商品單價</label>
 									</div>
-									<div class="col-xs-12 col-sm-8" id="AD_CASH">
+									<div class="col-xs-12 col-sm-8">
+										<input type="text" name="gs_price" id="gs_price"
+											value="${GSVO.gs_price}" />
+										<c:if test="${not empty errorMsgs}">
+											<font color='red' id="price"><b>${errorMsgs.gs_price}</b></font>
+										</c:if>
+
+									</div>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="form-group">
+									<div class="col-xs-12 col-sm-4">
+										<label for="aa" class="control-label">狀態</label>
+									</div>
+									<div class="col-xs-12 col-sm-8">
+										
+									 <c:set var = "salary" scope = "session" value = "${U}"/>
+									 <c:if test="${GSVO.gs_sta == salary}">	
+										<div class="radio-inline">
+											<label> <input type="radio" name="gs_sta" checked
+												value="U" />
+												上架中
+											</label>
+										</div>
+										<div class="radio-inline">
+											<label> <input type="radio" name="gs_sta"
+												value="D" />
+												下架
+											</label>
+										</div>
+									</c:if>	
+									<c:if test="${GSVO.gs_sta != salary}">	
+										<div class="radio-inline">
+											<label> <input type="radio" name="gs_sta" 
+												value="U" />
+												上架中
+											</label>
+										</div>
+										<div class="radio-inline">
+											<label> <input type="radio" name="gs_sta" checked
+												value="D" />
+												下架
+											</label>
+										</div>
+									</c:if>	
+										
+										
 										
 									</div>
+									
 								</div>
 							</li>
 							
@@ -226,6 +260,7 @@ textarea {
 									</div>
 								</div>
 							</li>
+							
 						</ul>
 					</div>
 
@@ -240,30 +275,16 @@ textarea {
 				</div>
 			</div>
 		</div>
-		<input type="hidden" name="AD_CASH" value="" id="cashes">
-		<input type="hidden" name="AD_STA" value="<%=(ADVO == null) ? "U" : ADVO.getAD_STA()%>">
+		<input type="hidden" name="gs_no" value="${GSVO.gs_no}">
 		<input type="hidden" name="MF_NO" value="${mVO.MF_NO}">
-		<input type="hidden" name="action" value="insert">
+		
+		
+		<input type="hidden" name="action" value="update">
+	
 
 	</form>
-	<!-- 月曆 & 顯示圖片 -->
-	<script>
-	$("#datepicker").datepicker({
-		changeMonth : true,
-		changeYear : true,
-		dateFormat : 'yy-mm-dd',
-		maxDate : "0D"
-	});
-		$("#datepicker3").datepicker({
-			changeMonth : true,
-			changeYear : true,
-			dateFormat : 'yy-mm-dd',
-			minDate: +30,
-		});
-		
+
 	
-	
-	</script>
 	<script>
 
 		
@@ -287,31 +308,14 @@ textarea {
 		})
 		
 	
+	
+	
+	
+	
+	
+	
 	</script>
 	
-	
-	<script>
-	function CalculateDate(start,end){
-		start = new Date(start);
-		end = new Date(end);;
-		return (end - start)/ 86400000 ;
-	
-	}
-	function Date_substr()
-	{
-	//定義起始 年月日
-	    var StartDate=document.getElementById("datepicker").value;
-	//定義結束 年月日
-	    var EndDate=document.getElementById("datepicker3").value;
-
-
-	   document.getElementById("AD_CASH").innerText = parseInt(CalculateDate(StartDate,EndDate)) * 1000;
-	   document.getElementById("cashes").value = parseInt(CalculateDate(StartDate,EndDate)) * 1000;
-	} 
-
-
-document.getElementsByClassName("list-group-item")[3].addEventListener('mouseover',Date_substr,false);
-</script>
 
 <script>
 		//產生驗證碼
@@ -334,19 +338,19 @@ document.getElementsByClassName("list-group-item")[3].addEventListener('mouseove
 				}
 			}
 			<!-- 驗證 -->			
-			if(document.getElementById('datepicker').value == ''){
-				document.getElementById('datepicker').focus();
-				document.getElementById('datepicker').select();
-					document.getElementById('START').innerText="*請輸入開始日期"; 
-			}else if(document.getElementById('datepicker3').value == ''){
-				document.getElementById('datepicker3').focus();
-				document.getElementById('datepicker3').select();
-					document.getElementById('END').innerText="*請輸入結束日期"; 
+			if(document.getElementById('gs_name').value.trim().length ==0){
+				document.getElementById('gs_name').focus();
+				document.getElementById('gs_name').select();
+					document.getElementById("name").innerText="*請輸入商品名稱"; 
+			}else if(document.getElementById('gs_info').value.trim() == ''){
+				document.getElementById('gs_info').focus();
+				document.getElementById('gs_info').select();
+					document.getElementById('info').innerText="*請輸入商品資訊"; 
 			}
-			else if(document.getElementById('AD_SELF').value == ''){
-				document.getElementById('AD_SELF').focus();
-					document.getElementById('AD_SELF').select();
-					document.getElementById('SELF').innerText="*請輸入自我介紹"; 
+			else if(document.getElementById("gs_price").value.trim() == ''){
+				document.getElementById('gs_price').focus();
+					document.getElementById('gs_price').select();
+					document.getElementById('price').innerText="*請輸商品單價"; 
 			}else if (!b) {
 					
 					document.getElementById('aa').focus();

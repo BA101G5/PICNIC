@@ -308,7 +308,7 @@ public class AdvertisementServlet extends HttpServlet {
 			}
 		}
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
-
+			System.out.println("123132");
 			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -321,7 +321,7 @@ public class AdvertisementServlet extends HttpServlet {
 				
 //				String AD_NO = req.getParameter("AD_NO").trim();
 				String MF_NO = req.getParameter("MF_NO").trim();
-		
+
 				String AD_SELF = req.getParameter("AD_SELF").trim();
 				if(AD_SELF .length() == 0){
 					errorMsgs.put("AD_SELF","請輸入自我介紹");

@@ -190,8 +190,6 @@
     <servlet-name>Buy_recordServlet</servlet-name>
     <url-pattern>/buy_record/buy_record.do</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>Contact_ListServlet</servlet-name>
     <servlet-class>com.contact_list.controller.Contact_ListServlet</servlet-class>
@@ -199,6 +197,48 @@
   <servlet-mapping>
     <servlet-name>Contact_ListServlet</servlet-name>
     <url-pattern>/contact_list/contact_list.do</url-pattern>
+  </servlet-mapping>
+<!--   <servlet> -->
+<!--     <servlet-name>Goods_SellServlet</servlet-name> -->
+<!--     <servlet-class>com.goods_sell.controller.Goods_SellServlet</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>Goods_SellServlet</servlet-name> -->
+<!--     <url-pattern>/goods_sell/goods_sell.do</url-pattern> -->
+<!--   </servlet-mapping> -->
+  <servlet>
+    <servlet-name>DBGift4</servlet-name>
+    <servlet-class>com.goods_sell.controller.DBGift4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift4</servlet-name>
+    <url-pattern>/good_sell/DBGift4.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Goods_rentServlet</servlet-name>
+    <servlet-class>com.goods_rent.controller.Goods_rentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Goods_rentServlet</servlet-name>
+    <url-pattern>/goods_rent/goods_rent.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DBGift5</servlet-name>
+    <servlet-class>com.goods_rent.controller.DBGift5</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift5</servlet-name>
+    <url-pattern>/goods_rent/DBGift5.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>addMemberEmail</servlet-name>
+    <servlet-class>login.addMemberEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addMemberEmail</servlet-name>
+    <url-pattern>/addMemberEmail.do</url-pattern>
   </servlet-mapping>
   
   <filter>
@@ -208,8 +248,6 @@
   <filter-mapping>
     <filter-name>loginFilter</filter-name>
     <url-pattern>/personal/personal.jsp</url-pattern>
-   
-
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

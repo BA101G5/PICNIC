@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container">
+<div class="container" style="background-color:white;opacity:0.8;">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12" style="background: white;">
 
@@ -15,23 +15,9 @@
 				<div>
 					<ul class="list">
 
-						<Form method="post" id="form1"
-							action="<%=request.getContextPath()%>/general_member/General_Member.do">
-							<li style="padding-top: 2px;"><a href="#"
-								onclick="document.getElementById('form1').submit();">個人資料修改</a></li>
-							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
-							<input type="hidden" name="action" value="getOne_For_Update">
+						
 
-						</Form>
-
-						<Form method="post" id="form2"
-							action="<%=request.getContextPath()%>/buy_record/buy_record.do">
-							<input type="hidden" name="action" value="getOne_For_MG">
-							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
-							<li style="padding-top: 2px;"><a href="#"
-								onclick="document.getElementById('form2').submit();">購買紀錄</a></li>
-
-						</Form>
+					
 
 
 					</ul>
@@ -49,7 +35,7 @@
 	</div>
 </div>
 </div>
-<div class="container">
+<div class="container"style="background-color:white;height:50%;opacity:0.8;">
 	<div class="row">
 		<div class="col-xs-12 col-sm-11 bb">
 			<div role="tabpanel">
@@ -60,8 +46,7 @@
 					</li>
 					<li role="presentation"><a href="#tab2" aria-controls="tab2"
 						role="tab" data-toggle="tab" class="li1">點數</a></li>
-					<li role="presentation"><a href="#tab3" aria-controls="tab3"
-						role="tab" data-toggle="tab" class="li1">文章</a></li>
+					
 					<li role="presentation"><a href="#tab4" aria-controls="tab4"
 						role="tab" data-toggle="tab" class="li1">朋友</a></li>
 
@@ -71,6 +56,14 @@
 				<!-- 標籤面板：內容區 -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="tab1">
+						<Form method="post" id="form1"
+							action="<%=request.getContextPath()%>/general_member/General_Member.do">
+							<li style="padding-top: 2px;"><a href="#"
+								onclick="document.getElementById('form1').submit();">個人資料修改</a></li>
+							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
+							<input type="hidden" name="action" value="getOne_For_Update">
+
+						</Form>
 						<div class="col-xs-12 col-sm-12"
 							style="margin-top: 20px; text-align: center;">性別 :
 							${gVO.MEM_GEN}</div>
@@ -78,17 +71,11 @@
 							style="margin-top: 20px; text-align: center;">生日 :
 							${gVO.MEM_BIRTH}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">自我介紹 :
+							style="margin-top: 20px; text-align: center;margin-bottom:40px;">自我介紹 :
 							${gVO.MEM_SELF}</div>
 
-						<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
-							<img src="images/qrCode.jpg"
-								style="display: block; margin: auto; width: 270px; height: 270px;">
-						</div>
-						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">
-							<input type="button" name="" id="btn" value="加好友">
-						</div>
+						
+						
 					</div>
 
 					<div role="tabpanel" class="tab-pane" id="tab2">
@@ -106,14 +93,15 @@
 
 
 						<table border="1" width="800" align='center'
-							style="margin-top: 5px;">
+							style="margin-top: 5px;" class="table table-hover table-bordered table-condensed table-striped">
+							<thead>
 							<tr align='center' valign='middle'>
-								<td>交易編號</td>
-								<td>紀錄時間</td>
-								<td>儲值金額</td>
-
-
+								<th style="text-align: center;">交易編號</th>
+								<th style="text-align: center;">紀錄時間</th>
+								<th style="text-align: center;">儲值金額</th>
 							</tr>
+							</thead>
+							<tbody>
 							<c:forEach var="Buy_recordVO" items="${Buy_recordSvc.all}">
 								<c:if test="${Buy_recordVO.MEM_NO == gVO.MEM_NO}">
 									<tr align='center' valign='middle'>
@@ -125,24 +113,25 @@
 									</tr>
 								</c:if>
 							</c:forEach>
+							</tbody>
 						</table>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="tab3">文章標籤的內容</div>
+					
 
 					<jsp:useBean id="Contact_ListSvc" scope="page"
 						class="com.contact_list.model.Contact_ListService" />
 					<jsp:useBean id="GeneralMemberSvc" scope="page"
 						class="com.general_member.model.GeneralMemberService" />
 
-					<c:forEach var="Contact_ListVO" items="${Contact_ListSvc.all}">
+					
 						<div role="tabpanel" class="tab-pane" id="tab4">
-
+<c:forEach var="Contact_ListVO" items="${Contact_ListSvc.all}">
 							<c:if test="${gVO.MEM_NO == Contact_ListVO.mem_no}">
 
 								<a
 									href="<%= request.getContextPath()%>/contact_list/contact_list.do?action=getOne_For_MG&mem_no=${Contact_ListVO.mem_no}&contact_no=${Contact_ListVO.contact_no}">
-									<div class="col-sm-4" style="border: solid">
-										<div class="news">
+									<div class="col-sm-4">
+										<div class="news" style="height:250px;">
 											<div class="img-figure">
 
 
@@ -168,7 +157,12 @@
 
 		</div>
 	</div>
+	</div>
 </div>
+
+
+
 <div class="col-sm-11 col-sm-push-3">
 	<jsp:include page="/mustinclude/footer.jsp" />
 </div>
+

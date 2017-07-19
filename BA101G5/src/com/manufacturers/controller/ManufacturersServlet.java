@@ -28,6 +28,8 @@ import com.general_member.model.GeneralMemberVO;
 import com.manufacturers.model.ManufacturersService;
 import com.manufacturers.model.ManufacturersVO;
 
+import mail.MailService;
+
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class ManufacturersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -247,7 +249,7 @@ System.out.println(MF_REPORTNUM);
 		    	session1.removeAttribute("mVO");
 				session1.setAttribute("mVO", MfVO );
 				
-				RequestDispatcher successView = req.getRequestDispatcher("/personal.jsp"); // 修改成功後,轉交listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // 修改成功後,轉交listOneEmp.jsp
 
 				successView.forward(req, res);
 
@@ -299,7 +301,7 @@ System.out.println(MF_REPORTNUM);
 				/***********************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *************************/
-				
+System.out.println("---");		
 				String MF_NAME = req.getParameter("MF_NAME").trim();
 				if(MF_NAME.equals("")){
 					errorMsgs.put("MF_NAME","*廠商名稱不能空白");
@@ -412,7 +414,20 @@ System.out.println(MF_REPORTNUM);
 				/***************************
 				 * 3.新增完成,準備轉交(Send the Success view)
 				 ***********/
-				String url = "/manufacturers/listAllMF.jsp";
+				
+				MailService mail = new MailService();
+
+				String subject = "密碼通知";
+
+				String messageText = "http://localhost:8081/BA101G5_1_0403/addMemberEmail.do?account="+MF_ACCO+ "\n"
+						+ "密碼: "+MF_PSW;
+
+				mail.sendMail(MF_MAIL, subject, messageText);
+				
+				
+				
+				
+				String url = "/signin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 

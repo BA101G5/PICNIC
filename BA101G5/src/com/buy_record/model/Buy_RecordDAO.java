@@ -43,7 +43,7 @@ public class Buy_RecordDAO implements Buy_RecordDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT);
 			pstmt.setString(1, Buy_recordVO.getMEM_NO());
-			pstmt.setDate(2, Buy_recordVO.getBR_DATE());
+			pstmt.setTimestamp(2, Buy_recordVO.getBR_DATE());
 			pstmt.setInt(3, Buy_recordVO.getBR_CASH());
 
 			pstmt.executeUpdate();
@@ -78,7 +78,7 @@ public class Buy_RecordDAO implements Buy_RecordDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setString(1, Buy_recordVO.getMEM_NO());
-			pstmt.setDate(2, Buy_recordVO.getBR_DATE());
+			pstmt.setTimestamp(2, Buy_recordVO.getBR_DATE());
 			pstmt.setInt(3, Buy_recordVO.getBR_CASH());
 			pstmt.setString(4, Buy_recordVO.getBR_ID());
 
@@ -155,7 +155,7 @@ public class Buy_RecordDAO implements Buy_RecordDAO_interface {
 				bVO = new Buy_RecordVO();
 				bVO.setBR_ID(rs.getString("BR_ID"));
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
-				bVO.setBR_DATE(rs.getDate("BR_DATE"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
 				
 
@@ -209,7 +209,7 @@ public class Buy_RecordDAO implements Buy_RecordDAO_interface {
 				bVO = new Buy_RecordVO();
 				bVO.setBR_ID(rs.getString("BR_ID"));
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
-				bVO.setBR_DATE(rs.getDate("BR_DATE"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
 				
 				list.add(bVO);
@@ -263,7 +263,7 @@ public class Buy_RecordDAO implements Buy_RecordDAO_interface {
 				bVO = new Buy_RecordVO();
 				bVO.setBR_ID(rs.getString("BR_ID"));
 				bVO.setMEM_NO(rs.getString("MEM_NO"));
-				bVO.setBR_DATE(rs.getDate("BR_DATE"));
+				bVO.setBR_DATE(rs.getTimestamp("BR_DATE"));
 				bVO.setBR_CASH(rs.getInt("BR_CASH"));
 				
 				list.add(bVO);

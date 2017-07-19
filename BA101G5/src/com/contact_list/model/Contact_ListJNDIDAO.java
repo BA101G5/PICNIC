@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 public class Contact_ListJNDIDAO implements Contact_ListDAO_interface {
 
-	// ¤@­ÓÀ³¥Îµ{¦¡¤¤,°w¹ï¤@­Ó¸ê®Æ®w ,¦@¥Î¤@­ÓDataSource§Y¥i
+	// ä¸€å€‹æ‡‰ç”¨ç¨‹å¼ä¸­,é‡å°ä¸€å€‹è³‡æ–™åº« ,å…±ç”¨ä¸€å€‹DataSourceå³å¯
 	private static DataSource ds = null;
 	static {
 		try {
@@ -179,7 +179,7 @@ public class Contact_ListJNDIDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ¤]ºÙ¬° Domain objects
+				// empVo ä¹Ÿç¨±ç‚º Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -234,7 +234,7 @@ public class Contact_ListJNDIDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				// empVO ä¹Ÿç¨±ç‚º Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));
@@ -290,7 +290,7 @@ public class Contact_ListJNDIDAO implements Contact_ListDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				// empVO ä¹Ÿç¨±ç‚º Domain objects
 				contact_listVO = new Contact_ListVO();
 				contact_listVO.setMem_no(rs.getString("MEM_NO"));
 				contact_listVO.setContact_no(rs.getString("CONTACT_NO"));

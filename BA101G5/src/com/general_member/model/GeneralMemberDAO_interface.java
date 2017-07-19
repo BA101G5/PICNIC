@@ -11,4 +11,6 @@ public interface GeneralMemberDAO_interface {
     public GeneralMemberVO findByPrimaryKey(String MEM_NO);
     public List<GeneralMemberVO> getAll();
     public void updatefromcoin(GeneralMemberVO generalmemberVO);
+    public void updateforSTA(GeneralMemberVO generalmemberVO);
+    
 }

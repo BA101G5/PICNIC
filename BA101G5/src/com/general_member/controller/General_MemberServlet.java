@@ -412,8 +412,8 @@ public class General_MemberServlet extends HttpServlet {
 
 				String subject = "密碼通知";
 
-				String messageText = "Hello! Thank you join us " + " 請謹記此密碼: " + MEM_PSW + "\n"
-						+ " (已經啟用)";
+				String messageText = "http://localhost:8081/BA101G5_1_0403/addMemberEmail.do?account="+MEM_MAIL+ "\n"
+						+ "密碼: "+MEM_PSW;
 
 				mail.sendMail(MEM_MAIL, subject, messageText);
 				String url = "/signin.jsp";

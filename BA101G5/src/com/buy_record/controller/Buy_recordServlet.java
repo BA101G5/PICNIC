@@ -151,11 +151,11 @@ public class Buy_recordServlet extends HttpServlet {
 				
 				String BR_ID = req.getParameter("BR_ID").trim();
 
-				java.sql.Date BR_DATE = null;
+				java.sql.Timestamp BR_DATE = null;
 				try {
-					BR_DATE = java.sql.Date.valueOf(req.getParameter("BR_DATE").trim());
+					BR_DATE =  new java.sql.Timestamp(System.currentTimeMillis());
 				} catch (IllegalArgumentException e) {
-					BR_DATE = new java.sql.Date(System.currentTimeMillis());
+					BR_DATE = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
 
@@ -308,7 +308,7 @@ public class Buy_recordServlet extends HttpServlet {
 
 				
 
-				java.sql.Date BR_DATE = new java.sql.Date(System.currentTimeMillis());
+				java.sql.Timestamp BR_DATE = new java.sql.Timestamp(System.currentTimeMillis());
 				
 
 			
@@ -341,7 +341,7 @@ public class Buy_recordServlet extends HttpServlet {
 				GRSvc.updatecoin(MEM_NO, coin);
 				Buy_RecordService BRSvc = new Buy_RecordService();
 				BRVO = BRSvc.addBuy_record(MEM_NO, BR_DATE, BR_CASH);
-				
+				GeneralMemberVO gvo1= GRSvc.getOneGeneralMember(MEM_NO);
 				
 				
 				/***************************
@@ -350,7 +350,8 @@ public class Buy_recordServlet extends HttpServlet {
 				String url = "/personal/personal.jsp";
 				HttpSession session1 = req.getSession();
 		    	session1.removeAttribute("gVO");
-				session1.setAttribute("gVO", gvo);
+				session1.setAttribute("gVO", gvo1);
+				System.out.println(gvo.getMEM_COIN());
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
