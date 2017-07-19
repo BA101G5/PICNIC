@@ -3,6 +3,7 @@ package com.purview.model;
 public class PurviewVO implements java.io.Serializable {
 		private String purview_no;
 		private String purview_name;
+		
 		public String getPurview_no() {
 			return purview_no;
 		}
