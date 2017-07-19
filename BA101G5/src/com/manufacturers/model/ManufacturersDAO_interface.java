@@ -11,4 +11,10 @@ public interface ManufacturersDAO_interface {
     public void delete(String MF_NO);
     public ManufacturersVO findByPrimaryKey(String MF_NO);
     public List<ManufacturersVO> getAll();
+    //----------------------------------------
+    public void k_insert(ManufacturersVO MANUFACTURERSVO);
+    public void k_update(ManufacturersVO MANUFACTURERSVO);
+    public void k_delete(String MF_NO);
+    public ManufacturersVO k_findByPrimaryKey(String MF_NO);
+    public List<ManufacturersVO> k_getAll();
 }
