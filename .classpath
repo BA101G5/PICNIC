@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-collections-3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-fileupload.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-lang-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/ezmorph-1.0.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/jstl.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/jdbc6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/mylib/standard.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
