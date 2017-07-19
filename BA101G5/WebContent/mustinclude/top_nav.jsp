@@ -1,4 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+
+<%@ page import="com.general_member.model.*"%>
+
+<%
+	String accountName = "³X«È";
+	GeneralMemberVO gmVO = (GeneralMemberVO)session.getAttribute("gVO");
+	if(gmVO != null) accountName = gmVO.getMEM_NAME();
+%>
+
 <div class="container-fulid">
 	<div class="row">
 		<div class=" col-sm-8 col-sm-push-2">
@@ -32,7 +41,7 @@
 
 					<!-- ¥k¿ï³æ -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<%=request.getContextPath()%>/personal/personal.jsp">shyangs</a></li>
+						<li><a href="<%=request.getContextPath()%>/personal/personal.jsp"><%= accountName %></a></li>
 						<li><a href="#"><form method="POST"
 								action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?"
 								onclick="submit()">
