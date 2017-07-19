@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
- 
-  <display-name>BA101G5</display-name>
-  
+
+  <display-name>BA101_G5</display-name>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -11,7 +11,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
+  
   
      <resource-ref>
 		<description>DB Connection</description>
@@ -19,6 +19,78 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+  
+  <servlet>
+    <servlet-name>ChecklistServlet</servlet-name>
+    <servlet-class>com.checklist.controller.ChecklistServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ChecklistServlet</servlet-name>
+    <url-pattern>/checklist/checklist.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AdvertisementServlet</servlet-name>
+    <servlet-class>com.advertisement.controller.AdvertisementServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AdvertisementServlet</servlet-name>
+    <url-pattern>/advertisement/advertisement.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DBGift2</servlet-name>
+    <servlet-class>com.advertisement.controller.DBGift2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBGift2</servlet-name>
+    <url-pattern>/advertisement/DBGift2.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LogIn</servlet-name>
+    <servlet-class>com.login.controller.LogInServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogIn</servlet-name>
+    <url-pattern>/login.do</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>com.login.controller.LogOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SewarchPicnic</servlet-name>
+    <servlet-class>com.searchpicnic.controller.SearchPicnicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SewarchPicnic</servlet-name>
+    <url-pattern>/searchpicnic/searchpicnic.do</url-pattern>
+  </servlet-mapping>
+  
+    <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.login.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/checklist/TEST_HOME.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+
+  
   	
   	<servlet>
 		<servlet-name>Chatroom_MembersServlet</servlet-name>
@@ -29,4 +101,5 @@
 		<url-pattern>/chatroom_members/chatroom_members.do</url-pattern>
 	</servlet-mapping>
   
+
 </web-app>
