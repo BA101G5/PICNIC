@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.manufacturers.model.ManufacturersVO;
+
 public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -30,7 +32,10 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
 	private static final String UPDATE_STMT = "update GOODS_SELL set MF_NO = ? ,GS_NAME = ? ,GS_DATE = ? ,GS_PRICE = ? ,GS_INFO = ? ,GS_IMG = ? ,GS_STA = ? where GS_NO = ? ";
-
+	private static final String GET_ALL_BYTYPE_STMT = "select *  from GOODS_SELL where  GS_TYPE = ? ";
+	private static final String GET_COUNT_BYMF_STMT = "select count(GS_TYPE)  from GOODS_SELL where MF_NO  = ? ";
+	
+	
 	@Override
 	public void insert(Goods_SellVO goods_sellVO) {
 		Connection con = null;
@@ -148,7 +153,6 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, gs_no);
 			rs = pstmt.executeQuery();
-
 			rs.next();
 				goods_sellVO = new Goods_SellVO();
 				goods_sellVO.setGs_no(rs.getString("GS_NO"));
@@ -240,4 +244,107 @@ public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 		}
 		return list;
 	}
+	@Override
+	public List<Goods_SellVO> findByType(String type) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
+		ResultSet rs = null;
+		try {
+		    con=ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BYTYPE_STMT);
+			pstmt.setString(1, type);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Goods_SellVO goods_sellVO = new Goods_SellVO();
+				goods_sellVO.setGs_no(rs.getString("GS_NO"));
+				goods_sellVO.setMf_no(rs.getString("MF_NO"));
+				goods_sellVO.setGs_name(rs.getString("GS_NAME"));
+				goods_sellVO.setGs_date(rs.getTimestamp("GS_DATE"));
+				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
+				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
+				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				list.add(goods_sellVO);
+
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+	}
+@Override
+	public List<String> getcountbymf(List<ManufacturersVO> list2) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list = new ArrayList<String>();
+		ResultSet rs = null;
+		try {
+		    con=ds.getConnection();
+		    for(ManufacturersVO ManufacturersVO:list2){
+			pstmt = con.prepareStatement(GET_COUNT_BYMF_STMT);	
+			pstmt.setString(1, ManufacturersVO.getMF_NO());
+			rs = pstmt.executeQuery();
+		        rs.next();
+		       String count=String.format("%s(%s)",ManufacturersVO.getMF_NO(), rs.getString("COUNT(GS_TYPE)"));
+		        System.out.println(count);
+		        list.add(count);
+		        }
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+	}
+
+
 }
