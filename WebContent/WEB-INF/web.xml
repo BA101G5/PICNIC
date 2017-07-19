@@ -157,8 +157,6 @@
 	</servlet-mapping>
 
   
-
-<!-- wei's xml -->
 	<servlet>
     <servlet-name>General_MemberServlet</servlet-name>
     <servlet-class>com.general_member.controller.General_MemberServlet</servlet-class>
@@ -223,14 +221,7 @@
     <servlet-name>Contact_ListServlet</servlet-name>
     <url-pattern>/contact_list/contact_list.do</url-pattern>
   </servlet-mapping>
-<!--   <servlet> -->
-<!--     <servlet-name>Goods_SellServlet</servlet-name> -->
-<!--     <servlet-class>com.goods_sell.controller.Goods_SellServlet</servlet-class> -->
-<!--   </servlet> -->
-<!--   <servlet-mapping> -->
-<!--     <servlet-name>Goods_SellServlet</servlet-name> -->
-<!--     <url-pattern>/goods_sell/goods_sell.do</url-pattern> -->
-<!--   </servlet-mapping> -->
+
   <servlet>
     <servlet-name>DBGift4</servlet-name>
     <servlet-class>com.goods_sell.controller.DBGift4</servlet-class>
@@ -240,15 +231,7 @@
     <url-pattern>/good_sell/DBGift4.do</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>Goods_rentServlet</servlet-name>
-    <servlet-class>com.goods_rent.controller.Goods_rentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Goods_rentServlet</servlet-name>
-    <url-pattern>/goods_rent/goods_rent.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
+    <servlet>
     <servlet-name>DBGift5</servlet-name>
     <servlet-class>com.goods_rent.controller.DBGift5</servlet-class>
   </servlet>
