@@ -3,13 +3,13 @@
  <tr>
   <%if (rowsPerPage<rowNumber) {%>
     <%if(pageIndex>=rowsPerPage){%>
-        <td><a href ="<%=request.getRequestURI()%>?whichPage=1">ï¿½Ü²Ä¤@ï¿½ï¿½</a>&nbsp;</td>
-        <td><a href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">ï¿½Wï¿½@ï¿½ï¿½ </a>&nbsp;</td>
+        <td><A href="<%=request.getRequestURI()%>?whichPage=1">¦Ü²Ä¤@­¶</A>&nbsp;</td>
+        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">¤W¤@­¶ </A>&nbsp;</td>
     <%}%>
   
     <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
-        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">ï¿½Uï¿½@ï¿½ï¿½ </A>&nbsp;</td>
-        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">ï¿½Ü³Ì«ï¿½@ï¿½ï¿½</A>&nbsp;</td>
+        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">¤U¤@­¶ </A>&nbsp;</td>
+        <td><A href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>">¦Ü³Ì«á¤@­¶</A>&nbsp;</td>
     <%}%>
   <%}%>  
  </tr>
@@ -24,10 +24,10 @@
         <td>
            <select size="1" name="whichPage">
         <%for (int i=1; i<=pageNumber; i++){%>
-           <option value="<%=i%>">ï¿½ï¿½ï¿½Ü²ï¿½<%=i%>ï¿½ï¿½
+           <option value="<%=i%>">¸õ¦Ü²Ä<%=i%>­¶
         <%}%> 
            </select>
-           <input type="submit" value="ï¿½Tï¿½w" >  
+           <input type="submit" value="½T©w" >  
         </td>
    </FORM>
  </tr>

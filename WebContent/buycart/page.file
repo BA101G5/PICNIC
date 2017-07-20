@@ -21,10 +21,10 @@
 <%  try {
       whichPage = Integer.parseInt(request.getParameter("whichPage"));
       pageIndex=pageIndexArray[whichPage-1];
-    } catch (NumberFormatException e) { //蝚砌�甈∪銵����
+    } catch (NumberFormatException e) { 
        whichPage=1;
        pageIndex=0;
-    } catch (ArrayIndexOutOfBoundsException e) { //蝮賡�銋��隤日�
+    } catch (ArrayIndexOutOfBoundsException e) {
          if (pageNumber>0){
               whichPage=pageNumber;
               pageIndex=pageIndexArray[pageNumber-1];
@@ -32,5 +32,5 @@
     } 
 %>
 <%if (pageNumber>0){%>
-<b><font color= red>蝚�<%=whichPage%>/<%=pageNumber%>����</font></b>
+<b><font color= red>�<%=whichPage%>/<%=pageNumber%></font></b>
 <%}%>

@@ -9,12 +9,6 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
 <title>Picnic野餐網</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
 <%
 	int i = 0;
 %>
@@ -163,14 +157,13 @@
 					</c:if>
 					<c:if test="${not empty ListPicnicVO}">
 						<h1>請選擇野餐團</h1>
-
 						<form method="POST" id="myForm"
 							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 							<select name="picnic" id="input" class="form-control"
-								required="required" onchange="submit()">
-								<option value=" "></option>
+								required="required" onchange="submit()">	
 								<c:forEach var="PicnicVO" items="${ListPicnicVO}">
-									<option value=" ${PicnicVO.getPicnic_no()}"
+									<c:if test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}"><option value="${PicnicVO.getPicnic_no()} " selected >${PicnicVO.getPicnic_name()}</option></c:if>
+									<c:if test="${PicnicVO.getPicnic_no() != sessionScope.picnic_no}"><option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option></c:if>
 										<c:if test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}"></c:if>>${PicnicVO.getPicnic_name()}</option>
 								</c:forEach>
 							</select> <input type="hidden" name="action" value="get_gr_no">
@@ -180,7 +173,7 @@
 					</c:if>
 					<form method="POST"
 						action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-						<c:if test="${not empty listOrderde_DetailVO}">
+						<c:if test="${not emptylistGr}">
 							<table class="table table-hover">
 								<caption>購物清單</caption>
 								<thead>
@@ -196,7 +189,7 @@
 								</thead>
 								<tbody>
 									<c:forEach var="Orderde_DetailVO"
-										items="${listOrderde_DetailVO}">
+										items="${listGr}">
 										<c:if test="${Orderde_DetailVO.getGr_no() == null}">
 											<tr>
 												<td>${Orderde_DetailVO.getOd_place()}<input
@@ -211,7 +204,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<c:forEach var="Orderde_DetailVO" items="${listOrderde_DetailVO}">
+							<c:forEach var="Orderde_DetailVO" items="${listGr}">
 								<c:if
 									test=" ${Orderde_DetailVO.getOd_price()==0 && Orderde_DetailVO.getGr_no()==null}">
 									<table class="table table-hover">
@@ -234,7 +227,7 @@
 											</tr>
 
 											<c:forEach var="Orderde_DetailVO"
-												items="${listOrderde_DetailVO}" varStatus="loop">
+												items="${listGr}" varStatus="loop">
 												<c:if test="${Orderde_DetailVO.getGr_no() != null }">
 													<tr>
 														<td>${Orderde_DetailVO.getGr_no()}</td>
@@ -281,8 +274,7 @@
 							</c:forEach>
 						</c:if>
 
-						<c:if test="${not empty listGs }">
-
+							<c:if test="${not empty listGs }"> 	
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -293,17 +285,14 @@
 										<th>數量</th>
 										<th>單價</th>
 										<th>小計</th>
-										<th>
-										
-										<th>
-									
+										<th>			
+										<th>				
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="Orderde_DetailVO" items="${listGs}"
 										varStatus="loop">
 										<tr>
-
 											<td>${Orderde_DetailVO.getGs_no()}</td>
 											<td><input type="number" class="gsnumber"
 												id="gs${loop.index}"
@@ -314,14 +303,10 @@
 											<td><a
 												href="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?action=delete&delete=${Orderde_DetailVO.getOrderde_detailno()}"
 												class="btn btn-default" role="button"
-												onmouseOver="window.status='none'return true">取消</a>
-											
-											<td>
-										
+												onmouseOver="window.status='none'return true">取消</a>			
+											<td>				
 										</tr>
 									</c:forEach>
-
-
 									<tr>
 										<th></th>
 										<th></th>
@@ -329,8 +314,6 @@
 										<th>合計</th>
 
 									</tr>
-
-
 									<tr>
 										<td></td>
 										<td></td>
@@ -339,12 +322,9 @@
 									</tr>
 									<tr>
 									</tr>
-
-
 								</tbody>
 							</table>
 						</c:if>
-
 						<c:if test="${not empty ListPicnicVO}">
 							<table class="table table-hover">
 								<tr>
@@ -368,11 +348,8 @@
 
 									<td class="tlc">總計NT$ 0</td>
 								</tr>
-
 							</table>
 						</c:if>
-
-
 						<c:if test="${not empty ListPicnicVO}">
 							<div class="btn-group btn-group-justified ">
 								<div class="btn-group">
@@ -396,9 +373,5 @@
 	<div class="col-sm-8 col-sm-push-4">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js">
-		
-	</script></
-												body>
+	</body>
 </html>

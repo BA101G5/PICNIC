@@ -77,7 +77,13 @@ public class Orderde_DetailService {
 	}
 
 	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs) {
-	
+		
+		
+		
+		
+		
+		
+		dao.updateOrderde_Detail(listGr, listGs);
 		
 	}
 

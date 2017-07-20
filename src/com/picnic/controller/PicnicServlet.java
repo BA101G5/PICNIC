@@ -162,7 +162,7 @@ public class PicnicServlet extends HttpServlet {
 							System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);
 							if (!list.isEmpty()) {
-								req.setAttribute("list", list);
+								session.setAttribute("list", list);
 							}
 						}
 					} catch (Exception e) {

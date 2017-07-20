@@ -20,7 +20,7 @@
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
 						style="display: inline-block; height: 200px; width: 200px;">
 					<div style="display: inline-block;">
-						<h2>${goods_sellVO.getGs_name()}</h2>
+						<h3>${goods_sellVO.getGs_name()}</h3>
 						<p>
 						<table style="display: inline-block;">
 							<tr>
@@ -28,7 +28,7 @@
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
 										<button type="submit" class="btn btn-info btn-lg"
-											style="width: 150px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
+											style="width: 80px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
 										<input type="hidden" name="gsno"
 											value="${goods_sellVO.getGs_no()}"> <input
 											type="hidden" name="action" value="getOne">
@@ -38,7 +38,7 @@
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit">
+											value="Submit" style="width: 80px; height: 40px; font-size: 20px;">
 											<span class="glyphicon glyphicon-shopping-cart"
 												aria-hidden="true"></span>
 										</button>
@@ -53,8 +53,9 @@
 					</div>
 				</div>
 			</div>
-			<%@ include file="/buycart/page2.file"%>
+			
 		</c:forEach>
+		<%@ include file="/buycart/page2.file"%>
 	</c:if>
 </div>
 <div class="col-sm-9">
@@ -68,7 +69,7 @@
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
 						style="display: inline-block; height: 200px; width: 200px;">
 					<div style="display: inline-block;">
-						<h2>${goods_sellVO.getGs_name()}</h2>
+						<h3>${goods_sellVO.getGs_name()}</h3>
 						<p>
 						<table style="display: inline-block;">
 							<tr>
@@ -76,7 +77,7 @@
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
 										<button type="submit" class="btn btn-info btn-lg"
-											style="width: 150px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
+											style="width: 80px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
 										<input type="hidden" name="gsno"
 											value="${goods_sellVO.getGs_no()}"> <input
 											type="hidden" name="action" value="getOne">
@@ -86,7 +87,7 @@
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit">
+											value="Submit" style="width: 80px; height: 40px; font-size: 20px;">
 											<span class="glyphicon glyphicon-shopping-cart"
 												aria-hidden="true"></span>
 										</button>
@@ -101,7 +102,7 @@
 					</div>
 				</div>
 			</div>
-			<%@ include file="/buycart/page2.file"%>
 		</c:forEach>
+		<%@ include file="/buycart/page2.file"%>
 	</c:if>
-	/div>
+	</div>
