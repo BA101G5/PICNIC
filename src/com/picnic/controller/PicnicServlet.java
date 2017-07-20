@@ -91,7 +91,7 @@ public class PicnicServlet extends HttpServlet {
 				} else {
 					tladdress = area + address;
 				}
-				System.out.println("hello");
+				
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
 				session.setAttribute("tladdress", tladdress);

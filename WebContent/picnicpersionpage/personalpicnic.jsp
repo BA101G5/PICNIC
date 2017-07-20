@@ -3,6 +3,7 @@
 <%@ page import="com.pboard_article.model.*"%>
 <%@ page import="com.general_member.model.*"%>
 <%@ page import="com.picnic.model.*"%>
+<%@ page import="com.picmem.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 	GeneralMemberService gmSvc = new GeneralMemberService();
@@ -11,14 +12,21 @@
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
 	Collections.reverse(list);
-	pageContext.setAttribute("list",list);
+	pageContext.setAttribute("list", list);
 %>
+
 <%
 	Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
 %>
 
 <% 
 	PicnicVO picnicVO = (PicnicVO)session.getAttribute("picnicVO");
+// 	System.out.println("personalpicnic.jsp / picnicVO.getPicnic_no() = " + picnicVO.getPicnic_no());
+	PicmemService pmSvc = new PicmemService();
+	List<PicmemVO> pmListByP = pmSvc.getAll(picnicVO.getPicnic_no());//picnicVO.getPicnic_no()
+// 	System.out.println(pmListByP.get(1).getMem_no());
+// 	System.out.println(pmListByP.get(2).getMem_no());
+	pageContext.setAttribute("pmListByP", pmListByP);
 %>
 <!DOCTYPE html>
 <html lang="">
@@ -97,8 +105,8 @@ body{
 	<div class="container" style="background-color: white;">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="/BA101G5456/index.jsp">首頁</a></li>
-				<li><a href="#" class="active">開團</a></li>
+				<li><a href="<%=request.getContextPath()%>/index.jsp">首頁</a></li>
+				<li>野餐團體版面</li>
 			</ol>
 		</div>
 		<div class="row">
@@ -132,6 +140,7 @@ body{
 
 
 <%-- 錯誤表列 --%>
+<div>
 <c:if test="${not empty errorMsgs}">
 	<font color='red'>請修正以下錯誤:
 	<ul>
@@ -141,6 +150,7 @@ body{
 	</ul>
 	</font>
 </c:if>
+</div>
 
 <div style="display:none">
 <FORM METHOD="post" ACTION="pboard_article.do" name="formPost" id="formPost">
@@ -160,6 +170,11 @@ body{
 		<td>作者:</td>
 		<td><input id="author_no" type="TEXT" name="author_no" size="45" 
 			value="<%= (pboard_articleVO==null)? "MG00000001" : pboard_articleVO.getAuthor_no()%>" /></td>
+	</tr>
+	<tr>
+		<td>野餐團:</td>
+		<td><input id="picnic_no" type="TEXT" name="picnic_no" size="45" 
+			value="<%= (picnicVO==null)? "PG00000001" : picnicVO.getPicnic_no() %>" /></td>
 	</tr>
 	<tr>
 		<input id="inputFile" type="file" onchange="encodeImageFileAsURL(this)" />
@@ -246,19 +261,16 @@ body{
 							</p>
 
 						</div>
+						
+<c:forEach var="picmemVO" items="${pmListByP}">
 						<div class="col-lg-6">
 							<ul class="list-unstyled">
-								<li><a href="#">成員</a></li>
-								<li><a href="#">成員</a></li>
+<%-- 								<li><a href="#">成員 ${ picmemVO.mem_no }</a></li> --%>
+								<li><a href="#">成員 ${gmSvc.getOneGeneralMember(picmemVO.mem_no).getMEM_NAME()}</a></li>
 							</ul>
 						</div>
+</c:forEach>	
 
-						<div class="col-lg-6">
-							<ul class="list-unstyled">
-								<li><a href="#">成員</a></li>
-								<li><a href="#">成員</a></li>
-							</ul>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -148,12 +148,28 @@
 		<url-pattern>/backend/pboard_article/pboard_article.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>Pboard_ArticleServlet</servlet-name>
+		<servlet-name>Pboard_ArticleServlet1</servlet-name>
 		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Pboard_ArticleServlet</servlet-name>
+		<servlet-name>Pboard_ArticleServlet1</servlet-name>
 		<url-pattern>/frontend/pboard_article/pboard_article.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Pboard_ArticleServlet2</servlet-name>
+		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Pboard_ArticleServlet2</servlet-name>
+		<url-pattern>/picnicpersionpage/pboard_article.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Pboard_ArticleServlet3</servlet-name>
+		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Pboard_ArticleServlet3</servlet-name>
+		<url-pattern>/picnic/pboard_article.do</url-pattern>
 	</servlet-mapping>
 
 
