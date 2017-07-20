@@ -266,6 +266,11 @@
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>/personal/personal.jsp</url-pattern>
+		<url-pattern>/picnic/maosecondui.jsp</url-pattern>
+		<url-pattern>/buycart/moafirst.jsp</url-pattern>
+		<url-pattern>/orderde_detail/orderde_detail.do</url-pattern>
+		<url-pattern>/orderde_detail/orderde_detail.do?</url-pattern>
+		<url-pattern>/picnic/picnic.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

@@ -41,9 +41,9 @@ public class Orderde_detailServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-			//	GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
-			 //	String account = gVO.getMEM_NO();
-				String account ="M000000001";
+				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			 	String account = gVO.getMEM_NO();
+			
 				PicmemService picmemSvc = new PicmemService();
 				List<String> list = picmemSvc.findbymem_no(account);
 
@@ -126,16 +126,20 @@ public class Orderde_detailServlet extends HttpServlet {
 				orderde_detailSvc = new Orderde_DetailService();
 				orderde_detailSvc.addGrOrderde_Detail(goods_rentVO, amount, account, picnic_no);
 			}
-
+		
 			String url = null;
 			if (action.equals("insertintocartA")) {
 				url = "/buycart/moafirst.jsp";
 			} else if (action.equals("insertintocartB")) {
 				url = "/buycart/maothird.jsp";
+			} else{
+				url = "/picnic/maosecondui3.jsp";
 			} 
 			javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
 			SuccessView.forward(req, res);
 		}
+		
+		
 		if (action.equals("delete")) {
 			String picnic_no = (String) session.getAttribute("picnic_no");
 			String delete = req.getParameter("delete");

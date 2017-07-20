@@ -86,7 +86,7 @@ public class PicnicServlet extends HttpServlet {
 				String tladdress = null;
 				System.out.println();
 
-				if (address.contains("撣�")) {
+				if (address.contains("縣")||address.contains("市")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
@@ -184,11 +184,14 @@ public class PicnicServlet extends HttpServlet {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
+			String account=null;
+			try{
 			GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
-
-			String account = gVO.getMEM_NO();
-
+		    account = gVO.getMEM_NO();
+			}catch(Exception e){System.out.println(e.getMessage()); }
+			
+			
 			String uri = (String) req.getParameter("uri");
 			try {
 				uri = uri.split("null")[1];
