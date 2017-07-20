@@ -22,33 +22,33 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (ORDERDE_DETAILNO,MEM_NO,P_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS)values('OD'||LPAD(ORDERDE_DETAIL_SQ.nextval,8,0),?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = " insert into ORDERDE_DETAIL (ORDERDE_DETAILNO,MEM_NO,P_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS,GR_NO,PICNIC_NO)values('OD'||LPAD(ORDERDE_DETAIL_SQ.nextval,8,0),?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = " select * from ORDERDE_DETAIL ORDER BY ORDERDE_DETAILNO";
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
 	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL WHERE PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
 	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL WHERE MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
-	
+
 	@Override
 	public void insert(Orderde_DetailVO orderde_detailVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con=ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1,orderde_detailVO.getMem_no());
+			pstmt.setString(1, orderde_detailVO.getMem_no());
 			pstmt.setString(2, orderde_detailVO.getP_no());
 			pstmt.setString(3, orderde_detailVO.getGs_no());
 			pstmt.setInt(4, orderde_detailVO.getOd_amount());
 			pstmt.setInt(5, orderde_detailVO.getOd_price());
 			pstmt.setTimestamp(6, orderde_detailVO.getOd_deliver());
-			pstmt.setString(7,orderde_detailVO.getOd_place());
-    		pstmt.setString(8, orderde_detailVO.getOd_bs());
-
+			pstmt.setString(7, orderde_detailVO.getOd_place());
+			pstmt.setString(8, orderde_detailVO.getOd_bs());
+			pstmt.setString(9, orderde_detailVO.getGr_no());
+			pstmt.setString(10, orderde_detailVO.getPicnic_no());
 			pstmt.executeUpdate();
 
-		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -75,11 +75,11 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con=ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
-			
+
 			pstmt.setString(1, orderde_detailVO.getMem_no());
-			pstmt.setString(2,orderde_detailVO.getPicnic_no());
+			pstmt.setString(2, orderde_detailVO.getPicnic_no());
 			pstmt.setString(3, orderde_detailVO.getP_no());
 			pstmt.setString(4, orderde_detailVO.getGs_no());
 			pstmt.setInt(5, orderde_detailVO.getOd_amount());
@@ -90,7 +90,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 			pstmt.setString(10, orderde_detailVO.getOrderde_detailno());
 
 			pstmt.executeUpdate();
-		
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -117,12 +117,12 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con=ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setString(1, orderde_detailno);
 
 			pstmt.executeUpdate();
-		
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -152,10 +152,10 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		Orderde_DetailVO orderde_detailVO = null;
 		ResultSet rs = null;
 		try {
-			con=ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setString(1, orderde_detailno);
-			rs = pstmt.executeQuery();		
+			rs = pstmt.executeQuery();
 			rs.next();
 			orderde_detailVO = new Orderde_DetailVO();
 			orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
@@ -168,9 +168,9 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 			orderde_detailVO.setOd_price(rs.getInt("OD_PRICE"));
 			orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
 			orderde_detailVO.setOd_place(rs.getString("OD_PLACE"));
-			orderde_detailVO.setOd_bs(rs.getString("OD_BS"));;
+			orderde_detailVO.setOd_bs(rs.getString("OD_BS"));
+			;
 
-		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -209,7 +209,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			con= ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -231,7 +231,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				list.add(orderde_detailVO);
 
 			}
-		
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -269,7 +269,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			con= ds.getConnection();
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_GR_PICNICNO_STMT);
 			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
@@ -292,7 +292,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				list.add(orderde_detailVO);
 
 			}
-		
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -321,7 +321,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<Orderde_DetailVO> getGsByMenno(String mem_no) {
 		Connection con = null;
@@ -330,7 +330,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_GS_MEMNO_STMT);
 			pstmt.setString(1, mem_no);
@@ -354,7 +354,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				list.add(orderde_detailVO);
 
 			}
-		
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -383,6 +383,5 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 		}
 		return list;
 	}
-	
 
 }

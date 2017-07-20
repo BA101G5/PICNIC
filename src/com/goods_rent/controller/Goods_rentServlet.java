@@ -136,6 +136,7 @@ public class Goods_rentServlet extends HttpServlet{
 				throw new ServletException(e);
 			}
 		}
+		
 		if ("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

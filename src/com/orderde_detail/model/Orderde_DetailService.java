@@ -63,9 +63,11 @@ public class Orderde_DetailService {
 	orderde_detailVO.setPicnic_no(picnic_no);
 	orderde_detailVO.setP_no(goods_rentVO.getP_no());
 	orderde_detailVO.setGr_no(goods_rentVO.getGr_no());
+	System.out.println(orderde_detailVO.getGr_no());
 	orderde_detailVO.setOd_amount(amount);
 	orderde_detailVO.setOd_price(goods_rentVO.getGr_price());
-	orderde_detailVO.setMem_no(account);		
+	orderde_detailVO.setMem_no(account);	
+	
 	dao.insert(orderde_detailVO);	
 	}
 	public List<Orderde_DetailVO> getGsByMem(String mem_no){

@@ -52,7 +52,7 @@ public class Orderde_detailServlet extends HttpServlet {
 
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 				List<Orderde_DetailVO> listGS = orderde_detailSvc.getGsByMem(account);
-
+				
 				session.setAttribute("ListPicnicVO", ListPicnic);
 				session.setAttribute("listGs", listGS);
 
@@ -72,10 +72,12 @@ public class Orderde_detailServlet extends HttpServlet {
 
 			try {
 				String picnic_no = req.getParameter("picnic");
-				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
-				String account = gVO.getMEM_NO();
+				System.out.println(picnic_no);
+				
+				
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
+				System.out.println(list);
 
 				if (!list.isEmpty()) {
 					req.setAttribute("listOrderde_DetailVO", list);
@@ -97,9 +99,12 @@ public class Orderde_detailServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String picnic_no = req.getParameter("Picnic_no");
+			System.out.println(picnic_no+"Picnic_no");
 			String gs_no = req.getParameter("gs_no");
+			
 			String gr_no = req.getParameter("gr_no");
-			System.out.println(picnic_no + "picnic_no");
+			System.out.println(gs_no+"GS_no");
+			System.out.println(gr_no + "picnic_no");
 
 			Integer amount = null;
 			try {
@@ -107,6 +112,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.put("amount", "�п�J���T�ƶq");
 			}
+			System.out.println(amount);
 			if (amount < 0) {
 				errorMsgs.put("amount", "�п�J���T�ƶq");
 			}
@@ -167,8 +173,8 @@ public class Orderde_detailServlet extends HttpServlet {
 			GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
 			String account = gVO.getMEM_NO();
 			String picnic_no = (String) session.getAttribute("picnic_no");
-			String address = req.getParameter("address").trim();
-
+			//String address = req.getParameter("address").trim();
+			//System.out.println(address);
 			List<Orderde_DetailVO> listGr = (List<Orderde_DetailVO>) session.getAttribute("listOrderde_DetailVO");
 			List<Orderde_DetailVO> listGs = (List<Orderde_DetailVO>) session.getAttribute("listGs");
 			try {
@@ -191,7 +197,7 @@ public class Orderde_detailServlet extends HttpServlet {
 					orderde_detailVO.setOd_price(price);
 					orderde_detailVO.setOd_amount(amount);
 					orderde_detailVO.setPicnic_no(picnic_no);
-					orderde_detailVO.setOd_place(address);
+					//orderde_detailVO.setOd_place(address);
 				}
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 				orderde_detailSvc.updateOrderde_Detail(listGr, listGs);
