@@ -36,6 +36,8 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 		"DELETE FROM PBOARD_ARTICLE where ARTICLE_NO = ?";
 	private static final String UPDATE = 
 		"UPDATE PBOARD_ARTICLE set AUTHOR_NO=?, TOPIC_NO=?, PICNIC_NO=?, ARTICLE_TITLE=?, ARTICLE_TEXT=?, ARTICLE_POST=?, ARTICLE_EDIT=?, ARTICLE_VIEWS=?, ARTICLE_STA=?, ARTICLE_KIND=?, ARTICLE_PW=? where ARTICLE_NO = ?";
+	private static final String GET_ALL_STMT_COND_P = 
+	"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE WHERE PICNIC_NO = ?";
 
 	@Override
 	public void insert(Pboard_ArticleVO pboardArticleVO) {
@@ -277,6 +279,71 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pboard_ArticleVO> getAllwP(String picnic_no) {
+		// TODO Auto-generated method stub
+		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
+		Pboard_ArticleVO pboardArticleVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+	
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_COND_P);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				// pboardArticleVO ¤]ºÙ¬° Domain objects
+				pboardArticleVO = new Pboard_ArticleVO();
+				pboardArticleVO.setArticle_no(rs.getString("ARTICLE_NO"));
+				pboardArticleVO.setAuthor_no(rs.getString("AUTHOR_NO"));
+				pboardArticleVO.setTopic_no(rs.getString("TOPIC_NO"));
+				pboardArticleVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				pboardArticleVO.setArticle_title(rs.getString("ARTICLE_TITLE"));
+				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
+				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
+				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
+				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
+				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
+				list.add(pboardArticleVO); // Store the row in the list
+			}
+	
+			// Handle any SQL errors
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
