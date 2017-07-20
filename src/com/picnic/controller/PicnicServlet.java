@@ -86,7 +86,7 @@ public class PicnicServlet extends HttpServlet {
 				String tladdress = null;
 				System.out.println();
 
-				if (address.contains("撣�")) {
+				if (address.contains("縣")||address.contains("市")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
