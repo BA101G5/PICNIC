@@ -376,5 +376,11 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 			
 		return list;
 		}
-
+	//-----------------------------------------------------------
+	public void k_insert(PicmemVO picmemVO){}
+	public void k_update(PicmemVO picmemVO){}
+	public void k_delete(String picnic_no,String mem_no){}
+	public PicmemVO k_findByPrimaryKey(String picnic_no,String mem_no){return null;}
+	public List<PicmemVO> k_getAll(){return null;}
+	public void k_insertowner(PicmemVO picmemVO){}
 }

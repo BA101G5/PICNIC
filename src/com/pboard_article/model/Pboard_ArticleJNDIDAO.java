@@ -305,4 +305,133 @@ public class Pboard_ArticleJNDIDAO implements Pboard_ArticleDAO_interface {
 		}
 		return list;
 	}
+	//-------------------------------------------------------------------------------------
+	private static final String K_RESEARCH_SELECT = 
+			" select pbo.ARTICLE_NO,pbo.AUTHOR_NO,gen.MEM_NAME ,gen.MEM_MAIL, pbo.PICNIC_NO,pic.PICNIC_NAME ,pbo.ARTICLE_TITLE¡Apbo.ARTICLE_TEXT,pbo.ARTICLE_POST ,pbo.TOPIC_NO¡Apbo.ARTICLE_EDIT¡Apbo.ARTICLE_VIEWS¡Apbo.ARTICLE_STA¡Apbo.ARTICLE_KIND¡Apbo.ARTICLE_PW "
+			+ " from PBOARD_ARTICLE pbo left outer join GENERAL_MEMBER gen on pbo.AUTHOR_NO = gen.MEM_NO left outer join PICNIC pic on pbo.PICNIC_NO = pic.PICNIC_NO "
+			+ " where 1=1 ";
+	private static final String K_GET_SEARCH_NAME =
+			 " select pbo.ARTICLE_NO,pbo.AUTHOR_NO,gen.MEM_NAME ,gen.MEM_MAIL "
+			+" from PBOARD_ARTICLE pbo left outer join GENERAL_MEMBER gen on pbo.AUTHOR_NO = gen.MEM_NO "
+			+" where ARTICLE_NO = ? ";
+	
+	
+	public List<Pboard_ArticleVO> k_research(String search_string) {
+		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
+		Pboard_ArticleVO pboardArticleVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			if(search_string == ""){
+				pstmt = con.prepareStatement(K_RESEARCH_SELECT);
+			}else{
+				pstmt = con.prepareStatement(K_RESEARCH_SELECT+search_string);
+				//pstmt.setString(1, search_string);
+			}
+			
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// pboardArticleVO ¤]ºÙ¬° Domain objects
+				pboardArticleVO = new Pboard_ArticleVO();
+				pboardArticleVO.setArticle_no(rs.getString("ARTICLE_NO"));
+				pboardArticleVO.setAuthor_no(rs.getString("AUTHOR_NO"));
+				pboardArticleVO.setTopic_no(rs.getString("TOPIC_NO"));
+				pboardArticleVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				pboardArticleVO.setArticle_title(rs.getString("ARTICLE_TITLE"));
+				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
+				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
+				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
+				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
+				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
+				list.add(pboardArticleVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public String k_get_search_name(String article_no) {
+		String list = "";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(K_GET_SEARCH_NAME);
+			pstmt.setString(1, article_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list = rs.getString("MEM_NAME"); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 }

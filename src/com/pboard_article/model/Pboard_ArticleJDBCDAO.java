@@ -391,4 +391,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		}
 	
 	}
+	//--------------------
+	public List<Pboard_ArticleVO> k_research(String search_string){return null;}
+	public String k_get_search_name(String article_no){return null;}
 }
