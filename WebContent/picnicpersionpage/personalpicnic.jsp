@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pboard_article.model.*"%>
 <%@ page import="com.general_member.model.*"%>
+<%@ page import="com.picnic.model.*"%>
 <%@ page import="java.util.*"%>
 <%
 	GeneralMemberService gmSvc = new GeneralMemberService();
@@ -15,6 +16,10 @@
 <%
 	Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
 %>
+
+<% 
+	PicnicVO picnicVO = (PicnicVO)session.getAttribute("picnicVO");
+%>
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -23,14 +28,12 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Picnic野餐網</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <jsp:include page="/mustinclude/head.jsp" />
 <style>
 body{
 	background-color: #eff9f9;
 }
-.navbar, .breadcrumb{
+.breadcrumb{
 	opacity: 0.8;
 }
 			h2{
@@ -38,8 +41,9 @@ body{
 				font-weight: 700;
 			}
 			.btn-board-newpost{
-				background-color: #1d2084;
-				color: white;
+ 				background-color: #1d2084;
+ 				margin: 0px 8px;
+				color: #555;
 			}
 			.board-topic{
 				margin: 16px 0px;
@@ -71,18 +75,26 @@ body{
 			.mem-guest{
 				display: none;
 			}
-	
+
+.article-content img{
+	max-width: 250px;
+	height: auto;
+}
+
+
 .breadcrumb {
-	margin-top: -25px;
+	margin: 0px;
 	background: skyblue;
 }
+
+
 </style>
 
 </head>
 <body>
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
-	<div class="container" style="background-color: gray;">
+	<div class="container" style="background-color: white;">
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="/BA101G5456/index.jsp">首頁</a></li>
@@ -91,11 +103,11 @@ body{
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<h1 class="page-header">
-					Heading <small>Text</small>
-				</h1>
+<!-- 				<h1 class="page-header"> -->
+<!-- 					Heading <small>Text</small> -->
+<!-- 				</h1> -->
 				<h2>
-					<a href="#"> Title</a>
+					${ picnicVO.picnic_name }
 				</h2>
 				<hr>
 				<div class="container-fluid">
@@ -190,7 +202,7 @@ body{
 </div>
 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		<script src="<%=request.getContextPath()%>/js/encodeImageFileAsURL.js"></script>
 		<script>
 			// sessionScope.gVO.getMEM_NO(): "${sessionScope.gVO.getMEM_NO()}"
@@ -214,20 +226,23 @@ body{
 				});
 			});
 		</script>
-				<ul class="pager">
-					<li class="previous"><a href="#">&larr; Older</a></li>
-					<li class="next"><a href="#">Newer &rarr;</a></li>
-				</ul>
+<!-- 				<ul class="pager"> -->
+<!-- 					<li class="previous"><a href="#">&larr; Older</a></li> -->
+<!-- 					<li class="next"><a href="#">Newer &rarr;</a></li> -->
+<!-- 				</ul> -->
+				
+				
+				
 			</div>
 			<div class="col-md-4">
 				<div class="well">
-					<h4>野餐團介紹</h4>
 					<div class="row">
 						<div class="well">
-							<p>
-							<form method="post" action="">
-								<a href="#">修改</a>
-							</form>
+							<strong>野餐團介紹</strong>
+							<p>${ picnicVO.picnic_desc }
+								<form method="post" action="" class="btn btn-default">
+									<a href="#">修改</a>
+								</form>
 							</p>
 
 						</div>
@@ -235,7 +250,6 @@ body{
 							<ul class="list-unstyled">
 								<li><a href="#">成員</a></li>
 								<li><a href="#">成員</a></li>
-
 							</ul>
 						</div>
 
@@ -255,7 +269,6 @@ body{
 	<div class="col-md-12">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div></div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

@@ -156,9 +156,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="password" name="MEM_PSW" id="MEM_PSW"
 											placeholder="請輸入密碼" style="width: 200px;"
-											value="" />
+											value="" /><font color='red' id="PSW"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="PSW"><b>${errorMsgs.MEM_PSW}</b></font>
+											<font color='red'><b>${errorMsgs.MEM_PSW}</b></font>
 											<font color='red'><b>${errorMsgs.MEM_PSW_1}</b></font>
 										</c:if>
 									</div>
@@ -192,9 +192,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MEM_NAME" id="MEM_NAME"
-											placeholder="請填寫真實姓名" value="${MemVO.MEM_NAME}">
+											placeholder="請填寫真實姓名" value="${MemVO.MEM_NAME}"><font color='red' id="NAME"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="NAME"><b>${errorMsgs.MEM_NAME}</b></font>
+											<font color='red'><b>${errorMsgs.MEM_NAME}</b></font>
 										</c:if>
 									</div>
 								</div>
@@ -228,9 +228,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MEM_BIRTH" id="datepicker3"
-											value="${MemVO.MEM_BIRTH}" />
+											value="${MemVO.MEM_BIRTH}" /><font color='red' id="BIRTH"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="BIRTH"><b>${errorMsgs.MEM_BIRTH}</b></font>
+											<font color='red'><b>${errorMsgs.MEM_BIRTH}</b></font>
 										</c:if>
 
 									</div>
@@ -255,9 +255,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MEM_PHONE" id="MEM_PHONE"
-											value="${MemVO.MEM_PHONE}" />
+											value="${MemVO.MEM_PHONE}" />	<font color='red' id="PHONE"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="PHONE"><b>${errorMsgs.MEM_PHONE}</b></font>
+											<font color='red'><b>${errorMsgs.MEM_PHONE}</b></font>
 										</c:if>
 
 									</div>

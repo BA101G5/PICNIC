@@ -159,9 +159,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="DAY_START" id="datepicker"
-											value="<%=(ADVO == null) ? "" : ADVO.getDAY_START()%>" />
+											value="<%=(ADVO == null) ? "" : ADVO.getDAY_START()%>" /><font color='red' id="START"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="START"><b>${errorMsgs.DAY_START}</b></font>
+											<font color='red'><b>${errorMsgs.DAY_START}</b></font>
 										</c:if>
 
 									</div>
@@ -174,9 +174,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="DAY_END" id="datepicker3"
-											value="<%=(ADVO == null) ? "" : ADVO.getDAY_END()%>" />
+											value="<%=(ADVO == null) ? "" : ADVO.getDAY_END()%>" /><font color='red' id="END"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="END"><b>${errorMsgs.DAY_END}</b></font>
+											<font color='red'><b>${errorMsgs.DAY_END}</b></font>
 										</c:if>
 
 									</div>
@@ -190,9 +190,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<textarea name="AD_SELF" rows="7" cols="50" id="AD_SELF"
 											value="<%=(ADVO == null) ? "¼s§i" : ADVO.getAD_SELF()%>" />
-										</textarea>
+										</textarea><font color='red' id="SELF"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="SELF"><b>${errorMsgs.AD_SELF}</b></font>
+											<font color='red'><b>${errorMsgs.AD_SELF}</b></font>
 										</c:if>
 									</div>
 
