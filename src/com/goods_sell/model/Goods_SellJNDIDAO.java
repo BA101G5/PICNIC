@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 import com.manufacturers.model.ManufacturersVO;
 
-public class Goods_SellDAO implements Goods_SellDAO_interface {
+public class Goods_SellJNDIDAO implements Goods_SellDAO_interface {
 	private static DataSource ds = null;
 	static {
 		Context ctx;
