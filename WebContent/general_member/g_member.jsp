@@ -123,10 +123,10 @@ textarea {
 	
 	<!-- title -->
 
-	<div class="container" " style="background: white;">
+	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-push-1 dd">
-				<label><h1>一般會員註冊</h1></label>
+				<label><h1  style="color:Azure  ;">一 般 會 員 註 冊</h1></label>
 			</div>
 		</div>
 	</div>
@@ -137,7 +137,7 @@ textarea {
 		enctype="multipart/form-data">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-10 col-sm-push-1">
+				<div class="col-xs-12 col-sm-10 col-sm-push-1" >
 					<!-- 帳號設定 -->
 					<div class="panel panel-default">
 						<div class="panel-heading">
