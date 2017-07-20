@@ -209,76 +209,80 @@
 											</tr>
 										</c:if>
 									</c:forEach>
-								</tbody>	
+								</tbody>
 							</table>
 							<c:forEach var="Orderde_DetailVO" items="${listOrderde_DetailVO}">
-						<c:if test=" ${Orderde_DetailVO.getOd_price()==0 && Orderde_DetailVO.getGr_no()==null}">
-							<table class="table table-hover">
-								<thead>
+								<c:if
+									test=" ${Orderde_DetailVO.getOd_price()==0 && Orderde_DetailVO.getGr_no()==null}">
+									<table class="table table-hover">
+										<thead>
 
-									<tr>
-										<th>租賃商品</th>
-									</tr>
-									<tr>
-										<th>商品名稱</th>
-										<th>數量</th>
-										<th>單價</th>
-										<th>小計</th>
-										<th>
-										<th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-									</tr>
-
-									<c:forEach var="Orderde_DetailVO"
-										items="${listOrderde_DetailVO}" varStatus="loop">
-										<c:if test="${Orderde_DetailVO.getGr_no() != null }">
 											<tr>
-												<td>${Orderde_DetailVO.getGr_no()}</td>
-
-												<td><input type="number" class="grnumber"
-													id="gr${loop.index}"
-													name="${Orderde_DetailVO.getGr_no()}amount"
-													value="${Orderde_DetailVO.getOd_amount()}" min="0"></td>
-												<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
-												<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
-												<td><a
-													href="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?action=delete&delete=${Orderde_DetailVO.getOrderde_detailno()}"
-													class="btn btn-default" role="button"
-													onmouseOver="window.status='none'return true">取消</a></td>
-												<td>
+												<th>租賃商品</th>
 											</tr>
-										</c:if>
-									</c:forEach>
-								</tbody>
+											<tr>
+												<th>商品名稱</th>
+												<th>數量</th>
+												<th>單價</th>
+												<th>小計</th>
+												<th><th>
+											
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+											</tr>
 
-								<thead>
-									<tr>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th>合計</th>
+											<c:forEach var="Orderde_DetailVO"
+												items="${listOrderde_DetailVO}" varStatus="loop">
+												<c:if test="${Orderde_DetailVO.getGr_no() != null }">
+													<tr>
+														<td>${Orderde_DetailVO.getGr_no()}</td>
 
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td class="lc">NT$ 0</td>
-									<tr>
-								</tbody>
-							</table>
-							
+														<td><input type="number" class="grnumber"
+															id="gr${loop.index}"
+															name="${Orderde_DetailVO.getGr_no()}amount"
+															value="${Orderde_DetailVO.getOd_amount()}" min="0"></td>
+														<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
+														<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
+														<td><a
+															href="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?action=delete&delete=${Orderde_DetailVO.getOrderde_detailno()}"
+															class="btn btn-default" role="button"
+															onmouseOver="window.status='none'return true">取消</a></td>
+														<td>
+													
+													</tr>
+												</c:if>
+											</c:forEach>
+										</tbody>
+
+										<thead>
+											<tr>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th>合計</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td class="lc">NT$ 0</td>
+											
+											<tr>
+										
+										</tbody>
+									</table>
+
+								</c:if>
+							</c:forEach>
 						</c:if>
-						</c:forEach>
-						</c:if>
-						
+
 						<c:if test="${not empty listGs }">
-					
+
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -290,7 +294,9 @@
 										<th>單價</th>
 										<th>小計</th>
 										<th>
+										
 										<th>
+									
 									</tr>
 								</thead>
 								<tbody>
@@ -309,7 +315,9 @@
 												href="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?action=delete&delete=${Orderde_DetailVO.getOrderde_detailno()}"
 												class="btn btn-default" role="button"
 												onmouseOver="window.status='none'return true">取消</a>
+											
 											<td>
+										
 										</tr>
 									</c:forEach>
 
@@ -335,32 +343,32 @@
 
 								</tbody>
 							</table>
-							</c:if>
-							
+						</c:if>
+
 						<c:if test="${not empty ListPicnicVO}">
-						<table class="table table-hover">
-							<tr>
-								<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-								
-								<td class="tlc">總計NT$ 0</td>
-							</tr>
-							
+							<table class="table table-hover">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+
+									<td class="tlc">總計NT$ 0</td>
+								</tr>
+
 							</table>
 						</c:if>
 
@@ -384,10 +392,13 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="col-sm-8 col-sm-push-4">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js">
+		
+	</script></
+												body>
 </html>

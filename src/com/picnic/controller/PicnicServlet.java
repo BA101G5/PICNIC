@@ -116,6 +116,9 @@ public class PicnicServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		
 
 		if (action.equals("insert")) {
 
@@ -151,6 +154,7 @@ public class PicnicServlet extends HttpServlet {
 						System.out.println(placeVO + "hello");
 
 						if (placeVO.getMf_no() != null) {
+							System.out.println(placeVO.getMf_no());
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
@@ -158,7 +162,7 @@ public class PicnicServlet extends HttpServlet {
 							System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);
 							if (!list.isEmpty()) {
-								session.setAttribute("list", list);
+								req.setAttribute("list", list);
 							}
 						}
 					} catch (Exception e) {
@@ -179,6 +183,10 @@ public class PicnicServlet extends HttpServlet {
 				errorMsgs.put("Exception", e.getMessage());
 			}
 		}
+		
+		
+		
+		
 
 		if (action.equals("persionalpicnic")) {
 

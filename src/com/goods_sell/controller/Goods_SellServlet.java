@@ -27,6 +27,8 @@ import com.manufacturers.model.ManufacturersService;
 import com.manufacturers.model.ManufacturersVO;
 import com.orderde_detail.model.Orderde_DetailService;
 
+import oracle.sql.CHAR;
+
 //import com.orderde_detail.model.Orderde_DetailService;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
@@ -296,8 +298,9 @@ public class Goods_SellServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
+				 Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
 
+				String gs_sta1 =GS_STA.toString();
 				System.out.println(GS_STA);
 				Goods_SellVO GSVO = new Goods_SellVO();
 
@@ -311,7 +314,7 @@ public class Goods_SellServlet extends HttpServlet {
 
 				/*************************** 2.嚙罷嚙締嚙論改蕭嚙踝蕭 *****************************************/
 				Goods_SellService gSvc = new Goods_SellService();
-				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA);
+				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, gs_sta1);
 
 				/***************************
 				 * 3.嚙論改完嚙踝蕭,嚙褒喉蕭嚙踝蕭嚙�(Send the Success view)

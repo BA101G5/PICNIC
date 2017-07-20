@@ -12,7 +12,7 @@ public class Goods_SellService {
 	}
 
 	public Goods_SellVO addGoods_Sell(String MF_NO, String GS_NAME, java.sql.Timestamp GS_DATE, Integer GS_PRICE,
-			String GS_INFO, byte[] GS_IMG, Character GS_STA) {
+			String GS_INFO, byte[] GS_IMG, String GS_STA) {
 		Goods_SellVO GSVO = new Goods_SellVO();
 		GSVO.setMf_no(MF_NO);
 		GSVO.setGs_name(GS_NAME);
@@ -28,7 +28,7 @@ public class Goods_SellService {
 	}
 
 	public Goods_SellVO updateGoods_Sell(String GS_NO, String MF_NO, String GS_NAME, java.sql.Timestamp GS_DATE,
-			Integer GS_PRICE, String GS_INFO, byte[] GS_IMG, Character GS_STA) {
+			Integer GS_PRICE, String GS_INFO, byte[] GS_IMG, String GS_STA) {
 
 		Goods_SellVO GSVO = new Goods_SellVO();
 		GSVO.setGs_no(GS_NO);
@@ -68,15 +68,8 @@ public class Goods_SellService {
 	}
 
 	public List<Goods_SellVO> findByMfType(String type, String Mf_no) {
-		
-		return dao.finBymf(type,Mf_no);
-	}
 
-	public List<Goods_SellVO> findByMfType(String type, String mf_no) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.finBymf(type, Mf_no);
 	}
-
-	
 
 }
