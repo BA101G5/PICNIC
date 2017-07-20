@@ -109,8 +109,8 @@ body{
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-8 col-sm-push-2" style="background-color:white;">
-
-
+<h2>最新成立的野餐團</h2>
+<%@ include file="pages/page1.file" %>
 <table border='1' bordercolor='#CCCCFF' width='100%'>
 	<tr>
 		<th>野餐團名稱</th>
@@ -118,7 +118,7 @@ body{
 <!-- 		<th>留言板</th> -->
 	</tr>
 
-	<c:forEach var="picnicVO" items="${list}">
+	<c:forEach var="picnicVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr align='center'>
 			<td>${picnicVO.picnic_name}</td>
 			<td>${picnicVO.picnic_desc}</td>
@@ -126,7 +126,7 @@ body{
 		</tr>
 	</c:forEach>
 </table>
-
+<%@ include file="pages/page2.file" %>
 
 		</div>
 	</div>
