@@ -89,7 +89,7 @@
 					  </div>
 
 					  <!-- 區塊1 檢舉系統-->
-					  <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel1">
 					      <h4 class="panel-title" >
@@ -101,7 +101,7 @@
 					    <div id="aaa" class="panel-collapse collapse " role="tabpanel" aria-labelledby="panel1">
 					    
 					      <div class="list-group">
-					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">文章檢舉</button>
 									<input type="hidden" name="chli_cate" value="0">
@@ -113,7 +113,7 @@
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+								<%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">揪團檢舉</button>
 									<input type="hidden" name="chli_cate" value="2">
@@ -125,7 +125,7 @@
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+								<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">商家檢舉</button>
 									<input type="hidden" name="chli_cate" value="4">
@@ -137,7 +137,7 @@
 					  </div>
 					  <%}%>
 					  <!-- 區塊2 會員資料管理-->
-					  <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel2">
 					      <h4 class="panel-title">
@@ -148,12 +148,12 @@
 					    </div>
 					    <div id="bbb" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel2">
 					      <div class="list-group">
-					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
 					      	<button type="submit" form="title_button" value="cho_generalMember" name="button">會員權限維護</button>
 					      	</FORM>
 					      	<%}%>
-					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
 						       <button type="submit" form="title_button" value="back" name="button">廠商資料審核</button>
 						    </FORM>
@@ -163,7 +163,7 @@
 					  </div>
 					  <%}%>
 					  <!-- 區塊3 會員管理-->
-					  <%if (loginVO.getAdm_iden().equals("員工管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("員工管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
 					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/adm.do" >
@@ -174,7 +174,7 @@
 					  </div>
 					<%}%>
 					  <!-- 區塊4 金流管理-->
-					  <%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel4">
 					      <h4 class="panel-title">
@@ -193,12 +193,15 @@
 					  <!-- 區塊5廣告審核-->
 					  <div class="panel panel-default">
 					    <h4 class="panel-title">
+					        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/advertisement/advertisement.do" >
 					        <button class="test" type="submit">廣告資格審核</button>
+					        <input type="hidden" name="action" value="AD">
+					   		 </FORM> 
 					      </h4>
 					  </div>
 					  <%}%>
 					  <!-- 區塊6關鍵字-->
-					   <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					   <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
 					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/blocked_keywords/blocked_keywords.do" >
@@ -323,13 +326,16 @@
 					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="deleteAnnouncement"){%>
-					<jsp:include page="//backend/announcement/listAllAnnouncement.jsp"/>
+					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="UpdateAnnouncement_"){%>
-					<jsp:include page="//backend/announcement/update_announcement_input.jsp"/>
+					<jsp:include page="/backend/announcement/update_announcement_input.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="updateFinalAnnouncement"){%>
-					<jsp:include page="//backend/announcement/listOneAnnouncement.jsp"/>
+					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="all"){%>
+					<jsp:include page="/allAdvertisement.jsp"/>
 				<%}%>
 				</div>
 				</div>
