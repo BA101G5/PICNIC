@@ -14,7 +14,10 @@
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
 
-
+<%
+	List<String> list = (List<String>) request.getAttribute("countbymf");
+	pageContext.setAttribute("list", list);
+%>
 
 <style>
 .banner {
@@ -121,7 +124,7 @@
 											<p>食物</p>
 											<input type="hidden" name="action" value="selectByType">
 											<input type="hidden" name="type" value="B">
-										</FORM>>
+										</FORM>
 								</a></li>
 								<li><a href="#">
 										<FORM METHOD="post"
@@ -132,14 +135,7 @@
 											<p>野餐墊</p>
 										</FORM>
 								</a></li>
-								<li><a href="#">
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/goods_rent/goods_rent.do"
-											onclick="submit()">
-											<input type="hidden" name="action" value="getGr">
-											<p>租賃商品</p>
-										</FORM>
-								</a></li>
+
 							</ul>
 						</div>
 					</div>
@@ -149,22 +145,47 @@
 					<div class="col-sm-8 col-sm-push-2">
 						<div class="col-sm-3  ">
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">熱銷商品</h3>
-								</div>
-								<table class="table">
-									<tr>
-										<%
-											List<String> list = (List<String>) request.getAttribute("countbymf");
-											pageContext.setAttribute("list", list);
-										%>
-										<c:if test="${list!=null }">
-											<c:forEach var="mfcount" items="${list}">
-												<td>${mfcount}</td>
-											</c:forEach>
-										</c:if>
-									</tr>
-								</table>
+
+								<c:if test="${list == null }">
+									<div class="panel-heading">
+										<h3 class="panel-title">熱門商品</h3>
+									</div>
+									<table class="table">
+										<c:forEach var="mfcount" items="${list}">
+											<tr>
+												<td><FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+														onclick="submit()">
+														<p>${mfcount}</p>
+														<input type="hidden" name="action" value="selectByMfype">
+														<input type="hidden" name="mf" value="${mfcount}">
+													</form></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</c:if>
+
+								<c:if test="${list!=null }">
+									<div class="panel-heading">
+										<h3 class="panel-title">提供廠商</h3>
+									</div>
+									<table class="table">
+										<c:forEach var="mfcount" items="${list}">
+											<tr>
+												<td><FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+														onclick="submit()">
+														<input type="hidden" name="action" value="selectByMfype">
+														<input type="hidden" name="mf" value="${mfcount}">
+														<p>${mfcount}</p>
+														
+													</form></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</c:if>
+
+
 							</div>
 						</div>
 						<jsp:include page="/buycart/Goods_sellitem.jsp" />

@@ -5,7 +5,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Picnic野餐網</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <script
@@ -17,11 +18,6 @@
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-       
-    <![endif]-->
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
@@ -30,99 +26,7 @@
 		});
 	});
 </script>
-
-
-<style>
-#map {
-	height: 600px;
-	width: 800px;
-}
-
-#new {
-	margin-top: 10px;
-}
-
-.breadcrumb {
-	margin-top: -20px;
-	background: skyblue;
-}
-
-html {
-	height: 100%;
-}
-
-body {
-	background-image:
-		url(http://ms-cache.walkerplus.com/walkertouch/wtd/images/n/103670.jpg);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-	background-size: cover;
-}
-</style>
-
-</head>
-
-<body>
-	<jsp:include page="/mustinclude/left_nav.jsp" />
-	<jsp:include page="/mustinclude/top_nav.jsp" />
-	<div class="container-fluid">
-		<div class="row ">
-			<div class="col-sm-8 col-sm-push-2">
-				<ol class="breadcrumb">
-					<li><a href="<%=request.getContextPath()%>/index.jsp">首頁</a></li>
-					<li><a href="#" class="active">開團</a></li>
-
-				</ol>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2 col-sm-push-2">
-				<form method="post"
-					action="<%=request.getContextPath()%>/picnic/picnic.do">
-					<div class="list-group">
-						<br> <a href="#" class="list-group-item active">請輸入開團資訊</a> <a
-							href="#" class="list-group-item">
-							<table>
-								<tr>
-									<td>縣市: <select name="area" id="input"
-										class="form-control" required="required" onmouseup="change(this.value)">
-											<option value="新北市">新北市</option>
-											<option value="高雄市">高雄市</option>
-											<option value="臺中市">臺中市</option>
-											<option value="桃園縣">桃園縣</option>
-											<option value="臺南市">臺南市</option>
-											<option value="彰化縣">彰化縣</option>
-											<option value="屏東縣">屏東縣</option>
-											<option value="雲林縣">雲林縣</option>
-											<option value="苗栗縣">苗栗縣</option>
-											<option value="嘉義縣">嘉義縣</option>
-											<option value="新竹縣">新竹縣</option>
-											<option value="南投縣">南投縣</option>
-											<option value="宜蘭縣">宜蘭縣</option>
-											<option value="基隆市">基隆市</option>
-											<option value="花蓮縣">花蓮縣</option>
-											<option value="嘉義市">嘉義市</option>
-											<option value="臺東縣">臺東縣</option>
-									</select><br></td>
-								</tr>
-								<tr>
-									<td>地點 :<br> <input type="text"  name="address"  id="address"
-										value="${sessionScope.address} "><br> <font
-										color="red")>${errorMsgs.address}</font></td>
-								</tr>
-								<tr>
-									<td>限制人數 :<br> <input type="text" name="people"
-										value="${sessionScope.people}"><br> <font
-										color="red")>${errorMsgs.people}</font></td>
-								</tr>
-								<tr>
-									<td>日 期 :<br> <input type="text" id="datepicker"
-										name="date" value="${sessionScope.date}"><br> <font
-										color="red")>${errorMsgs.date}</font></td>
-								</tr>
-								
-								<script>
+	<script>
 var Latitude =22.6158015;
 var Longitude =120.7120023;
 var zoom =7;
@@ -309,11 +213,79 @@ var zoom =7;
  <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxmcF3GtUMJYpT78-gvq2jG3ER8wE15tg&callback=initMap">
     </script>
+
+
+<style>
+#map {
+	height: 60%;
+	width: 100%;
+}
+.breadcrumb {
+	margin-top: -25px;
+	background: skyblue;
+}
+</style>
+</head>
+<body>
+	<jsp:include page="/mustinclude/left_nav.jsp" />
+	<jsp:include page="/mustinclude/top_nav.jsp" />
+	<div class="container">
+		<div class="row">
+				
+				<ol class="breadcrumb">
+					<li><a href="<%=request.getContextPath()%>/index.jsp">首頁</a></li>
+					<li><a href="#" class="active">開團</a></li>
+
+				</ol>
+		
+		</div>
+		<div class="row" style="align:center;">
+			<div class="col-md-4">
+				<form method="post"
+					action="<%=request.getContextPath()%>/picnic/picnic.do">
+					<div class="list-group">
+						<br> <a href="#" class="list-group-item active">請輸入開團資訊</a> <a
+							href="#" class="list-group-item">
+							<table>
+								<tr>
+									<td>縣市: <select name="area" id="input"
+										class="form-control" required="required" onmouseup="change(this.value)">
+											<option value="新北市">新北市</option>
+											<option value="高雄市">高雄市</option>
+											<option value="臺中市">臺中市</option>
+											<option value="桃園縣">桃園縣</option>
+											<option value="臺南市">臺南市</option>
+											<option value="彰化縣">彰化縣</option>
+											<option value="屏東縣">屏東縣</option>
+											<option value="雲林縣">雲林縣</option>
+											<option value="苗栗縣">苗栗縣</option>
+											<option value="嘉義縣">嘉義縣</option>
+											<option value="新竹縣">新竹縣</option>
+											<option value="南投縣">南投縣</option>
+											<option value="宜蘭縣">宜蘭縣</option>
+											<option value="基隆市">基隆市</option>
+											<option value="花蓮縣">花蓮縣</option>
+											<option value="嘉義市">嘉義市</option>
+											<option value="臺東縣">臺東縣</option>
+									</select><br></td>
+								</tr>
+								<tr>
+									<td>地點 :<br> <input type="text"  name="address"  id="address"
+										value="${sessionScope.address} "><br> <font
+										color="red")>${errorMsgs.address}</font></td>
+								</tr>
+								<tr>
+									<td>限制人數 :<br> <input type="text" name="people"
+										value="${sessionScope.people}"><br> <font
+										color="red")>${errorMsgs.people}</font></td>
+								</tr>
+								<tr>
+									<td>日 期 :<br> <input type="text" id="datepicker"
+										name="date" value="${sessionScope.date}"><br> <font
+										color="red")>${errorMsgs.date}</font></td>
+								</tr>
 								
-								
-								
-								
-								
+							
 								<tr>
 									<td>時間 : <br> <select id="SearchTime" name="hour"
 										style="width: 85px;"><option value="">請選擇</option>
@@ -373,7 +345,7 @@ var zoom =7;
 				</form>
 			</div>
 
-			<div class="col-sm-8 col-xs-1 col-sm-push-2">
+			<div class="col-md-8 ">
 				<div id="map"></div>
 
 
@@ -381,23 +353,23 @@ var zoom =7;
 		</div>
 		<div class="row">
 			<div id="new">
-				<div class="col-xs-8 col-xs-push-2 ">
-					<a href="# " class="thumbnail ">
+			
+					<a href="#" class="thumbnail">
 
 						<div class="caption"></div>
 					</a>
-				</div>
+			
 			</div>
 
-			<div class="row ">
-				<div class="col-sm-8 col-sm-push-2 ">
+			<div class="row">
+			
 					<div class="btn-group btn-group-justified ">
 						<a href="# " class="btn btn-default " role="button ">回標題</a>
 					</div>
-					<div class="col-sm-11 col-sm-push-3 ">
+				
 						<jsp:include page="/mustinclude/footer.jsp" />
-					</div>
-				</div>
+					
+			
 			</div>
 		</div>
 	</div>

@@ -34,18 +34,19 @@ public class Goods_SellService {
 	}
 
 	public List<Goods_SellVO> findByType(String type) {
-	
+		System.out.println(type);
 		return dao.findByType(type);
 	}
 
-	public int getcountbymf() {
-		// TODO Auto-generated method stub
-		return 0;
+
+	public List<String> getcountbymf(List<ManufacturersVO> list2) {
+		
+		return dao.getcountbymf(list2) ;
 	}
 
-	public List<java.lang.String> getcountbymf(List<ManufacturersVO> list2) {
-		
-		return dao.getcountbymf( list2) ;
+	public List<Goods_SellVO> finBymf(String type,String mf) {
+	
+		return dao.finBymf(type,mf);
 	}
 
 

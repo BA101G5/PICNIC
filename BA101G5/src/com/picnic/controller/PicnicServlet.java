@@ -40,9 +40,9 @@ public class PicnicServlet extends HttpServlet {
 				String picnic_name = req.getParameter("name");
 				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (picnic_name == null || picnic_name.trim().length() == 0) {
-					errorMsgs.put("name", "�����蝛�");
+					errorMsgs.put("name", "嚙踝蕭謢塚蕭��蕭���蕭蹌剛�蕭");
 				} else if (!picnic_name.trim().matches(nameReg)) {
-					errorMsgs.put("name", "������畾泵��� 銝��2~70摮���");
+					errorMsgs.put("name", "嚙踝蕭謢塚蕭��蕭���蕭蹌哨蕭����陬嚙踝蕭嚙� ���蕭�嚙踝�祗2~70�謅蕭�嚙踝蕭");
 				}
 				String address = null;
 				try {
@@ -54,12 +54,12 @@ public class PicnicServlet extends HttpServlet {
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";
 				if (address == null || address.trim().length() == 0) {
 
-					errorMsgs.put("address", "���銝�蝛�");
+					errorMsgs.put("address", "嚙踐秘嚙踝蕭����蕭蹌剛�蕭");
 				} else if (!address.trim().matches(addressReg)) {
 
-					errorMsgs.put("address", "���敹��葉���摮� 銝6~15摮���");
+					errorMsgs.put("address", "嚙踐秘嚙踝蕭��嚙踝�蕭���蕭嚙踝嚙踝��嚙� ���祗6~15�謅蕭�嚙踝蕭");
 				} else if ((Integer.getInteger(address) != null) || address.substring(1, 2).equals("[^0-9]")) {
-					errorMsgs.put("address", "隢撓�甇�蝣箏��");
+					errorMsgs.put("address", "����蕭���蕭�蝞秘嚙踝蕭");
 				}
 
 				Timestamp picnic_date = null;
@@ -69,23 +69,23 @@ public class PicnicServlet extends HttpServlet {
 					String hour = req.getParameter("hour");
 					picnic_date = java.sql.Timestamp.valueOf(date + hour);
 				} catch (IllegalArgumentException e) {
-					errorMsgs.put("date", "隢撓�������");
+					errorMsgs.put("date", "����蕭�嚙踐�蕭嚙踐�蕭�嚙踝蕭");
 				}
 
 				Integer picnic_pl = null;
 				try {
 					picnic_pl = new Integer(req.getParameter("people").trim());
 					if (picnic_pl < 0) {
-						errorMsgs.put("people", "鈭箸銝撠�");
+						errorMsgs.put("people", "�蝞賃�����謘蕭謆�");
 					}
 				} catch (Exception e) {
-					errorMsgs.put("people", "隢撓��摮�");
+					errorMsgs.put("people", "����蕭�嚙踐�嚙�");
 				}
 
 				String tladdress = null;
 				System.out.println();
 
-				if (address.contains("市")) {
+				if (address.contains("撣�")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
@@ -110,31 +110,30 @@ public class PicnicServlet extends HttpServlet {
 				successView.forward(req, res);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				errorMsgs.put("nodata", "�瘜�����:" + e.getMessage());
+				errorMsgs.put("nodata", "嚙踝���蕭謘潘蕭謅蕭�嚙踝蕭:" + e.getMessage());
 				javax.servlet.RequestDispatcher failureView = req.getRequestDispatcher("/picnic/maosecondui.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		if (action.equals("insert")) {
-		
-		
+
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-		
-			try {/*************** 蝘駁銝������ ***************/
+
+			try {/*************** ������蕭�嚙踐播嚙踝�蕭�嚙踝蕭 ***************/
 				session.removeAttribute("area");
 				session.removeAttribute("address");
 				session.removeAttribute("date");
-				/******************* ��������� ************************/
-				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+				/******************* 嚙踝蕭謘潘蕭謅蕭�嚙踐播嚙踝�蕭�嚙踝蕭 ************************/
+				GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
 				String account = gVO.getMEM_NO();
 				String picnic_name = (String) session.getAttribute("picnic_name");
 
 				String tladdress = (String) session.getAttribute("tladdress");
 
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
-				
+
 				Integer picnic_pl = (Integer) session.getAttribute("people");
 
 				if (action.equals("insert")) {
@@ -145,11 +144,11 @@ public class PicnicServlet extends HttpServlet {
 					PlaceService placeSvc = new PlaceService();
 					PlaceVO placeVO = null;
 					Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-					
+
 					try {
-						placeVO = placeSvc.getOne(tladdress);	
-						System.out.println(placeVO+"hello");
-						
+						placeVO = placeSvc.getOne(tladdress);
+						System.out.println(placeVO + "hello");
+
 						if (placeVO.getMf_no() != null) {
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
@@ -180,5 +179,30 @@ public class PicnicServlet extends HttpServlet {
 			}
 		}
 
+		if (action.equals("persionalpicnic")) {
+
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
+			String account = gVO.getMEM_NO();
+
+			try {
+				PicmemService picmemSvc = new PicmemService();
+				List<String> persionalpicnic = picmemSvc.findbymem_no(account);
+				
+				session.setAttribute("persionalpicnic", persionalpicnic);
+				String url = null;
+
+				if (action.equals("persionalpicnic")) {
+					url = "/picnicpersionpage/personalpicnic.jsp";
+				}
+				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+				SuccessView.forward(req, res);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
+
 }

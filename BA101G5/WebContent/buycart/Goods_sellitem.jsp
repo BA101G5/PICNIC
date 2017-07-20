@@ -10,11 +10,11 @@
 %>
 
 <div class="col-sm-9">
-	<c:if test="${not empty goods_sellSvc }">
+	<c:if test="${empty list }">
 		<%@ include file="/buycart/page.file"%>
 		<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
 			begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			<div class="col-sm-7">
+			<div class="col-sm-12">
 				<div class="thumbnail" style="display: inline-block;";>
 					<img
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
@@ -58,11 +58,11 @@
 	</c:if>
 </div>
 <div class="col-sm-9">
-	<c:if test="${not empty goods_sellSvc }">
+	<c:if test="${not empty list }">
 		<%@ include file="/buycart/page.file"%>
-		<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
-			begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			<div class="col-sm-7">
+		<c:forEach var="goods_sellVO" items="${list}" begin="<%=pageIndex%>"
+			end="<%=pageIndex+rowsPerPage-1%>">
+			<div class="col-sm-12">
 				<div class="thumbnail" style="display: inline-block;";>
 					<img
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"

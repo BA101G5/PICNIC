@@ -11,5 +11,6 @@ public interface Goods_SellDAO_interface {
 		public List<Goods_SellVO> getAll();
 		public List<Goods_SellVO> findByType(String type);
 		public List<String> getcountbymf(List<ManufacturersVO> list2);
+		public List<Goods_SellVO> finBymf(String type, String mf);
 
 }

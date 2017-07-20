@@ -31,7 +31,7 @@ body {
 	background-position: center;
 	background-size: cover;
 	font-family: "NotoSansCJKtc";
-	font-size: 21px;
+    font-size: 21px;
 }
 
 </style>

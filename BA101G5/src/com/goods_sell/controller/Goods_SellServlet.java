@@ -84,31 +84,29 @@ public class Goods_SellServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-		System.out.println("Hello");
+
 		if (action.equals("selectByType")) {
-			System.out.println("Hello");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("Hello");
 
 			try {
 				String type = new String(req.getParameter("type"));
 
-				System.out.println("Hello");
 				Goods_SellService goods_sellSvc = new Goods_SellService();
 				List<Goods_SellVO> list = goods_sellSvc.findByType(type);
 
-				System.out.println("Hello");
 				ManufacturersService manufacturersSvc = new ManufacturersService();
 				List<ManufacturersVO> list2 = manufacturersSvc.getAll();
 				List<String> list3 = goods_sellSvc.getcountbymf(list2);
-				System.out.println("Hello");
+
 				req.setAttribute("typelist", list);
 				req.setAttribute("countbymf", list3);
+				session.setAttribute("type", type);
 
 				String url = null;
 				if (action.equals("selectByType")) {
-					url = "/buycart/maofirst.jsp";
+					url = "/buycart/moafirst.jsp";
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -117,5 +115,28 @@ public class Goods_SellServlet extends HttpServlet {
 			}
 		}
 
+		if (action.equals("selectByMfype")) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String type = (java.lang.String) session.getAttribute("type");
+				String mf=(java.lang.String) req.getAttribute("mf");
+				
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				List<Goods_SellVO> list=goods_sellSvc.finBymf(type,mf);
+				
+				req.setAttribute("typelist", list);
+				String url = null;
+				if (action.equals("selectByType")) {
+					url = "/buycart/moafirst.jsp";
+				}
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 }
