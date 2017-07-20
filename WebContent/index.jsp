@@ -120,7 +120,14 @@ body{
 
 	<c:forEach var="picnicVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr align='center'>
-			<td>${picnicVO.picnic_name}</td>
+			<td>
+<form method="post" action="<%=request.getContextPath()%>/picnic/picnic.do" onclick="submit()">
+	<font color="blue">${picnicVO.picnic_name}</font>
+	<input type="hidden" name="Picnic_no" value="${picnicVO.getPicnic_no()}">
+	<input type="hidden" name="action" value="lookpicnic">
+</form>
+			
+</td>
 			<td>${picnicVO.picnic_desc}</td>
 <%-- 			<td><a href="<%=request.getContextPath()%>/frontend/pboard_article/pboard_article.jsp">留言板</a></td> --%>
 		</tr>
