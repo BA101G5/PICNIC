@@ -41,6 +41,11 @@
 			background-color:#FFFFFF;
 			border: 1px solid #DDDDDD ;
 		}
+		.test{
+			background-color:#F5F5F5;
+			border:none;
+			text-align:center;
+		}
 		</style>
 		
 	</head>
@@ -67,7 +72,7 @@
 			
 		</nav>
 
-		<div class="col-sm-10 col-sm-offset-1" >
+		<div class="col-sm-12 col-sm-offset-0.5" >
 			<div class="row">
 				<div class="col-xs-12 col-sm-2" style="padding-top: 40px ">
 					<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true" >
@@ -84,10 +89,10 @@
 					  </div>
 
 					  <!-- 區塊1 檢舉系統-->
-					  <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel1">
-					      <h4 class="panel-title">
+					      <h4 class="panel-title" >
 					        <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
 					          檢舉系統
 					        </a>
@@ -96,7 +101,7 @@
 					    <div id="aaa" class="panel-collapse collapse " role="tabpanel" aria-labelledby="panel1">
 					    
 					      <div class="list-group">
-					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">文章檢舉</button>
 									<input type="hidden" name="chli_cate" value="0">
@@ -108,7 +113,7 @@
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+								<%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">揪團檢舉</button>
 									<input type="hidden" name="chli_cate" value="2">
@@ -120,7 +125,7 @@
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+								<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button  type="submit">商家檢舉</button>
 									<input type="hidden" name="chli_cate" value="4">
@@ -132,7 +137,7 @@
 					  </div>
 					  <%}%>
 					  <!-- 區塊2 會員資料管理-->
-					  <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel2">
 					      <h4 class="panel-title">
@@ -143,35 +148,33 @@
 					    </div>
 					    <div id="bbb" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel2">
 					      <div class="list-group">
-					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
-					      	<a href="#" class="list-group-item">會員權限維護</a>
+					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
+					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
+					      	<button type="submit" form="title_button" value="cho_generalMember" name="button">會員權限維護</button>
+					      	</FORM>
 					      	<%}%>
-					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
-					      	<a href="#" class="list-group-item">廠商資料審核</a>
+					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
+					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
+						       <button type="submit" form="title_button" value="back" name="button">廠商資料審核</button>
+						    </FORM>
 					      	<%}%>
 					      </div>
 					    </div>
 					  </div>
 					  <%}%>
 					  <!-- 區塊3 會員管理-->
-					  <%if (loginVO.getAdm_iden().equals("員工管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("員工管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="panel3">
-					      <h4 class="panel-title">
-					        <a href="#ccc" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-					          員工管理
-					        </a>
-					    </div>
-					    <div id="ccc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel3">
-					      <div class="list-group">
-					      	<a href="#" class="list-group-item">管理員資料維護</a>
-					      	<a href="#" class="list-group-item">管理員權限維護</a>
-					      </div>
-					    </div>
+					   <h4 class="panel-title">
+					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/adm.do" >
+					        <button class="test" type="submit">員工管理</button>
+					        <input type="hidden" name="action" value="get_adm_one_data">
+					   		 </FORM> 
+					      </h4>
 					  </div>
 					<%}%>
 					  <!-- 區塊4 金流管理-->
-					  <%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					  <%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel4">
 					      <h4 class="panel-title">
@@ -189,33 +192,33 @@
 
 					  <!-- 區塊5廣告審核-->
 					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="panel5">
-					      <h4 class="panel-title">
-					        <a href="#" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-					          廣告資格審核
-					        </a>
-					    </div>
+					    <h4 class="panel-title">
+					        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/advertisement/advertisement.do" >
+					        <button class="test" type="submit">廣告資格審核</button>
+					        <input type="hidden" name="action" value="AD">
+					   		 </FORM> 
+					      </h4>
 					  </div>
 					  <%}%>
 					  <!-- 區塊6關鍵字-->
-					   <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("MASTER")){%>
+					   <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="panel6">
-					      <h4 class="panel-title">
-					        <a href="#" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-					          關鍵字屏蔽管理
-					        </a>
-					    </div>
+					   <h4 class="panel-title">
+					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/blocked_keywords/blocked_keywords.do" >
+					        <button class="test" type="submit">關鍵字屏蔽管理</button>
+					        <input type="hidden" name="action" value="Blocked_Keywords">
+					   		 </FORM> 
+					      </h4>
 					  </div>
 					  
  					  <!-- 區塊7最新消息-->
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="panel7">
-					      <h4 class="panel-title">
-					        <a href="#" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-					          最新消息管理
-					        </a>
-					    </div>
+					   <div class="panel panel-default">
+					     <h4 class="panel-title">
+					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/announcement/announcement.do" >
+					        <button class="test" type="submit">最新消息管理</button>
+					        <input type="hidden" name="action" value="Announcement">
+					   		 </FORM> 
+					      </h4>
 					  </div>
 					  <%}%>
 					</div>
@@ -234,6 +237,105 @@
 				<%}%>
 				<%if (request.getAttribute("result")=="done"){%>
 					<jsp:include page="test_Done.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="adm"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="add_adm"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="purview"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="modify"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="add_determine"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="all_cancel"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="del"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="mod_determine"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="pur_determine"){%>
+					<jsp:include page="/view/admView.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="back"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="cho_generalMember"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="detail"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="ma_mod"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="ma_verification"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="ma_removed"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="ma_suspension"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="Blocked_Keywords"){%>
+					<jsp:include page="/backend/blocked_keywords/select_page.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="getOne_For_Display_Keywords"){%>
+					<jsp:include page="/backend/blocked_keywords/listOneBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="Announcement"){%>
+					<jsp:include page="/backend/announcement/select_page.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="getOne_For_Display_Announcement"){%>
+					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="all_Announcements"){%>
+					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="add_Announcements"){%>
+					<jsp:include page="/backend/announcement/addAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="all_Blocked_Keywordss"){%>
+					<jsp:include page="/backend/blocked_keywords/listAllBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="add_Blocked_Keywords"){%>
+					<jsp:include page="/backend/blocked_keywords/addBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="deleteKeywords"){%>
+					<jsp:include page="/backend/blocked_keywords/listAllBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="Update_Keyword"){%>
+					<jsp:include page="/backend/blocked_keywords/update_blocked_keywords_input.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="updateFinal"){%>
+					<jsp:include page="/backend/blocked_keywords/listOneBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="insertKeyword"){%>
+					<jsp:include page="/backend/blocked_keywords/listAllBlocked_Keywords.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="insertAnnouncement"){%>
+					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="deleteAnnouncement"){%>
+					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="UpdateAnnouncement_"){%>
+					<jsp:include page="/backend/announcement/update_announcement_input.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="updateFinalAnnouncement"){%>
+					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="all"){%>
+					<jsp:include page="/allAdvertisement.jsp"/>
 				<%}%>
 				</div>
 				</div>

@@ -107,7 +107,9 @@ public class ChecklistServlet extends HttpServlet {
 		
 			req.setAttribute("checklistVO", checklistVOList);
 			
-
+			String undone = req.getParameter("undone");
+			System.out.print("undone"+undone);
+			req.setAttribute("testundone", undone);
 			
 			req.setAttribute("testundone", chli_cate);
 			String result = "undone";
@@ -148,7 +150,8 @@ public class ChecklistServlet extends HttpServlet {
 		
 		if("update".equals(action)){
 			System.out.println("update");
-			
+			String aaa = req.getParameter("chli_start");
+					System.out.print(aaa);
 			Timestamp chli_start = Timestamp.valueOf(req.getParameter("chli_start"));
 			Integer chli_day = Integer.valueOf(req.getParameter("chli_day"));						
 			
@@ -215,11 +218,9 @@ public class ChecklistServlet extends HttpServlet {
 			}
 			
 			
-			
-			
-			
-			
-			
+			String undone = req.getParameter("undone");
+			System.out.print("undone"+undone);
+			req.setAttribute("testundone", undone);
 			
 			req.setAttribute("checklistVO", checklistVOList);
 			

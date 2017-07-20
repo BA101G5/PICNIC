@@ -21,7 +21,30 @@ public class AnnouncementServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
+		if("add_Announcements".equals(action)){
+			String result = "";
+			result = "add_Announcements";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		if("all_Announcements".equals(action)){
+			String result = "";
+			result = "all_Announcements";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		if("Announcement".equals(action)){
+			String result = "";
+			result = "Announcement";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -73,7 +96,10 @@ public class AnnouncementServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("announcementVO", announcementVO); // 資料庫取出的announcementVO物件,存入req
-				String url = "/backend/announcement/listOneAnnouncement.jsp";
+				String result = "";
+				result = "getOne_For_Display_Announcement";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAnnouncement.jsp
 				successView.forward(req, res);
 
@@ -104,7 +130,10 @@ public class AnnouncementServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("announcementVO", announcementVO);         // 資料庫取出的announcementVO物件,存入req
-				String url = "/backend/announcement/update_announcement_input.jsp";
+				String result = "";
+				result = "UpdateAnnouncement_";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_announcement_input.jsp
 				successView.forward(req, res);
 
@@ -149,7 +178,10 @@ public class AnnouncementServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("announcementVO", announcementVO); // 資料庫update成功後,正確的的announcementVO物件,存入req
-				String url = "/backend/announcement/listOneAnnouncement.jsp";
+				String result = "";
+				result = "updateFinalAnnouncement";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneAnnouncement.jsp
 				successView.forward(req, res);
 
@@ -191,7 +223,10 @@ public class AnnouncementServlet extends HttpServlet {
 				announcementVO = announcementSvc.addAnnouncement(ann_text);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/announcement/listAllAnnouncement.jsp";
+				String result = "";
+				result = "insertAnnouncement";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAnnouncement.jsp
 				successView.forward(req, res);				
 				
@@ -220,8 +255,11 @@ public class AnnouncementServlet extends HttpServlet {
 				AnnouncementService announcementSvc = new AnnouncementService();
 				announcementSvc.deleteAnnouncement(ann_no);
 				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/backend/announcement/listAllAnnouncement.jsp";
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
+				String result = "";
+				result = "deleteAnnouncement";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
