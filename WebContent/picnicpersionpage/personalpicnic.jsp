@@ -5,12 +5,23 @@
 <%@ page import="com.picnic.model.*"%>
 <%@ page import="com.picmem.model.*"%>
 <%@ page import="java.util.*"%>
+
+<% 
+	PicnicVO picnicVO = (PicnicVO)session.getAttribute("picnicVO");
+// 	System.out.println("personalpicnic.jsp / picnicVO.getPicnic_no() = " + picnicVO.getPicnic_no());
+	PicmemService pmSvc = new PicmemService();
+	List<PicmemVO> pmListByP = pmSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
+// 	System.out.println(pmListByP.get(1).getMem_no());
+// 	System.out.println(pmListByP.get(2).getMem_no());
+	pageContext.setAttribute("pmListByP", pmListByP);
+%>
+
 <%
 	GeneralMemberService gmSvc = new GeneralMemberService();
 	pageContext.setAttribute("gmSvc", gmSvc);
 
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
-	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll();
+	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
 	Collections.reverse(list);
 	pageContext.setAttribute("list", list);
 %>
@@ -19,15 +30,7 @@
 	Pboard_ArticleVO pboard_articleVO = (Pboard_ArticleVO) request.getAttribute("pboard_articleVO");
 %>
 
-<% 
-	PicnicVO picnicVO = (PicnicVO)session.getAttribute("picnicVO");
-// 	System.out.println("personalpicnic.jsp / picnicVO.getPicnic_no() = " + picnicVO.getPicnic_no());
-	PicmemService pmSvc = new PicmemService();
-	List<PicmemVO> pmListByP = pmSvc.getAll(picnicVO.getPicnic_no());//picnicVO.getPicnic_no()
-// 	System.out.println(pmListByP.get(1).getMem_no());
-// 	System.out.println(pmListByP.get(2).getMem_no());
-	pageContext.setAttribute("pmListByP", pmListByP);
-%>
+
 <!DOCTYPE html>
 <html lang="">
 <head>

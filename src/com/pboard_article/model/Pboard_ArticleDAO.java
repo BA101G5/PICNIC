@@ -309,7 +309,7 @@ public class Pboard_ArticleDAO implements Pboard_ArticleDAO_interface {
 	}
 
 	@Override
-	public List<Pboard_ArticleVO> getAllwP(String picnic_no) {
+	public List<Pboard_ArticleVO> getAll(String picnic_no) {
 		// TODO Auto-generated method stub
 		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
 		Pboard_ArticleVO pboardArticleVO = null;
@@ -322,6 +322,7 @@ public class Pboard_ArticleDAO implements Pboard_ArticleDAO_interface {
 	
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT_COND_P);
+			pstmt.setString(1, picnic_no);
 			rs = pstmt.executeQuery();
 	
 			while (rs.next()) {
