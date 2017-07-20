@@ -1,4 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="big5"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.pboard_article.model.*"%>
+<%@ page import="com.picnic.model.*"%>
+
+<%
+	PicnicService picnicSvc = new PicnicService();
+	pageContext.setAttribute("picnicSvc", picnicSvc);
+
+	List<PicnicVO> list = picnicSvc.getAll();
+	Collections.reverse(list);
+	pageContext.setAttribute("list", list);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +73,21 @@ body{
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-10 col-sm-push-1">
+
+
+<table border='1' bordercolor='#CCCCFF' width='100%'>
+	<tr>
+		<th>³¥À\¹Î¦WºÙ</th>
+		<th>³¥À\¹Î±Ô­z</th>
+	</tr>
+
+	<c:forEach var="picnicVO" items="${list}">
+		<tr align='center'>
+			<td>${picnicVO.picnic_name}</td>
+			<td>${picnicVO.picnic_desc}</td>
+		</tr>
+	</c:forEach>
+</table>
 
 
 		</div>
@@ -120,6 +150,8 @@ body{
 					</div>
  -->
 </div>
+
+<jsp:include page="/mustinclude/chatroom.jsp" />
 
 </body>
 </html>
