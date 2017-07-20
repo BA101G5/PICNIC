@@ -127,7 +127,6 @@ public class Goods_SellServlet extends HttpServlet {
 		// }
 		// }
 
-		
 		if (action.equals("selectByType")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -157,7 +156,7 @@ public class Goods_SellServlet extends HttpServlet {
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		if (action.equals("selectgoods_sell")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -184,6 +183,33 @@ public class Goods_SellServlet extends HttpServlet {
 
 				System.out.println("errorrrrrr");
 				throw new ServletException(e);
+			}
+		}
+
+		if (action.equals("selectByMfype")) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String type = new String((String) session.getAttribute("type"));
+				String Mf_no = req.getParameter("mf");
+				Mf_no = Mf_no.split("(")[0];
+
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				List<Goods_SellVO> list = goods_sellSvc.findByMfType(type, Mf_no);
+				System.out.println("Hello");
+
+				req.setAttribute("list", list);
+
+				String url = null;
+				if (action.equals("selectByMfype")) {
+					url = "/buycart/moafirst.jsp";
+				}
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+
 			}
 		}
 
