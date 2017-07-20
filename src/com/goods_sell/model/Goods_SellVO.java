@@ -65,5 +65,8 @@ public class Goods_SellVO implements java.io.Serializable{
 		public void setGs_sta(Character gs_sta) {
 			this.gs_sta = gs_sta;
 		}
+		public void setGs_sta(String string) {
+			
+		}
 		
 }

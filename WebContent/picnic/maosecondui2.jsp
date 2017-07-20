@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
-<title>Picnic³¥À\ºô</title>
+<title>Picnicé‡é¤ç¶²</title>
 </head>
 <body>
 
@@ -21,22 +21,22 @@
 
 			<div class="col-sm-12 " style="background: white;">
 				<div class="col-sm-8 col-sm-push-2">
-					<h1>½Ğ­«½Æ½T»{±zªº¸ê®Æ</h1>
-					<p>¹Î¦W :  ${sessionScope.picnic_name}</p>
-					<p>¦a§} :  ${sessionScope.tladdress}</p>
-					<p>´ª¹Î¤é´Á :  ${sessionScope.picnic_date}</p>
-					<p>­­¨î¤H¼Æ  :  ${sessionScope.people}</p>
+					<h1>è«‹é‡è¤‡ç¢ºèªæ‚¨çš„è³‡æ–™</h1>
+					<p>åœ˜å :  ${sessionScope.picnic_name}</p>
+					<p>åœ°å€ :  ${sessionScope.tladdress}</p>
+					<p>æªåœ˜æ—¥æœŸ :  ${sessionScope.picnic_date}</p>
+					<p>é™åˆ¶äººæ•¸  :  ${sessionScope.people}</p>
 					<br>
 
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
 							<a href="<%=request.getContextPath()%>/picnic/maosecondui.jsp"
-								class="btn btn-default" role="button">­×§ï</a>
+								class="btn btn-default" role="button">ä¿®æ”¹</a>
 						</div>
 						<div class="btn-group">
 							<form method="post"
 								action="<%=request.getContextPath()%>/picnic/picnic.do">
-								<button type="submit" class="btn btn-default" value="Submit">½T»{°e¥X</button>
+								<button type="submit" class="btn btn-default" value="Submit">ç¢ºèªé€å‡º</button>
 								<input type="hidden" name="action" value="insert">
 							</form>
 						</div>
@@ -54,8 +54,6 @@
 		</div>
 	</div>
 	<jsp:include page="/mustinclude/chatroom.jsp" />
-
-	
 
 </body>
 </html>

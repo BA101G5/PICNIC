@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.List"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -8,12 +9,14 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Picnic野餐網</title>
 <jsp:include page="/mustinclude/head.jsp" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
 
-
+<%
+	List<String> list = (List<String>) request.getAttribute("countbymf");
+	pageContext.setAttribute("list", list);
+%>
 
 <style>
 .banner {
@@ -100,33 +103,38 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-8 col-sm-push-2">
+					<div class="col-sm-8  col-sm-push-1">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-							<ul class="nav navbar-nav side-nav">
+							<ul class="nav navbar-nav side-nav"
+								style="background: white; border: 1px black;">
 								<li><a href="#">
-										<form METHOD="post" ACTION="<%=request.getContextPath()%>"
+										<form METHOD="post"
+											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 											onclick="submit()">
 											<p>器具</p>
+											<input type="hidden" name="action" value="selectByType">
+											<input type="hidden" name="type" value="A">
 										</form>
 								</a></li>
 								<li><a href="#">
-										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										<FORM METHOD="post"
+											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 											onclick="submit()">
 											<p>食物</p>
+											<input type="hidden" name="action" value="selectByType">
+											<input type="hidden" name="type" value="B">
 										</FORM>
 								</a></li>
 								<li><a href="#">
-										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
+										<FORM METHOD="post"
+											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 											onclick="submit()">
+											<input type="hidden" name="action" value="selectByType">
+											<input type="hidden" name="type" value="C">
 											<p>野餐墊</p>
 										</FORM>
-								</a></li>					
-								<li><a href="#">
-										<FORM METHOD="post" ACTION="<%=request.getContextPath()%>"
-											onclick="submit()">
-											<p>租賃商品</p>
-										</FORM>
 								</a></li>
+
 							</ul>
 						</div>
 					</div>
@@ -136,66 +144,50 @@
 					<div class="col-sm-8 col-sm-push-2">
 						<div class="col-sm-3  ">
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">熱銷商品</h3>
-								</div>
-								<table class="table">
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-								</table>
+
+								<c:if test="${list == null }">
+									<div class="panel-heading">
+										<h3 class="panel-title">熱門商品</h3>
+									</div>
+									<table class="table">
+										<c:forEach var="mfcount" items="${list}">
+											<tr>
+												<td><FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+														onclick="submit()">
+														<p>${mfcount}</p>
+														<input type="hidden" name="action" value="selectByMfype">
+														<input type="hidden" name="mf" value="${mfcount}">
+													</form></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</c:if>
+
+								<c:if test="${list!=null }">
+									<div class="panel-heading">
+										<h3 class="panel-title">提供廠商</h3>
+									</div>
+									<table class="table">
+										<c:forEach var="mfcount" items="${list}">
+											<tr>
+												<td><FORM METHOD="post"
+														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+														onclick="submit()">
+														<input type="hidden" name="action" value="selectByMfype">
+														<input type="hidden" name="mf" value="${mfcount}">
+														<p>${mfcount}</p>
+
+													</form></td>
+											</tr>
+										</c:forEach>
+									</table>
+								</c:if>
+
+
 							</div>
 						</div>
-						<div class="col-sm-9">
-							<c:if test="${not empty goods_sellSvc }">
-								<%@ include file="/buycart/page.file"%>
-								<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
-									begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-									<div class="col-sm-12">
-										<div class="thumbnail"  style="display: inline-block;" ;>
-											<img
-												src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
-												style="display: inline-block; height: 200px; width: 200px;">
-											<div style="display: inline-block;">
-												<h2>${goods_sellVO.getGs_name()}</h2>
-												<p>
-												<table style="display: inline-block; ">
-													<tr>
-														<td>
-															<FORM METHOD="post"
-																ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
-																<button type="submit" class="btn btn-info btn-lg"
-																	style="width: 150px; height: 40px; font-size: 20px;">${goods_sellVO.getGs_price()}</button>
-																<input type="hidden" name="gsno"
-																	value="${goods_sellVO.getGs_no()}"> <input
-																	type="hidden" name="action" value="getOne">
-															</FORM>
-														</td>	
-														<td>
-															<FORM METHOD="post"
-																ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-																<button type="submit" class="btn btn-default btn-xs"
-																	value="Submit">
-																	<span class="glyphicon glyphicon-shopping-cart"
-																		aria-hidden="true"></span>
-																</button>
-																<input type="hidden" name="gs_no"
-																	value="${goods_sellVO.getGs_no()}"> <input
-																	type="hidden" name="action" value="insertintocartA">
-																<input type="hidden" name="amount" value="1">
-															</FORM>
-														</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-										<%@ include file="/buycart/page2.file"%>
-								</c:forEach>
-							</c:if>
-						</div>
+						<jsp:include page="/buycart/Goods_sellitem.jsp" />
 					</div>
 				</div>
 				<div class="row ">
@@ -213,8 +205,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/mustinclude/chatroom.jsp" />
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
