@@ -9,16 +9,16 @@
 	padding: 300px 0px;
 }
 
-left-navigation-bar .bs-glyphicons-list {
+#left-navigation-bar > ul {
 	padding-left: 0px;
 	list-style: outside none none;
 }
 
-left-navigation-bar .bs-glyphicons-list>li {
+#left-navigation-bar > ul > li {
 	margin: 16px 0px;
 }
 
-left-navigation-bar .glyphicon {
+#left-navigation-bar .glyphicon {
 	font-size: 36px;
 	color: #091e4c;
 }
