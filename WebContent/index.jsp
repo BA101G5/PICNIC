@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -65,91 +65,80 @@ body{
 </head>
 <body>
 
- 	//<jsp:include page="/mustinclude/left_nav.jsp" /> 
+	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<jsp:include page="/mustinclude/marquee.jsp" />
+
+
+<!-- .cr -->
+<div class="container-fluid" style="margin-bottom: 16px;">
+					<div class="row">
+						<div class="col-sm-8 col-sm-push-2">
+							<div id="carousel-id" class="carousel slide" data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-id" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-id" data-slide-to="1" class=""></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="item active">
+										<img
+											src="<%=request.getContextPath()%>/images/index_img1.jpg"
+											alt="">
+									</div>
+									<div class="item">
+										<img
+											src="<%=request.getContextPath()%>/images/index_img2.jpg"
+											alt="">
+									</div>
+								</div>
+								<a class="left carousel-control" href="#carousel-id"
+									data-slide="prev"><span
+									class="glyphicon glyphicon-chevron-left"></span></a> <a
+									class="right carousel-control" href="#carousel-id"
+									data-slide="next"><span
+									class="glyphicon glyphicon-chevron-right"></span></a>
+							</div>
+						</div>
+					</div>
+</div>
+
+
+
 
 <!-- .cr -->
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-10 col-sm-push-1">
+		<div class="col-sm-8 col-sm-push-2" style="background-color:white;">
 
 
 <table border='1' bordercolor='#CCCCFF' width='100%'>
 	<tr>
-		<th>��擗�����蝔�</th>
-		<th>��擗�����餈�</th>
+		<th>野餐團名稱</th>
+		<th>野餐團敘述</th>
+<!-- 		<th>留言板</th> -->
 	</tr>
 
 	<c:forEach var="picnicVO" items="${list}">
 		<tr align='center'>
 			<td>${picnicVO.picnic_name}</td>
 			<td>${picnicVO.picnic_desc}</td>
+<%-- 			<td><a href="<%=request.getContextPath()%>/frontend/pboard_article/pboard_article.jsp">留言板</a></td> --%>
 		</tr>
 	</c:forEach>
 </table>
 
 
 		</div>
-					    <%--<ol class="carousel-indicators">
-					        <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
-					        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-					    </ol>--%>
 	</div>
 
-<!-- 	<div class="row">
-		<div class="col-sm-12" style="overflow: hidden;">
-			<img src="hd-wallpaper-nature-hd-wallpapers-nature.jpg" style="opacity: 1;">
-		</div>
-	</div> -->
 
-					<!-- bs-slider
-					<div id="carousel-id" class="carousel slide" data-ride="carousel" style="position: fixed; top: 0; left:0;  z-index: -1;">
-					    <!-- 撟餌����撠���暺��� 
-					    <ol class="carousel-indicators">
-					        <li data-target="#carousel-id" data-slide-to="0" class=""></li>
-					        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-					        <li data-target="#carousel-id" data-slide-to="2" class="active"></li>
-					    </ol>
-					    <!-- 撟餌����銝餃����
-					    <div class="carousel-inner">
-					        <div class="item">
-					            <img src="https://api.fnkr.net/testimg/800x700/aaaaaa" alt="">
-					            <div class="container">
-					                <div class="carousel-caption">
-					                    <h1>CSS�舀�憟賢��頞��賢翰</h1>
-					                    <p>雿�����鈭���嚗�</p>
-					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="item">
-					            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
-					            <div class="container">
-					                <div class="carousel-caption">
-					                    <h1>CSS�舀���憭������嫣噶</h1>
-					                    <p>雿�摰�鋆�鈭���嚗�</p>
-					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">�游�</a></p>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="item active">
-					            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
-					            <div class="container">
-					                <div class="carousel-caption">
-					                    <h1>���舀�憿���嚚��芸楛�寞��獢���</h1>
-					                    <p>���臬�扳����嚗�雿��臭誑��摮����券��鋆∪��</p>
-					                    <p><a class="btn btn-lg btn-primary" href="#" role="button">閰喟敦�批捆</a></p>
-					                </div>
-					            </div>
-					        </div>
-					    </div>
-					    <!-- 銝�銝����批�嗅��
-					    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-					    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-					</div>
- -->
+
+
+
+
 </div>
+
 <jsp:include page="/mustinclude/chatroom.jsp" />
+
 </body>
 </html>
