@@ -62,6 +62,7 @@
  	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
 // 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
 // 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
+pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
@@ -125,7 +126,7 @@
 							<!-- bs-list-group -->
 							<div class="list-group bs-list-group chatroom-list-friend-room">
 <c:forEach var="entryOfMapFriendRoom" items="${ mapFriendRoom.entrySet() }">
-								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }"><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapFriendRoom.getValue() }</a>
+								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }" roomno='${ chmemDao.getOnewCond("MG00000002", "MG00000003").getChatroom_no() }'><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapFriendRoom.getValue() }</a>
 </c:forEach>
 							</div>
 							<!-- END: bs-list-group -->
@@ -161,22 +162,6 @@
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" id="btn-close-aChatroom-container">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-<!--                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> -->
-<!--                             <span class="glyphicon glyphicon-chevron-down"></span> -->
-<!--                         </button> -->
-<!--                         <ul class="dropdown-menu slidedown"> -->
-<!--                             <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh"> -->
-<!--                             </span>Refresh</a></li> -->
-<!--                             <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign"> -->
-<!--                             </span>Available</a></li> -->
-<!--                             <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove"> -->
-<!--                             </span>Busy</a></li> -->
-<!--                             <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-time"></span> -->
-<!--                                 Away</a></li> -->
-<!--                             <li class="divider"></li> -->
-<!--                             <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span> -->
-<!--                                 Sign Out</a></li> -->
-<!--                         </ul> -->
                     </div>
                 </div>
                 <div class="panel-body">
@@ -256,7 +241,8 @@
 
 
 
-		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>		
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_websocket.js"></script>
 		<script>
 			var gObjCR = {};
 			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
@@ -264,9 +250,26 @@
 
             $('.chatroom-list-friend-room .list-group-item').on('click', function(){
                 $('#aChatroom-container').css('display', 'block');
-                //alert(this.id); //"MG00000003"
-                gObjCR.chatWithMemNo = this.id;
-                // gObjCR.myRoomNo = 
+                gObjCR.chatWithMemNo = this.id; //alert(this.id); //"MG00000003"
+
+                gObjCR.myRoomNo = 'CR00000001'; 
+                gObjCR.myRoomNo = this.getAttribute( "roomno" );
+
+	            var myRoomNo = gObjCR.myRoomNo;
+	            updateStatus(' memNo = ' + gObjCR.memNo + ", myRoomNo = " + myRoomNo);
+	
+	            var MyPoint = "/MyWebSocketServer/peter/" + myRoomNo;
+	            var host = window.location.host;
+	            var path = window.location.pathname;
+	            var webCtx = path.substring(0, path.indexOf('/', 1));
+	            //updateStatus(' webCtx = ' + webCtx);
+	            var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	            //updateStatus(' endPointURL = ' + endPointURL);
+	            var webSocket;
+	
+	            if( myRoomNo !== '' ) connect(endPointURL);
+                
+                
                 onWinResize();
             });
             
@@ -274,4 +277,3 @@
             	$('#aChatroom-container').css('display', 'none');
             });
 		</script>
-		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_websocket.js"></script>

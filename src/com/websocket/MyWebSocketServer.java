@@ -18,7 +18,8 @@ import com.google.gson.JsonParser;
 
 import jdk.nashorn.internal.parser.JSONParser;
 
-@ServerEndpoint("/MyWebSocketServer/{name}/{room}")    //要用會員ID當做房間
+
+@ServerEndpoint("/MyWebSocketServer/{name}/{room}")    //name 會員ID // room 房間
 public class MyWebSocketServer {
 
 //	private static final Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<>());
@@ -26,38 +27,35 @@ public class MyWebSocketServer {
 //	private Map<String, Map<String, Session>> chatroom_no = new HashMap<String, Map<String, Session>>();
 //	private Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 //  Map<Chatroom_NO, SET<SESSION>>
-
-	private static final Set<Session> allWebsocktConnectedSessions = Collections.synchronizedSet(new HashSet<Session>());
-	
 	private String room;
-	private static final Map<String, Set<Session>> mapChatroomNo = new HashMap<String, Set<Session>>();
+	private static final Map<String, Set<Session>> mapChatroomNo = new HashMap<String, Set<Session>>();//< "room 房間", >
 
 	@OnOpen                                            // 創一個會員物件，存會員ID和SESSION 可能用SET 或 MAP
 	public void onOpen(@PathParam("name") String name, @PathParam("room") String room, Session userSession) throws IOException {
 //     老師的範例
-		System.out.println("MYWebSocket name : " + name);
-		System.out.println("MYWebSocket room : " + room);
+//		System.out.println("MYWebSocket name : " + name);
+//		System.out.println("MYWebSocket room : " + room);
 //		connectedSessions.add(userSession);
-		String text = String.format("MYWebSocket Session ID = %s, connected; name = %s; room = %s",
-				userSession.getId(), name, room);
-		System.out.println(text);
+//		String text = String.format("Session ID = %s, connected; name = %s; room = %s",
+//				userSession.getId(), name, room);
+//		System.out.println(text);
 
 		this.room = room;
 
 //      測試 二
+		Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<Session>());
 
 
 		if (mapChatroomNo.containsKey(room)){
-			System.out.println("有近來麻1 // 當前使用者 ("+ room +") 在 mapChatroomNo 裡");
+			System.out.println("有近來麻1");
 			Set<Session> session = mapChatroomNo.get(room);
 			session.add(userSession);
 			mapChatroomNo.put(room, session);
 
 		}else{
-			System.out.println("有近來麻2 // 當前使用者 ("+ room +") 不在 mapChatroomNo 裡");
-			allWebsocktConnectedSessions.add(userSession);
-			System.out.println("MyWebSocketServer / onOpen / allWebsocktConnectedSessions.size(): " + allWebsocktConnectedSessions.size());
-			mapChatroomNo.put(room, allWebsocktConnectedSessions);
+			System.out.println("有近來麻2");
+			connectedSessions.add(userSession);
+			mapChatroomNo.put(room, connectedSessions);
 		}
 
 		System.out.println("MYWebSocket name : " + name);
@@ -75,8 +73,8 @@ public class MyWebSocketServer {
 //		System.out.println("Message received: " + message);
 
 		// 確認Map
-		// if( mapChatroomNo.containsKey(room)){
-			System.out.println("有近來麻3 //// " + message);
+		if( mapChatroomNo.containsKey(room)){
+			System.out.println("有近來麻3");
 			Set<Session> set = mapChatroomNo.get(room);
 			String people= String.valueOf(set.size());
 
@@ -88,17 +86,15 @@ public class MyWebSocketServer {
 			message = jsonObject.toString();
 			//
 
-			
-			//for(Session session:set){
-			System.out.println("MyWebSocketServer / onMessage / allWebsocktConnectedSessions.size(): " + allWebsocktConnectedSessions.size());
-			for(Session session:allWebsocktConnectedSessions){	
+			for(Session session:set){
+
 				session.getAsyncRemote().sendText(message);
-				System.out.println("有近來麻4 /// session.getId() = " + session.getId());
+				System.out.println("有近來麻4");
 
 			}
 			System.out.println("Message received: " + message);
 			System.out.println("連線人數 : " + people);
-		// }
+		}
 	}
 
 	@OnError

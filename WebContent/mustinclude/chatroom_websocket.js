@@ -5,23 +5,7 @@ function updateStatus(newStatus) {
   console.log('chatroom_websocket.js / ' + newStatus);
 }
 
-// gObjCR.memNo = '';
-// gObjCR.memNo = 'MG00000002';
-var myRoom = gObjCR.memNo;
-updateStatus(' memNo = ' + gObjCR.memNo);
-
-var MyPoint = "/MyWebSocketServer/peter/" + myRoom;
-var host = window.location.host;
-var path = window.location.pathname;
-var webCtx = path.substring(0, path.indexOf('/', 1));
-updateStatus(' webCtx = ' + webCtx);
-var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-updateStatus(' endPointURL = ' + endPointURL);
-var webSocket;
-
-if( myRoom !== '' ) connect();
-
-function connect() {
+function connect(endPointURL) {
   // 建立 websocket 物件
   webSocket = new WebSocket(endPointURL);
 
@@ -66,7 +50,7 @@ function sendMessage() {
         alert ("訊息請勿空白!");
         inputMessage.focus();
     }else{
-        var jsonObj = {"userName" : userName, "message" : message, "myRoom": myRoom};
+        var jsonObj = {"userName" : userName, "message" : message, "myRoomNo":  gObjCR.myRoomNo};
         updateStatus(' sendMessage / json  = ' + JSON.stringify(jsonObj));
         webSocket.send(JSON.stringify(jsonObj));
         inputMessage.value = "";
