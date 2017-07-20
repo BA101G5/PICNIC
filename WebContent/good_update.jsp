@@ -209,34 +209,21 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										
 									 <c:set var = "salary" scope = "session" value = "${U}"/>
-									 <c:if test="${GSVO.gs_sta == session.salary}">	
+									
 										<div class="radio-inline">
-											<label> <input type="radio" name="gs_sta" checked
-												value="U" />
+											<label> <input type="radio" name="gs_sta" 
+												value="U" ${GSVO.gs_sta eq 'U'?'checked':''}/>
 												上架中
 											</label>
 										</div>
 										<div class="radio-inline">
 											<label> <input type="radio" name="gs_sta"
-												value="D" />
+												value="D" ${GSVO.gs_sta eq 'D'?'checked':''}/>
 												下架
 											</label>
 										</div>
-									</c:if>	
-									<c:if test="${GSVO.gs_sta != salary}">	
-										<div class="radio-inline">
-											<label> <input type="radio" name="gs_sta" 
-												value="U" />
-												上架中
-											</label>
-										</div>
-										<div class="radio-inline">
-											<label> <input type="radio" name="gs_sta" checked
-												value="D" />
-												下架
-											</label>
-										</div>
-									</c:if>	
+									
+									
 										
 										
 										
