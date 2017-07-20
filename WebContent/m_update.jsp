@@ -159,7 +159,7 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="password" name="MF_PSW" id="MF_PSW"
 											placeholder="請輸入密碼" style="width: 200px;"
-											value="">
+											value=""><font color='red'><b>${errorMsgs.MF_PSW}</b></font>
 										<c:if test="${not empty errorMsgs}">
 											<font color='red' id="PSW"><b>${errorMsgs.MF_PSW}</b></font>
 											<font color='red'><b>${errorMsgs.MF_PSW_1}</b></font>
@@ -189,9 +189,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MF_MAIL" id="MF_MAIL"
 											placeholder="信箱需輸入正確" style="width: 200px;"
-											value="${MfVO.MF_MAIL}">
+											value="${MfVO.MF_MAIL}"><font color='red' id="MAIL"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="MAIL"><b>${errorMsgs.MF_MAIL}</b></font>
+											<font color='red'><b>${errorMsgs.MF_MAIL}</b></font>
 										</c:if>
 									</div>
 								</div>
@@ -205,9 +205,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MF_PHONE" id="MF_PHONE"
 											placeholder="電話需輸入正確" style="width: 200px;"
-											value="${MfVO.MF_PHONE}">
+											value="${MfVO.MF_PHONE}"><font color='red' id="PHONE"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="PHONE"><b>${errorMsgs.MF_PHONE}</b></font>
+											<font color='red'><b>${errorMsgs.MF_PHONE}</b></font>
 										</c:if>
 									</div>
 								</div>
@@ -230,8 +230,8 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="MF_NAME" id="MF_NAME"
 											placeholder="請填寫廠商名稱" value="${MfVO.MF_NAME}">
-										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="NAME"><b>${errorMsgs.MF_NAME}</b></font>
+										<c:if test="${not empty errorMsgs}"><font color='red' id="NAME"><b></b></font>
+											<font color='red'><b>${errorMsgs.MF_NAME}</b></font>
 										</c:if>
 									</div>
 								</div>
