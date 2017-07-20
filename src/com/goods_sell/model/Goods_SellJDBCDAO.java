@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.manufacturers.model.ManufacturersVO;
+
 import java.io.*;
 
 public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
@@ -20,7 +23,9 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
 	private static final String UPDATE_STMT = "update GOODS_SELL set MF_NO = ? ,GS_NAME = ? ,GS_DATE = ? ,GS_PRICE = ? ,GS_INFO = ? ,GS_IMG = ? ,GS_STA = ? where GS_NO = ? ";
-
+	private static final String GET_COUNT_BYMF_STMT = "select count(GS_TYPE)  from GOODS_SELL where MF_NO  = ? ";
+	private static final String GET_ALL_BYMF_STMT = "select *  from GOODS_SELL where  GS_TYPE = ? and MF_NO = ?";
+	
 	@Override
 	public void insert(Goods_SellVO goods_sellVO) {
 		Connection con = null;
@@ -36,7 +41,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
+			pstmt.setString(7, goods_sellVO.getGs_sta());
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -75,7 +80,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			pstmt.setInt(4, goods_sellVO.getGs_price());
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
-			pstmt.setString(7, goods_sellVO.getGs_sta().toString());
+			pstmt.setString(7, goods_sellVO.getGs_sta());
 			pstmt.setString(8, goods_sellVO.getGs_no());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -158,7 +163,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 			goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 			goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 			goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-			goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
+			goods_sellVO.setGs_sta(rs.getString("GS_STA"));
 			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -211,7 +216,7 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
 				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
-				goods_sellVO.setGs_sta(rs.getString("GS_STA").charAt(0));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
 				list.add(goods_sellVO);
 
 			}
@@ -257,8 +262,8 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		 goods_sellVO.setGs_date(java.sql.Timestamp.valueOf("2055-01-01 0:0:0"));
 		 goods_sellVO.setGs_price(10);
 		 goods_sellVO.setGs_info("aeou");
-		 goods_sellVO.setGs_img(null);
-		 goods_sellVO.setGs_sta('A');
+		 goods_sellVO.setGs_img(getPicture("WebContent/nothing-here.jpg"));
+		 goods_sellVO.setGs_sta("A");
 		 goods_selljdbcdao.insert(goods_sellVO);
 // update
 		// Goods_SellVO goods_sellVO = new Goods_SellVO();
@@ -327,4 +332,177 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		return data;
 	}
 
-}
+	@Override
+	public List<Goods_SellVO> findByType(String type) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_COUNT_BYMF_STMT);
+			pstmt.setString(1, type);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Goods_SellVO goods_sellVO = new Goods_SellVO();
+				goods_sellVO.setGs_no(rs.getString("GS_NO"));
+				goods_sellVO.setMf_no(rs.getString("MF_NO"));
+				goods_sellVO.setGs_name(rs.getString("GS_NAME"));
+				goods_sellVO.setGs_date(rs.getTimestamp("GS_DATE"));
+				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
+				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
+				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				list.add(goods_sellVO);
+
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+	}
+
+	@Override
+	public List<String> getcountbymf(List<ManufacturersVO> list2) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<String> list = new ArrayList<String>();
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+		    for(ManufacturersVO ManufacturersVO:list2){
+			pstmt = con.prepareStatement(GET_COUNT_BYMF_STMT);	
+			pstmt.setString(1, ManufacturersVO.getMF_NO());
+			rs = pstmt.executeQuery();
+		        rs.next();
+		       String count=String.format("%s(%s)",ManufacturersVO.getMF_NO(), rs.getString("COUNT(GS_TYPE)"));
+		        System.out.println(count);
+		        list.add(count);
+		        }
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+		
+	}
+
+	
+	@Override
+	public List<Goods_SellVO> finBymf(String type, String mf) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<Goods_SellVO> list = new ArrayList<Goods_SellVO>();
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_BYMF_STMT);
+			pstmt.setString(1, type);
+			pstmt.setString(2,mf);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Goods_SellVO goods_sellVO = new Goods_SellVO();
+				goods_sellVO.setGs_no(rs.getString("GS_NO"));
+				goods_sellVO.setMf_no(rs.getString("MF_NO"));
+				goods_sellVO.setGs_name(rs.getString("GS_NAME"));
+				goods_sellVO.setGs_date(rs.getTimestamp("GS_DATE"));
+				goods_sellVO.setGs_price(rs.getInt("GS_PRICE"));
+				goods_sellVO.setGs_info(rs.getString("GS_INFO"));
+				goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
+				goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+				list.add(goods_sellVO);
+
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured." + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return list;
+	}
+
+	}
+

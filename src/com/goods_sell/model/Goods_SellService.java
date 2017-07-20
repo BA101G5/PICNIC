@@ -1,6 +1,8 @@
 package com.goods_sell.model;
 import java.util.List;
 
+import com.manufacturers.model.ManufacturersVO;
+
 public class Goods_SellService {
 	private Goods_SellDAO dao = null;
 
@@ -52,6 +54,16 @@ public class Goods_SellService {
 	public Goods_SellVO getOne(String gs_no) {
 		
 		return dao.findByPrimaryKey(gs_no);
+	}
+
+	public List<Goods_SellVO> findByType(String type) {
+		
+		return dao.findByType(type);
+	}
+
+	public List<String> getcountbymf(List<ManufacturersVO> list2) {
+		
+		return dao.getcountbymf(list2);
 	}
 
 

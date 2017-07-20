@@ -11,12 +11,6 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Picnic³¥À\ºô</title>
 <jsp:include page="/mustinclude/head.jsp" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 	<jsp:include page="/mustinclude/left_nav.jsp" />
@@ -81,8 +75,5 @@
 				<jsp:include page="/mustinclude/footer.jsp" /></div>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

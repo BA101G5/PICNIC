@@ -23,6 +23,8 @@ import com.general_member.model.GeneralMemberService;
 import com.general_member.model.GeneralMemberVO;
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
+import com.manufacturers.model.ManufacturersService;
+import com.manufacturers.model.ManufacturersVO;
 import com.orderde_detail.model.Orderde_DetailService;
 
 //import com.orderde_detail.model.Orderde_DetailService;
@@ -66,62 +68,96 @@ public class Goods_SellServlet extends HttpServlet {
 			}
 		}
 
-		if ("insert".equals(action)) {
+		// if ("insert".equals(action)) {
+		//
+		// Map<String, String> errorMsgs = new HashMap<String, String>();
+		// req.setAttribute("errorMsgs", errorMsgs);
+		//
+		// try {
+		// String MF_NO = req.getParameter("MF_NO").trim();
+		//
+		// String GS_NAME = req.getParameter("gs_name").trim();
+		// if (GS_NAME.equals("")) {
+		// errorMsgs.put("gs_name", "*嚙請選蕭J嚙諉品嚙磕嚙踝蕭");
+		// }
+		//
+		// byte[] GS_IMG = null;
+		// try {
+		// Part part = req.getPart("gs_img");
+		// GS_IMG = getPictureByteArrayFromWeb(part);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		//
+		// java.sql.Timestamp GS_DATE = null;
+		// GS_DATE = new java.sql.Timestamp(System.currentTimeMillis());
+		//
+		// Integer GS_PRICE =
+		// Integer.parseInt(req.getParameter("gs_price").trim());
+		// if (GS_PRICE.equals("")) {
+		// errorMsgs.put("gs_price", "*嚙請選蕭J嚙諉品嚙踝蕭嚙�");
+		// }
+		//
+		// String GS_INFO = req.getParameter("gs_info");
+		// if (GS_INFO.equals("")) {
+		// errorMsgs.put("gs_info", "*嚙請選蕭J嚙諉品嚙踝蕭T");
+		// }
+		//
+		// Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
+		//
+		// if (!errorMsgs.isEmpty()) {
+		// RequestDispatcher failureView =
+		// req.getRequestDispatcher("/good_buy.jsp");
+		// failureView.forward(req, res);
+		//
+		// return;
+		//
+		// Goods_SellService gsSvc = new Goods_SellService();
+		// Goods_SellVO GSVO = gsSvc.addGoods_Sell(MF_NO, GS_NAME, GS_DATE,
+		// GS_PRICE, GS_INFO, GS_IMG, GS_STA);
+		//
+		// session.setAttribute("GSVO", GSVO);
+		// String url = null;
+		// if (action.equals("insert")) {
+		// url = "/personal/personal.jsp";
+		// }
+		// RequestDispatcher successView = req.getRequestDispatcher(url);
+		// successView.forward(req, res);
+		// } catch (Exception e) {
+		// }
+		// }
 
-			Map<String, String> errorMsgs = new HashMap<String, String>();
+		
+		if (action.equals("selectByType")) {
+
+			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				String MF_NO = req.getParameter("MF_NO").trim();
+				String type = new String(req.getParameter("type"));
 
-				String GS_NAME = req.getParameter("gs_name").trim();
-				if (GS_NAME.equals("")) {
-					errorMsgs.put("gs_name", "*嚙請選蕭J嚙諉品嚙磕嚙踝蕭");
+				Goods_SellService goods_sellSvc = new Goods_SellService();
+				List<Goods_SellVO> list = goods_sellSvc.findByType(type);
+
+				ManufacturersService manufacturersSvc = new ManufacturersService();
+				List<ManufacturersVO> list2 = manufacturersSvc.getAll();
+				List<String> list3 = goods_sellSvc.getcountbymf(list2);
+
+				req.setAttribute("typelist", list);
+				req.setAttribute("countbymf", list3);
+				session.setAttribute("type", type);
+
+				String url = null;
+				if (action.equals("selectByType")) {
+					url = "/buycart/moafirst.jsp";
 				}
-
-				byte[] GS_IMG = null;
-				try {
-					Part part = req.getPart("gs_img");
-					GS_IMG = getPictureByteArrayFromWeb(part);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				java.sql.Timestamp GS_DATE = null;
-				GS_DATE = new java.sql.Timestamp(System.currentTimeMillis());
-
-				Integer GS_PRICE = Integer.parseInt(req.getParameter("gs_price").trim());
-				if (GS_PRICE.equals("")) {
-					errorMsgs.put("gs_price", "*嚙請選蕭J嚙諉品嚙踝蕭嚙�");
-				}
-
-				String GS_INFO = req.getParameter("gs_info");
-				if (GS_INFO.equals("")) {
-					errorMsgs.put("gs_info", "*嚙請選蕭J嚙諉品嚙踝蕭T");
-				}
-
-				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
-
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/good_buy.jsp");
-					failureView.forward(req, res);
-
-					return;
-
-					Goods_SellService gsSvc = new Goods_SellService();
-					Goods_SellVO GSVO = gsSvc.addGoods_Sell(MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA);
-
-					session.setAttribute("GSVO", GSVO);
-					String url = null;
-					if (action.equals("insert")) {
-						url = "/personal/personal.jsp";
-					}
-					RequestDispatcher successView = req.getRequestDispatcher(url);
-					successView.forward(req, res);
-				} catch (Exception e) {
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
-
+		
 		if (action.equals("selectgoods_sell")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
