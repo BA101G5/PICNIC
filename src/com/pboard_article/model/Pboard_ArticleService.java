@@ -97,6 +97,10 @@ public class Pboard_ArticleService {
 	public List<Pboard_ArticleVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<Pboard_ArticleVO> getAllwP(String picnic_no) {
+		return dao.getAllwP(picnic_no);
+	}
 
 	public Object getPboard_ArticlesByGeneralMemberno(String mem_no) {
 		// TODO Auto-generated method stub

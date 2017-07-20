@@ -159,9 +159,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gs_name" id="gs_name"
-											value="<%=(GSVO == null) ? "" : GSVO.getGs_name()%>" />
+											value="<%=(GSVO == null) ? "" : GSVO.getGs_name()%>" />	<font color='red' id="name"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="name"><b>${errorMsgs.gs_name}</b></font>
+											<font color='red'><b>${errorMsgs.gs_name}</b></font>
 										</c:if>
 
 									</div>
@@ -175,9 +175,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<textarea name="gs_info" rows="7" cols="50" id="gs_info"
 											value="<%=(GSVO == null) ? "" : GSVO.getGs_info()%>" />
-										</textarea>
+										</textarea><font color='red' id="info"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="info"><b>${errorMsgs.gs_info}</b></font>
+											<font color='red'><b>${errorMsgs.gs_info}</b></font>
 										</c:if>
 
 									</div>
@@ -193,9 +193,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gs_price" id="gs_price"
-											value="<%=(GSVO == null) ? "" : GSVO.getGs_price()%>" />
+											value="<%=(GSVO == null) ? "" : GSVO.getGs_price()%>" /><font color='red' id="price"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="price"><b>${errorMsgs.gs_price}</b></font>
+											<font color='red'><b>${errorMsgs.gs_price}</b></font>
 										</c:if>
 
 									</div>

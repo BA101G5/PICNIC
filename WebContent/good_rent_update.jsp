@@ -163,9 +163,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gr_name" id="gr_name"
-											value="${GRVO.gr_name}" />
+											value="${GRVO.gr_name}" /><font color='red' id="name"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="name"><b>${errorMsgs.gr_name}</b></font>
+											<font color='red' ><b>${errorMsgs.gr_name}</b></font>
 										</c:if>
 
 									</div>
@@ -179,9 +179,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<textarea name="gr_info" rows="7" cols="50" id="gr_info"
 											value="${GRVO.gr_info}" />${GRVO.gr_info}
-										</textarea>
+										</textarea><font color='red' id="info"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="info"><b>${errorMsgs.gr_info}</b></font>
+											<font color='red' ><b>${errorMsgs.gr_info}</b></font>
 										</c:if>
 
 									</div>
@@ -197,9 +197,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gr_price" id="gr_price"
-											value="${GRVO.gr_price}" />
+											value="${GRVO.gr_price}" /><font color='red' id="price"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="price"><b>${errorMsgs.gr_price}</b></font>
+											<font color='red'><b>${errorMsgs.gr_price}</b></font>
 										</c:if>
 
 									</div>
@@ -214,9 +214,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-4">
 										<input type="text" name="gr_until" id="datepicker3"
-											value="" /> 
+											value="" /> <font color='red' id="until"><b></b></font>
 											<c:if test="${not empty errorMsgs}">
-											<font color='red' id="until"><b>${errorMsgs.gr_until}</b></font>
+											<font color='red'><b>${errorMsgs.gr_until}</b></font>
 										</c:if>
 
 									</div>
@@ -259,9 +259,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gr_count" id="gr_count"
-											value="${GRVO.gr_count}" />
+											value="${GRVO.gr_count}" /><font color='red' id="count"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="count"><b>${errorMsgs.gr_count}</b></font>
+											<font color='red'><b>${errorMsgs.gr_count}</b></font>
 										</c:if>
 
 									</div>
@@ -276,9 +276,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gr_place" id="gr_place" size="50"
 											maxlength="50"
-											value="${GRVO.gr_place}" />
+											value="${GRVO.gr_place}" /><font color='red' id="place"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="place"><b>${errorMsgs.gr_place}</b></font>
+											<font color='red'><b>${errorMsgs.gr_place}</b></font>
 										</c:if>
 
 									</div>

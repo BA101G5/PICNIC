@@ -159,9 +159,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gs_name" id="gs_name"
-											value="${GSVO.gs_name}" />
+											value="${GSVO.gs_name}" /><font color='red' id="name"></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="name"><b>${errorMsgs.gs_name}</b></font>
+											<font color='red'><b>${errorMsgs.gs_name}</b></font>
 										</c:if>
 
 									</div>
@@ -175,9 +175,9 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<textarea name="gs_info" rows="7" cols="50" id="gs_info"
 											value="${GSVO.gs_info}" />${GSVO.gs_info}
-										</textarea>
+										</textarea><font color='red' id="info"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="info"><b>${errorMsgs.gs_info}</b></font>
+											<font color='red'><b>${errorMsgs.gs_info}</b></font>
 										</c:if>
 
 									</div>
@@ -193,9 +193,9 @@ textarea {
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="gs_price" id="gs_price"
-											value="${GSVO.gs_price}" />
+											value="${GSVO.gs_price}" /><font color='red' id="price"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
-											<font color='red' id="price"><b>${errorMsgs.gs_price}</b></font>
+											<font color='red' ><b>${errorMsgs.gs_price}</b></font>
 										</c:if>
 
 									</div>
@@ -209,7 +209,7 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										
 									 <c:set var = "salary" scope = "session" value = "${U}"/>
-									 <c:if test="${GSVO.gs_sta == salary}">	
+									 <c:if test="${GSVO.gs_sta == session.salary}">	
 										<div class="radio-inline">
 											<label> <input type="radio" name="gs_sta" checked
 												value="U" />
@@ -269,7 +269,7 @@ textarea {
 
 					<!-- button -->
 					<p class="text-center">
-						<input type="button" value="新增" id="btn">
+						<input type="button" value="修改" id="btn">
 					</p>
 
 				</div>
@@ -337,7 +337,7 @@ textarea {
 					break;
 				}
 			}
-			<!-- 驗證 -->			
+					
 			if(document.getElementById('gs_name').value.trim().length ==0){
 				document.getElementById('gs_name').focus();
 				document.getElementById('gs_name').select();

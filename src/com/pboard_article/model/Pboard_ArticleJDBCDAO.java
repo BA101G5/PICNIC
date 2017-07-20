@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chatroom_members.model.Chatroom_MembersVO2;
+
 public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -18,6 +20,8 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		"INSERT INTO PBOARD_ARTICLE (ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW) VALUES ('AB' || LPAD(PBOARD_ARTICLE_NO_SQ.NEXTVAL, 8, '0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE order by ARTICLE_NO";
+	private static final String GET_ALL_STMT_COND_P = 
+		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE WHERE PICNIC_NO = ?";
 	private static final String GET_ONE_STMT = 
 		"SELECT ARTICLE_NO, AUTHOR_NO, TOPIC_NO, PICNIC_NO, ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_POST, ARTICLE_EDIT, ARTICLE_VIEWS, ARTICLE_STA, ARTICLE_KIND, ARTICLE_PW FROM PBOARD_ARTICLE where ARTICLE_NO = ?";
 	private static final String DELETE = 
@@ -251,6 +255,77 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 	}
 
 	@Override
+	public List<Pboard_ArticleVO> getAllwP(String picnic_no) {
+		// TODO Auto-generated method stub
+		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
+		Pboard_ArticleVO pboardArticleVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_STMT_COND_P);
+			pstmt.setString(1, picnic_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// pboardArticleVO 嘿 Domain objects
+				pboardArticleVO = new Pboard_ArticleVO();
+				pboardArticleVO.setArticle_no(rs.getString("ARTICLE_NO"));
+				pboardArticleVO.setAuthor_no(rs.getString("AUTHOR_NO"));
+				pboardArticleVO.setTopic_no(rs.getString("TOPIC_NO"));
+				pboardArticleVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				pboardArticleVO.setArticle_title(rs.getString("ARTICLE_TITLE"));
+				pboardArticleVO.setArticle_text(rs.getString("ARTICLE_TEXT"));
+				pboardArticleVO.setArticle_post(rs.getTimestamp("ARTICLE_POST"));
+				pboardArticleVO.setArticle_edit(rs.getTimestamp("ARTICLE_EDIT"));
+				pboardArticleVO.setArticle_views(rs.getInt("ARTICLE_VIEWS"));
+				pboardArticleVO.setArticle_sta(rs.getString("ARTICLE_STA"));
+				pboardArticleVO.setArticle_kind(rs.getInt("ARTICLE_KIND"));
+				pboardArticleVO.setArticle_pw(rs.getString("ARTICLE_PW"));
+				list.add(pboardArticleVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
 	public List<Pboard_ArticleVO> getAll() {
 		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
 		Pboard_ArticleVO pboardArticleVO = null;
@@ -374,21 +449,38 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 		System.out.println("---------------------");
 		
 		// 琩高 场
-		List<Pboard_ArticleVO> list = dao.getAll();
-		for (Pboard_ArticleVO aEmp : list) {
-			System.out.print(aEmp.getArticle_no() + ",");
-			System.out.print(aEmp.getTopic_no() + ",");
-			System.out.print(aEmp.getPicnic_no() + ",");
-			System.out.print(aEmp.getArticle_title() + ",");
-			System.out.print(aEmp.getArticle_text() + ",");
-			System.out.print(aEmp.getArticle_post() + ",");
-			System.out.print(aEmp.getArticle_edit() + ",");
-			System.out.print(aEmp.getArticle_views() + ",");
-			System.out.print(aEmp.getArticle_sta() + ",");
-			System.out.print(aEmp.getArticle_kind() + ",");
-			System.out.print(aEmp.getArticle_pw());
-			System.out.println();
-		}
-	
+//		List<Pboard_ArticleVO> list = dao.getAll();
+//		for (Pboard_ArticleVO aEmp : list) {
+//			System.out.print(aEmp.getArticle_no() + ",");
+//			System.out.print(aEmp.getTopic_no() + ",");
+//			System.out.print(aEmp.getPicnic_no() + ",");
+//			System.out.print(aEmp.getArticle_title() + ",");
+//			System.out.print(aEmp.getArticle_text() + ",");
+//			System.out.print(aEmp.getArticle_post() + ",");
+//			System.out.print(aEmp.getArticle_edit() + ",");
+//			System.out.print(aEmp.getArticle_views() + ",");
+//			System.out.print(aEmp.getArticle_sta() + ",");
+//			System.out.print(aEmp.getArticle_kind() + ",");
+//			System.out.print(aEmp.getArticle_pw());
+//			System.out.println();
+//		}
+
+		// 琩高 场
+				List<Pboard_ArticleVO> list2 = dao.getAllwP("PG00000001");
+				for (Pboard_ArticleVO aEmp : list2) {
+					System.out.print(aEmp.getArticle_no() + ",");
+					System.out.print(aEmp.getTopic_no() + ",");
+					System.out.print(aEmp.getPicnic_no() + ",");
+					System.out.print(aEmp.getArticle_title() + ",");
+					System.out.print(aEmp.getArticle_text() + ",");
+					System.out.print(aEmp.getArticle_post() + ",");
+					System.out.print(aEmp.getArticle_edit() + ",");
+					System.out.print(aEmp.getArticle_views() + ",");
+					System.out.print(aEmp.getArticle_sta() + ",");
+					System.out.print(aEmp.getArticle_kind() + ",");
+					System.out.print(aEmp.getArticle_pw());
+					System.out.println();
+				}
+			
 	}
 }
