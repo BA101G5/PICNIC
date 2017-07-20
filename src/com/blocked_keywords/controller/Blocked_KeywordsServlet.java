@@ -21,7 +21,30 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
+		if("all_Blocked_Keywordss".equals(action)){
+			String result = "";
+			result = "all_Blocked_Keywordss";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		if("add_Blocked_Keywords".equals(action)){
+			String result = "";
+			result = "add_Blocked_Keywords";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
+		if("Blocked_Keywords".equals(action)){
+			String result = "";
+			result = "Blocked_Keywords";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); 
+			successView.forward(req, res);
+		}
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -73,7 +96,10 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("blocked_keywordsVO", blocked_keywordsVO); // 資料庫取出的blocked_keywordsVO物件,存入req
-				String url = "/backend/blocked_keywords/listOneBlocked_Keywords.jsp";
+				String result = "";
+				result = "getOne_For_Display_Keywords";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneBlocked_Keywords.jsp
 				successView.forward(req, res);
 
@@ -104,7 +130,10 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("blocked_keywordsVO", blocked_keywordsVO);         // 資料庫取出的blocked_keywordsVO物件,存入req
-				String url = "/backend/blocked_keywords/update_blocked_keywords_input.jsp";
+				String result = "";
+				result = "Update_Keyword";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_blocked_keywords_input.jsp
 				successView.forward(req, res);
 
@@ -151,7 +180,10 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("blocked_keywordsVO", blocked_keywordsVO); // 資料庫update成功後,正確的的blocked_keywordsVO物件,存入req
-				String url = "/backend/blocked_keywords/listOneBlocked_Keywords.jsp";
+				String result = "";
+				result = "updateFinal";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneBlocked_Keywords.jsp
 				successView.forward(req, res);
 
@@ -195,7 +227,10 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 				blocked_keywordsVO = blocked_keywordsSvc.addBlocked_Keywords(keyword, replacement);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/backend/blocked_keywords/listAllBlocked_Keywords.jsp";
+				String result = "";
+				result = "insertKeyword";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllBlocked_Keywords.jsp
 				successView.forward(req, res);				
 				
@@ -225,7 +260,10 @@ public class Blocked_KeywordsServlet extends HttpServlet {
 				blocked_keywordsSvc.deleteBlocked_Keywords(keyword_no);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/backend/blocked_keywords/listAllBlocked_Keywords.jsp";
+				String result = "";
+				result = "deleteKeywords";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
