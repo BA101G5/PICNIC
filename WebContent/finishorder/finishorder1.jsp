@@ -392,6 +392,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="col-sm-8 col-sm-push-4">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div>
