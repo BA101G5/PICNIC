@@ -401,6 +401,7 @@ var zoom =7;
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/mustinclude/chatroom.jsp" />
 
 	<%
 		session.removeAttribute("address");

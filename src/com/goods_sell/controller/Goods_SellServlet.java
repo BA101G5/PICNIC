@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
 import com.general_member.model.GeneralMemberService;
 
 import com.general_member.model.GeneralMemberVO;
 import com.goods_sell.model.Goods_SellService;
 import com.goods_sell.model.Goods_SellVO;
+
 //import com.orderde_detail.model.Orderde_DetailService;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
@@ -75,12 +75,12 @@ public class Goods_SellServlet extends HttpServlet {
 
 			try {
 				String MF_NO = req.getParameter("MF_NO").trim();
-System.out.println(MF_NO);
+
 				String GS_NAME =req.getParameter("gs_name").trim();
 				if(GS_NAME.equals("")){
-					errorMsgs.put("gs_name","*�п�J�ӫ~�W��");
+					errorMsgs.put("gs_name","*嚙請選蕭J嚙諉品嚙磕嚙踝蕭");
 				}
-System.out.println(GS_NAME);				
+				
 				byte[] GS_IMG = null;
 				try {
 					Part part = req.getPart("gs_img");
@@ -95,26 +95,24 @@ System.out.println(GS_NAME);
 				
 				Integer GS_PRICE = Integer.parseInt(req.getParameter("gs_price").trim());
 				if(GS_PRICE.equals("")){
-					errorMsgs.put("gs_price","*�п�J�ӫ~���");
+					errorMsgs.put("gs_price","*嚙請選蕭J嚙諉品嚙踝蕭嚙�");
 				}
-System.out.println(GS_DATE);				
+			
 				String GS_INFO = req.getParameter("gs_info");
 				if(GS_INFO.equals("")){
-					errorMsgs.put("gs_info","*�п�J�ӫ~��T");
+					errorMsgs.put("gs_info","*嚙請選蕭J嚙諉品嚙踝蕭T");
 				}
-System.out.println(GS_INFO);				
+				
 				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
-				
-System.out.println(GS_STA);				
-				
-			
+			}
+
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/good_buy.jsp");
 				failureView.forward(req, res);
 
 				return;
-			}
-				
+		
+			
 
 
 				Goods_SellService gsSvc =  new Goods_SellService();
@@ -126,8 +124,8 @@ System.out.println(GS_STA);
 				String url = null;
 				
 				url = "/personal/personal.jsp";
-				
-=======
+			}
+		
 		
 		if (action.equals("selectgoods_sell")) {
 
@@ -169,34 +167,34 @@ System.out.println(GS_STA);
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try {
-				/*************************** 1.�����ШD�Ѽ� ****************************************/
+				/*************************** 1.嚙踝蕭嚙踝蕭嚙請求嚙諸潘蕭 ****************************************/
 				String GS_NO = new String(req.getParameter("GS_NO"));
 				
-				/*************************** 2.�}�l�d�߸�� ****************************************/
+				/*************************** 2.嚙罷嚙締嚙範嚙賠賂蕭嚙� ****************************************/
 				Goods_SellService gsSvc =  new Goods_SellService();
 				Goods_SellVO GSVO = gsSvc.getOne(GS_NO);
 
 				/***************************
-				 * 3.�d�ߧ���,�ǳ����(Send the Success view)
+				 * 3.嚙範嚙賠改蕭嚙踝蕭,嚙褒喉蕭嚙踝蕭嚙�(Send the Success view)
 				 ************/
 				req.setAttribute("GSVO", GSVO);
 
-				// ��Ʈw��X��GeneralMemberVO����,�s�Jreq
+				// 嚙踝蕭w嚙踝蕭X嚙踝蕭GeneralMemberVO嚙踝蕭嚙踝蕭,嚙編嚙皚req
 				String url = "/good_update.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// ���\���
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 嚙踝蕭嚙穀嚙踝蕭嚙�
 				// update_general_member_input.jsp
 				successView.forward(req, res);
 
-				/*************************** ��L�i�઺��~�B�z **********************************/
+				/*************************** 嚙踝蕭L嚙箠嚙賞的嚙踝蕭~嚙畿嚙緲 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("�L�k��o�n�ק諸���:" + e.getMessage());
+				errorMsgs.add("嚙盤嚙糊嚙踝蕭o嚙緯嚙論改的嚙踝蕭嚙�:" + e.getMessage());
 				System.out.println("----------------");
 				RequestDispatcher failureView = req.getRequestDispatcher("/personal/personal.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // �Ӧ�update_emp_input.jsp���ШD
+		if ("update".equals(action)) { // 嚙諉佗蕭update_emp_input.jsp嚙踝蕭嚙請求
 
 			Map<String, String> errorMsgs = new HashMap<String, String>();
 			// Store this set in the request scope, in case we need to
@@ -205,14 +203,14 @@ System.out.println(GS_STA);
 
 			try {
 				/***************************
-				 * 1.�����ШD�Ѽ� - ��J�榡����~�B�z
+				 * 1.嚙踝蕭嚙踝蕭嚙請求嚙諸潘蕭 - 嚙踝蕭J嚙賣式嚙踝蕭嚙踝蕭~嚙畿嚙緲
 				 **********************/
 				String GS_NO = req.getParameter("gs_no").trim();
 				String MF_NO = req.getParameter("MF_NO").trim();
 				
 				String GS_NAME = req.getParameter("gs_name").trim();
 				if(GS_NAME.equals("")){
-					errorMsgs.put("gs_name","���i�ť�");
+					errorMsgs.put("gs_name","嚙踝蕭嚙箠嚙褐伐蕭");
 				}
 				
 
@@ -223,7 +221,7 @@ System.out.println(GS_STA);
 				String GS_INFO = req.getParameter("gs_info").trim();
 
 				if(GS_INFO.equals("")){
-					errorMsgs.put("gs_info","���i�ť�");
+					errorMsgs.put("gs_info","嚙踝蕭嚙箠嚙褐伐蕭");
 				}
 
 				Integer GS_PRICE = null;
@@ -231,7 +229,7 @@ System.out.println(GS_STA);
 				try {//"7011" "aaa"
 					GS_PRICE = new Integer(req.getParameter("gs_price").trim());
 				} catch (Exception e) {
-					errorMsgs.put("gs_price","�п�J���T�����");
+					errorMsgs.put("gs_price","嚙請選蕭J嚙踝蕭嚙確嚙踝蕭嚙踝蕭嚙�");
 				}
 				Part part = req.getPart("gs_img");
 				byte[] GS_IMG = null;
@@ -256,30 +254,30 @@ System.out.println(GS_STA);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("GSVO", GSVO); // �t����J�榡��~��MemVO����,�]�s�Jreq
+					req.setAttribute("GSVO", GSVO); // 嚙緣嚙踝蕭嚙踝蕭J嚙賣式嚙踝蕭~嚙踝蕭MemVO嚙踝蕭嚙踝蕭,嚙稽嚙編嚙皚req
 					RequestDispatcher failureView = req.getRequestDispatcher("/good_update.jsp");
 					failureView.forward(req, res);
-					return; // �{�����_
+					return; // 嚙緹嚙踝蕭嚙踝蕭嚙稻
 				}
 
-				/*************************** 2.�}�l�ק��� *****************************************/
+				/*************************** 2.嚙罷嚙締嚙論改蕭嚙踝蕭 *****************************************/
 Goods_SellService gSvc = new Goods_SellService();
 				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA);
 
 				/***************************
-				 * 3.�ק粒��,�ǳ����(Send the Success view)
+				 * 3.嚙論改完嚙踝蕭,嚙褒喉蕭嚙踝蕭嚙�(Send the Success view)
 				 *************/
 
-				req.setAttribute("GSVO", GSVO); // ��Ʈwupdate���\��,���T����MemVO����,�s�Jreq
+				req.setAttribute("GSVO", GSVO); // 嚙踝蕭wupdate嚙踝蕭嚙穀嚙踝蕭,嚙踝蕭嚙確嚙踝蕭嚙踝蕭MemVO嚙踝蕭嚙踝蕭,嚙編嚙皚req
 //				HttpSession session1 = req.getSession();
 //				session1.removeAttribute("gVO");
 //				session1.setAttribute("gVO", MemVO);
 
-				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // �ק令�\��,���listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // 嚙論改成嚙穀嚙踝蕭,嚙踝蕭嚙締istOneEmp.jsp
 
 				successView.forward(req, res);
 
-				/*************************** ��L�i�઺��~�B�z *************************************/
+				/*************************** 嚙踝蕭L嚙箠嚙賞的嚙踝蕭~嚙畿嚙緲 *************************************/
 			} catch (Exception e) {
 System.out.println("--------------");
 				errorMsgs.put("error", "error");
@@ -291,16 +289,18 @@ System.out.println("--------------");
 		
 		
 	}
+
 	public String getFileNameFromPart(Part part) {
 		String header = part.getHeader("content-disposition");
-		// System.out.println("header=" + header); // ��ե�
+		// System.out.println("header=" + header); // 嚙踝蕭掍嚙�
 		String filename = new File(header.substring(header.lastIndexOf("=") + 2, header.length() - 1)).getName();
-		// System.out.println("filename=" + filename); // ��ե�
+		// System.out.println("filename=" + filename); // 嚙踝蕭掍嚙�
 		if (filename.length() == 0) {
 			return null;
 		}
 		return filename;
 	}
+
 	public static byte[] getPictureByteArrayFromWeb(Part part) throws IOException {
 		InputStream in = part.getInputStream();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -311,9 +311,8 @@ System.out.println("--------------");
 		}
 		return baos.toByteArray();
 
-				throw new ServletException(e);
-			}
-		}
-
+		throw new ServletException(e);
 	}
 }
+
+}}

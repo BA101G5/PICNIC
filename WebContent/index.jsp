@@ -50,7 +50,7 @@ body{
 </head>
 <body>
 
-<%-- 	<jsp:include page="/mustinclude/left_nav.jsp" /> --%>
+ 	<jsp:include page="/mustinclude/left_nav.jsp" /> 
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 	<jsp:include page="/mustinclude/marquee.jsp" />
 
@@ -120,6 +120,6 @@ body{
 					</div>
  -->
 </div>
-
+<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>

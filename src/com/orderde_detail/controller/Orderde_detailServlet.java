@@ -41,8 +41,9 @@ public class Orderde_detailServlet extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
-				String account = gVO.getMEM_NO();
+			//	GeneralMemberVO gVO  =(GeneralMemberVO)session.getAttribute("gVO");
+			 //	String account = gVO.getMEM_NO();
+				String account ="M000000001";
 				PicmemService picmemSvc = new PicmemService();
 				List<String> list = picmemSvc.findbymem_no(account);
 
