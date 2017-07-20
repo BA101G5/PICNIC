@@ -29,6 +29,7 @@ public class PicmemDAO implements PicmemDAO_interface {
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
 	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'A')";
 	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'A\'";
+	private static final String GET_ALL_STMT_P = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =?";
 	@Override
 	public void insert(PicmemVO picmemVO) {
 		Connection con = null;
@@ -317,6 +318,59 @@ public class PicmemDAO implements PicmemDAO_interface {
 		}
 
 		return list;
+	}
+
+	@Override
+	public List<PicmemVO> getAll(String picnic_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<PicmemVO> list = new ArrayList<PicmemVO>();
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_P);
+			pstmt.setString(1, picnic_no);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				PicmemVO picmemVO = new PicmemVO();
+				picmemVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				picmemVO.setMem_no(rs.getString("MEM_NO"));
+				picmemVO.setPicmem_iden(rs.getString("PICMEM_IDEN"));
+				picmemVO.setPicmem_sta(rs.getString("PICMEM_STA"));
+				picmemVO.setMem_longi(rs.getDouble("MEM_LONGI"));
+				picmemVO.setMem_latit(rs.getDouble("MEM_LATIT"));
+				list.add(picmemVO);
+			}
+	
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	
 	}
 
 }

@@ -54,15 +54,19 @@
  	ChatroomService chatroomSvc = new ChatroomService();
 // 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
 
+
+	List<Chatroom_MembersVO2> listChatroomVO2 = chatroom_membersSvc.getAllwCond();
+	pageContext.setAttribute("listChatroomVO2", listChatroomVO2);
+
 // *** bug
 // Chatroom_MembersVO2 cmVO2 = chatroom_membersSvc.getOnewCond("MG00000002", "MG00000003");
 // System.out.println("chatroom.jsp / cmVO2.getMem_no() = " + cmVO2.getMem_no());
 // *** bug
 // *** ´À¥N
- 	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
-// 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
-// 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
-pageContext.setAttribute("chmemDao", chmemJDBCDAO);
+//  	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
+// // 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
+// // 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
+// pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
@@ -252,8 +256,37 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
                 $('#aChatroom-container').css('display', 'block');
                 gObjCR.chatWithMemNo = this.id; //alert(this.id); //"MG00000003"
 
-                gObjCR.myRoomNo = 'CR00000001'; 
-                gObjCR.myRoomNo = this.getAttribute( "roomno" );
+                var notMap = <%
+        	    String tempStr ="[";
+        			for (int idx = 0; idx < listChatroomVO2.size(); idx++) {
+        				Chatroom_MembersVO2 aVo2 = listChatroomVO2.get(idx);
+        	      tempStr += "['" + aVo2.getChatroom_no() + "', '" + aVo2.getMem_no() + "']";
+        	      if(idx<listChatroomVO2.size()-1) tempStr += ",";
+        			}
+        	    tempStr +="]";
+        	    out.print(tempStr);
+        	    %>;
+        	    
+        	    var set1 = [];
+        	    var set2 = [];
+        	    
+	       	    for(var ii = 0; ii < notMap.length; ii++){
+        	      if(notMap[ii][1]==gObjCR.memNo){set1.push(notMap[ii][0]);}
+        	      if(notMap[ii][1]==gObjCR.chatWithMemNo){set2.push(notMap[ii][0]);console.log("ppp"+notMap[ii][0]);}
+        	    }
+        	    var intersect;
+
+        	    for(var jj=0; jj<set1.length; jj++){
+        	      for(var kk=0; kk<set2.length; kk++){
+        	        if( set1[jj] == set2[kk] ){ intersect = set1[jj]; }
+        	      }
+        	    }
+        	    gObjCR.myRoomNo = intersect;
+//         	    console.log("intersect>>>>>>"+intersect);
+        	   
+
+//                 gObjCR.myRoomNo = 'CR00000001'; 
+//                 gObjCR.myRoomNo = this.getAttribute( "roomno" );
 
 	            var myRoomNo = gObjCR.myRoomNo;
 	            updateStatus(' memNo = ' + gObjCR.memNo + ", myRoomNo = " + myRoomNo);
@@ -264,7 +297,7 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 	            var webCtx = path.substring(0, path.indexOf('/', 1));
 	            //updateStatus(' webCtx = ' + webCtx);
 	            var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-	            //updateStatus(' endPointURL = ' + endPointURL);
+	            updateStatus(' endPointURL = ' + endPointURL);
 	            var webSocket;
 	
 	            if( myRoomNo !== '' ) connect(endPointURL);
@@ -276,4 +309,7 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
             $('#btn-close-aChatroom-container').on('click', function(){
             	$('#aChatroom-container').css('display', 'none');
             });
+            
+<%--             console.log("tessssssssssst" +  '<% out.print("{[123asf]}"); %>');  --%>
+
 		</script>
