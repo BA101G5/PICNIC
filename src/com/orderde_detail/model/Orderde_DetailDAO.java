@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.goods_sell.model.Goods_SellVO;
+
 import java.sql.*;
 
 public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
@@ -27,7 +29,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
-	private static final String GET_GR_PICNICNO_STMT = " select * from ORDERDE_DETAIL WHERE PICNIC_NO = ? ORDER BY ORDERDE_DETAILNO";
+	private static final String GET_GR_PICNICNO_STMT = "select * from ORDERDE_DETAIL where PICNIC_NO= ? ";
 	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL WHERE MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
 	private String UPDATE_STMT_PL = "update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,OD_AMOUNT =?,OD_PRICE =?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
 	private String UPDATE_STMT_GR = "update ORDERDE_DETAIL set OD_AMOUNT =?,OD_PRICE =?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
@@ -279,7 +281,6 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 
 			while (rs.next()) {
 				Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
-
 				orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
 				orderde_detailVO.setMem_no(rs.getString("MEM_NO"));
 				orderde_detailVO.setPicnic_no(rs.getString("PICNIC_NO"));
@@ -298,7 +299,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
+
 		} finally {
 			if (rs != null) {
 				try {
@@ -360,7 +361,6 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -408,36 +408,35 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				pstmt.setString(9, orderde_detailVO.getOrderde_detailno());
 				pstmt.executeUpdate();
 			}
-			try{
-			for (Orderde_DetailVO orderde_detailVO : listGr) {
-				if (orderde_detailVO.getGr_no() == null) {
-					pstmt = con.prepareStatement(UPDATE_STMT_GR);
-					
-					pstmt.setInt(1, orderde_detailVO.getOd_amount());
-					pstmt.setInt(2, orderde_detailVO.getOd_price());
-					pstmt.setString(3, orderde_detailVO.getOd_place());
-					pstmt.setString(4, "F");
-					pstmt.setString(5, orderde_detailVO.getOrderde_detailno());
-					pstmt.executeUpdate();
-				}else {
-					pstmt = con.prepareStatement(UPDATE_STMT_PL);
-					pstmt.setString(1, orderde_detailVO.getMem_no());
-					pstmt.setString(2, orderde_detailVO.getPicnic_no());
-					pstmt.setString(3, orderde_detailVO.getP_no());
-					pstmt.setInt(4, orderde_detailVO.getOd_amount());
-					pstmt.setInt(5, orderde_detailVO.getOd_price());
-					pstmt.setString(6, orderde_detailVO.getOd_place());
-					pstmt.setString(7, "F");
-					pstmt.setString(8, orderde_detailVO.getOrderde_detailno());
-					pstmt.executeUpdate();
-				}
-				
-				
-			
-			}	
-			con.commit();
+			try {
+				for (Orderde_DetailVO orderde_detailVO : listGr) {
+					if (orderde_detailVO.getGr_no() == null) {
+						pstmt = con.prepareStatement(UPDATE_STMT_GR);
 
-			}catch(Exception e){}
+						pstmt.setInt(1, orderde_detailVO.getOd_amount());
+						pstmt.setInt(2, orderde_detailVO.getOd_price());
+						pstmt.setString(3, orderde_detailVO.getOd_place());
+						pstmt.setString(4, "F");
+						pstmt.setString(5, orderde_detailVO.getOrderde_detailno());
+						pstmt.executeUpdate();
+					} else {
+						pstmt = con.prepareStatement(UPDATE_STMT_PL);
+						pstmt.setString(1, orderde_detailVO.getMem_no());
+						pstmt.setString(2, orderde_detailVO.getPicnic_no());
+						pstmt.setString(3, orderde_detailVO.getP_no());
+						pstmt.setInt(4, orderde_detailVO.getOd_amount());
+						pstmt.setInt(5, orderde_detailVO.getOd_price());
+						pstmt.setString(6, orderde_detailVO.getOd_place());
+						pstmt.setString(7, "F");
+						pstmt.setString(8, orderde_detailVO.getOrderde_detailno());
+						pstmt.executeUpdate();
+					}
+
+				}
+				con.commit();
+
+			} catch (Exception e) {
+			}
 
 		} catch (SQLException se) {
 			try {
@@ -464,6 +463,10 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				}
 			}
 		}
-		}
+	}
+
+
+
+	
 
 }

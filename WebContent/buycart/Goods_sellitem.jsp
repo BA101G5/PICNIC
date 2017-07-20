@@ -38,7 +38,8 @@
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit" style="width: 80px; height: 40px; font-size: 20px;">
+											value="Submit"
+											style="width: 80px; height: 40px; font-size: 20px;">
 											<span class="glyphicon glyphicon-shopping-cart"
 												aria-hidden="true"></span>
 										</button>
@@ -53,23 +54,24 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</c:forEach>
 		<%@ include file="/buycart/page2.file"%>
 	</c:if>
 </div>
-<div class="col-sm-9">
+<div class="col-md-9">
 	<c:if test="${not empty list }">
 		<%@ include file="/buycart/page.file"%>
 		<c:forEach var="goods_sellVO" items="${list}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
-			<div class="col-sm-12">
+			<div class="col-md-5">
 				<div class="thumbnail" style="display: inline-block;";>
+					<h4>${goods_sellVO.getGs_name()}</h4>
 					<img
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
 						style="display: inline-block; height: 200px; width: 200px;">
 					<div style="display: inline-block;">
-						<h3>${goods_sellVO.getGs_name()}</h3>
+
 						<p>
 						<table style="display: inline-block;">
 							<tr>
@@ -83,11 +85,14 @@
 											type="hidden" name="action" value="getOne">
 									</FORM>
 								</td>
+							</tr>
+							<tr>
 								<td>
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit" style="width: 80px; height: 40px; font-size: 20px;">
+											value="Submit"
+											style="width: 80px; height: 40px; font-size: 20px;">
 											<span class="glyphicon glyphicon-shopping-cart"
 												aria-hidden="true"></span>
 										</button>
@@ -105,4 +110,4 @@
 		</c:forEach>
 		<%@ include file="/buycart/page2.file"%>
 	</c:if>
-	</div>
+</div>

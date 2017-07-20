@@ -359,4 +359,5 @@ public class ManufacturersJDBCDAO implements ManufacturersDAO_interface {
 		
 	}
 
+
 }

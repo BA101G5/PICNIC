@@ -14,14 +14,16 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ManufacturersDAO implements ManufacturersDAO_interface {
-	
+
 	private static final String INSERT = "INSERT INTO MANUFACTURERS(MF_NO,MF_NAME,MF_PHONE,MF_MAIL,MF_ACCO,MF_PSW,MF_LOGO,MF_SELF,MF_BS,MF_ADDR,MF_FAX,MF_STA,MF_REPORTNUM)"
 			+ "VALUES('MM' || LPAD(MF_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE MANUFACTURERS SET MF_NAME=?,MF_PHONE=?,MF_MAIL=?, MF_ACCO=?, MF_PSW=? ,MF_LOGO=? ,MF_SELF=?, MF_BS=?, MF_ADDR=? ,MF_FAX=?,MF_STA=?,MF_REPORTNUM=? WHERE MF_NO=?";
 	private static final String DELETE = "DELETE FROM MANUFACTURERS WHERE MF_NO=?";
 	private static final String FINDBYKEY = "SELECT MF_NO,MF_NAME, MF_PHONE, MF_MAIL, MF_ACCO, MF_PSW, MF_SELF,MF_LOGO, MF_BS, MF_ADDR,MF_FAX,MF_STA,MF_REPORTNUM FROM MANUFACTURERS WHERE MF_NO=?";
 	private static final String FINDALL = "SELECT * FROM MANUFACTURERS ORDER BY MF_NO DESC";
-	private static final String UPDATEFORSTA ="UPDATE  MANUFACTURERS SET MF_STA=? WHERE MF_ACCO=?";
+	private static final String UPDATEFORSTA = "UPDATE  MANUFACTURERS SET MF_STA=? WHERE MF_ACCO=?";
+	private static final String FINDBYMFNAME_STMT = "SELECT MF_NO FROM MANUFACTURERS WHERE MF_NAME=?";
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -50,7 +52,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 			pstmt.setString(9, ManufacturersVO.getMF_ADDR());
 			pstmt.setString(10, String.valueOf(ManufacturersVO.getMF_FAX()));
 			pstmt.setString(11, String.valueOf(ManufacturersVO.getMF_STA()));
-			pstmt.setInt(12,ManufacturersVO.getMF_REPORTNUM());
+			pstmt.setInt(12, ManufacturersVO.getMF_REPORTNUM());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -281,7 +283,7 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 			pstmt = con.prepareStatement(UPDATEFORSTA);
 			pstmt.setString(1, ManufacturersVO.getMF_STA().toString());
 			pstmt.setString(2, ManufacturersVO.getMF_ACCO());
-			
+
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -303,9 +305,56 @@ public class ManufacturersDAO implements ManufacturersDAO_interface {
 				}
 			}
 		}
-		
+
 	}
 
 	
+
+	
+	public String findByMfName(String mf_name) {
+
+		String Mf_no = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDBYMFNAME_STMT);
+			pstmt.setString(1, mf_name);
+			rs = pstmt.executeQuery();
+			rs.next();
+			 Mf_no = rs.getString("MF_NO");
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return Mf_no;
+	}
 
 }

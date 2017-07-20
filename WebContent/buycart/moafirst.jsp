@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.*"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -14,8 +14,8 @@
 	class="com.goods_sell.model.Goods_SellService" />
 
 <%
-	List<String> list = (List<String>) request.getAttribute("countbymf");
-	pageContext.setAttribute("list", list);
+	Set<String> typeset = (Set<String>) session.getAttribute("typeSet");
+	pageContext.setAttribute("typeset", typeset);
 %>
 
 <style>
@@ -160,27 +160,24 @@
 								</table>
 							</c:if>
 
-							<c:if test="${list!=null }">
+							<c:if test="${typeset!=null }">
 								<div class="panel-heading">
 									<h3 class="panel-title">提供廠商</h3>
 								</div>
 								<table class="table">
-									<c:forEach var="mfcount" items="${list}">
+									<c:forEach var="mfcount" items="${typeset}">
 										<tr>
-											<td><FORM METHOD="post"
-													ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+											<td><form method="post" action="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 													onclick="submit()">
-													<input type="hidden" name="action" value="selectByMfype">
-													<input type="hidden" name="mf" value="${mfcount}">
 													<p>${mfcount}</p>
-
+													<input type="hidden" name="action" value="selectByMfype">
+													<input type="hidden" name="mfcount" value="${mfcount}">
+													<input type="hidden" name="mfcount" value="${mfcount}">
 												</form></td>
 										</tr>
 									</c:forEach>
 								</table>
 							</c:if>
-
-
 						</div>
 					</div>
 					<jsp:include page="/buycart/Goods_sellitem.jsp" />
@@ -199,7 +196,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 </body>

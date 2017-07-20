@@ -472,4 +472,10 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

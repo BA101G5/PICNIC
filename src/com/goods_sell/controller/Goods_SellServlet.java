@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,8 +29,6 @@ import com.manufacturers.model.ManufacturersService;
 import com.manufacturers.model.ManufacturersVO;
 import com.orderde_detail.model.Orderde_DetailService;
 
-import oracle.sql.CHAR;
-
 //import com.orderde_detail.model.Orderde_DetailService;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
@@ -42,6 +42,7 @@ public class Goods_SellServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		System.out.println(action);
 
 		if (action.equals("getOne")) {
 
@@ -137,23 +138,26 @@ public class Goods_SellServlet extends HttpServlet {
 			try {
 				String type = new String(req.getParameter("type"));
 
+				ManufacturersService manufacturerSVC = new ManufacturersService();
+				List<ManufacturersVO> list = manufacturerSVC.getAll();
+
 				Goods_SellService goods_sellSvc = new Goods_SellService();
-				List<Goods_SellVO> list = goods_sellSvc.findByType(type);
+				Set<String> set = goods_sellSvc.findByTypeandList(type, list);
 
-				ManufacturersService manufacturersSvc = new ManufacturersService();
-				List<ManufacturersVO> list2 = manufacturersSvc.getAll();
-				List<String> list3 = goods_sellSvc.getcountbymf(list2);
+				List<Goods_SellVO> goodslist = goods_sellSvc.findByType(type);
 
-				req.setAttribute("typelist", list);
-				req.setAttribute("countbymf", list3);
 				session.setAttribute("type", type);
+				req.setAttribute("list", goodslist);
+				if (!set.isEmpty()) {
+					session.setAttribute("typeSet", set);
 
-				String url = null;
-				if (action.equals("selectByType")) {
-					url = "/buycart/moafirst.jsp";
+					String url = null;
+					if (action.equals("selectByType")) {
+						url = "/buycart/moafirst.jsp";
+					}
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
 				}
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -194,12 +198,19 @@ public class Goods_SellServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
+
 				String type = new String((String) session.getAttribute("type"));
-				String Mf_no = req.getParameter("mf");
-				Mf_no = Mf_no.split("(")[0];
+
+				String Mf_name = req.getParameter("mfcount");
+				System.out.println(Mf_name);
+				Mf_name = Mf_name.split("\\(")[0];
+
+				ManufacturersService manufacturersScv = new ManufacturersService();
+				String Mf_no = manufacturersScv.findByMfname(Mf_name);
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
 				List<Goods_SellVO> list = goods_sellSvc.findByMfType(type, Mf_no);
+
 				System.out.println("Hello");
 
 				req.setAttribute("list", list);
@@ -211,7 +222,7 @@ public class Goods_SellServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -298,9 +309,9 @@ public class Goods_SellServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				 Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
+				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
 
-				String gs_sta1 =GS_STA.toString();
+				String gs_sta1 = GS_STA.toString();
 				System.out.println(GS_STA);
 				Goods_SellVO GSVO = new Goods_SellVO();
 

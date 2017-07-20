@@ -12,4 +12,6 @@ public interface ManufacturersDAO_interface {
     public ManufacturersVO findByPrimaryKey(String MF_NO);
     public List<ManufacturersVO> getAll();
     public void updateforSTA(ManufacturersVO ManufacturersVO);
+	public String findByMfName(String mf_name);
+	
 }

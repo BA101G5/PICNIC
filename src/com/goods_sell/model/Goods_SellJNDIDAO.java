@@ -401,5 +401,11 @@ public List<Goods_SellVO> finBymf(String type, String mf) {
 	return list;
 }
 
+@Override
+public String findByType(String type, String mf_no) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 }

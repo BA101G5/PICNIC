@@ -2,6 +2,8 @@ package com.orderde_detail.model;
 
 import java.util.List;
 
+import com.goods_sell.model.Goods_SellVO;
+
 public interface Orderde_DetailDAO_interface {
 	public void insert(Orderde_DetailVO orderde_detailVO);
 	public void update(Orderde_DetailVO orderde_detailVO);
@@ -11,5 +13,6 @@ public interface Orderde_DetailDAO_interface {
 	public List<Orderde_DetailVO> getAllPICNICNO(String picnic_no);
 	public List<Orderde_DetailVO> getGsByMenno(String mem_no);
 	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs);
+
 	
 }

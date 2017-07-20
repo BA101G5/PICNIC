@@ -1,6 +1,8 @@
 package com.goods_sell.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.manufacturers.model.ManufacturersVO;
 
@@ -58,7 +60,7 @@ public class Goods_SellService {
 	}
 
 	public List<Goods_SellVO> findByType(String type) {
-
+		
 		return dao.findByType(type);
 	}
 
@@ -68,8 +70,22 @@ public class Goods_SellService {
 	}
 
 	public List<Goods_SellVO> findByMfType(String type, String Mf_no) {
-
+		
 		return dao.finBymf(type, Mf_no);
+	}
+
+	public Set<String> findByTypeandList(String type, List<ManufacturersVO> list) {
+		Set<String> set = new HashSet<String>();
+		for (ManufacturersVO ManufacturersVO : list) {
+			String typecount = dao.findByType(type, ManufacturersVO.getMF_NO());
+			Integer count = Integer.valueOf(typecount);
+			if (count > 0) {
+				String typemf = String.format("%s(%s)", ManufacturersVO.getMF_NAME(), typecount);
+				set.add(typemf);
+			}
+		}
+		System.out.println(set);
+		return set;
 	}
 
 }

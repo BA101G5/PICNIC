@@ -173,7 +173,7 @@
 					</c:if>
 					<form method="POST"
 						action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-						<c:if test="${not emptylistGr}">
+						<c:if test="${not empty listGr}">
 							<table class="table table-hover">
 								<caption>ÁÊª«²M³æ</caption>
 								<thead>

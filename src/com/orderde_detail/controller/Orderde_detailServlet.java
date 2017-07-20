@@ -43,6 +43,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			try {
 				GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
 				String account = gVO.getMEM_NO();
+				System.out.println(account);
 
 				PicmemService picmemSvc = new PicmemService();
 				List<String> list = picmemSvc.findbymem_no(account);
@@ -72,11 +73,9 @@ public class Orderde_detailServlet extends HttpServlet {
 
 			try {
 				String picnic_no = req.getParameter("picnic");
-				System.out.println(picnic_no);
 
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
 				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
-				System.out.println(list);
 
 				if (!list.isEmpty()) {
 					req.setAttribute("listOrderde_DetailVO", list);
@@ -176,12 +175,11 @@ public class Orderde_detailServlet extends HttpServlet {
 			// System.out.println(address);
 			List<Orderde_DetailVO> listGr = (List<Orderde_DetailVO>) session.getAttribute("listGr");
 			List<Orderde_DetailVO> listGs = (List<Orderde_DetailVO>) session.getAttribute("listGs");
-		
-			
+
 			try {
 				if (!listGr.isEmpty()) {
 					for (Orderde_DetailVO orderde_detailVO : listGr) {
-			
+
 						Integer preamount = orderde_detailVO.getOd_amount();
 						Integer price = orderde_detailVO.getOd_price();
 						price = price / preamount;
@@ -193,7 +191,8 @@ public class Orderde_detailServlet extends HttpServlet {
 						System.out.println(orderde_detailVO.getOd_amount());
 						orderde_detailVO.setPicnic_no(picnic_no);
 						System.out.println(orderde_detailVO.getPicnic_no());
-						orderde_detailVO.setOd_place("       ");;
+						orderde_detailVO.setOd_place("       ");
+						;
 					}
 				}
 			} catch (Exception e) {
@@ -212,7 +211,8 @@ public class Orderde_detailServlet extends HttpServlet {
 					orderde_detailVO.setOd_price(price);
 					orderde_detailVO.setOd_amount(amount);
 					orderde_detailVO.setPicnic_no(picnic_no);
-					orderde_detailVO.setOd_place("       ");;
+					orderde_detailVO.setOd_place("       ");
+					;
 					// orderde_detailVO.setOd_place(address);
 				}
 				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();

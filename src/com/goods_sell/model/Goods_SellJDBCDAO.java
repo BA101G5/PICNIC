@@ -504,5 +504,11 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		return list;
 	}
 
+	@Override
+	public String findByType(String type, String mf_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	}
 

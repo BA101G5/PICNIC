@@ -79,4 +79,9 @@ public class ManufacturersService {
 		dao.updateforSTA(mVO);
 
 	}
+
+	public String findByMfname(String mf_name) {
+		
+		return dao.findByMfName(mf_name);
+	}
 }
