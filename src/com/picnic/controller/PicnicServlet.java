@@ -14,6 +14,7 @@ import com.goods_rent.model.Goods_RentVO;
 import com.orderde_detail.model.Orderde_DetailService;
 import com.picmem.model.PicmemService;
 import com.picnic.model.PicnicService;
+import com.picnic.model.PicnicVO;
 import com.place.model.PlaceService;
 import com.place.model.PlaceVO;
 
@@ -85,7 +86,7 @@ public class PicnicServlet extends HttpServlet {
 				String tladdress = null;
 				System.out.println();
 
-				if (address.contains("市")) {
+				if (address.contains("撣�")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
@@ -185,16 +186,53 @@ public class PicnicServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
+
 			String account = gVO.getMEM_NO();
+
+			String uri = (String) req.getParameter("uri");
+			try {
+				uri = uri.split("null")[1];
+			} catch (Exception e) {
+				uri = uri.split(req.getContextPath())[1];
+			}
 
 			try {
 				PicmemService picmemSvc = new PicmemService();
 				List<String> persionalpicnic = picmemSvc.findbymem_no(account);
-				
-				session.setAttribute("persionalpicnic", persionalpicnic);
+				PicnicService picnicSvc = new PicnicService();
+				List<PicnicVO> list2 = picnicSvc.getByPicnic_Nos(persionalpicnic);
+				session.setAttribute("persionalpicnic", list2);
 				String url = null;
 
 				if (action.equals("persionalpicnic")) {
+					url = uri;
+				}
+				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+				SuccessView.forward(req, res);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		if (action.equals("lookpicnic")) {
+
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			String picnic_no = (String) req.getParameter("Picnic_no");
+		
+
+			try {
+				
+				PicnicService picnicSvc = new PicnicService();
+				PicnicVO picnicVO = picnicSvc.getByPicnic_No(picnic_no);
+				
+				PicmemService picmemSvc = new PicmemService();
+		
+				session.setAttribute("picnicVO", picnicVO);
+				String url = null;
+
+				if (action.equals("lookpicnic")) {
 					url = "/picnicpersionpage/personalpicnic.jsp";
 				}
 				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);

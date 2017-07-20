@@ -44,8 +44,8 @@ public class PicnicService {
 
 	}
 
-	public List<PicnicVO> getByPicnic_No() {
-		return null;
+	public PicnicVO getByPicnic_No(String picnic_no) {
+		return dao.findByPrimaryKey(picnic_no);
 	}
 
 	public List<PicnicVO> getByPicnic_Nos(List<String> list) {

@@ -114,7 +114,7 @@
 					<c:if test="${not empty goods_sellSvc }">
 
 						<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}" >
-							<div class="col-sm-12 ">
+							<div class="col-sm-8 ">
 								<div class="thumbnail">
 									<img
 										src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
