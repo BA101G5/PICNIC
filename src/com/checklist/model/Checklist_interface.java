@@ -33,5 +33,10 @@ public interface Checklist_interface {
 	public List<ChecklistVO> getAllUndone_2();
 	public List<ChecklistVO> getAllUndone_3();
 	public List<ChecklistVO> getAllUndone_4();
-
+//-----------------------------------------------------------------------------
+	public void k_insert(ChecklistVO checklistVO);
+	public void k_update(ChecklistVO checklistVO);
+	public void k_delete(String chli_no);
+	public ChecklistVO k_findByPrimaryKey(String chli_no);
+	public List<ChecklistVO> k_getAll();
 }
