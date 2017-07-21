@@ -72,4 +72,9 @@ public class PlaceService {
 		String p_no = dao.insertone(placeVO);
 		return p_no;
 	}
+	//--------------------------------------------------------------------------------------
+	public PlaceVO k_getOne(String p_no) {
+			return dao.k_findByPrimaryKey(p_no);
+		}
+
 }
