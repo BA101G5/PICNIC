@@ -440,5 +440,12 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 			System.out.println();
 		}
 	}
-
+//-----------------------------------------------------------------------
+	public void k_insert(PicnicVO picnicVO){}
+	public void k_update(PicnicVO picnicVO){}
+	public void k_delete(String picnic_no){}
+	public PicnicVO k_findByPrimaryKey(String picnic_no){return null;}
+	public List<PicnicVO> k_getAll(){return null;}
+	public String k_addPicnic(PicnicVO picnicVO){return null;}
+	public List<PicnicVO> k_get_search_list(String searchWord){return null;}
 }

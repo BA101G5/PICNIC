@@ -18,4 +18,5 @@ public interface GeneralMemberDAO_interface {
     public void k_delete(String MEM_NO);
     public GeneralMemberVO k_findByPrimaryKey(String MEM_NO);
     public List<GeneralMemberVO> k_getAll();
+
 }

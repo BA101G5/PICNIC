@@ -138,7 +138,10 @@ public class ChecklistService {
 	public List<ChecklistVO> getAllUndone_4(){
 		return dao.getAllUndone_4();
 	}
-//-----------------------------------------------------------------
+
+  
+  //-----------------------------------------------------------------
+  
 	public ChecklistVO k_addChecklist(ChecklistVO chVO){
 		ChecklistVO addChVO = chVO;
 		dao.k_insert(addChVO);

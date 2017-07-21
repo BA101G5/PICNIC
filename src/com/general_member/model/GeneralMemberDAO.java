@@ -405,13 +405,16 @@ public class GeneralMemberDAO implements GeneralMemberDAO_interface {
 		}
 		
 	}
+  
 //---------------------------------------------------------------------------
+  
 	private static final String K_INSERT = "INSERT INTO GENERAL_MEMBER(MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_COIN, MEM_STATE,MEM_PHONE,MEM_PBOARD)"
 			+ "VALUES('MG' || LPAD(MEM_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
 	private static final String K_UPDATE = "UPDATE GENERAL_MEMBER SET MEM_NAME=?,MEM_GEN=?,MEM_BIRTH=?, MEM_ADDR=?, MEM_MAIL=? , MEM_PSW=?,MEM_SELF=?,MEM_PIC=?, MEM_COIN=?, MEM_STA=? ,MEM_PHONE=?,MEM_PBOARD=? WHERE MEM_NO=?";
 	private static final String K_DELETE = "UPDATE GENERAL_MEMBER SET MEM_STA='R' WHERE MEM_NO=?";
 	private static final String K_FINDBYKEY = "SELECT MEM_NO, MEM_NAME, MEM_GEN, MEM_BIRTH, MEM_ADDR, MEM_MAIL, MEM_PSW, MEM_SELF ,MEM_PIC,MEM_COIN, MEM_STA,MEM_PHONE,MEM_PBOARD FROM GENERAL_MEMBER WHERE MEM_NO=?";
 	private static final String K_FINDALL = "SELECT * FROM GENERAL_MEMBER Where MEM_STA != 'R'";
+
 
 	@Override
 	public void k_insert(GeneralMemberVO generalmemberVO) {

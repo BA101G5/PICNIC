@@ -21,19 +21,19 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 			"DELETE FROM checklist where chli_no = ?";
 	private static final String UPDATE =
 			"UPDATE checklist set  chli_cate=?, chli_end=?, chli_day=?, chli_pun=?, chli_sta=? where chli_no=?";
-	//·|­û°±Åv
+	//æœƒå“¡åœæ¬Š
 	private static final String UPDATE_MEM =
 			"UPDATE GENERAL_MEMBER set  mem_state = 'D' where mem_no=?";
-	//¼t°Ó°±Åv
+	//å» å•†åœæ¬Š
 	private static final String UPDATE_MF = 
 			"UPDATE MANUFACTURERS set mf_sta = 'D'  where mf_no=?";
-	//°±Åv°Ó®a°Ó«~¤U¬[
+	//åœæ¬Šå•†å®¶å•†å“ä¸‹æ¶
 	private static final String UPDATE_GOODS= "UPDATE GOODS_SELL set GS_STA = 'D' where mf_no=?";
-	//§ä¹Î¥D
+	//æ‰¾åœ˜ä¸»
 		private static final String FIND_IDEM = 
 				"select mem_no from picmem where picmem_iden='A' and picnic_no=?";
 		
-		//§äµo¤å³¹¤H
+		//æ‰¾ç™¼æ–‡ç« äºº
 		private static final String FIND_AF = 
 				"select author_no from forum_article where article_no = ?";
 	
@@ -455,7 +455,7 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 	public static void main(String[] args){
 		ChecklistJDBCDAO dao = new ChecklistJDBCDAO();
 		
-		//·s¼W
+		//æ–°å¢
 //		ChecklistVO checklistVO1 = new ChecklistVO();
 //		checklistVO1.setChli_cate(1);
 //		checklistVO1.setChli_be_num("00001");
@@ -470,7 +470,7 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 //		
 //		dao.insert(checklistVO1);
 		
-		//­×§ï
+		//ä¿®æ”¹
 //		ChecklistVO checklistVO2 = new ChecklistVO();
 //		checklistVO2.setChli_no("00000015");
 //		checklistVO2.setChli_cate(2);
@@ -481,10 +481,10 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 //		
 //		dao.update(checklistVO2);
 		
-		//§R°£
+		//åˆªé™¤
 //		dao.delete("00000015");
 		
-		//³æ¤@¬d¸ß
+		//å–®ä¸€æŸ¥è©¢
 //		ChecklistVO checklistVO3 = dao.findByPrimaryKey("CH00000001");
 //		
 //		System.out.print(checklistVO3.getChli_no()+",");
@@ -500,7 +500,7 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 //		System.out.print(checklistVO3.getChli_sta());
 //		System.out.println("-------------------------------------------");
 		
-		//¬d¸ß©Ò¦³
+		//æŸ¥è©¢æ‰€æœ‰
 //		List<ChecklistVO> list = dao.getAll();
 //		for(ChecklistVO checklistVO : list){
 //			System.out.print(checklistVO.getChli_no()+",");
@@ -640,12 +640,15 @@ public class ChecklistJDBCDAO implements Checklist_interface {
 		// TODO Auto-generated method stub
 		
 	}
-//----------------------------------------------------------------------
+
+  //----------------------------------------------------------------------
+  
 	public void k_insert(ChecklistVO checklistVO){}
 	public void k_update(ChecklistVO checklistVO){}
 	public void k_delete(String chli_no){}
 	public ChecklistVO k_findByPrimaryKey(String chli_no){return null;}
 	public List<ChecklistVO> k_getAll(){return null;}
+
 
 	
 
