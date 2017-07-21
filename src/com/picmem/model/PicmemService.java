@@ -27,6 +27,10 @@ public class PicmemService {
 	public List<PicmemVO> getAll() {
 		return dao.getAll();
 	}
+
+	public List<PicmemVO> getAll(String picnic_no) {
+		return dao.getAll(picnic_no);
+	}
 	
 	public void addowner(String picnic_no, String mem_no) {
 		System.out.println("hello");
@@ -40,5 +44,37 @@ public class PicmemService {
 
 		return dao.findByMem_no(account);
 
+	}
+	//---------------------------------------------------------------
+	public PicmemVO k_addPicmem(PicmemVO picVO) {
+		PicmemVO picmemVO =	picVO;
+		dao.k_insert(picmemVO);
+		return picmemVO;
+	}
+
+	public PicmemVO k_updatePicmem() {
+		return null;
+	}
+
+	public void k_deletePicmem(String picnic_no,String mem_no) {
+		dao.k_delete(picnic_no, mem_no);
+	}
+
+	public PicmemVO k_getOne() {
+		return null;
+	}
+
+	public List<PicmemVO> k_getAll() {
+		return null;
+	}
+	public void k_addowner(String picnic_no,String mem_no){
+		PicmemVO picmemVO =new PicmemVO();
+		picmemVO.setPicnic_no(picnic_no);
+		picmemVO.setMem_no(mem_no);
+		dao.k_insertowner(picmemVO);
+	}
+	//---
+	public List<String> k_getMemPicList(String mem_no){
+		return dao.k_getMemPicList(mem_no);
 	}
 }

@@ -41,9 +41,9 @@ public class PicnicServlet extends HttpServlet {
 				String picnic_name = req.getParameter("name");
 				String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (picnic_name == null || picnic_name.trim().length() == 0) {
-					errorMsgs.put("name", "嚙踝蕭謢塚蕭��蕭���蕭蹌剛�蕭");
+					errorMsgs.put("name", "野餐團名請勿空白");
 				} else if (!picnic_name.trim().matches(nameReg)) {
-					errorMsgs.put("name", "嚙踝蕭謢塚蕭��蕭���蕭蹌哨蕭����陬嚙踝蕭嚙� ���蕭�嚙踝�祗2~70�謅蕭�嚙踝蕭");
+					errorMsgs.put("name", "團名只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 				String address = null;
 				try {
@@ -55,12 +55,12 @@ public class PicnicServlet extends HttpServlet {
 				String addressReg = "^[(\u4e00-\u9fa5)(0-9_)]{6,30}$";
 				if (address == null || address.trim().length() == 0) {
 
-					errorMsgs.put("address", "嚙踐秘嚙踝蕭����蕭蹌剛�蕭");
+					errorMsgs.put("address", "地址請勿空白");
 				} else if (!address.trim().matches(addressReg)) {
 
-					errorMsgs.put("address", "嚙踐秘嚙踝蕭��嚙踝�蕭���蕭嚙踝嚙踝��嚙� ���祗6~15�謅蕭�嚙踝蕭");
+					errorMsgs.put("address", "地址只能是中、英文字母、數字和_ , 且長度必需在 6 到30之間");
 				} else if ((Integer.getInteger(address) != null) || address.substring(1, 2).equals("[^0-9]")) {
-					errorMsgs.put("address", "����蕭���蕭�蝞秘嚙踝蕭");
+					errorMsgs.put("address", "請輸入正確數字");
 				}
 
 				Timestamp picnic_date = null;
@@ -70,17 +70,17 @@ public class PicnicServlet extends HttpServlet {
 					String hour = req.getParameter("hour");
 					picnic_date = java.sql.Timestamp.valueOf(date + hour);
 				} catch (IllegalArgumentException e) {
-					errorMsgs.put("date", "����蕭�嚙踐�蕭嚙踐�蕭�嚙踝蕭");
+					errorMsgs.put("date", "請輸入日期");
 				}
 
 				Integer picnic_pl = null;
 				try {
 					picnic_pl = new Integer(req.getParameter("people").trim());
 					if (picnic_pl < 0) {
-						errorMsgs.put("people", "�蝞賃�����謘蕭謆�");
+						errorMsgs.put("people", "請輸入大於零的數字");
 					}
 				} catch (Exception e) {
-					errorMsgs.put("people", "����蕭�嚙踐�嚙�");
+					errorMsgs.put("people", "請輸入正確的數字");
 				}
 
 				String tladdress = null;
@@ -91,7 +91,7 @@ public class PicnicServlet extends HttpServlet {
 				} else {
 					tladdress = area + address;
 				}
-				System.out.println("hello");
+				
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
 				session.setAttribute("tladdress", tladdress);
@@ -111,7 +111,7 @@ public class PicnicServlet extends HttpServlet {
 				successView.forward(req, res);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				errorMsgs.put("nodata", "嚙踝���蕭謘潘蕭謅蕭�嚙踝蕭:" + e.getMessage());
+				errorMsgs.put("nodata", "沒資料:" + e.getMessage());
 				javax.servlet.RequestDispatcher failureView = req.getRequestDispatcher("/picnic/maosecondui.jsp");
 				failureView.forward(req, res);
 			}

@@ -59,4 +59,9 @@ AdvertisementVO aVO = new AdvertisementVO();
 	public List<AdvertisementVO> getForMM(String MF_NO) {
 		return dao.findByMM(MF_NO);
 	}
+
+	public AdvertisementVO updateSTA(String aD_NO, Character aD_STA) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

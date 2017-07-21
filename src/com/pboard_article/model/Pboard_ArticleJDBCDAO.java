@@ -255,7 +255,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 	}
 
 	@Override
-	public List<Pboard_ArticleVO> getAllwP(String picnic_no) {
+	public List<Pboard_ArticleVO> getAll(String picnic_no) {
 		// TODO Auto-generated method stub
 		List<Pboard_ArticleVO> list = new ArrayList<Pboard_ArticleVO>();
 		Pboard_ArticleVO pboardArticleVO = null;
@@ -466,7 +466,7 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 //		}
 
 		// ¬d¸ß ¥þ³¡
-				List<Pboard_ArticleVO> list2 = dao.getAllwP("PG00000001");
+				List<Pboard_ArticleVO> list2 = dao.getAll("PG00000001");
 				for (Pboard_ArticleVO aEmp : list2) {
 					System.out.print(aEmp.getArticle_no() + ",");
 					System.out.print(aEmp.getTopic_no() + ",");
@@ -483,4 +483,8 @@ public class Pboard_ArticleJDBCDAO implements Pboard_ArticleDAO_interface {
 				}
 			
 	}
+	//--------------------------------------------------------------
+	public List<Pboard_ArticleVO> k_research(String search_string){return null;}
+	public String k_get_search_name(String article_no){return null;}
+
 }
