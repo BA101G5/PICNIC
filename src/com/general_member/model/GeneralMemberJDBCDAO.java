@@ -350,5 +350,10 @@ public class GeneralMemberJDBCDAO implements GeneralMemberDAO_interface {
 		// TODO Auto-generated method stub
 		
 	}
-
+//-------------------------------------------------------
+	public void k_insert(GeneralMemberVO generalmemberVO){}
+    public void k_update(GeneralMemberVO generalmemberVO){}
+    public void k_delete(String MEM_NO){}
+    public GeneralMemberVO k_findByPrimaryKey(String MEM_NO){return null;}
+    public List<GeneralMemberVO> k_getAll(){return null;}
 }
