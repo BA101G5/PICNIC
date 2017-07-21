@@ -509,6 +509,11 @@ public class Goods_SellJDBCDAO implements Goods_SellDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+//------------------------------------------------------------------------------
+	public void k_insert(Goods_SellVO goods_sellVO){}
+	public void k_update(Goods_SellVO goods_sellVO){}
+	public void k_delete(String gs_no){}
+	public Goods_SellVO k_findByPrimaryKey(String gs_no){return null;}
+	public List<Goods_SellVO> k_getAll(){return null;}
 	}
 
