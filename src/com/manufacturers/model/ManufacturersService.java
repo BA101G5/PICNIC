@@ -84,6 +84,12 @@ public class ManufacturersService {
 		
 		return dao.findByMfName(mf_name);
 	}
+  
+	public void updateManufacturers(ManufacturersVO ma_detail) {
+		// TODO Auto-generated method stub
+	}
+	
+	
 	//------------------------------------------------------
 	public ManufacturersVO k_addManufacturers(String MF_NO, String MF_NAME, String MF_PHONE, String MF_MAIL,
 			String MF_ACCO, String MF_PSW, byte[] MF_LOGO, String MF_SELF, String MF_BS, String MF_ADDR,

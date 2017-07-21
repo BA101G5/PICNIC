@@ -66,7 +66,7 @@ public class man_men_data extends HttpServlet{
 			List<String> staList = new ArrayList<String>();
 			List<String> pboList = new ArrayList<String>();
 			for(GeneralMemberVO meVO : memList){
-				staList.add(sta_convert(meVO.getMEM_STATE()));
+				staList.add(sta_convert(meVO.getMEM_STA()));
 				pboList.add(pbo_convert(meVO.getMEM_PBOARD()));
 			}
 			
@@ -101,7 +101,7 @@ public class man_men_data extends HttpServlet{
 				GeneralMemberService gmS =new GeneralMemberService();
 				GeneralMemberVO gm_detail = gmS.getOneGeneralMember(argu);
 				
-				String sta = sta_convert(gm_detail.getMEM_STATE());
+				String sta = sta_convert(gm_detail.getMEM_STA());
 				String pbo = pbo_convert(gm_detail.getMEM_PBOARD());
 				String picPath = req.getContextPath()+getPicPath(gm_detail.getMEM_PIC(),gm_detail.getMEM_NO());
 				req.setAttribute("picPath", picPath);
@@ -158,10 +158,10 @@ public class man_men_data extends HttpServlet{
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
 				GeneralMemberService gmS =new GeneralMemberService();
 				GeneralMemberVO gm_detail = gmS.getOneGeneralMember(req.getParameter("MF_NO"));
-				gm_detail.setMEM_STATE('A');
+				gm_detail.setMEM_STA('A');
 				gmS.updateGeneralMember(gm_detail);
 				
-				String sta = sta_convert(gm_detail.getMEM_STATE());
+				String sta = sta_convert(gm_detail.getMEM_STA());
 				String pbo = pbo_convert(gm_detail.getMEM_PBOARD());
 				String picPath = req.getContextPath()+getPicPath(gm_detail.getMEM_PIC(),gm_detail.getMEM_NO());
 				req.setAttribute("picPath", picPath);
@@ -200,10 +200,10 @@ public class man_men_data extends HttpServlet{
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
 				GeneralMemberService gmS =new GeneralMemberService();
 				GeneralMemberVO gm_detail = gmS.getOneGeneralMember(req.getParameter("MF_NO"));
-				gm_detail.setMEM_STATE('D');
+				gm_detail.setMEM_STA('D');
 				gmS.updateGeneralMember(gm_detail);
 				
-				String sta = sta_convert(gm_detail.getMEM_STATE());
+				String sta = sta_convert(gm_detail.getMEM_STA());
 				String pbo = pbo_convert(gm_detail.getMEM_PBOARD());
 				String picPath = req.getContextPath()+getPicPath(gm_detail.getMEM_PIC(),gm_detail.getMEM_NO());
 				req.setAttribute("picPath", picPath);
@@ -248,7 +248,7 @@ public class man_men_data extends HttpServlet{
 				List<String> staList = new ArrayList<String>();
 				List<String> pboList = new ArrayList<String>();
 				for(GeneralMemberVO meVO : memList){
-					staList.add(sta_convert(meVO.getMEM_STATE()));
+					staList.add(sta_convert(meVO.getMEM_STA()));
 					pboList.add(pbo_convert(meVO.getMEM_PBOARD()));
 				}
 				
@@ -310,7 +310,7 @@ public class man_men_data extends HttpServlet{
 					}	
 					
 					gmS.updateGeneralMember(gmVO);
-					String sta = sta_convert(gmVO.getMEM_STATE());
+					String sta = sta_convert(gmVO.getMEM_STA());
 					String pbo = pbo_convert(gmVO.getMEM_PBOARD());
 					String picPath = req.getContextPath()+getPicPath(gmVO.getMEM_PIC(),gmVO.getMEM_NO());
 					req.setAttribute("picPath", picPath);

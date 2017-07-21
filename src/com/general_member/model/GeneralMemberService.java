@@ -87,6 +87,14 @@ public class GeneralMemberService {
 		dao.updateforSTA(gVO);
 
 	}
+
+	
+
+	public void updateGeneralMember(GeneralMemberVO gm_detail) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 //-----------------------------------------------------------------------------------
 	public GeneralMemberVO k_addGeneralMember(String MEM_NO, String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
 			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
@@ -133,12 +141,18 @@ public class GeneralMemberService {
 		return gVO;
 	}
 	
+
+		
+
+
+
+
 	public GeneralMemberVO k_updateGeneralMember(GeneralMemberVO gmVO){
 		GeneralMemberVO gVO = new GeneralMemberVO();
 		dao.k_update(gmVO);
 		return gVO;
 	}
-		
+
 	public void k_deleteGeneralMember(String MEM_NO) {
 		dao.k_delete(MEM_NO);
 	}
@@ -146,7 +160,7 @@ public class GeneralMemberService {
 	public GeneralMemberVO k_getOneGeneralMember(String MEM_NO) {
 		return dao.k_findByPrimaryKey(MEM_NO);
 	}
-
+	
 	public List<GeneralMemberVO> k_getAll() {
 		return dao.k_getAll();
 	}

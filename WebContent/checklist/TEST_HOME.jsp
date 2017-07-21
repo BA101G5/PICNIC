@@ -55,7 +55,7 @@
 		<div class="col-sm-1" style="background-color: #8bdddd;height: 150px"></div>
 			<div class="col-sm-10 " style="background-color: #8bdddd">
 				<div class="navbar-header " >
-					<img class="navbar-brand navbar-left" src="野餐LOGO.png" style="height: 150px ">
+					<img class="navbar-brand navbar-left" src="LOGO.png" style="height: 150px ">
 
 				</div>
 				<div style="font-size: 70px; text-align: center; padding-top: 20px;  "><font style="color: #000000">野太美後台管理系統</font>
