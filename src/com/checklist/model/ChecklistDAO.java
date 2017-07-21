@@ -19,7 +19,7 @@ public class ChecklistDAO implements Checklist_interface {
 	static{
 		try{
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA101G5");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ba101_5");
 		}catch (NamingException e){
 			e.printStackTrace();
 		}

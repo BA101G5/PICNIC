@@ -84,4 +84,9 @@ public class ManufacturersService {
 		
 		return dao.findByMfName(mf_name);
 	}
+
+	public void updateManufacturers(ManufacturersVO ma_detail) {
+		// TODO Auto-generated method stub
+		
+	}
 }

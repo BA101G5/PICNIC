@@ -88,4 +88,10 @@ public class GeneralMemberService {
 
 	}
 
+
+	public void updateGeneralMember(GeneralMemberVO gm_detail) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
