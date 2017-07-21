@@ -13,5 +13,10 @@ public interface ManufacturersDAO_interface {
     public List<ManufacturersVO> getAll();
     public void updateforSTA(ManufacturersVO ManufacturersVO);
 	public String findByMfName(String mf_name);
-	
+	//------------------------------------------------------
+	public void k_insert(ManufacturersVO MANUFACTURERSVO);
+    public void k_update(ManufacturersVO MANUFACTURERSVO);
+    public void k_delete(String MF_NO);
+    public ManufacturersVO k_findByPrimaryKey(String MF_NO);
+    public List<ManufacturersVO> k_getAll();
 }
