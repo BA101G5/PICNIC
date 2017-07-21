@@ -18,6 +18,8 @@
 	%>
 
 </c:if>
+<jsp:useBean id="Goods_sellSvc" scope="page"
+	class="com.goods_sell.controller.Goods_SellServlet"></jsp:useBean>
 <script type="text/javascript">
 	var grcount = 0;
 	var gscount = 0;
@@ -160,11 +162,18 @@
 						<form method="POST" id="myForm"
 							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 							<select name="picnic" id="input" class="form-control"
-								required="required" onchange="submit()">	
+								required="required" onchange="submit()">
 								<c:forEach var="PicnicVO" items="${ListPicnicVO}">
-									<c:if test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}"><option value="${PicnicVO.getPicnic_no()} " selected >${PicnicVO.getPicnic_name()}</option></c:if>
-									<c:if test="${PicnicVO.getPicnic_no() != sessionScope.picnic_no}"><option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option></c:if>
-										<c:if test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}"></c:if>>${PicnicVO.getPicnic_name()}</option>
+									<c:if
+										test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}">
+										<option value="${PicnicVO.getPicnic_no()} " selected>${PicnicVO.getPicnic_name()}</option>
+									</c:if>
+									<c:if
+										test="${PicnicVO.getPicnic_no() != sessionScope.picnic_no}">
+										<option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option>
+									</c:if>
+									<c:if
+										test="${PicnicVO.getPicnic_no() == sessionScope.picnic_no}"></c:if>>${PicnicVO.getPicnic_name()}</option>
 								</c:forEach>
 							</select> <input type="hidden" name="action" value="get_gr_no">
 
@@ -188,8 +197,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="Orderde_DetailVO"
-										items="${listGr}">
+									<c:forEach var="Orderde_DetailVO" items="${listGr}">
 										<c:if test="${Orderde_DetailVO.getGr_no() == null}">
 											<tr>
 												<td>${Orderde_DetailVO.getOd_place()}<input
@@ -218,16 +226,16 @@
 												<th>计秖</th>
 												<th>虫基</th>
 												<th>璸</th>
-												<th><th>
-											
+												<th>
+												<th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 											</tr>
 
-											<c:forEach var="Orderde_DetailVO"
-												items="${listGr}" varStatus="loop">
+											<c:forEach var="Orderde_DetailVO" items="${listGr}"
+												varStatus="loop">
 												<c:if test="${Orderde_DetailVO.getGr_no() != null }">
 													<tr>
 														<td>${Orderde_DetailVO.getGr_no()}</td>
@@ -243,7 +251,6 @@
 															class="btn btn-default" role="button"
 															onmouseOver="window.status='none'return true"></a></td>
 														<td>
-													
 													</tr>
 												</c:if>
 											</c:forEach>
@@ -264,9 +271,7 @@
 												<td></td>
 												<td></td>
 												<td class="lc">NT$ 0</td>
-											
 											<tr>
-										
 										</tbody>
 									</table>
 
@@ -274,7 +279,7 @@
 							</c:forEach>
 						</c:if>
 
-							<c:if test="${not empty listGs }"> 	
+						<c:if test="${not empty listGs }">
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -285,15 +290,18 @@
 										<th>计秖</th>
 										<th>虫基</th>
 										<th>璸</th>
-										<th>			
-										<th>				
+										<th>
+										<th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody><tr>
 									<c:forEach var="Orderde_DetailVO" items="${listGs}"
 										varStatus="loop">
 										<tr>
-											<td>${Orderde_DetailVO.getGs_no()}</td>
+											<c:forEach var="Goods_SellVO"
+												items="${Goods_SellSvc.All}">
+												<c:if test="${Goods_SellVO.getGs_no()==Orderde_DetailVO.getGs_no()}"><td>${Goods_SellVO.getGs_name()}</td></c:if>
+											</c:forEach>
 											<td><input type="number" class="gsnumber"
 												id="gs${loop.index}"
 												name="${Orderde_DetailVO.getOrderde_detailno()}amount"
@@ -303,10 +311,11 @@
 											<td><a
 												href="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?action=delete&delete=${Orderde_DetailVO.getOrderde_detailno()}"
 												class="btn btn-default" role="button"
-												onmouseOver="window.status='none'return true"></a>			
-											<td>				
-										</tr>
+												onmouseOver="window.status='none'return true"></a>
+											<td>
+										
 									</c:forEach>
+									</tr>
 									<tr>
 										<th></th>
 										<th></th>
@@ -369,9 +378,9 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="col-sm-8 col-sm-push-4">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div>
-	</body>
+</body>
 </html>

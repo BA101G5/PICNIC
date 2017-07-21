@@ -14,9 +14,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
-
-<title>Title Page</title>
-
+<title></title>
 <style>
 .form-group {
 	text-align: left;
@@ -43,7 +41,7 @@ h3 {
 body {
 	font-size: 13px;
 	color: #333;
-	font-family: "·L³n¥¿¶ÂÅé", Arial, sans-serif;
+	font-family: "å¾®è»Ÿæ­£é»‘é«”", Arial, sans-serif;
 }
 
 form {
@@ -111,7 +109,7 @@ textarea {
 
 <jsp:include page="/mustinclude/top_nav.jsp" />
 
-	<!-- ªí³æ -->
+	<!-- è¡¨å–® -->
 
 	<form METHOD="post" ACTION="<%=request.getContextPath() %>/advertisement/advertisement.do" name="form1"
 		enctype="multipart/form-data">
@@ -121,13 +119,13 @@ textarea {
 					
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title title">¼s§iÁÊ¶R¸ê®Æ</h3>
+							<h3 class="panel-title title">å»£å‘Šè³¼è²·è³‡æ–™</h3>
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item bb">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">¼s§i·Ó¤ù</label>
+										<label for="aa" class="control-label">å»£å‘Šç…§ç‰‡</label>
 									</div>
 									<div class="col-xs-12 col-sm-4">
 										<input type="file" name="AD_PHOTO" size="45" class="upl"
@@ -144,7 +142,7 @@ textarea {
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">¶}©l¤é´Á</label>
+										<label for="aa" class="control-label">é–‹å§‹æ—¥æœŸ</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="DAY_START" id="datepicker"
@@ -159,7 +157,7 @@ textarea {
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">µ²§ô¤é´Á</label>
+										<label for="aa" class="control-label">çµæŸæ—¥æœŸ</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<input type="text" name="DAY_END" id="datepicker3"
@@ -174,11 +172,11 @@ textarea {
 							<li class="list-group-item cc">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">¼s§i¤¶²Ğ</label>
+										<label for="aa" class="control-label">å»£å‘Šä»‹ç´¹</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
 										<textarea name="AD_SELF" rows="7" cols="50" id="AD_SELF"
-											value="<%=(ADVO == null) ? "¼s§i" : ADVO.getAD_SELF()%>" />
+											value="<%=(ADVO == null) ? "å»£å‘Š" : ADVO.getAD_SELF()%>" />
 										</textarea><font color='red' id="SELF"><b></b></font>
 										<c:if test="${not empty errorMsgs}">
 											<font color='red'><b>${errorMsgs.AD_SELF}</b></font>
@@ -192,7 +190,7 @@ textarea {
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">ª÷ÃB</label>
+										<label for="aa" class="control-label">é‡‘é¡</label>
 									</div>
 									<div class="col-xs-12 col-sm-8" id="AD_CASH">
 										
@@ -203,10 +201,10 @@ textarea {
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">
-										<label for="aa" class="control-label">ÅçÃÒ½X</label>
+										<label for="aa" class="control-label">é©—è­‰ç¢¼</label>
 									</div>
 									<div class="col-xs-12 col-sm-4">
-										<input type="text" name="aa" id="aa" placeholder="½Ğ¿é¤J¥k¤èÅçÃÒ½X">
+										<input type="text" name="aa" id="aa" placeholder="è«‹è¼¸å…¥å³æ–¹é©—è­‰ç¢¼">
 										<font color='red' id="number"><b></b></font>
 									</div>
 									<div class="col-xs-12 col-sm-2">
@@ -223,7 +221,7 @@ textarea {
 
 					<!-- button -->
 					<p class="text-center">
-						<input type="button" value="·s¼W" id="btn">
+						<input type="button" value="æ–°å¢" id="btn">
 					</p>
 
 				</div>
@@ -235,7 +233,7 @@ textarea {
 		<input type="hidden" name="action" value="insert">
 
 	</form>
-	<!-- ¤ë¾ä & Åã¥Ü¹Ï¤ù -->
+	<!-- æœˆæ›† & é¡¯ç¤ºåœ–ç‰‡ -->
 	<script>
 	$("#datepicker").datepicker({
 		changeMonth : true,
@@ -288,9 +286,9 @@ textarea {
 	}
 	function Date_substr()
 	{
-	//©w¸q°_©l ¦~¤ë¤é
+	//å®šç¾©èµ·å§‹ å¹´æœˆæ—¥
 	    var StartDate=document.getElementById("datepicker").value;
-	//©w¸qµ²§ô ¦~¤ë¤é
+	//å®šç¾©çµæŸ å¹´æœˆæ—¥
 	    var EndDate=document.getElementById("datepicker3").value;
 
 
@@ -303,7 +301,7 @@ document.getElementsByClassName("list-group-item")[3].addEventListener('mouseove
 </script>
 
 <script>
-		//²£¥ÍÅçÃÒ½X
+		//ç”¢ç”Ÿé©—è­‰ç¢¼
 		var x = new Array(4);
 		for (var i = 0; i < x.length; i++) {
 			x[i] = Math.floor(Math.random() * 10);
@@ -322,25 +320,25 @@ document.getElementsByClassName("list-group-item")[3].addEventListener('mouseove
 					break;
 				}
 			}
-			<!-- ÅçÃÒ -->			
+			<!-- é©—è­‰ -->			
 			if(document.getElementById('datepicker').value == ''){
 				document.getElementById('datepicker').focus();
 				document.getElementById('datepicker').select();
-					document.getElementById('START').innerText="*½Ğ¿é¤J¶}©l¤é´Á"; 
+					document.getElementById('START').innerText="*è«‹è¼¸å…¥é–‹å§‹æ—¥æœŸ"; 
 			}else if(document.getElementById('datepicker3').value == ''){
 				document.getElementById('datepicker3').focus();
 				document.getElementById('datepicker3').select();
-					document.getElementById('END').innerText="*½Ğ¿é¤Jµ²§ô¤é´Á"; 
+					document.getElementById('END').innerText="*è«‹è¼¸å…¥çµæŸæ—¥æœŸ"; 
 			}
 			else if(document.getElementById('AD_SELF').value == ''){
 				document.getElementById('AD_SELF').focus();
 					document.getElementById('AD_SELF').select();
-					document.getElementById('SELF').innerText="*½Ğ¿é¤J¦Û§Ú¤¶²Ğ"; 
+					document.getElementById('SELF').innerText="*è«‹è¼¸å…¥è‡ªæˆ‘ä»‹ç´¹"; 
 			}else if (!b) {
 					
 					document.getElementById('aa').focus();
 					document.getElementById('aa').select();
-					document.getElementById('number').innerText = "*½Ğ¿é¤J¥¿½T";
+					document.getElementById('number').innerText = "*è«‹è¼¸å…¥æ­£ç¢º";
 				} else {
 					 
 					form1.submit();
