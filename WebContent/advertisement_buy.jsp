@@ -14,9 +14,20 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
-
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <title>Title Page</title>
 
+
+
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<!--[if lt IE 9]>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
 <style>
 .form-group {
 	text-align: left;
@@ -351,5 +362,9 @@ document.getElementsByClassName("list-group-item")[3].addEventListener('mouseove
 
 		document.getElementById("btn").onclick = add;
 	</script>
+	
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

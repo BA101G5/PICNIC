@@ -359,5 +359,11 @@ public class ManufacturersJDBCDAO implements ManufacturersDAO_interface {
 		
 	}
 
+	@Override
+	public String findByMfName(String mf_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
