@@ -87,7 +87,7 @@ public class GeneralMemberService {
 		dao.updateforSTA(gVO);
 
 	}
-//--------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
 	public GeneralMemberVO k_addGeneralMember(String MEM_NO, String MEM_NAME, Character MEM_GEN, Date MEM_BIRTH,
 			String MEM_ADDR, String MEM_MAIL, String MEM_PSW, String MEM_SELF, byte[] MEM_PIC, Integer MEM_COIN,
 			Character MEM_STATE, String MEM_PHONE, Character MEM_PBOARD) {

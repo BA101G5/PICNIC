@@ -42,28 +42,28 @@ public class ChecklistDAO implements Checklist_interface {
 			"UPDATE MANUFACTURERS set mf_sta = 'D'  where mf_no=?";
 	private static final String UPDATE_GOODS= 
 			"UPDATE GOODS_SELL set GS_STA = 'D' where mf_no=?";
-	//¤U¬[³æ¦V°Ó«~
+	//ä¸‹æ¶å–®å‘å•†å“
 	private static final String UPDATE_GOODS_ONE= 
 			"UPDATE GOODS_SELL set GS_STA = 'D' where gs_no=?";
 	
-	//§ä¹Î¥D
+	//æ‰¾åœ˜ä¸»
 	private static final String FIND_IDEM = 
 			"select mem_no from picmem where picmem_iden='A' and picnic_no=?";
-	//«ÊÂê³¥À\¹Î
+	//å°é–é‡é¤åœ˜
 	private static final String BLOCKADE_PICNIC = 
 			"update picnic set picnic_sta = 'B' where picnic_no = ?";
 	
-	//§äµo¤å³¹¤H
+	//æ‰¾ç™¼æ–‡ç« äºº
 	private static final String FIND_AF = 
 			"select author_no from forum_article where article_no = ?";
-	//§R¤å³¹
+	//åˆªæ–‡ç« 
 	private static final String SELETE_AF = 
 			"delete from forum_article where article_no = ?";
 	
-	//§ä¯d¨¥¤H
+	//æ‰¾ç•™è¨€äºº
 	private static final String FIND_AB = 
 				"select author_no from pboard_article where article_no = ?";
-	//§R¯d¨¥
+	//åˆªç•™è¨€
 	private static final String SELETE_AB = 
 				"delete from pboard_article_article where article_no = ?";
 	
@@ -1230,7 +1230,9 @@ public class ChecklistDAO implements Checklist_interface {
 			}
 		}
 	}
-	//--------------------------------------------------------------
+
+  //--------------------------------------------------------------
+  
 	private static final String K_INSERT_STMT =
 			"INSERT INTO checklist (chli_no, chli_cate, chli_be_num, chli_memno, chli_start, chli_end, chli_day, chli_pun, chli_reason, chli_date, chli_sta) VALUES ('CH' || LPAD(CHLI_NO_SQ.NEXTVAL, 8, '0'),?,?,?,?,?,?,?,?,?,?)";
 	private static final String K_GET_ALL_STMT =
