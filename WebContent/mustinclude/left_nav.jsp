@@ -1,48 +1,82 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.general_member.model.*"%>
+<%@ page import="com.manufacturers.model.*"%>
 <%
-	List<String> list = (List<String>) session.getAttribute("persionalpicnic");
-	pageContext.setAttribute("list", list);
-	System.out.println(list);
-%>
+	List<String> persionalpicnic = (List<String>) session.getAttribute("persionalpicnic");
+	pageContext.setAttribute("persionalpicnic", persionalpicnic);
 
+	String accountName = "訪客";
+	String name = "登入";
+	GeneralMemberVO gmVO = (GeneralMemberVO) session.getAttribute("gVO");
+	ManufacturersVO mVO = (ManufacturersVO) session.getAttribute("mVO");
+	if (gmVO != null) {
+		accountName = gmVO.getMEM_NAME();
+		name = "登出";
+	}
+	if (mVO != null) {
+		accountName = mVO.getMF_NAME();
+		name = "登出";
+	}
+%>
 <div id="left-navigation-bar">
 	<ul class="bs-glyphicons-list">
-		<li title=""><span class="glyphicon glyphicon-user"></span></li>
-		<li title=""><span class="glyphicon glyphicon-envelope"></span></li>
-		<li title=""><form method="post"
-				action="<%=request.getContextPath()%>/picnic/picnic.do"
-				onclick="submit()">
-				<span class="glyphicon glyphicon-question-sign"></span> <input
-					type="hidden" name="uri" value="<%=request.getRequestURI()%>">
-				<input type="hidden" name="action" value="persionalpicnic">
-			</form>
+		<li title="member">
+			<%
+				if (gmVO != null || mVO != null) {
+			%> <a href="<%=request.getContextPath()%>/personal/personal.jsp"><span
+				class="glyphicon glyphicon-user"></span></a> <%
+ 	} else {
+ %><a href="<%=request.getContextPath()%>/login/logout.do"><span
+				class="glyphicon glyphicon-user"></span></a> <%
+ 	}
+ %>
+		</li>
+
+		<li title="Picnic">
 			<div class="panel-group">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" href="#collapse1">Hello </a>
-						</h4>
+						<h3 class="panel-title">
+
+							<form method="post"
+								action="<%=request.getContextPath()%>/picnic/picnic.do"
+								onclick="submit()">
+								<a data-toggle="collapse" href=""><span
+									class="glyphicon glyphicon-star"></span> </a> <input type="hidden"
+									name="uri" value="<%=request.getRequestURI()%>"> <input
+									type="hidden" name="action" value="persionalpicnic">
+							</form>
+
+						</h3>
 					</div>
 					<div id="collapse1" class="panel-collapse collapse">
-						<c:if test="${not empty pageScope.list }">
-							<c:forEach var="PicnicVO" items="${list}">
-								<div class="panel-body">${PicnicVO.getPicnic_name()}</div>
-								<form method="post"
-									action="<%=request.getContextPath()%>/picnic/picnic.do"
-									onclick="submit()">
-									<span class="glyphicon glyphicon-question-sign"></span> <input
-										type="hidden" name="Picnic_no"
-										value="${PicnicVO.getPicnic_no()}"> <input
-										type="hidden" name="action" value="lookpicnic">
-								</form>
+						<c:if test="${not empty persionalpicnic }">
+							<c:forEach var="PicnicVO" items="${persionalpicnic}">
+								
+										<div class="panel-body">${PicnicVO.getPicnic_name()}</div>
+										<form method="post"
+										action="<%=request.getContextPath()%>/picnic/picnic.do"
+										onclick="submit()">
+										<input type="hidden" name="Picnic_no"
+											value="${PicnicVO.getPicnic_no()}"> <input
+											type="hidden" name="action" value="lookpicnic">
+									</form>
 							</c:forEach>
 						</c:if>
-
 					</div>
 				</div>
-			</div></li>
+			</div>
+		</li>
+		<li title="cart">
+			<form method="POST"
+				action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?"
+				onclick="submit()">
+				<span class="glyphicon glyphicon-shopping-cart"></span> <input
+					type="hidden" name="action" value="insert">
+			</form>
+		</li>
 
-		<ul>
+	</ul>
 </div>

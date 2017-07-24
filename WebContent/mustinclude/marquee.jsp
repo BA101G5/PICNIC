@@ -14,7 +14,7 @@
 %>
 
 <div class="container-fulid">
-	<div class="row">
+	<div class="row" style="margin-right: 0px;">
 		<div class=" col-sm-8 col-sm-push-2">
 			<div class="alert alert-success">
 				<button type="button" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" class="close" data-dismiss="alert"><span aria-hidden="true">กั</span><span class="sr-only">Close</span></button>

@@ -191,7 +191,6 @@ public class Goods_SellServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-
 		if (action.equals("selectByMfype")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
