@@ -29,7 +29,7 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 	private static final String GET_ONE_STMT = " select ORDERDE_DETAILNO,MEM_NO,PICNIC_NO,P_NO,GR_NO,GS_NO,OD_AMOUNT,OD_PRICE,OD_DELIVER,OD_PLACE,OD_BS  from ORDERDE_DETAIL where ORDERDE_DETAILNO = ? ";
 	private static final String DELETE_STMT = " delete from ORDERDE_DETAIL where ORDERDE_DETAILNO =? ";
 	private static final String UPDATE_STMT = " update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,GS_NO= ?,OD_AMOUNT =?,OD_PRICE =?,OD_DELIVER = ?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
-	private static final String GET_GR_PICNICNO_STMT = "select * from ORDERDE_DETAIL where PICNIC_NO= ? ";
+	private static final String GET_GR_PICNICNO_STMT = "select * from ORDERDE_DETAIL where PICNIC_NO=? AND OD_BS IS NULL";
 	private static final String GET_GS_MEMNO_STMT = " select * from ORDERDE_DETAIL WHERE MEM_NO = ? AND GS_NO IS NOT NULL ORDER BY ORDERDE_DETAILNO";
 	private String UPDATE_STMT_PL = "update ORDERDE_DETAIL set MEM_NO=?, PICNIC_NO = ?,P_NO = ?,OD_AMOUNT =?,OD_PRICE =?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
 	private String UPDATE_STMT_GR = "update ORDERDE_DETAIL set OD_AMOUNT =?,OD_PRICE =?,OD_PLACE=?,OD_BS =? where ORDERDE_DETAILNO = ?";
@@ -277,8 +277,10 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_GR_PICNICNO_STMT);
 			pstmt.setString(1, picnic_no);
+			System.out.println("hello");
+			System.out.println(picnic_no);
 			rs = pstmt.executeQuery();
-
+			System.out.println("hello");
 			while (rs.next()) {
 				Orderde_DetailVO orderde_detailVO = new Orderde_DetailVO();
 				orderde_detailVO.setOrderde_detailno(rs.getString("ORDERDE_DETAILNO"));
@@ -292,9 +294,9 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				orderde_detailVO.setOd_deliver(rs.getTimestamp("OD_DELIVER"));
 				orderde_detailVO.setOd_place(rs.getString("OD_PLACE"));
 				orderde_detailVO.setOd_bs(rs.getString("OD_BS"));
-
+				System.out.println("hello");
 				list.add(orderde_detailVO);
-
+				System.out.println("hello");
 			}
 
 		} catch (SQLException se) {
@@ -404,8 +406,10 @@ public class Orderde_DetailDAO implements Orderde_DetailDAO_interface {
 				pstmt.setInt(5, orderde_detailVO.getOd_amount());
 				pstmt.setInt(6, orderde_detailVO.getOd_price());
 				pstmt.setString(7, orderde_detailVO.getOd_place());
+				System.out.println(orderde_detailVO.getOd_place());
 				pstmt.setString(8, "F");
 				pstmt.setString(9, orderde_detailVO.getOrderde_detailno());
+			
 				pstmt.executeUpdate();
 			}
 			try {

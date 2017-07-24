@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,14 +36,37 @@ public class Orderde_detailServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
-		System.out.println(action);
+		if (action.equals("get_gr_no")) {
+
+			String picnic_no = req.getParameter("picnic_no").trim();
+			try {
+
+				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
+				System.out.println(list);
+				if (!list.isEmpty()) {
+					req.setAttribute("picnic_no", picnic_no);
+					req.setAttribute("listOrderde_DetailVO", list);
+				}
+
+				String url = null;
+				if (action.equals("get_gr_no")) {
+					url = "/finishorder/finishorder1.jsp";
+
+				}
+				RequestDispatcher SuccessView = req.getRequestDispatcher(url);
+				SuccessView.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		if (action.equals("insert")) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
-				String account = gVO.getMEM_NO();
+				String account = gVO.getMEM_NO().trim();
 				System.out.println(account);
 
 				PicmemService picmemSvc = new PicmemService();
@@ -69,29 +93,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			}
 
 		}
-		if (action.equals("get_gr_no")) {
 
-			try {
-				String picnic_no = req.getParameter("picnic");
-
-				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
-
-				if (!list.isEmpty()) {
-					session.setAttribute("listOrderde_DetailVO", list);
-				}
-				session.setAttribute("picnic_no", picnic_no);
-				String url = null;
-				if (action.equals("get_gr_no")) {
-					url = "/finishorder/finishorder1.jsp";
-
-				}
-				RequestDispatcher SuccessView = req.getRequestDispatcher(url);
-				SuccessView.forward(req, res);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 		if (action.equals("insertintocartA") || action.equals("insertintocartB") || action.equals("insertintocartC")) {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -169,13 +171,15 @@ public class Orderde_detailServlet extends HttpServlet {
 		if (action.equals("finishorder")) {
 			GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
 			String account = gVO.getMEM_NO();
-			String picnic_no = ((String) session.getAttribute("picnic_no")).trim();
+			String picnic_no = req.getParameter("picnic_no").trim();
 			System.out.println(picnic_no);
-			// String address = req.getParameter("address").trim();
-			// System.out.println(address);
-			List<Orderde_DetailVO> listGr = (List<Orderde_DetailVO>) session.getAttribute("listGr");
-			List<Orderde_DetailVO> listGs = (List<Orderde_DetailVO>) session.getAttribute("listGs");
-
+			String address = req.getParameter("address").trim();
+			System.out.println(address);
+			Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
+			List<Orderde_DetailVO> listGr = orderde_detailSvc.getAllPICNICNO(picnic_no);
+			List<Orderde_DetailVO> listGs = ((List<Orderde_DetailVO>) session.getAttribute("listGs"));
+			System.out.println(listGr);
+			Integer tlprice=0;
 			try {
 				if (!listGr.isEmpty()) {
 					for (Orderde_DetailVO orderde_detailVO : listGr) {
@@ -185,40 +189,46 @@ public class Orderde_detailServlet extends HttpServlet {
 						price = price / preamount;
 						Integer amount = Integer.valueOf(
 								req.getParameter(orderde_detailVO.getOrderde_detailno().toString() + "amount"));
+						price = amount * price;
 						orderde_detailVO.setOd_price(price);
 						System.out.println(orderde_detailVO.getOd_price());
 						orderde_detailVO.setOd_amount(amount);
 						System.out.println(orderde_detailVO.getOd_amount());
 						orderde_detailVO.setPicnic_no(picnic_no);
 						System.out.println(orderde_detailVO.getPicnic_no());
-						orderde_detailVO.setOd_place("       ");
-						;
+						orderde_detailVO.setOd_place(address);
+						System.out.println(address);
+						tlprice=tlprice+price;
+						System.out.println(tlprice+"2");
 					}
 				}
 			} catch (Exception e) {
 			}
+			try {
+				if (!listGs.isEmpty()) {
+					for (Orderde_DetailVO orderde_detailVO : listGs) {
+						Integer preamount = orderde_detailVO.getOd_amount();
+						Integer price = orderde_detailVO.getOd_price();
+						price = price / preamount;
+						Integer amount = Integer.valueOf(
+								req.getParameter(orderde_detailVO.getOrderde_detailno().toString() + "amount"));
+						price = amount * price;
+						orderde_detailVO.setOd_price(price);
+						orderde_detailVO.setOd_amount(amount);
+						orderde_detailVO.setPicnic_no(picnic_no);
+						orderde_detailVO.setOd_place(address);
+						tlprice=tlprice+price;
+						System.out.println(tlprice+"1");
+					}
 
-			if (!listGs.isEmpty()) {
-				for (Orderde_DetailVO orderde_detailVO : listGs) {
-					String orderde_detailno = orderde_detailVO.getOrderde_detailno().toString();
-
-					Integer preamount = orderde_detailVO.getOd_amount();
-					Integer price = orderde_detailVO.getOd_price();
-					price = price / preamount;
-					Integer amount = Integer
-							.valueOf(req.getParameter(orderde_detailVO.getOrderde_detailno().toString() + "amount"));
-					price = amount * price;
-					orderde_detailVO.setOd_price(price);
-					orderde_detailVO.setOd_amount(amount);
-					orderde_detailVO.setPicnic_no(picnic_no);
-					orderde_detailVO.setOd_place("       ");
-					;
-					// orderde_detailVO.setOd_place(address);
 				}
-				Orderde_DetailService orderde_detailSvc = new Orderde_DetailService();
-				orderde_detailSvc.updateOrderde_Detail(listGr, listGs);
+			} catch (Exception e) {
+				System.out.println("沒有預購商品");
 			}
-
+			System.out.println(tlprice);
+			orderde_detailSvc.updateOrderde_Detail(listGr, listGs);
+			PicnicService picnicSvc = new PicnicService();
+			picnicSvc.updatepicnic(picnic_no,tlprice);
 			String url = null;
 			if (action.equals("finishorder")) {
 				url = "/finishorder/finishorder2.jsp";
