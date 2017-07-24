@@ -35,16 +35,23 @@
 /*		.body > nav{
 			border-bottom: 3px blue solid !important;
 		}*/
-		button{
+		.button{
 			height:41px;
 			width:100%;
 			background-color:#FFFFFF;
+			text-align:center;
 			border: 1px solid #DDDDDD ;
 		}
 		.test{
+			height:41px;
+			width:100%;
+			border: 1px solid #DDDDDD ;
 			background-color:#F5F5F5;
 			border:none;
 			text-align:center;
+		}
+		H4{
+			text-align:center
 		}
 		</style>
 		
@@ -52,22 +59,26 @@
 	<body>
 		<div></div>
 		<nav class="navbar " role="navigation" style="background-color: ;opacity: 0.8;">
-		<div class="col-sm-1" style="background-color: #8bdddd;height: 150px"></div>
-			<div class="col-sm-10 " style="background-color: #8bdddd">
+<!-- 		<div class="col-sm-1" style="background-color: #8bdddd;height: 150px"></div> -->
+			<div class="col-sm-12 " style="background-color: #8bdddd; box-shadow:0 0 30px 10px rgba(139,211,211,1) ">
 				<div class="navbar-header " >
-					<img class="navbar-brand navbar-left" src="野餐LOGO.png" style="height: 150px ">
-
+					<%if (request.getAttribute("result")==null){%>
+					<img class="navbar-brand navbar-left" src="LOGO.png" style="height: 150px ">
+					<%}%>
+					<%if (request.getAttribute("result")!=null){%>
+					<img class="navbar-brand navbar-left" src="/BA101_G5/checklist/LOGO.png" style="height: 150px ">
+					<%}%>
 				</div>
 				<div style="font-size: 70px; text-align: center; padding-top: 20px;  "><font style="color: #000000">野太美後台管理系統</font>
 				<div style="float: right;">
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/logout.do"><ul class="nav navbar-nav navbar-right" style="font-size: 15px; padding-top: 80px; ">
 						<li><a><%=loginVO.getAdm_name()%></a></li>
-						<li><button type="submit" class="glyphicon glyphicon-log-out" style="background-color:#8bdddd;border:none" >登出</button></li>
+						<li><button type="submit" class="glyphicon glyphicon-log-out" style="background-color:#8bdddd;border:none;padding-top:15px" >登出</button></li>
 					</ul></FORM>
 				</div>
 				</div>
 			</div>
-			<div class="col-sm-1" style="background-color: #8bdddd;height: 150px" ></div>
+<!-- 			<div class="col-sm-1" style="background-color: #8bdddd;height: 150px" ></div> -->
 
 			
 		</nav>
@@ -93,7 +104,7 @@
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel1">
 					      <h4 class="panel-title" >
-					        <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
+					        <a id="1" href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
 					          檢舉系統
 					        </a>
 					      </h4>
@@ -103,31 +114,31 @@
 					      <div class="list-group">
 					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">文章檢舉</button>
+									<button class="button" type="submit">文章檢舉</button>
 									<input type="hidden" name="chli_cate" value="0">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 					      	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">留言檢舉</button>
+									<button class="button" type="submit">留言檢舉</button>
 									<input type="hidden" name="chli_cate" value="1">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
 								<%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">揪團檢舉</button>
+									<button class="button" type="submit">揪團檢舉</button>
 									<input type="hidden" name="chli_cate" value="2">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">會員檢舉</button>
+									<button class="button" type="submit">會員檢舉</button>
 									<input type="hidden" name="chli_cate" value="3">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
 								<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">商家檢舉</button>
+									<button class="button" type="submit">商家檢舉</button>
 									<input type="hidden" name="chli_cate" value="4">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
@@ -141,7 +152,7 @@
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel2">
 					      <h4 class="panel-title">
-					        <a href="#bbb" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="true" aria-controls="bbb">
+					        <a id="2" onClick="f2()" href="#bbb" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="true" aria-controls="bbb">
 					          會員資料管理
 					        </a>
 					      </h4>
@@ -150,12 +161,12 @@
 					      <div class="list-group">
 					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
-					      	<button type="submit" form="title_button" value="cho_generalMember" name="button">會員權限維護</button>
+					      	<button class="button" type="submit" form="title_button" value="cho_generalMember" name="button">會員權限維護</button>
 					      	</FORM>
 					      	<%}%>
 					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
-						       <button type="submit" form="title_button" value="back" name="button">廠商資料審核</button>
+						       <button class="button" type="submit" form="title_button" value="back" name="button">廠商資料審核</button>
 						    </FORM>
 					      	<%}%>
 					      </div>
@@ -178,7 +189,7 @@
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel4">
 					      <h4 class="panel-title">
-					        <a href="#ddd" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
+					        <a id="4" onClick="f4()" style="text-align:center;" href="#ddd" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
 					          金流管理
 					        </a>
 					    </div>
@@ -205,9 +216,10 @@
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
 					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/blocked_keywords/blocked_keywords.do" >
-					        <button class="test" type="submit">關鍵字屏蔽管理</button>
-					        <input type="hidden" name="action" value="Blocked_Keywords">
+					         <input class="test"  type="submit" value="關鍵字屏蔽管理">
+					         <input type="hidden" name="action" value="all_Blocked_Keywordss">
 					   		 </FORM> 
+					   		
 					      </h4>
 					  </div>
 					  
@@ -215,9 +227,10 @@
 					   <div class="panel panel-default">
 					     <h4 class="panel-title">
 					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/announcement/announcement.do" >
-					        <button class="test" type="submit">最新消息管理</button>
-					        <input type="hidden" name="action" value="Announcement">
+					        <input class="test" type="submit" value="最新消息管理">
+       						 <input type="hidden" name="action" value="all_Announcements">
 					   		 </FORM> 
+					   		 
 					      </h4>
 					  </div>
 					  <%}%>
@@ -335,7 +348,16 @@
 					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="all"){%>
-					<jsp:include page="/allAdvertisement.jsp"/>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="OTHER"){%>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="AD"){%>
+					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="AD_DELETE"){%>
+					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
 				<%}%>
 				</div>
 				</div>
@@ -347,3 +369,38 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
 </html>
+<script>
+var session = sessionStorage;
+console.log("localStorage.getItem="+localStorage.getItem("1"));
+document.getElementById("1").addEventListener("click",f1);
+document.getElementById("2").addEventListener("click",f2);
+document.getElementById("4").addEventListener("click",f4);
+function f1() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "1");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function f2() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "2");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function f4() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "4");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function init(){
+	if(localStorage.getItem("1")==1){
+		document.getElementById("1").click();
+	}else if(localStorage.getItem("1")==2){
+		document.getElementById("2").click();
+	}else{
+		document.getElementById("4").click();
+	}
+}
+// window.onload=init();
+</script>

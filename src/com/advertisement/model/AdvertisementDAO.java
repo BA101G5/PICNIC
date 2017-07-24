@@ -25,6 +25,10 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 	private static final String FINDBYKEY = "SELECT AD_NO,MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA FROM Advertisement WHERE AD_NO=?";
 	private static final String FINDALL = "SELECT * FROM Advertisement";
 	private static final String FINDBYMM ="SELECT AD_NO,MF_NO,AD_SELF,AD_PHOTO,DAY_START,DAY_END,AD_CASH,AD_STA FROM Advertisement WHERE MF_NO=?";
+	private static final String UPDATESTA="UPDATE Advertisement SET AD_STA=? WHERE AD_NO=?";
+	
+	private static final String FINDALL_U = "SELECT * FROM Advertisement where AD_STA='U'";
+	private static final String FINDALL_OTHER = "SELECT * FROM Advertisement where AD_STA!='U'";
 	private static DataSource ds = null;
 	static {
 		try {
@@ -270,6 +274,155 @@ public class AdvertisementDAO implements AdvertisementDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(FINDBYMM);
 			pstmt.setString(1, MF_NO);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				aVO = new AdvertisementVO();
+				aVO.setAD_NO(rs.getString("AD_NO"));
+				aVO.setMF_NO(rs.getString("MF_NO"));
+				aVO.setAD_SELF(rs.getString("AD_SELF"));
+				aVO.setAD_PHOTO(rs.getBytes("AD_PHOTO"));
+				aVO.setDAY_START(rs.getDate("DAY_START"));
+				aVO.setDAY_END(rs.getDate("DAY_END"));
+				aVO.setAD_CASH(rs.getInt("AD_CASH"));
+				aVO.setAD_STA(rs.getString("AD_STA").charAt(0));
+				list.add(aVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public void updateforSTA(AdvertisementVO AdvertisementVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATESTA);
+			
+			
+			
+			
+			pstmt.setString(1, String.valueOf(AdvertisementVO.getAD_STA()));
+			pstmt.setString(2, AdvertisementVO.getAD_NO());
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+
+		
+	}
+
+	@Override
+	public List<AdvertisementVO> getAll_U() {
+		List<AdvertisementVO> list = new ArrayList<AdvertisementVO>();
+		AdvertisementVO aVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDALL_U);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				aVO = new AdvertisementVO();
+				aVO.setAD_NO(rs.getString("AD_NO"));
+				aVO.setMF_NO(rs.getString("MF_NO"));
+				aVO.setAD_SELF(rs.getString("AD_SELF"));
+				aVO.setAD_PHOTO(rs.getBytes("AD_PHOTO"));
+				aVO.setDAY_START(rs.getDate("DAY_START"));
+				aVO.setDAY_END(rs.getDate("DAY_END"));
+				aVO.setAD_CASH(rs.getInt("AD_CASH"));
+				aVO.setAD_STA(rs.getString("AD_STA").charAt(0));
+				list.add(aVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<AdvertisementVO> getAll_Other() {
+		List<AdvertisementVO> list = new ArrayList<AdvertisementVO>();
+		AdvertisementVO aVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDALL_OTHER);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				aVO = new AdvertisementVO();

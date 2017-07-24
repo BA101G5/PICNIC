@@ -12,18 +12,34 @@
 		<title>admView</title>
 		<script src="${pageContext.request.contextPath}/view/js/sweetalert.min.js"></script>
 		<link href="${pageContext.request.contextPath}/view/js/sweetalert.css" rel="stylesheet" type="text/css" />
-		<link href="${pageContext.request.contextPath}/view/js/admView.css" rel="stylesheet" type="text/css" />
+<%-- 		<link href="${pageContext.request.contextPath}/view/js/admView.css" rel="stylesheet" type="text/css" /> --%>
 	</head>
 	<body>
-			<table id="administratorTable" class = "center">
+	<div class="col-xs-12 col-sm-10">
+					 
+					  <form class="navbar-form navbar-left" role="search" style="">
+					  <div class="col-xs-12 col-sm-10">
+					 
+					  <div style="float: left; font-size: 50px">員工管理</div> 
+					 
+					</div>
+						
+						<div class="col-xs-12 col-sm-2">
+						<div  style="float: right;margin-left:	 600px; padding-top: 30px">
+							
+						</div>
+					</div>	
+					</form>
+					
+			<table id="administratorTable" class = "table5_3">
 				<thead>
-					<tr>
-						<td>管理員編號</td>
-						<td>管理員帳號</td>
-						<td>管理員密碼</td>
-						<td>管理員身份</td>
-						<td>管理員姓名</td>
-						<td>管理員狀態</td>	
+					<tr height="50px">
+						<th>管理員編號</th>
+						<th>管理員帳號</th>
+						<th>管理員密碼</th>
+						<th>管理員身份</th>
+						<th>管理員姓名</th>
+						<th>管理員狀態</th>	
 					</tr>
 				</thead>
       			<tbody class="adm">
@@ -42,9 +58,8 @@
 					</c:forEach>	
 					</form>
 				</tbody>
-					<tr>
-						<td colspan="6">
-							<section>	
+		    </table>
+		    <section>	
 							<table>
 							<tr>
 								<th style="width:25%"><button type="submit" form="administrator" value="add" name="button">新增</button></th>
@@ -54,9 +69,6 @@
 							</tr>
 							</table>
 							</section>
-						</td>
-					</tr>
-		    </table>
 		    <c:if test="${not empty add_adm}">
 		    	<table class = "center">
 		    	<thead>
@@ -211,16 +223,21 @@
 		    		</tr>
 		    	</table>
 		    </c:if>
+		    </div>
+		    <div class="col-sm-1 "></div>
+		    
+		    <script src="https://code.jquery.com/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
 </html>
 
 <style type="text/css">
-body {
-	background: #fafafa url(https://jackrugile.com/images/misc/noise-diagonal.png);
-	color: #444;
-	font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
-	text-shadow: 0 1px 0 #fff;
-}
+/* body { */
+/* 	background: #fafafa url(https://jackrugile.com/images/misc/noise-diagonal.png); */
+/* 	color: #444; */
+/* 	font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif; */
+/* 	text-shadow: 0 1px 0 #fff; */
+/* } */
 
 strong {
 	font-weight: bold; 
@@ -380,7 +397,47 @@ input[type="text"]{
 	font-size:24px;
 	color:#FF0000;
 }		
+.table5_3 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table5_3 th {
+	background-color:#87CEFA;
+	color:#000000
+}
 
+.table5_3,.table5_3 th,.table5_3 td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table5_3 th,.table5_3 td {
+	border: 1px solid #ffffff;
+	border-width:1px 0 1px 0
+}
+.table5_3 tr {
+	border: 1px solid #ffffff;
+}
+.table5_3 tr:nth-child(odd){
+	background-color:#d7eefd;
+}
+.table5_3 tr:nth-child(even){
+	background-color:#ffffff;
+}
+/* .table5_3 tr:last-child td:last-child{ */
+/*   border-bottom-right-radius: 10px; */
+/* } */
+.table5_3 tr:first-child th:last-child{
+  border-top-right-radius: 10px;
+}
+/* .table5_3 tr:last-child td:first-child{ */
+/*   border-bottom-left-radius: 10px; */
+/* } */
+.table5_3 tr:first-child th:first-child{
+  border-top-left-radius: 10px;
+}
 </style>
 
 
