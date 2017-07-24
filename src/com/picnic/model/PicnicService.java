@@ -97,4 +97,9 @@ public class PicnicService {
 	public List<PicnicVO> k_getAllSearch(String searchWord){
 		return dao.k_get_search_list(searchWord);
 	}
+
+	public void updatepicnic(String picnic_no,Integer tlprice) {
+		dao.updatepicnic(picnic_no,tlprice);
+		
+	}
 }
