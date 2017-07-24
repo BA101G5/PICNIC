@@ -1,4 +1,4 @@
-package com.goods_sell.controller;
+ package com.goods_sell.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

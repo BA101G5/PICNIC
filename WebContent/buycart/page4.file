@@ -2,8 +2,8 @@
 
 <ul class="pagination">
  
-  <%if (rowsPerPage<rowNumber) {%>
-    <%if(pageIndex>=rowsPerPage){%>
+  <%if (rowsPerPage1<rowNumber) {%>
+    <%if(pageIndex1>=rowsPerPage1){%>
          <li><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage-1%>">&laquo;</A></li>
        <%}%>
        <%if ( pageNumber > 1) {%>
@@ -11,7 +11,7 @@
         <li> <a href="<%=request.getRequestURI()%>?whichPage=<%=i%>"><%=i%></a></li>
      <%}%>   
        <%}%>
-    <%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+    <%if(pageIndex1<pageIndexArray[pageNumber-1]){%>
         <li><A href="<%=request.getRequestURI()%>?whichPage=<%=whichPage+1%>">&raquo;</A></li>
     <%}%>
   <%}%>  

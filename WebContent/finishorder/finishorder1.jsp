@@ -298,10 +298,8 @@
 									<c:forEach var="Orderde_DetailVO" items="${listGs}"
 										varStatus="loop">
 										<tr>
-											<c:forEach var="Goods_SellVO"
-												items="${Goods_SellSvc.All}">
-												<c:if test="${Goods_SellVO.getGs_no()==Orderde_DetailVO.getGs_no()}"><td>${Goods_SellVO.getGs_name()}</td></c:if>
-											</c:forEach>
+								
+									
 											<td><input type="number" class="gsnumber"
 												id="gs${loop.index}"
 												name="${Orderde_DetailVO.getOrderde_detailno()}amount"

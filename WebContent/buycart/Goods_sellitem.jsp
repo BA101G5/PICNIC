@@ -5,16 +5,19 @@
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
 <%
+	List<Goods_SellVO> list2 = goods_sellSvc.getAll();
 	List<Goods_SellVO> list = (List<Goods_SellVO>) request.getAttribute("typelist");
 	pageContext.setAttribute("list", list);
+	pageContext.setAttribute("list2", list);
 %>
 
-<div class="col-sm-9">
-	<c:if test="${empty list }">
+
+<c:if test="${empty list }">
+	<div class="col-sm-12">
 		<%@ include file="/buycart/page.file"%>
 		<c:forEach var="goods_sellVO" items="${goods_sellSvc.getAll()}"
 			begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			<div class="col-sm-6">
+			<div class="col-sm-3">
 				<div class="thumbnail" style="display: inline-block;";>
 					<img
 						src="<%=request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
@@ -54,17 +57,18 @@
 					</div>
 				</div>
 			</div>
-
 		</c:forEach>
-		<%@ include file="/buycart/page2.file"%>
-	</c:if>
-</div>
+
+		<div class="col-md-12 col-md-push-5">
+			<%@ include file="/buycart/page2.file"%></div>
+	</div>
+</c:if>
+
 <div class="col-md-9">
 	<c:if test="${not empty list }">
-		<%@ include file="/buycart/page.file"%>
-		<c:forEach var="goods_sellVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
-			<div class="col-md-5">
+		
+		<c:forEach var="goods_sellVO" items="${list}" >
+			<div class="col-md-4">
 				<div class="thumbnail" style="display: inline-block;";>
 					<h4>${goods_sellVO.getGs_name()}</h4>
 					<img
@@ -85,8 +89,7 @@
 											type="hidden" name="action" value="getOne">
 									</FORM>
 								</td>
-							</tr>
-							<tr>
+
 								<td>
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
@@ -108,6 +111,6 @@
 				</div>
 			</div>
 		</c:forEach>
-		<%@ include file="/buycart/page2.file"%>
+		
 	</c:if>
 </div>

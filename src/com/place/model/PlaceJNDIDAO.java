@@ -325,4 +325,40 @@ public class PlaceJNDIDAO implements PlaceDAO_interface {
 		}
 	}
 
+	@Override
+	public void k_insert(PlaceVO placeVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void k_update(PlaceVO placeVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void k_delete(String p_no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PlaceVO k_findByPrimaryKey(String p_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PlaceVO> k_getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void k_insertplace(PlaceVO placeVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
