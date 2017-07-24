@@ -1,6 +1,6 @@
 <%@ page contentType="text/css; charset=UTF-8" pageEncoding="Big5"%>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <!-- 最新編譯和最佳化的 CSS -->
 <link rel="stylesheet"
@@ -32,7 +32,7 @@ html {
 
 @font-face {
 	font-family: "NotoSansCJKtc";
-	src: url(<%= request.getContextPath() %>/lib/NotoSansCJKtc-Light.otf);
+<%-- 	src: url(<%= request.getContextPath() %>/lib/NotoSansCJKtc-Light.otf); --%>
 }
 body {
 	background-image:
