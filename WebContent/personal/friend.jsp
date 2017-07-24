@@ -92,9 +92,9 @@ li+a {
 	<jsp:include page="/mustinclude/top_nav.jsp" />
 <div class="container" >
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" style="background: white;">
+		<div class="col-xs-12 col-sm-12" style="background: white;opacity:0.8;">
 
-			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1" >
 				<img
 					src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${contact_no}"
 					style="display: block; margin: auto; border-radius: 25%; width: 200px; height: 200px;">
@@ -105,7 +105,7 @@ li+a {
 
 
 		</div>
-		<div class="col-xs-12 col-sm-11">
+		<div class="col-xs-12 col-sm-11" style="background: white;opacity:0.8;">
 			<h3 style="font-family: DFKai-sb;">
 				<b>${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_NAME}</b>
 			</h3>
@@ -115,7 +115,7 @@ li+a {
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-11 bb">
+		<div class="col-xs-12 col-sm-11 bb" style="background: white;opacity:0.8;">
 			<div role="tabpanel">
 				<!-- 標籤面板：標籤區 -->
 				<ul class="nav nav-tabs" role="tablist">
@@ -123,8 +123,7 @@ li+a {
 						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">個人資料</a>
 					</li>
 					
-					<li role="presentation"><a href="#tab3" aria-controls="tab3"
-						role="tab" data-toggle="tab" class="li1">文章</a></li>
+					
 					<li role="presentation"><a href="#tab4" aria-controls="tab4"
 						role="tab" data-toggle="tab" class="li1">朋友</a></li>
 
@@ -148,7 +147,7 @@ li+a {
 					</div>
 
 				
-					<div role="tabpanel" class="tab-pane" id="tab3">文章標籤的內容</div>
+					
 
 					<jsp:useBean id="Contact_ListSvc" scope="page"
 						class="com.contact_list.model.Contact_ListService" />
