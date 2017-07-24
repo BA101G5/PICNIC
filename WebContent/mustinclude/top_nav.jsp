@@ -54,12 +54,7 @@
 						
 						
 						<li><a href="<%=request.getContextPath()%>/login/logout.do"><%= name %></a></li>
-						<li><a href="#"><form method="POST"
-								action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do?"
-								onclick="submit()">
-								<span class="glyphicon glyphicon-shopping-cart"></span> 
-								<input type="hidden" name="action" value="insert">
-							</form></a></li>
+
 				
 					</ul>
 
