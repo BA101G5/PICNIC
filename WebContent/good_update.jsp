@@ -15,7 +15,7 @@ Goods_SellVO GSVO = (Goods_SellVO) request.getAttribute("GSVO");
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<title>Title Page</title>
+<title>商品更新</title>
 
 
 
@@ -201,6 +201,30 @@ textarea {
 									</div>
 								</div>
 							</li>
+							
+								<li class="list-group-item">
+								<div class="form-group">
+									<div class="col-xs-12 col-sm-4">
+										<label for="aa" class="control-label">商品分類</label>
+									</div>
+									<div class="col-xs-12 col-sm-8">
+										<select name="gs_type">
+											<option value='A' ${GSVO.gs_type eq 'A'?'selected':''}>器具</option>
+											<option value='B'${GSVO.gs_type eq 'B'?'selected':''}>食物</option>
+											<option value='C'${GSVO.gs_type eq 'C'?'selected':''}>野餐墊</option>
+										</select>
+										<font color='red' id="type"><b></b></font>
+										<c:if test="${not empty errorMsgs}">
+											<font color='red'><b>${errorMsgs.gs_price}</b></font>
+										</c:if>
+
+									</div>
+								</div>
+							</li>
+							
+							
+							
+							
 							<li class="list-group-item">
 								<div class="form-group">
 									<div class="col-xs-12 col-sm-4">

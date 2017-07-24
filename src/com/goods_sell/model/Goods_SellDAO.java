@@ -28,11 +28,11 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 
 	}
 
-	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA) values('GS'||LPAD(GS_NO_SQ.nextval,8,0),?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "insert into GOODS_SELL(GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA,GS_TYPE) values('GS'||LPAD(GS_NO_SQ.nextval,8,0),?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from GOODS_SELL ORDER BY GS_NO";
-	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA from GOODS_SELL where GS_NO =?";
+	private static final String GET_ONE_STMT = "select GS_NO,MF_NO,GS_NAME,GS_DATE,GS_PRICE,GS_INFO,GS_IMG,GS_STA,GS_TYPE from GOODS_SELL where GS_NO =?";
 	private static final String DELETE_STMT = "delete from GOODS_SELL where GS_NO = ?";
-	private static final String UPDATE_STMT = "update GOODS_SELL set MF_NO = ? ,GS_NAME = ? ,GS_DATE = ? ,GS_PRICE = ? ,GS_INFO = ? ,GS_IMG = ? ,GS_STA = ? where GS_NO = ? ";
+	private static final String UPDATE_STMT = "update GOODS_SELL set MF_NO = ? ,GS_NAME = ? ,GS_DATE = ? ,GS_PRICE = ? ,GS_INFO = ? ,GS_IMG = ? ,GS_STA = ?,GS_TYPE=? where GS_NO = ? ";
 	private static final String GET_ALL_BYTYPEMF_STMT = "select count(*)  from GOODS_SELL where GS_TYPE = ? and MF_NO = ?";
 	private static final String GET_COUNT_BYMF_STMT = "select count(GS_TYPE)  from GOODS_SELL where MF_NO  = ? ";
 	private static final String GET_ALL_BYMF_STMT = "select *  from GOODS_SELL where  GS_TYPE = ? and MF_NO = ?";
@@ -53,6 +53,7 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
 			pstmt.setString(7, goods_sellVO.getGs_sta());
+			pstmt.setString(8, goods_sellVO.getGs_type());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -88,7 +89,8 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 			pstmt.setString(5, goods_sellVO.getGs_info());
 			pstmt.setBytes(6, goods_sellVO.getGs_img());
 			pstmt.setString(7, goods_sellVO.getGs_sta());
-			pstmt.setString(8, goods_sellVO.getGs_no());
+			pstmt.setString(8, goods_sellVO.getGs_type());
+			pstmt.setString(9, goods_sellVO.getGs_no());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -165,6 +167,7 @@ public class Goods_SellDAO implements Goods_SellDAO_interface {
 			goods_sellVO.setGs_info(rs.getString("GS_INFO"));
 			goods_sellVO.setGs_img(rs.getBytes("GS_IMG"));
 			goods_sellVO.setGs_sta(rs.getString("GS_STA"));
+			goods_sellVO.setGs_type(rs.getString("GS_TYPE"));
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {

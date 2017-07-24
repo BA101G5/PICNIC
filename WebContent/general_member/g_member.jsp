@@ -16,7 +16,7 @@
 <jsp:include page="/mustinclude/head.jsp" />
 <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<title>Title Page</title>
+<title>一般會員新增</title>
 
 
 

@@ -177,10 +177,15 @@
 											<td>${ADVO.DAY_START}</td>
 											<td>${ADVO.DAY_END}</td>
 											<td>${ADVO.AD_CASH}</td>
-
-
-											<td>${ADVO.AD_STA}</td>
-
+												<c:set var="sta" value="U" scope="page"></c:set>
+												<c:set var="sta1" value="O" scope="page"></c:set>
+											
+											
+											<td>${ADVO.AD_STA.equals(sta.charAt(0))?"待審中":""}
+												${ADVO.AD_STA.equals(sta1.charAt(0))?"審核完畢":""}
+											
+											</td>
+						
 										</tr>
 									</c:if>
 
@@ -233,7 +238,12 @@
 													<td>${GRVO.gr_info}</td>
 
 													<td>${GRVO.gr_until}</td>
-													<td>${GRVO.gr_sta}</td>
+													<c:set var="a" value="U" scope="page"></c:set>
+												<c:set var="a1" value="A" scope="page"></c:set>
+													<td>
+														${GRVO.gr_sta.equals(a)?"上架中":""}
+														${GRVO.gr_sta.equals(a1)?"下架":""}
+													</td>
 													<td><input type="submit" value="修改" class="btn">
 														<input type="hidden" name="gr_no" value="${GRVO.gr_no}">
 														<input type="hidden" name="action"
