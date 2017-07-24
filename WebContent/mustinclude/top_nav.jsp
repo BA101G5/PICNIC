@@ -13,7 +13,7 @@
 %>
 
 <div class="container-fulid">
-	<div class="row">
+	<div class="row" style="margin-right: 0px;">
 		<div class=" col-sm-8 col-sm-push-2">
 			<nav class="navbar navbar-default " role="navigation">
 				<div class="col-sm-12">
