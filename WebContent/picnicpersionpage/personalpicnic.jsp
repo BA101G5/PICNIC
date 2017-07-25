@@ -195,15 +195,16 @@ body{
 <c:forEach var="pboard_articleVO" items="${list}">
 			<div class="col-xs-12 col-sm-12 board-topic board-article">
 				<div class="row article-row">
-
-					<div class="col-xs-10 col-sm-10 article-title">
-						${pboard_articleVO.article_title}
+					<div class="col-xs-2 col-sm-2">
+						<span class="headicon"><img src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${ pboard_articleVO.author_no }" style="width:56px;"></span>
 					</div>
-				</div>
-				<div class="row article-row">
-
-					<div class="col-xs-10 col-sm-10 article-author">
-						${gmSvc.getOneGeneralMember(pboard_articleVO.author_no).getMEM_NAME()} (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
+					<div class="col-xs-10 col-sm-10">
+						<div class="col-xs-12 col-sm-12 article-title">
+							${pboard_articleVO.article_title}
+						</div>
+						<div class="col-xs-12 col-sm-12 article-author">
+							${gmSvc.getOneGeneralMember(pboard_articleVO.author_no).getMEM_NAME()} (${pboard_articleVO.getArticle_post().toString().replaceFirst(".0$", "")})
+						</div>
 					</div>
 				</div>
 				<div class="row article-row">
