@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.*"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -12,10 +12,14 @@
 
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
+	<jsp:useBean id="goods_rentSvc" scope="page"
+	class="com.goods_rent.controller.Goods_rentServlet" />
+	
 
 <%
-	List<String> list = (List<String>) request.getAttribute("countbymf");
-	pageContext.setAttribute("list", list);
+	Set<String> typeset = (Set<String>) session.getAttribute("typeSet");
+     session.removeAttribute("typeSet");
+	pageContext.setAttribute("typeset", typeset);
 %>
 
 <style>
@@ -39,9 +43,8 @@
 }
 
 .thumbnail {
-	height: 250px;
+	height: 350px;
 	text-align: center;
-	line-height: 80px;
 	margin-top: 0px;
 	bgcolor: white;
 }
@@ -104,107 +107,95 @@
 						</div>
 					</div>
 					<div class="col-sm-8  col-sm-push-1">
-						<div class="collapse navbar-collapse navbar-ex1-collapse">
-							<ul class="nav navbar-nav side-nav"
-								style="background: white; border: 1px black;">
-								<li><a href="#">
-										<form METHOD="post"
-											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
-											onclick="submit()">
-											<p>器具</p>
-											<input type="hidden" name="action" value="selectByType">
-											<input type="hidden" name="type" value="A">
-										</form>
-								</a></li>
-								<li><a href="#">
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
-											onclick="submit()">
-											<p>食物</p>
-											<input type="hidden" name="action" value="selectByType">
-											<input type="hidden" name="type" value="B">
-										</FORM>
-								</a></li>
-								<li><a href="#">
-										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
-											onclick="submit()">
-											<input type="hidden" name="action" value="selectByType">
-											<input type="hidden" name="type" value="C">
-											<p>野餐墊</p>
-										</FORM>
-								</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-8 col-sm-push-2">
-						<div class="col-sm-3  ">
-							<div class="panel panel-default">
-
-								<c:if test="${list == null }">
-									<div class="panel-heading">
-										<h3 class="panel-title">熱門商品</h3>
-									</div>
-									<table class="table">
-										<c:forEach var="mfcount" items="${list}">
-											<tr>
-												<td><FORM METHOD="post"
-														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
-														onclick="submit()">
-														<p>${mfcount}</p>
-														<input type="hidden" name="action" value="selectByMfype">
-														<input type="hidden" name="mf" value="${mfcount}">
-													</form></td>
-											</tr>
-										</c:forEach>
-									</table>
-								</c:if>
-
-								<c:if test="${list!=null }">
-									<div class="panel-heading">
-										<h3 class="panel-title">提供廠商</h3>
-									</div>
-									<table class="table">
-										<c:forEach var="mfcount" items="${list}">
-											<tr>
-												<td><FORM METHOD="post"
-														ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
-														onclick="submit()">
-														<input type="hidden" name="action" value="selectByMfype">
-														<input type="hidden" name="mf" value="${mfcount}">
-														<p>${mfcount}</p>
-
-													</form></td>
-											</tr>
-										</c:forEach>
-									</table>
-								</c:if>
-
+						<div class="btn-group btn-group-justified" role="group"
+							aria-label="...">
+							<div class="btn-group" role="group">
+								<form METHOD="post"
+									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
+									<button type="submit" class="btn btn-default">器具</button>
+									<input type="hidden" name="action" value="selectByType">
+									<input type="hidden" name="type" value="A">
+								</form>
 
 							</div>
-						</div>
-						<jsp:include page="/buycart/Goods_sellitem.jsp" />
-					</div>
-				</div>
-				<div class="row ">
-					<div class="col-sm-10 col-sm-push-1 ">
-						<div class="col-sm-10 col-sm-push-1 ">
-							<div class="btn-group btn-group-justified ">
-								<a href="# " class="btn btn-default " role="button ">回標題</a>
+							<div class="btn-group" role="group">
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
+									<button type="submit" class="btn btn-inverse">食物</button>
+									<input type="hidden" name="action" value="selectByType">
+									<input type="hidden" name="type" value="B">
+								</FORM>
 							</div>
-							<div class="col-sm-11 col-sm-push-3 ">
-								<jsp:include page="/mustinclude/footer.jsp" />
+							<div class="btn-group" role="group">
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/goods_sell/goods_sell.do">
+									<button type="submit" class="btn btn-default">野餐墊</button>
+									<input type="hidden" name="action" value="selectByType">
+									<input type="hidden" name="type" value="C">
+								</FORM>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-sm-8 col-sm-push-2">
+
+
+					<c:if test="${typeset==null }">
+						<div class="col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">熱門商品</h3>
+								</div>
+								
+							</div>
+						</div>
+					</c:if>
+
+					<c:if test="${typeset!=null }">
+						<div class="col-sm-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">提供廠商</h3>
+								</div>
+								<table class="table">
+									<c:forEach var="mfcount" items="${typeset}">
+										<tr>
+											<td><form method="post"
+													action="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
+													onclick="submit()">
+													<p>${mfcount}</p>
+													<input type="hidden" name="action" value="selectByMfype">
+													<input type="hidden" name="mfcount" value="${mfcount}">
+													<input type="hidden" name="mfcount" value="${mfcount}">
+												</form></td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+					</c:if>
+				<jsp:include page="/buycart/Goods_sellitem.jsp" />
+			</div>
+				</div>
+		</div>
+
+	<div class="row ">
+		<div class="col-sm-10 col-sm-push-1 ">
+			<div class="col-sm-10 col-sm-push-1 ">
+				<div class="btn-group btn-group-justified ">
+					<a href="<%=request.getRequestURI()%>?whichPage="
+						class="btn btn-default " role="button ">回標題</a>
+				</div>
+				<div class="col-sm-11 col-sm-push-3 ">
+					<jsp:include page="/mustinclude/footer.jsp" />
+				</div>
+			</div>
 		</div>
 	</div>
-
+	</div>
+<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>

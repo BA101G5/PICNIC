@@ -14,7 +14,7 @@
 	<jsp:include page="/mustinclude/head.jsp" />
 <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<title>Title Page</title>
+<title>廠商會員註冊</title>
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -122,7 +122,7 @@ textarea {
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-push-1 dd">
-				<label><h1>廠商會員註冊</h1></label>
+				<label><h1 style="color:Azure  ;">廠 商 會 員 註 冊</h1></label>
 			</div>
 		</div>
 	</div>

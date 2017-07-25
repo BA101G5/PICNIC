@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pboard_article.model.Pboard_ArticleVO;
+
 public class PicmemJDBCDAO implements PicmemDAO_interface {
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -15,10 +17,11 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 	String passwd = "BA101G5";
 	private static final String INSERT_STMT = "insert into PICMEM (PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT) values(?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";
+	private static final String GET_ALL_STMT_P = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =?";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'�ΥD')";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,\'A\')";
 	private static final String GET_BYMEMNO_STMT = "select P_NO form PICMEM where MEM_NO =?";
 
 	@Override
@@ -190,6 +193,70 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 	}
 
 	@Override
+	public List<PicmemVO> getAll(String picnic_no) {
+		// GET_ALL_STMT_P
+		List<PicmemVO> list = new ArrayList<PicmemVO>();
+		PicmemVO picmemVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_STMT_P);
+			pstmt.setString(1, picnic_no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				picmemVO = new PicmemVO();
+				picmemVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				picmemVO.setMem_no(rs.getString("MEM_NO"));
+				picmemVO.setPicmem_iden(rs.getString("PICMEM_IDEN"));
+				picmemVO.setPicmem_sta(rs.getString("PICMEM_STA"));
+				picmemVO.setMem_longi(rs.getDouble("MEM_LONGI"));
+				picmemVO.setMem_latit(rs.getDouble("MEM_LATIT"));
+				list.add(picmemVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
 	public List<PicmemVO> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -280,64 +347,13 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 
 	}
 
-	public static void main(String[] args) {
-		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
-		// insert
-		// PicmemVO picmemVO = new PicmemVO();
-		// picmemVO.setPicnic_no("PG00000006");
-		// picmemVO.setMem_no("MG00000001");
-		// picmemVO.setPicmem_iden("aoeuaoeu");
-		// picmemVO.setPicmem_sta("A");
-		// picmemVO.setMem_longi(44.012);
-		// picmemVO.setMem_latit(44.022);
-		// picmemjdbcdao.insert(picmemVO);
-		// update
-		// PicmemVO picmemVO = new PicmemVO();
-		// picmemVO.setPicnic_no("PG00000001");
-		// picmemVO.setMem_no("MG00000001");
-		// picmemVO.setPicmem_iden("aoeuaoeu");
-		// picmemVO.setPicmem_sta("A");
-		// picmemVO.setMem_longi(44.012);
-		// picmemVO.setMem_latit(44.022);
-		// picmemjdbcdao.update(picmemVO);
-		// delete
-		// picmemjdbcdao.delete("PG00000001", "MG00000001");
-		// search one
-		// PicmemVO picmemVO = picmemjdbcdao.findByPrimaryKey("PG00000001",
-		// "MG00000001");
-		// System.out.println(picmemVO.getPicnic_no());
-		// System.out.println(picmemVO.getMem_no());
-		// System.out.println(picmemVO.getPicmem_iden());
-		// System.out.println(picmemVO.getPicmem_sta());
-		// System.out.println(picmemVO.getMem_longi());
-		// System.out.println(picmemVO.getMem_latit());
-		// System.out.println("---------------------");
-		// search all
-		// List<PicmemVO> list = picmemjdbcdao.getAll();
-		// for (PicmemVO picmemVO : list) {
-		// System.out.println(picmemVO.getPicnic_no());
-		// System.out.println(picmemVO.getMem_no());
-		// System.out.println(picmemVO.getPicmem_iden());
-		// System.out.println(picmemVO.getPicmem_sta());
-		// System.out.println(picmemVO.getMem_longi());
-		// System.out.println(picmemVO.getMem_latit());
-		// System.out.println("---------------------");
-		// }
-		// insert owner
-		// PicmemVO picmemVO =new PicmemVO();
-		// picmemVO.setPicnic_no("PG00000007");
-		// picmemVO.setMem_no("MG00000002");
-		// picmemjdbcdao.insertowner(picmemVO);
-
-	}
-
 	@Override
 	public List<String> findByMem_no(String mem_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		List<String> list = new ArrayList<String>();
 		ResultSet rs = null;
-
+	
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -376,5 +392,65 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 			
 		return list;
 		}
+
+	public static void main(String[] args) {
+		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
+		// insert
+		// PicmemVO picmemVO = new PicmemVO();
+		// picmemVO.setPicnic_no("PG00000006");
+		// picmemVO.setMem_no("MG00000001");
+		// picmemVO.setPicmem_iden("aoeuaoeu");
+		// picmemVO.setPicmem_sta("A");
+		// picmemVO.setMem_longi(44.012);
+		// picmemVO.setMem_latit(44.022);
+		// picmemjdbcdao.insert(picmemVO);
+		// update
+		// PicmemVO picmemVO = new PicmemVO();
+		// picmemVO.setPicnic_no("PG00000001");
+		// picmemVO.setMem_no("MG00000001");
+		// picmemVO.setPicmem_iden("aoeuaoeu");
+		// picmemVO.setPicmem_sta("A");
+		// picmemVO.setMem_longi(44.012);
+		// picmemVO.setMem_latit(44.022);
+		// picmemjdbcdao.update(picmemVO);
+		// delete
+		// picmemjdbcdao.delete("PG00000001", "MG00000001");
+		// search one
+		// PicmemVO picmemVO = picmemjdbcdao.findByPrimaryKey("PG00000001",
+		// "MG00000001");
+		// System.out.println(picmemVO.getPicnic_no());
+		// System.out.println(picmemVO.getMem_no());
+		// System.out.println(picmemVO.getPicmem_iden());
+		// System.out.println(picmemVO.getPicmem_sta());
+		// System.out.println(picmemVO.getMem_longi());
+		// System.out.println(picmemVO.getMem_latit());
+		// System.out.println("---------------------");
+		// search all
+		 List<PicmemVO> list = picmemjdbcdao.getAll("PG00000001");
+		 for (PicmemVO picmemVO : list) {
+			 System.out.println(picmemVO.getPicnic_no());
+			 System.out.println(picmemVO.getMem_no());
+			 System.out.println(picmemVO.getPicmem_iden());
+			 System.out.println(picmemVO.getPicmem_sta());
+			 System.out.println(picmemVO.getMem_longi());
+			 System.out.println(picmemVO.getMem_latit());
+			 System.out.println("---------------------");
+		 }
+		// insert owner
+		// PicmemVO picmemVO =new PicmemVO();
+		// picmemVO.setPicnic_no("PG00000007");
+		// picmemVO.setMem_no("MG00000002");
+		// picmemjdbcdao.insertowner(picmemVO);
+
+	}
+	
+	//-------------------------------------------------------------------
+	public void k_insert(PicmemVO picmemVO){}
+	public void k_update(PicmemVO picmemVO){}
+	public void k_delete(String picnic_no,String mem_no){}
+	public PicmemVO k_findByPrimaryKey(String picnic_no,String mem_no){return null;}
+	public List<PicmemVO> k_getAll(){return null;}
+	public void k_insertowner(PicmemVO picmemVO){}
+
 
 }

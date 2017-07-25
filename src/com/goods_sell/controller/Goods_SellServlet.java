@@ -1,13 +1,15 @@
-package com.goods_sell.controller;
+ package com.goods_sell.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,6 +42,7 @@ public class Goods_SellServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		System.out.println(action);
 
 		if (action.equals("getOne")) {
 
@@ -68,64 +71,76 @@ public class Goods_SellServlet extends HttpServlet {
 			}
 		}
 
-		// if ("insert".equals(action)) {
-		//
-		// Map<String, String> errorMsgs = new HashMap<String, String>();
-		// req.setAttribute("errorMsgs", errorMsgs);
-		//
-		// try {
-		// String MF_NO = req.getParameter("MF_NO").trim();
-		//
-		// String GS_NAME = req.getParameter("gs_name").trim();
-		// if (GS_NAME.equals("")) {
-		// errorMsgs.put("gs_name", "*嚙請選蕭J嚙諉品嚙磕嚙踝蕭");
-		// }
-		//
-		// byte[] GS_IMG = null;
-		// try {
-		// Part part = req.getPart("gs_img");
-		// GS_IMG = getPictureByteArrayFromWeb(part);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		//
-		// java.sql.Timestamp GS_DATE = null;
-		// GS_DATE = new java.sql.Timestamp(System.currentTimeMillis());
-		//
-		// Integer GS_PRICE =
-		// Integer.parseInt(req.getParameter("gs_price").trim());
-		// if (GS_PRICE.equals("")) {
-		// errorMsgs.put("gs_price", "*嚙請選蕭J嚙諉品嚙踝蕭嚙�");
-		// }
-		//
-		// String GS_INFO = req.getParameter("gs_info");
-		// if (GS_INFO.equals("")) {
-		// errorMsgs.put("gs_info", "*嚙請選蕭J嚙諉品嚙踝蕭T");
-		// }
-		//
-		// Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
-		//
-		// if (!errorMsgs.isEmpty()) {
-		// RequestDispatcher failureView =
-		// req.getRequestDispatcher("/good_buy.jsp");
-		// failureView.forward(req, res);
-		//
-		// return;
-		//
-		// Goods_SellService gsSvc = new Goods_SellService();
-		// Goods_SellVO GSVO = gsSvc.addGoods_Sell(MF_NO, GS_NAME, GS_DATE,
-		// GS_PRICE, GS_INFO, GS_IMG, GS_STA);
-		//
-		// session.setAttribute("GSVO", GSVO);
-		// String url = null;
-		// if (action.equals("insert")) {
-		// url = "/personal/personal.jsp";
-		// }
-		// RequestDispatcher successView = req.getRequestDispatcher(url);
-		// successView.forward(req, res);
-		// } catch (Exception e) {
-		// }
-		// }
+		if ("insert".equals(action)) {
+
+			Map<String,String> errorMsgs = new HashMap<String,String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			
+
+			try {
+				String MF_NO = req.getParameter("MF_NO").trim();
+System.out.println(MF_NO);
+				String GS_NAME =req.getParameter("gs_name").trim();
+				if(GS_NAME.equals("")){
+					errorMsgs.put("gs_name","*請輸入商品名稱");
+				}
+System.out.println(GS_NAME);				
+				byte[] GS_IMG = null;
+				try {
+					Part part = req.getPart("gs_img");
+					GS_IMG = getPictureByteArrayFromWeb(part);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+				java.sql.Timestamp GS_DATE = null;
+			    GS_DATE =  new java.sql.Timestamp(System.currentTimeMillis());
+				
+				Integer GS_PRICE = Integer.parseInt(req.getParameter("gs_price").trim());
+				if(GS_PRICE.equals("")){
+					errorMsgs.put("gs_price","*請輸入商品價格");
+				}
+System.out.println(GS_DATE);				
+				String GS_INFO = req.getParameter("gs_info");
+				if(GS_INFO.equals("")){
+					errorMsgs.put("gs_info","*請輸入商品資訊");
+				}
+System.out.println(GS_INFO);				
+				String GS_STA = req.getParameter("gs_sta").trim();
+				
+System.out.println(GS_STA);				
+String GS_TYPE = req.getParameter("gs_type").trim();
+System.out.println(GS_TYPE);			
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/good_buy.jsp");
+				failureView.forward(req, res);
+
+				return;
+			}
+				
+
+
+				Goods_SellService gsSvc =  new Goods_SellService();
+				Goods_SellVO GSVO = gsSvc.addGoods_Sell(MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA, GS_TYPE);
+			
+				
+
+				session.setAttribute("GSVO", GSVO);
+				String url = null;
+				
+				url = "/personal/personal.jsp";
+				
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				
+				System.out.println("errorrrrrr");
+				throw new ServletException(e);
+			}
+		}
 
 		if (action.equals("selectByType")) {
 
@@ -135,23 +150,26 @@ public class Goods_SellServlet extends HttpServlet {
 			try {
 				String type = new String(req.getParameter("type"));
 
+				ManufacturersService manufacturerSVC = new ManufacturersService();
+				List<ManufacturersVO> list = manufacturerSVC.getAll();
+
 				Goods_SellService goods_sellSvc = new Goods_SellService();
-				List<Goods_SellVO> list = goods_sellSvc.findByType(type);
+				Set<String> set = goods_sellSvc.findByTypeandList(type, list);
 
-				ManufacturersService manufacturersSvc = new ManufacturersService();
-				List<ManufacturersVO> list2 = manufacturersSvc.getAll();
-				List<String> list3 = goods_sellSvc.getcountbymf(list2);
+				List<Goods_SellVO> goodslist = goods_sellSvc.findByType(type);
 
-				req.setAttribute("typelist", list);
-				req.setAttribute("countbymf", list3);
 				session.setAttribute("type", type);
+				req.setAttribute("list", goodslist);
+				if (!set.isEmpty()) {
+					session.setAttribute("typeSet", set);
 
-				String url = null;
-				if (action.equals("selectByType")) {
-					url = "/buycart/moafirst.jsp";
+					String url = null;
+					if (action.equals("selectByType")) {
+						url = "/buycart/moafirst.jsp";
+					}
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
 				}
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -185,19 +203,25 @@ public class Goods_SellServlet extends HttpServlet {
 				throw new ServletException(e);
 			}
 		}
-
 		if (action.equals("selectByMfype")) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
+
 				String type = new String((String) session.getAttribute("type"));
-				String Mf_no = req.getParameter("mf");
-				Mf_no = Mf_no.split("(")[0];
+
+				String Mf_name = req.getParameter("mfcount");
+				System.out.println(Mf_name);
+				Mf_name = Mf_name.split("\\(")[0];
+
+				ManufacturersService manufacturersScv = new ManufacturersService();
+				String Mf_no = manufacturersScv.findByMfname(Mf_name);
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
 				List<Goods_SellVO> list = goods_sellSvc.findByMfType(type, Mf_no);
+
 				System.out.println("Hello");
 
 				req.setAttribute("list", list);
@@ -209,7 +233,7 @@ public class Goods_SellServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -218,36 +242,36 @@ public class Goods_SellServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try {
-				/*************************** 1.嚙踝蕭嚙踝蕭嚙請求嚙諸潘蕭 ****************************************/
+				/*************************** 1.接收請求參數 ****************************************/
 				String GS_NO = new String(req.getParameter("GS_NO"));
-
-				/*************************** 2.嚙罷嚙締嚙範嚙賠賂蕭嚙� ****************************************/
-				Goods_SellService gsSvc = new Goods_SellService();
+				
+				/*************************** 2.開始查詢資料 ****************************************/
+				Goods_SellService gsSvc =  new Goods_SellService();
 				Goods_SellVO GSVO = gsSvc.getOne(GS_NO);
 
 				/***************************
-				 * 3.嚙範嚙賠改蕭嚙踝蕭,嚙褒喉蕭嚙踝蕭嚙�(Send the Success view)
+				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
 				req.setAttribute("GSVO", GSVO);
 
-				// 嚙踝蕭w嚙踝蕭X嚙踝蕭GeneralMemberVO嚙踝蕭嚙踝蕭,嚙編嚙皚req
+				// 資料庫取出的GeneralMemberVO物件,存入req
 				String url = "/good_update.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 嚙踝蕭嚙穀嚙踝蕭嚙�
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交
 				// update_general_member_input.jsp
 				successView.forward(req, res);
 
-				/*************************** 嚙踝蕭L嚙箠嚙賞的嚙踝蕭~嚙畿嚙緲 **********************************/
+				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("嚙盤嚙糊嚙踝蕭o嚙緯嚙論改的嚙踝蕭嚙�:" + e.getMessage());
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				System.out.println("----------------");
 				RequestDispatcher failureView = req.getRequestDispatcher("/personal/personal.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // 嚙諉佗蕭update_emp_input.jsp嚙踝蕭嚙請求
+		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 
 			Map<String, String> errorMsgs = new HashMap<String, String>();
 			// Store this set in the request scope, in case we need to
@@ -256,31 +280,33 @@ public class Goods_SellServlet extends HttpServlet {
 
 			try {
 				/***************************
-				 * 1.嚙踝蕭嚙踝蕭嚙請求嚙諸潘蕭 - 嚙踝蕭J嚙賣式嚙踝蕭嚙踝蕭~嚙畿嚙緲
+				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String GS_NO = req.getParameter("gs_no").trim();
 				String MF_NO = req.getParameter("MF_NO").trim();
-
+				
 				String GS_NAME = req.getParameter("gs_name").trim();
-				if (GS_NAME.equals("")) {
-					errorMsgs.put("gs_name", "嚙踝蕭嚙箠嚙褐伐蕭");
+				if(GS_NAME.equals("")){
+					errorMsgs.put("gs_name","不可空白");
 				}
+				
 
 				java.sql.Timestamp GS_DATE = null;
-				GS_DATE = new java.sql.Timestamp(System.currentTimeMillis());
+			    GS_DATE =  new java.sql.Timestamp(System.currentTimeMillis());
+				
 
 				String GS_INFO = req.getParameter("gs_info").trim();
 
-				if (GS_INFO.equals("")) {
-					errorMsgs.put("gs_info", "嚙踝蕭嚙箠嚙褐伐蕭");
+				if(GS_INFO.equals("")){
+					errorMsgs.put("gs_info","不可空白");
 				}
 
 				Integer GS_PRICE = null;
-
-				try {// "7011" "aaa"
+				
+				try {//"7011" "aaa"
 					GS_PRICE = new Integer(req.getParameter("gs_price").trim());
 				} catch (Exception e) {
-					errorMsgs.put("gs_price", "嚙請選蕭J嚙踝蕭嚙確嚙踝蕭嚙踝蕭嚙�");
+					errorMsgs.put("gs_price","請輸入正確的價格");
 				}
 				Part part = req.getPart("gs_img");
 				byte[] GS_IMG = null;
@@ -296,39 +322,42 @@ public class Goods_SellServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				Character GS_STA = req.getParameter("gs_sta").trim().charAt(0);
+				
+			String GS_STA = req.getParameter("gs_sta").trim();
 
-				System.out.println(GS_STA);
+			System.out.println(GS_STA);
+			String GS_TYPE = req.getParameter("gs_type").trim();
 				Goods_SellVO GSVO = new Goods_SellVO();
+				
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("GSVO", GSVO); // 嚙緣嚙踝蕭嚙踝蕭J嚙賣式嚙踝蕭~嚙踝蕭MemVO嚙踝蕭嚙踝蕭,嚙稽嚙編嚙皚req
+					req.setAttribute("GSVO", GSVO); // 含有輸入格式錯誤的MemVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/good_update.jsp");
 					failureView.forward(req, res);
-					return; // 嚙緹嚙踝蕭嚙踝蕭嚙稻
+					return; // 程式中斷
 				}
 
-				/*************************** 2.嚙罷嚙締嚙論改蕭嚙踝蕭 *****************************************/
-				Goods_SellService gSvc = new Goods_SellService();
-				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA);
+				/*************************** 2.開始修改資料 *****************************************/
+Goods_SellService gSvc = new Goods_SellService();
+				GSVO = gSvc.updateGoods_Sell(GS_NO, MF_NO, GS_NAME, GS_DATE, GS_PRICE, GS_INFO, GS_IMG, GS_STA, GS_TYPE);
 
 				/***************************
-				 * 3.嚙論改完嚙踝蕭,嚙褒喉蕭嚙踝蕭嚙�(Send the Success view)
+				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
 
-				req.setAttribute("GSVO", GSVO); // 嚙踝蕭wupdate嚙踝蕭嚙穀嚙踝蕭,嚙踝蕭嚙確嚙踝蕭嚙踝蕭MemVO嚙踝蕭嚙踝蕭,嚙編嚙皚req
-				// HttpSession session1 = req.getSession();
-				// session1.removeAttribute("gVO");
-				// session1.setAttribute("gVO", MemVO);
+				req.setAttribute("GSVO", GSVO); // 資料庫update成功後,正確的的MemVO物件,存入req
+//				HttpSession session1 = req.getSession();
+//				session1.removeAttribute("gVO");
+//				session1.setAttribute("gVO", MemVO);
 
-				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // 嚙論改成嚙穀嚙踝蕭,嚙踝蕭嚙締istOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher("/personal/personal.jsp"); // 修改成功後,轉交listOneEmp.jsp
 
 				successView.forward(req, res);
 
-				/*************************** 嚙踝蕭L嚙箠嚙賞的嚙踝蕭~嚙畿嚙緲 *************************************/
+				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
-				System.out.println("--------------");
+System.out.println("--------------");
 				errorMsgs.put("error", "error");
 				RequestDispatcher failureView = req.getRequestDispatcher("/good_update.jsp");
 				failureView.forward(req, res);

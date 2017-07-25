@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<title>登入</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<!--[if lt IE 9]>
@@ -72,6 +72,7 @@
 											<div class="panel panel-default" id="container1" >
 											  <div class="panel-heading">
 											    <h3 class="panel-title"><h1>登入</h1></h3>
+											    <c:if test="${not empty msg}"><font color="red">*<%= request.getAttribute("msg") %></font></c:if>
 											  </div>
 											  <ul class="list-group" style="height: 270px;">
 											    <li class="list-group-item">
@@ -86,9 +87,8 @@
 														<c:if test="${not empty errorMsgs}">
 															<font color="red"><b>${errorMsgs}</b></font><br>
 														</c:if>
-														<a href="#" id="forget">還沒有帳號 </a>
-														or 
-														<a href="#">忘記密碼 ?</a>
+														<a href="#" id="forget">還沒有帳號 ?</a>
+														
 													</div>
 													<div class="col-xs-12 col-sm-10 col-sm-push-1"  style="padding-top: 10px;">	<input type=submit value="  ok   "></div>								    
 												</li>  			    

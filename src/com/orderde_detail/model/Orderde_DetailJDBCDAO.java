@@ -472,4 +472,16 @@ public class Orderde_DetailJDBCDAO implements Orderde_DetailDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs) {
+		// TODO Auto-generated method stub
+		
+	}
+//--------------------------------------------
+	public void k_insert(Orderde_DetailVO orderde_detailVO){}
+	public void k_update(Orderde_DetailVO orderde_detailVO){}
+	public void k_delete(String orderde_detailno){}
+	public Orderde_DetailVO k_findByPrimaryKey(String orderde_detailno){return null;}
+	public List<Orderde_DetailVO> k_getAll(){return null;}
+
 }

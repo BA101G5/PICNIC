@@ -13,11 +13,19 @@
 			</div>
 			<div class="col-xs-12 col-sm-2">
 				<div>
-					<ul class="list">
+					<ul class="list" >
 
-						
+						<Form method="post" id="form1"
+							action="<%=request.getContextPath()%>/general_member/General_Member.do">
+							<li style="padding-top: 5px;"><a href="#"
+								onclick="document.getElementById('form1').submit();">個人資料修改</a></li>
+							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
+							<input type="hidden" name="action" value="getOne_For_Update">
 
-					
+						</Form>
+
+					<li style="padding-top: 5px;"><a
+							href="<%=request.getContextPath()%>/buy_coin.jsp">購買點數</a></li>
 
 
 					</ul>
@@ -56,14 +64,7 @@
 				<!-- 標籤面板：內容區 -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="tab1">
-						<Form method="post" id="form1"
-							action="<%=request.getContextPath()%>/general_member/General_Member.do">
-							<li style="padding-top: 2px;"><a href="#"
-								onclick="document.getElementById('form1').submit();">個人資料修改</a></li>
-							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
-							<input type="hidden" name="action" value="getOne_For_Update">
-
-						</Form>
+						
 						<div class="col-xs-12 col-sm-12"
 							style="margin-top: 20px; text-align: center;">性別 :
 							${gVO.MEM_GEN}</div>
@@ -83,8 +84,7 @@
 
 
 
-						<li style="padding-top: 2px;"><a
-							href="<%=request.getContextPath()%>/buy_coin.jsp">購買點數</a></li>
+						
 
 
 						<div class="col-xs-12 col-sm-12"

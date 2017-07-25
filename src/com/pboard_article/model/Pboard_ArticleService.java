@@ -97,6 +97,10 @@ public class Pboard_ArticleService {
 	public List<Pboard_ArticleVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<Pboard_ArticleVO> getAll(String picnic_no) {
+		return dao.getAll(picnic_no);
+	}
 
 	public Object getPboard_ArticlesByGeneralMemberno(String mem_no) {
 		// TODO Auto-generated method stub
@@ -106,5 +110,12 @@ public class Pboard_ArticleService {
 	public List<Pboard_ArticleVO> getAll(Map<String, String[]> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	//------------------------------------------------------
+	public List<Pboard_ArticleVO> k_getPboard(String search_string) {
+		return dao.k_research(search_string);
+	}
+	public String k_getPboardName(String article_no){
+		return dao.k_get_search_name(article_no);
 	}
 }

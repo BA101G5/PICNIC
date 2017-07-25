@@ -22,5 +22,27 @@
             <input type = 'submit' value = '送出'>
         </form>
 		
+		<table>
+			<c:forEach var="pic" items="${picniclist}">
+				<tr>
+					<td>${pic.picnic_no}</td>
+					<td>${pic.picnic_name}</td>
+					<td>${pic.picnic_desc}</td>
+					<td>${pic.picnic_startup}</td>
+					<td>${pic.picnic_setup}</td>
+					<td>${pic.picnic_chk}</td>
+					<td>${pic.picnic_date}</td>
+					<td>${pic.picnic_pl}</td>
+					<td>${pic.picnic_sta}</td>
+					<td>${pic.ord_total}</td>
+					<td>${pic.ord_date}</td>
+					<td>${pic.ord_dm}</td>
+					<td>${pic.ord_sta}</td>
+				</tr>
+			</c:forEach>
+		</table>
+		
+		
+		
 	</body>
 </html>

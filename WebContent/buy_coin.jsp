@@ -9,7 +9,7 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<title>Title Page</title>
+<title>¶RÂI¼Æ</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <!--[if lt IE 9]>

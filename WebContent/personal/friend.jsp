@@ -24,7 +24,7 @@ h3 {
 }
 
 body {
-	font-family: "∑L≥n•ø∂¬≈È", Arial, sans-serif;
+	font-family: "ÂæÆËªüÊ≠£ÈªëÈ´î", Arial, sans-serif;
 }
 
 li+a {
@@ -51,61 +51,63 @@ li+a {
 #tab4 {
 	margin-top: 10px;
 }
+
 #btn {
-  color: #fff;
-    background-color: #5bc0de;
-    border-color: #46b8da;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-  
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 
-#btn:hover {background-color:SkyBlue ;}
+#btn:hover {
+	background-color: SkyBlue;
+}
 
 #btn:active {
-  background-color: 	#40E0D0;
- 
-  transform: translateY(4px);
+	background-color: #40E0D0;
+	transform: translateY(4px);
 }
 </style>
 </head>
 <jsp:useBean id="GeneralMemberSvc" scope="page"
-					class="com.general_member.model.GeneralMemberService" />
+	class="com.general_member.model.GeneralMemberService" />
 <jsp:include page="/mustinclude/left_nav.jsp" />
-	<jsp:include page="/mustinclude/top_nav.jsp" />
-<div class="container" >
+<jsp:include page="/mustinclude/top_nav.jsp" />
+<div class="container" style="background: white; opacity: 0.8">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" style="background: white;">
 
-			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+		<div class="col-xs-12 col-sm-12">
+
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1" >
 				<img
 					src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${contact_no}"
 					style="display: block; margin: auto; border-radius: 25%; width: 200px; height: 200px;">
 
 			</div>
-			
+
 
 
 
 		</div>
-		<div class="col-xs-12 col-sm-11">
+		<div class="col-xs-12 col-sm-11" style="background: white;opacity:0.8;">
 			<h3 style="font-family: DFKai-sb;">
 				<b>${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_NAME}</b>
 			</h3>
@@ -113,76 +115,82 @@ li+a {
 	</div>
 </div>
 </div>
-<div class="container">
+<div class="container" style="background: white; opacity: 0.8">
 	<div class="row">
-		<div class="col-xs-12 col-sm-11 bb">
+		<div class="col-xs-12 col-sm-11 bb" style="background: white;opacity:0.8;">
 			<div role="tabpanel">
-				<!-- º–≈“≠±™O°Gº–≈“∞œ -->
+				<!-- Ê®ôÁ±§Èù¢ÊùøÔºöÊ®ôÁ±§ÂçÄ -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#tab1"
-						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">≠”§H∏ÍÆ∆</a>
+						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">ÂÄã‰∫∫Ë≥áÊñô</a>
 					</li>
-					
-					<li role="presentation"><a href="#tab3" aria-controls="tab3"
-						role="tab" data-toggle="tab" class="li1">§Â≥π</a></li>
+
+          
+          
 					<li role="presentation"><a href="#tab4" aria-controls="tab4"
-						role="tab" data-toggle="tab" class="li1">™B§Õ</a></li>
+						role="tab" data-toggle="tab" class="li1">ÊúãÂèã</a></li>
 
 				</ul>
-				
-				<!-- º–≈“≠±™O°G§∫Æe∞œ -->
+
+				<!-- Ê®ôÁ±§Èù¢ÊùøÔºöÂÖßÂÆπÂçÄ -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">© ßO :
+							style="margin-top: 20px; text-align: center;">ÊÄßÂà• :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_GEN}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">•Õ§È :
+							style="margin-top: 20px; text-align: center;">ÁîüÊó• :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_BIRTH}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">¶€ß⁄§∂≤– :
+							style="margin-top: 20px; text-align: center;">Ëá™Êàë‰ªãÁ¥π :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_SELF}</div>
 
-						
-						
+
+
 					</div>
 
-				
-					<div role="tabpanel" class="tab-pane" id="tab3">§Â≥πº–≈“™∫§∫Æe</div>
+
+          
+          
 
 					<jsp:useBean id="Contact_ListSvc" scope="page"
 						class="com.contact_list.model.Contact_ListService" />
-					
-						
+
+
 					<c:forEach var="Contact_ListVO" items="${Contact_ListSvc.all}">
 						<div role="tabpanel" class="tab-pane" id="tab4">
-						
-						<c:if test="${contact_no == Contact_ListVO.mem_no}">
-								<form method="post" id="form3" action="<%= request.getContextPath()%>/contact_list/contact_list.do">
-<a href="<%= request.getContextPath()%>/contact_list/contact_list.do?action=getOne_For_MG&mem_no=${Contact_ListVO.mem_no}&contact_no=${Contact_ListVO.contact_no}">
-								<div class="col-sm-4" style="border:solid">
-									<div class="news">
-										<div class="img-figure">
-				
-											
-											<img
-												src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${Contact_ListVO.contact_no}"
-												style="display: block; margin: auto; border-radius: 25%; width: 200px; height: 200px;"
-												class="img-responsive">
-				
+
+							<c:if test="${contact_no == Contact_ListVO.mem_no}">
+								<form method="post" id="form3"
+									action="<%=request.getContextPath()%>/contact_list/contact_list.do">
+									<a
+										href="<%= request.getContextPath()%>/contact_list/contact_list.do?action=getOne_For_MG&mem_no=${Contact_ListVO.mem_no}&contact_no=${Contact_ListVO.contact_no}">
+										<div class="col-sm-4" style="border: solid">
+											<div class="news">
+												<div class="img-figure">
+
+
+													<img
+														src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${Contact_ListVO.contact_no}"
+														style="display: block; margin: auto; border-radius: 25%; width: 200px; height: 200px;"
+														class="img-responsive">
+
+												</div>
+
+												<div class="title">
+													<h3 align="center">${GeneralMemberSvc.getOneGeneralMember(Contact_ListVO.contact_no).MEM_NAME}</h3>
+												</div>
+												<input type="hidden" name="mem_no"
+													value="${Contact_ListVO.mem_no}"> <input
+													type="hidden" name="contact_no"
+													value="${Contact_ListVO.contact_no}"> <input
+													type="hidden" name="action" value="getOne_For_MG">
+											</div>
 										</div>
-											
-										<div class="title">
-											<h3 align="center">${GeneralMemberSvc.getOneGeneralMember(Contact_ListVO.contact_no).MEM_NAME}</h3>
-										</div>
-										<input type="hidden" name="mem_no" value="${Contact_ListVO.mem_no}">
-										<input type="hidden" name="contact_no" value="${Contact_ListVO.contact_no}">
-										<input type="hidden" name="action" value="getOne_For_MG">
-									</div>
-								</div>
-							</a>	
-							</form>
-						</c:if>
+									</a>
+								</form>
+							</c:if>
+							</div>
 					</c:forEach>
 				</div>
 			</div>

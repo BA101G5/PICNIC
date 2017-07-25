@@ -410,12 +410,14 @@ public class General_MemberServlet extends HttpServlet {
 				 ***********/
 				MailService mail = new MailService();
 
-				String subject = "密碼通知";
+				String subject = "驗證信通知";
 
-				String messageText = "http://localhost:8081/BA101G5_1_0403/addMemberEmail.do?account="+MEM_MAIL+ "\n"
+				String messageText = String.valueOf(
+						"<a href='http://localhost:8081/" + req.getContextPath() +"/addMemberEmail.do?account="+MEM_MAIL+"'>驗證網址</a>") + "\n"
 						+ "密碼: "+MEM_PSW;
-
+				
 				mail.sendMail(MEM_MAIL, subject, messageText);
+				req.setAttribute("msg","請去信箱驗證");
 				String url = "/signin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
