@@ -14,7 +14,7 @@ public class Goods_SellService {
 	}
 
 	public Goods_SellVO addGoods_Sell(String MF_NO, String GS_NAME, java.sql.Timestamp GS_DATE, Integer GS_PRICE,
-			String GS_INFO, byte[] GS_IMG, String GS_STA) {
+			String GS_INFO, byte[] GS_IMG, String GS_STA,String GS_TYPE) {
 		Goods_SellVO GSVO = new Goods_SellVO();
 		GSVO.setMf_no(MF_NO);
 		GSVO.setGs_name(GS_NAME);
@@ -23,6 +23,7 @@ public class Goods_SellService {
 		GSVO.setGs_info(GS_INFO);
 		GSVO.setGs_img(GS_IMG);
 		GSVO.setGs_sta(GS_STA);
+		GSVO.setGs_type(GS_TYPE);
 
 		dao.insert(GSVO);
 
@@ -30,7 +31,7 @@ public class Goods_SellService {
 	}
 
 	public Goods_SellVO updateGoods_Sell(String GS_NO, String MF_NO, String GS_NAME, java.sql.Timestamp GS_DATE,
-			Integer GS_PRICE, String GS_INFO, byte[] GS_IMG, String GS_STA) {
+			Integer GS_PRICE, String GS_INFO, byte[] GS_IMG, String GS_STA,String GS_TYPE) {
 
 		Goods_SellVO GSVO = new Goods_SellVO();
 		GSVO.setGs_no(GS_NO);
@@ -41,7 +42,7 @@ public class Goods_SellService {
 		GSVO.setGs_info(GS_INFO);
 		GSVO.setGs_img(GS_IMG);
 		GSVO.setGs_sta(GS_STA);
-
+		GSVO.setGs_type(GS_TYPE);
 		dao.update(GSVO);
 		return GSVO;
 	}

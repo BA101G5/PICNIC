@@ -28,7 +28,7 @@ public class LoginHandler extends HttpServlet {
     
 	List<GeneralMemberVO> list = gs.getAll();
 	for(GeneralMemberVO gvo : list){
-		if(gvo.getMEM_MAIL().contains(account) == true && gvo.getMEM_PSW().contains(password)== true){
+		if(gvo.getMEM_MAIL().equals(account) == true && gvo.getMEM_PSW().equals(password)== true){
 			return gvo;
 		}
 	}
@@ -43,7 +43,7 @@ public class LoginHandler extends HttpServlet {
 	      
 	  	List<ManufacturersVO> list = ms.getAll();
 	  	for(ManufacturersVO mvo : list){
-	  		if(mvo.getMF_ACCO().contains(account) == true && mvo.getMF_PSW().contains(password)== true){
+	  		if(mvo.getMF_ACCO().equals(account) == true && mvo.getMF_PSW().equals(password)== true){
 	  			return mvo;
 	  		}
 	  	}

@@ -112,20 +112,21 @@ public class ManufacturersServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 ****************************************/
 				ManufacturersService MfSvc = new ManufacturersService();
 				ManufacturersVO MfVO = MfSvc.getOneManufacturers(MF_NO);
-
+System.out.println(MfVO.getMF_PSW());
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
 				req.setAttribute("MfVO", MfVO); // 資料庫取出的ManufacturersVO物件,存入req
 				String url = "/m_update.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交
-System.out.println("--------------");												// update_manufacturers_input.jsp
+				System.out.println("-----FFF");									// update_manufacturers_input.jsp
 				successView.forward(req, res);
-
+				System.out.println("--------------");
+				return;
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/m_personal.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/personal/personal.jsp");
 				failureView.forward(req, res);
 			}
 		}
