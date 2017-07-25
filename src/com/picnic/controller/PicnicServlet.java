@@ -33,7 +33,7 @@ public class PicnicServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-//		System.out.println(action);
+		// System.out.println(action);
 		if ("checkbeforeinsert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -84,14 +84,14 @@ public class PicnicServlet extends HttpServlet {
 				}
 
 				String tladdress = null;
-//				System.out.println();
+				// System.out.println();
 
-				if (address.contains("縣")||address.contains("市")) {
+				if (address.contains("縣") || address.contains("市")) {
 					tladdress = address;
 				} else {
 					tladdress = area + address;
 				}
-				
+
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
 				session.setAttribute("tladdress", tladdress);
@@ -116,9 +116,6 @@ public class PicnicServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		
-		
 
 		if ("insert".equals(action)) {
 
@@ -151,15 +148,15 @@ public class PicnicServlet extends HttpServlet {
 
 					try {
 						placeVO = placeSvc.getOne(tladdress);
-//						System.out.println(placeVO + "hello");
+						// System.out.println(placeVO + "hello");
 
 						if (placeVO.getMf_no() != null) {
-//							System.out.println(placeVO.getMf_no());
+							// System.out.println(placeVO.getMf_no());
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
 							List<Goods_RentVO> list = goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
-//							System.out.println(list);
+							// System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);
 							if (!list.isEmpty()) {
 								session.setAttribute("list", list);
@@ -171,7 +168,7 @@ public class PicnicServlet extends HttpServlet {
 						orderde_detailSvc.addPlaceOrderde_Detail(P_price, p_no, account, picnic_no, tladdress);
 					} finally {
 						String url = null;
-//						System.out.println(action);
+						// System.out.println(action);
 						if ("insert".equals(action)) {
 							url = "/picnic/maosecondui3.jsp";
 						}
@@ -183,23 +180,20 @@ public class PicnicServlet extends HttpServlet {
 				errorMsgs.put("Exception", e.getMessage());
 			}
 		}
-		
-		
-		
-		
 
 		if (action.equals("persionalpicnic")) {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
-			String account=null;
-			try{
-			GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
-		    account = gVO.getMEM_NO();
-			}catch(Exception e){System.out.println(e.getMessage()); }
-			
-			
+
+			String account = null;
+			try {
+				GeneralMemberVO gVO = (GeneralMemberVO) session.getAttribute("gVO");
+				account = gVO.getMEM_NO();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
 			String uri = (String) req.getParameter("uri");
 			try {
 				uri = uri.split("null")[1];
@@ -231,15 +225,14 @@ public class PicnicServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			String picnic_no = (String) req.getParameter("Picnic_no");
-		
 
 			try {
-				
+
 				PicnicService picnicSvc = new PicnicService();
 				PicnicVO picnicVO = picnicSvc.getByPicnic_No(picnic_no);
-				
+
 				PicmemService picmemSvc = new PicmemService();
-		
+
 				session.setAttribute("picnicVO", picnicVO);
 				String url = null;
 
