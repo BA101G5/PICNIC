@@ -4,6 +4,7 @@
 <%@ page import="com.general_member.model.*"%>
 <%@ page import="com.picnic.model.*"%>
 <%@ page import="com.picmem.model.*"%>
+<%@ page import="com.blocked_keywords.model.*"%>
 <%@ page import="java.util.*"%>
 
 <% 
@@ -22,6 +23,22 @@
 
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
+
+	// ÃöÁä¦r«Ì½ª¹LÂo
+	Blocked_KeywordsService bkSvc = new Blocked_KeywordsService();
+	List<Blocked_KeywordsVO> bkList = bkSvc.getAll();
+	for (Pboard_ArticleVO paVO: list) {
+		for (Blocked_KeywordsVO bkVO: bkList) {
+			paVO.setArticle_title(
+					paVO.getArticle_title().replaceAll(bkVO.getKeyword(), bkVO.getReplacement())
+				);
+			paVO.setArticle_text(
+				paVO.getArticle_text().replaceAll(bkVO.getKeyword(), bkVO.getReplacement())
+			);
+		}
+	}
+
+	
 	Collections.reverse(list);
 	pageContext.setAttribute("list", list);
 %>
