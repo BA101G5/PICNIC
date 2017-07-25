@@ -38,6 +38,7 @@
   bottom: 0px;
   right: 0px;
   display: none;
+  z-index: 8000;
 }
 #aChatroom-container .panel{
   margin-bottom: 0px;
@@ -72,7 +73,7 @@
 .aChatroom-container .chat li .chat-body p
 {
     margin: 0;
-    color: #777777;
+    /*color: #777777;*/
 }
 
 .aChatroom-container .panel .slidedown .glyphicon, .aChatroom-container .chat .glyphicon
@@ -86,7 +87,9 @@
     height: 400px;
 }
 
-
+.aChatroom-container .img-circle{
+  width: 50px;
+}
 
 ::-webkit-scrollbar-track
 {

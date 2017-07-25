@@ -17,32 +17,39 @@
 					</h1>
 				</marquee>
 			</div>
-			<div class="col-xs-12 col-sm-4" style="margin-top:5px;">
+			<div class="col-xs-12 col-sm-4" style="margin-top: 5px;">
 				<div class="col-xs-12 col-sm-12">
-				<Form method="post" id="form1"
-					action="<%=request.getContextPath()%>/manufacturers/Manufacturers.do">
-					<li style="padding-top: 5px; float: right" class="list"><a href="#"
-						onclick="document.getElementById('form1').submit();">廠商資料修改</a></li> <input
-						type="hidden" name="MF_NO" value="${mVO.MF_NO}"> <input
-						type="hidden" name="action" value="getOne_For_Update">
-				</Form></div><div class="col-xs-12 col-sm-12">
+					<Form method="post" id="form1"
+						action="<%=request.getContextPath()%>/manufacturers/Manufacturers.do">
+						<li style="padding-top: 5px; float: right" class="list"><a
+							href="#" onclick="document.getElementById('form1').submit();">廠商資料修改</a></li>
+						<input type="hidden" name="MF_NO" value="${mVO.MF_NO}"> <input
+							type="hidden" name="action" value="getOne_For_Update">
+					</Form>
+				</div>
+				<div class="col-xs-12 col-sm-12">
 					<Form method="post" id="form2"
-							action="<%=request.getContextPath()%>/advertisement_buy.jsp">
-							<li style="padding-top: 5px; float: right"class="list"><a href="#"
-								onclick="document.getElementById('form2').submit();">購買廣告</a></li>
+						action="<%=request.getContextPath()%>/advertisement_buy.jsp">
+						<li style="padding-top: 5px; float: right" class="list"><a
+							href="#" onclick="document.getElementById('form2').submit();">購買廣告</a></li>
 
-						</Form></div><div class="col-xs-12 col-sm-12">
-						
-						<Form method="post" id="form3"
-							action="<%=request.getContextPath()%>/good_buy.jsp">
-							<li style="padding-top: 5px; float: right"class="list"><a href="#"
-								onclick="document.getElementById('form3').submit();">上架商品</a></li>
-						</Form></div><div class="col-xs-12 col-sm-12">
-						<Form method="post" id="form4"
-							action="<%=request.getContextPath()%>/good_rent.jsp">
-							<li style="padding-top: 5px; float: right"class="list"><a href="#"
-								onclick="document.getElementById('form4').submit();">上架商品出租</a></li>
-						</Form></div>
+					</Form>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+
+					<Form method="post" id="form3"
+						action="<%=request.getContextPath()%>/good_buy.jsp">
+						<li style="padding-top: 5px; float: right" class="list"><a
+							href="#" onclick="document.getElementById('form3').submit();">上架商品</a></li>
+					</Form>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<Form method="post" id="form4"
+						action="<%=request.getContextPath()%>/good_rent.jsp">
+						<li style="padding-top: 5px; float: right" class="list"><a
+							href="#" onclick="document.getElementById('form4').submit();">上架商品出租</a></li>
+					</Form>
+				</div>
 
 			</div>
 
@@ -80,12 +87,14 @@
 				<div class="tab-content">
 
 					<div role="tabpanel" class="tab-pane" id="tab1">
-						
-						<div class="col-xs-12 col-sm-12" style="text-align:center;">
-						<h1><b>目前商品</b></h1>
-						
+
+						<div class="col-xs-12 col-sm-12" style="text-align: center;">
+							<h1>
+								<b>目前商品</b>
+							</h1>
+
 						</div>
-						
+
 						<c:forEach var="goods_sellVO" items="${GSSvc.all}">
 
 
@@ -133,12 +142,14 @@
 					</div>
 
 					<div role="tabpanel" class="tab-pane" id="tab2">
-					
-						<div class="col-xs-12 col-sm-12" style="text-align:center;">
-						<h1><b>目前購買之廣告</b></h1>
-						
+
+						<div class="col-xs-12 col-sm-12" style="text-align: center;">
+							<h1>
+								<b>目前購買之廣告</b>
+							</h1>
+
 						</div>
-							<div class="col-xs-12 col-sm-12">
+						<div class="col-xs-12 col-sm-12">
 							<table border="1" width='800' align="center"
 								style="margin-top: 5px;"
 								class="table table-hover table-bordered table-condensed table-striped">
@@ -166,20 +177,29 @@
 											<td>${ADVO.DAY_START}</td>
 											<td>${ADVO.DAY_END}</td>
 											<td>${ADVO.AD_CASH}</td>
-											<td>${ADVO.AD_STA}</td>
-
+												<c:set var="sta" value="U" scope="page"></c:set>
+												<c:set var="sta1" value="O" scope="page"></c:set>
+											
+											
+											<td>${ADVO.AD_STA.equals(sta.charAt(0))?"待審中":""}
+												${ADVO.AD_STA.equals(sta1.charAt(0))?"審核完畢":""}
+											
+											</td>
+						
 										</tr>
-
 									</c:if>
+
 								</c:forEach>
 
 							</table>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tab3">
-						<div class="col-xs-12 col-sm-12" style="text-align:center;">
-						<h1><b>目前上架出租商品</b></h1>
-						
+						<div class="col-xs-12 col-sm-12" style="text-align: center;">
+							<h1>
+								<b>目前上架出租商品</b>
+							</h1>
+
 						</div>
 						<div class="col-lg-12">
 							<table class="table" id="table">
@@ -218,9 +238,14 @@
 													<td>${GRVO.gr_info}</td>
 
 													<td>${GRVO.gr_until}</td>
-													<td>${GRVO.gr_sta}</td>
-													<td><input type="submit" value="修改" class="btn"> <input
-														type="hidden" name="gr_no" value="${GRVO.gr_no}">
+													<c:set var="a" value="U" scope="page"></c:set>
+												<c:set var="a1" value="A" scope="page"></c:set>
+													<td>
+														${GRVO.gr_sta.equals(a)?"上架中":""}
+														${GRVO.gr_sta.equals(a1)?"下架":""}
+													</td>
+													<td><input type="submit" value="修改" class="btn">
+														<input type="hidden" name="gr_no" value="${GRVO.gr_no}">
 														<input type="hidden" name="action"
 														value="getOne_For_Update"></td>
 												</tr>
@@ -234,26 +259,26 @@
 
 					</div>
 					<div role="tabpanel" class="tab-pane active" id="tab4">
-						
-						<div class="col-xs-12 col-sm-12" style="margin-bottom:40px;">
-							<div class="col-xs-12 col-sm-6" style="margin-top:20px;">
-								<div class="col-xs-12 col-sm-12" >
+
+						<div class="col-xs-12 col-sm-12" style="margin-bottom: 40px;">
+							<div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
+								<div class="col-xs-12 col-sm-12">
 									<div class="col-xs-12 col-sm-6">信箱 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_MAIL}</div>
 								</div>
-								<div class="col-xs-12 col-sm-12" style="margin-top:20px;">
+								<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-6">電話 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_PHONE}</div>
 								</div>
-								<div class="col-xs-12 col-sm-12" style="margin-top:20px;">
+								<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-6">傳真 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_FAX}</div>
 								</div>
-								<div class="col-xs-12 col-sm-12" style="margin-top:20px;">
+								<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-6">統一編號 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_BS}</div>
 								</div>
-								<div class="col-xs-12 col-sm-12" style="margin-top:20px;">
+								<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-6">地址 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_ADDR}</div>
 								</div>
@@ -262,14 +287,15 @@
 
 							</div>
 
-							<div class="col-xs-12 col-sm-6" style="margin-top:20px;text-align:center;">
-								
-								<div class="col-xs-12 col-sm-12" style="margin-top:20px;">
+							<div class="col-xs-12 col-sm-6"
+								style="margin-top: 20px; text-align: center;">
+
+								<div class="col-xs-12 col-sm-12" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-6">自我介紹 :</div>
 									<div class="col-xs-12 col-sm-6">${mVO.MF_SELF}</div>
 								</div>
-								
-								</div>
+
+							</div>
 
 						</div>
 					</div>

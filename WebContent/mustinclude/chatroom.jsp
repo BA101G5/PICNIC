@@ -22,7 +22,8 @@
 	}else{
 		mem_no = gVO.getMEM_NO();
 	}
-	System.out.println("chatroom.jsp/ mem_no=" + mem_no);
+// 	System.out.println("chatroom.jsp/ mem_no=" + mem_no);
+pageContext.setAttribute("mem_no", mem_no);
 
 
 	PicmemService picmemSvc = new PicmemService();
@@ -54,15 +55,19 @@
  	ChatroomService chatroomSvc = new ChatroomService();
 // 	List<ChatroomVO> listChatroomVO = chatroomSvc.getAll();
 
+
+	List<Chatroom_MembersVO2> listChatroomVO2 = chatroom_membersSvc.getAllwCond();
+	pageContext.setAttribute("listChatroomVO2", listChatroomVO2);
+
 // *** bug
 // Chatroom_MembersVO2 cmVO2 = chatroom_membersSvc.getOnewCond("MG00000002", "MG00000003");
 // System.out.println("chatroom.jsp / cmVO2.getMem_no() = " + cmVO2.getMem_no());
 // *** bug
 // *** 替代
- 	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
-// 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
-// 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
-pageContext.setAttribute("chmemDao", chmemJDBCDAO);
+//  	Chatroom_MembersJDBCDAO chmemJDBCDAO = new Chatroom_MembersJDBCDAO();
+// // 	Chatroom_MembersVO2 cmVO2 = chmemJDBCDAO.getOnewCond("MG00000002", "MG00000003");
+// // 	System.out.println("chatroom.jsp / chmemJDBCDAO.getMem_no() = " + cmVO2.getChatroom_no());
+// pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 
 // 	Map<String, String> mapGroupRoom = new HashMap<String, String>();
 // 	for(int idx = 0; idx < listChatroom_MembersVO.size(); idx++){
@@ -96,6 +101,9 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 
 %>
 
+<c:if test="${mem_no != ''}" var="blnCif" scope="page">
+
+
 
 		<div class="col-sm-4 container-fulid chatroom-list-container">
 			<div class="row">
@@ -106,8 +114,8 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 					<div class="collapse" id="chatroom-list-body">
 						<!-- bs-panel -->
 						<div class="bs-panel panel panel-danger">
-						
-						
+
+
 <!-- 							<div class="panel-heading"> -->
 <!-- 								<h3 class="panel-title">野餐團</h3> -->
 <!-- 							</div> -->
@@ -118,7 +126,7 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 <%-- </c:forEach> --%>
 <!-- 							</div> -->
 <!-- 							END: bs-list-group -->
-							
+
 
 							<div class="panel-heading">
 								<h3 class="panel-title">好友</h3>
@@ -126,7 +134,7 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 							<!-- bs-list-group -->
 							<div class="list-group bs-list-group chatroom-list-friend-room">
 <c:forEach var="entryOfMapFriendRoom" items="${ mapFriendRoom.entrySet() }">
-								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }" roomno='${ chmemDao.getOnewCond("MG00000002", "MG00000003").getChatroom_no() }'><span class="headicon"><img src="https://api.fnkr.net/testimg/24x24/00CED1/FFF/?text=img+placeholder"></span>${ entryOfMapFriendRoom.getValue() }</a>
+								<a href="#" class="list-group-item" id="${ entryOfMapFriendRoom.getKey() }" ><span class="headicon"><img src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${ entryOfMapFriendRoom.getKey() }" style="width:24px;"></span>${ entryOfMapFriendRoom.getValue() }</a>
 </c:forEach>
 							</div>
 							<!-- END: bs-list-group -->
@@ -240,11 +248,14 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
 <!-- END: .aChatroom-container -->
 
 
-
-		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>		
+		<script>
+	            var webSocket;
+		</script>
+		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_resize.js"></script>
 		<script src="<%=request.getContextPath()%>/mustinclude/chatroom_websocket.js"></script>
 		<script>
 			var gObjCR = {};
+			gObjCR.getContextPath = '<%=request.getContextPath()%>';
 			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
 			gObjCR.memName = '${sessionScope.gVO.getMEM_NAME()}';
 
@@ -252,28 +263,74 @@ pageContext.setAttribute("chmemDao", chmemJDBCDAO);
                 $('#aChatroom-container').css('display', 'block');
                 gObjCR.chatWithMemNo = this.id; //alert(this.id); //"MG00000003"
 
-                gObjCR.myRoomNo = 'CR00000001'; 
-                gObjCR.myRoomNo = this.getAttribute( "roomno" );
+                var notMap = <%
+					String tempStr ="[";
+						for (int idx = 0; idx < listChatroomVO2.size(); idx++) {
+							Chatroom_MembersVO2 aVo2 = listChatroomVO2.get(idx);
+							tempStr += "['" + aVo2.getChatroom_no() + "', '" + aVo2.getMem_no() + "']";
+							if(idx<listChatroomVO2.size()-1) tempStr += ",";
+						}
+					tempStr +="]";
+					out.print(tempStr);
+        	    %>;
+
+        	    var set1 = [];
+        	    var set2 = [];
+
+	       	    for(var ii = 0; ii < notMap.length; ii++){
+        	      if(notMap[ii][1]==gObjCR.memNo){set1.push(notMap[ii][0]);}
+        	      if(notMap[ii][1]==gObjCR.chatWithMemNo){
+					  set2.push(notMap[ii][0]);
+					//   console.log("ppp"+notMap[ii][0]);
+				  }
+        	    }
+        	    var intersect;
+
+        	    for(var jj=0; jj<set1.length; jj++){
+        	      for(var kk=0; kk<set2.length; kk++){
+        	        if( set1[jj] == set2[kk] ){ intersect = set1[jj]; }
+        	      }
+        	    }
+        	    gObjCR.myRoomNo = intersect;
+//         	    console.log("intersect>>>>>>"+intersect);
+
+
+//                 gObjCR.myRoomNo = 'CR00000001';
+//                 gObjCR.myRoomNo = this.getAttribute( "roomno" );
 
 	            var myRoomNo = gObjCR.myRoomNo;
 	            updateStatus(' memNo = ' + gObjCR.memNo + ", myRoomNo = " + myRoomNo);
-	
+
 	            var MyPoint = "/MyWebSocketServer/peter/" + myRoomNo;
 	            var host = window.location.host;
 	            var path = window.location.pathname;
 	            var webCtx = path.substring(0, path.indexOf('/', 1));
 	            //updateStatus(' webCtx = ' + webCtx);
 	            var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-	            //updateStatus(' endPointURL = ' + endPointURL);
-	            var webSocket;
-	
-	            if( myRoomNo !== '' ) connect(endPointURL);
-                
-                
+	            updateStatus(' endPointURL = ' + endPointURL);
+
+				if(myRoomNo !== '' ){
+	        		if( !webSocket ){
+						connect(endPointURL)
+					}else if(webSocket.url !== endPointURL){
+						webSocket.close();
+						document.getElementById("ulChat").innerHTML = '';
+						connect(endPointURL);
+					}
+				}
+
+
                 onWinResize();
             });
-            
+
             $('#btn-close-aChatroom-container').on('click', function(){
             	$('#aChatroom-container').css('display', 'none');
             });
+
+<%--             console.log("tessssssssssst" +  '<% out.print("{[123asf]}"); %>');  --%>
+
 		</script>
+
+
+</c:if>
+

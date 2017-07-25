@@ -73,7 +73,7 @@ body{
 <!-- .cr -->
 <div class="container-fluid" style="margin-bottom: 16px;">
 					<div class="row">
-						<div class="col-sm-8 col-sm-push-2">
+						<div class="col-sm-8 col-sm-push-2"  style="padding-left: 0px;">
 							<div id="carousel-id" class="carousel slide" data-ride="carousel">
 								<ol class="carousel-indicators">
 									<li data-target="#carousel-id" data-slide-to="0" class="active"></li>
@@ -107,7 +107,7 @@ body{
 
 <!-- .cr -->
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" style="margin-right: 15px;">
 		<div class="col-sm-8 col-sm-push-2" style="background-color:white;">
 <h2>最新成立的野餐團</h2>
 <%@ include file="pages/page1.file" %>

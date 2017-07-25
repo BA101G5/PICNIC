@@ -121,7 +121,7 @@ textarea {
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-sm-push-1 dd">
-				<label><h1>廠商會員修改</h1></label>
+				<label><h1 style="color:Azure  ;"> 廠 商 會 員 修 改 </h1></label>
 			</div>
 		</div>
 	</div>
@@ -159,7 +159,7 @@ textarea {
 									<div class="col-xs-12 col-sm-8">
 										<input type="password" name="MF_PSW" id="MF_PSW"
 											placeholder="請輸入密碼" style="width: 200px;"
-											value=""><font color='red'><b>${errorMsgs.MF_PSW}</b></font>
+											value=""><font color='red'><b></b></font>
 										<c:if test="${not empty errorMsgs}">
 											<font color='red' id="PSW"><b>${errorMsgs.MF_PSW}</b></font>
 											<font color='red'><b>${errorMsgs.MF_PSW_1}</b></font>

@@ -21,7 +21,11 @@ function connect(endPointURL) {
     updateStatus(' chatroom_websocket.js / onmessage / event.data = ' + event.data);
     var jsonObj = JSON.parse(event.data);
     var message = jsonObj.userName + ": " + jsonObj.message;// + "\r\n";
-    messagesArea.innerHTML += '<li class="left clearfix">' + message + '</li>';
+    if(jsonObj.userNo == gObjCR.memNo){
+      messagesArea.innerHTML += '<li class="right clearfix"><span class="chat-img pull-right"><img src="'+gObjCR.getContextPath +'/general_member/DBGift.do?MEM_NO='+jsonObj.userNo +'" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+ jsonObj.timestamp +'</small><strong class="pull-right primary-font">' + jsonObj.userName + '</strong></div><p>' + jsonObj.message + '</p></div></li>';
+    }else{
+      messagesArea.innerHTML += '<li class="left clearfix"><span class="chat-img pull-left"><img src="'+gObjCR.getContextPath +'/general_member/DBGift.do?MEM_NO='+jsonObj.userNo +'" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">' + jsonObj.userName + '</strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'+ jsonObj.timestamp +'</small></div><p>'+jsonObj.message+'</p></div></li>';
+    }
     // messagesArea.scrollTop = messagesArea.scrollHeight;
     onWinResize();
   };
@@ -36,6 +40,7 @@ function connect(endPointURL) {
 // inputUserName.focus();
 
 function sendMessage() {
+    var userNo = gObjCR.memNo;
     var userName = gObjCR.memName;//inputUserName.value.trim();
     // if (userName === ""){
     //     alert ("使用者名稱請勿空白!");
@@ -50,7 +55,7 @@ function sendMessage() {
         alert ("訊息請勿空白!");
         inputMessage.focus();
     }else{
-        var jsonObj = {"userName" : userName, "message" : message, "myRoomNo":  gObjCR.myRoomNo};
+        var jsonObj = {"userNo": userNo, "userName": userName, "message": message, "myRoomNo":  gObjCR.myRoomNo, "timestamp": moment().format('YYYY-MM-DD HH:MM:SS')};
         updateStatus(' sendMessage / json  = ' + JSON.stringify(jsonObj));
         webSocket.send(JSON.stringify(jsonObj));
         inputMessage.value = "";

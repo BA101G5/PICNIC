@@ -15,7 +15,7 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<title>Title Page</title>
+<title>更新商品租借</title>
 
 
 
@@ -297,7 +297,7 @@ textarea {
 										<select size="1" name="p_no">
 											<c:forEach var="pVO" items="${pSvc.all}">
 												
-												<option value="${pVO.p_no}" selected>${pVO.p_name}
+												<option value="${pVO.p_no}" ${(GRVO.p_no eq pVO.p_no)?'selected':'' }>${pVO.p_name}
 												</option>
 												
 											</c:forEach>
@@ -311,9 +311,11 @@ textarea {
 										<label for="aa" class="control-label">狀態</label>
 									</div>
 									<div class="col-xs-12 col-sm-8">
+										
+										
 										<select name="gr_sta" id="gr_sta">
-											<option value="U">上架</option>
-											<option value="A">下架</option>
+											<option value="U" ${(GRVO.gr_sta eq 'U')?'selected':'' }>上架</option>
+											<option value="A" ${(GRVO.gr_sta eq 'A')?'selected':'' }>下架</option>
 										</select>
 									</div>
 								</div>

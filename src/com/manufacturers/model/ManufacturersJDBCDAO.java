@@ -359,4 +359,41 @@ public class ManufacturersJDBCDAO implements ManufacturersDAO_interface {
 		
 	}
 
+	@Override
+	public String findByMfName(String mf_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void k_insert(ManufacturersVO MANUFACTURERSVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void k_update(ManufacturersVO MANUFACTURERSVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void k_delete(String MF_NO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ManufacturersVO k_findByPrimaryKey(String MF_NO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ManufacturersVO> k_getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

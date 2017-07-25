@@ -425,4 +425,10 @@ public class Goods_RentJDBCDAO implements Goods_RentDAO_interface {
 		}
 		return list;
 	}
+	//------------------------------------------
+	public void k_insert(Goods_RentVO goods_rentVO){}
+	public void k_update(Goods_RentVO goods_rentVO){}
+	public void k_delete(String gr_no){}
+	public Goods_RentVO k_findByPrimaryKey(String gr_no){return null;}
+	public List<Goods_RentVO> k_getAll(){return null;}
 }

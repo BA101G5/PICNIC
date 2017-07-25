@@ -63,9 +63,11 @@ public class Orderde_DetailService {
 	orderde_detailVO.setPicnic_no(picnic_no);
 	orderde_detailVO.setP_no(goods_rentVO.getP_no());
 	orderde_detailVO.setGr_no(goods_rentVO.getGr_no());
+	
 	orderde_detailVO.setOd_amount(amount);
 	orderde_detailVO.setOd_price(goods_rentVO.getGr_price());
-	orderde_detailVO.setMem_no(account);		
+	orderde_detailVO.setMem_no(account);	
+	
 	dao.insert(orderde_detailVO);	
 	}
 	public List<Orderde_DetailVO> getGsByMem(String mem_no){
@@ -75,7 +77,13 @@ public class Orderde_DetailService {
 	}
 
 	public void updateOrderde_Detail(List<Orderde_DetailVO> listGr, List<Orderde_DetailVO> listGs) {
-	
+		
+		
+		
+		
+		
+		
+		dao.updateOrderde_Detail(listGr, listGs);
 		
 	}
 
@@ -83,5 +91,38 @@ public class Orderde_DetailService {
 		
 		
 	}
+//-----------------------------------------------------------------
+	public void k_addOrderde_Detail(Orderde_DetailVO orderde_detailVO) {
+		dao.k_insert(orderde_detailVO);
+	}
 
+	public Orderde_DetailVO k_updateOrderde_Detail() {
+		return null;
+	}
+
+	public void k_deleteOrderde_Detail() {
+	}
+
+	public Orderde_DetailVO k_getOne(String orderde_detailno) {
+		return dao.k_findByPrimaryKey(orderde_detailno);
+	}
+
+	public List<Orderde_DetailVO> k_getAll() {
+		return dao.k_getAll();
+	}
+	//--
+	public List<Orderde_DetailVO> k_getAllByPicnic(String picnic_no){
+		return dao.k_getAllByPicnic(picnic_no);
+	}
+	
+	
+	public Orderde_DetailVO k_gsGoodNumber(String gs_no,String pic_no) {
+		Orderde_DetailVO ordVO =dao.k_gsGoodNumber(gs_no, pic_no);
+		return ordVO;
+	}
+	
+	public Orderde_DetailVO k_grGoodNumber(String gr_no,String pic_no) {
+		Orderde_DetailVO ordVO =dao.k_grGoodNumber(gr_no, pic_no);
+		return ordVO;
+	}
 }

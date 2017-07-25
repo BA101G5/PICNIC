@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Title Page</title>
+<title>­Ó¤H­¶­±</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,10 +19,10 @@
 		<![endif]-->
 <style type="text/css">
 .table-striped tbody tr:nth-of-type(odd){
-				background-color: #afa;
+				background-color: AliceBlue ;
 			}
 			.table-hover tbody tr:hover{
-				background-color: #fa0;
+				background-color: GreenYellow ;
 			}
 
 .row-padding {
@@ -195,125 +195,123 @@ li+a {
 #tab4 {
 	margin-top: 10px;
 }
-
-#btn {
-	color: #fff;
-	background-color: #5bc0de;
-	border-color: #46b8da;
-	display: inline-block;
-	padding: 6px 12px;
-	margin-bottom: 0;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1.42857143;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	-ms-touch-action: manipulation;
-	touch-action: manipulation;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-image: none;
-	border: 1px solid transparent;
-	border-radius: 4px;
+#btn,.btn{
+  color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  
 }
 
-#btn:hover {
-	background-color: SkyBlue;
-}
+#btn:hover,.btn:hover{background-color:SkyBlue ;}
 
-#btn:active {
-	background-color: #40E0D0;
-	transform: translateY(4px);
+#btn:active,.btn:active{
+  background-color: 	#40E0D0;
+ 
+  transform: translateY(4px);
 }
 </style>
 </head>
 <body>
-	<div class="container-fulid">
-		<div class="row">
-		
-				<jsp:include page="/mustinclude/left_nav.jsp" />
-				<jsp:include page="/mustinclude/top_nav.jsp" />
 
+	<jsp:include page="/mustinclude/left_nav.jsp" />
+	<jsp:include page="/mustinclude/top_nav.jsp" />
+	
+	
+<c:if test="${not empty gVO}">
 
-				<c:if test="${not empty gVO}">
+	<jsp:include page="/personal/g_personal.jsp" />
+</c:if>
+<c:if test="${not empty mVO}">
 
-					<jsp:include page="/personal/g_personal.jsp" />
-				</c:if>
-				<c:if test="${not empty mVO}">
+	<jsp:include page="/personal/m_personal.jsp" />
+</c:if>		
+	<script>
+	
+	
+	
+		function doFirst() {
+			document.getElementsByClassName('li1')[0].style.borderBottom = "2px solid blue";
+		}
+		document.getElementsByClassName('li1')[0]
+				.addEventListener(
+						'click',
+						function() {
+							document.getElementsByClassName('li1')[0].style.borderBottom = "2px solid blue";
+							document.getElementsByClassName('li1')[1].style.borderBottom = "";
+							document.getElementsByClassName('li1')[2].style.borderBottom = "";
+							document.getElementsByClassName('li1')[3].style.borderBottom = "";
+							document.getElementsByClassName('li1')[4].style.borderBottom = "";
+						}, false);
 
-					<jsp:include page="/personal/m_personal.jsp" />
-				</c:if>
-				<script>
-					function doFirst() {
-						document.getElementsByClassName('li1')[0].style.borderBottom = "2px solid blue";
-					}
-					document.getElementsByClassName('li1')[0]
-							.addEventListener(
-									'click',
-									function() {
-										document.getElementsByClassName('li1')[0].style.borderBottom = "2px solid blue";
-										document.getElementsByClassName('li1')[1].style.borderBottom = "";
-										document.getElementsByClassName('li1')[2].style.borderBottom = "";
-										document.getElementsByClassName('li1')[3].style.borderBottom = "";
-										document.getElementsByClassName('li1')[4].style.borderBottom = "";
-									}, false);
+		document.getElementsByClassName('li1')[1]
+				.addEventListener(
+						'click',
+						function() {
+							document.getElementsByClassName('li1')[1].style.borderBottom = "2px solid blue";
+							document.getElementsByClassName('li1')[0].style.borderBottom = "";
+							document.getElementsByClassName('li1')[2].style.borderBottom = "";
+							document.getElementsByClassName('li1')[3].style.borderBottom = "";
+							document.getElementsByClassName('li1')[4].style.borderBottom = "";
+						}, false);
 
-					document.getElementsByClassName('li1')[1]
-							.addEventListener(
-									'click',
-									function() {
-										document.getElementsByClassName('li1')[1].style.borderBottom = "2px solid blue";
-										document.getElementsByClassName('li1')[0].style.borderBottom = "";
-										document.getElementsByClassName('li1')[2].style.borderBottom = "";
-										document.getElementsByClassName('li1')[3].style.borderBottom = "";
-										document.getElementsByClassName('li1')[4].style.borderBottom = "";
-									}, false);
+		document.getElementsByClassName('li1')[2]
+				.addEventListener(
+						'click',
+						function() {
+							document.getElementsByClassName('li1')[2].style.borderBottom = "2px solid blue";
+							document.getElementsByClassName('li1')[1].style.borderBottom = "";
+							document.getElementsByClassName('li1')[0].style.borderBottom = "";
+							document.getElementsByClassName('li1')[3].style.borderBottom = "";
+							document.getElementsByClassName('li1')[4].style.borderBottom = "";
+						}, false);
 
-					document.getElementsByClassName('li1')[2]
-							.addEventListener(
-									'click',
-									function() {
-										document.getElementsByClassName('li1')[2].style.borderBottom = "2px solid blue";
-										document.getElementsByClassName('li1')[1].style.borderBottom = "";
-										document.getElementsByClassName('li1')[0].style.borderBottom = "";
-										document.getElementsByClassName('li1')[3].style.borderBottom = "";
-										document.getElementsByClassName('li1')[4].style.borderBottom = "";
-									}, false);
+		document.getElementsByClassName('li1')[3]
+				.addEventListener(
+						'click',
+						function() {
+							document.getElementsByClassName('li1')[3].style.borderBottom = "2px solid blue";
+							document.getElementsByClassName('li1')[1].style.borderBottom = "";
+							document.getElementsByClassName('li1')[2].style.borderBottom = "";
+							document.getElementsByClassName('li1')[0].style.borderBottom = "";
+							document.getElementsByClassName('li1')[4].style.borderBottom = "";
+						}, false);
 
-					document.getElementsByClassName('li1')[3]
-							.addEventListener(
-									'click',
-									function() {
-										document.getElementsByClassName('li1')[3].style.borderBottom = "2px solid blue";
-										document.getElementsByClassName('li1')[1].style.borderBottom = "";
-										document.getElementsByClassName('li1')[2].style.borderBottom = "";
-										document.getElementsByClassName('li1')[0].style.borderBottom = "";
-										document.getElementsByClassName('li1')[4].style.borderBottom = "";
-									}, false);
+		document.getElementsByClassName('li1')[4]
+				.addEventListener(
+						'click',
+						function() {
+							document.getElementsByClassName('li1')[4].style.borderBottom = "2px solid blue";
+							document.getElementsByClassName('li1')[1].style.borderBottom = "";
+							document.getElementsByClassName('li1')[2].style.borderBottom = "";
+							document.getElementsByClassName('li1')[0].style.borderBottom = "";
+							document.getElementsByClassName('li1')[3].style.borderBottom = "";
+						}, false);
 
-					document.getElementsByClassName('li1')[4]
-							.addEventListener(
-									'click',
-									function() {
-										document.getElementsByClassName('li1')[4].style.borderBottom = "2px solid blue";
-										document.getElementsByClassName('li1')[1].style.borderBottom = "";
-										document.getElementsByClassName('li1')[2].style.borderBottom = "";
-										document.getElementsByClassName('li1')[0].style.borderBottom = "";
-										document.getElementsByClassName('li1')[3].style.borderBottom = "";
-									}, false);
+		window.addEventListener('load', doFirst, false);
+	</script>
 
-					window.addEventListener('load', doFirst, false);
-				</script>
-
-				<script src="https://code.jquery.com/jquery.js"></script>
-				<script
-					src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			</div>
-		</div>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

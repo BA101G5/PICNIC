@@ -71,10 +71,14 @@ AdvertisementVO aVO = new AdvertisementVO();
 	public List<AdvertisementVO> getForMM(String MF_NO) {
 		return dao.findByMM(MF_NO);
 	}
+  
 	public List<AdvertisementVO> getAll_U(){
 		return dao.getAll_U();
 	}
+
+
 	public List<AdvertisementVO> getAll_Other(){
 		return dao.getAll_Other();
 	}
+
 }

@@ -29,11 +29,11 @@ public class addMemberEmail extends HttpServlet {
 		try{
 			String account = req.getParameter("account").trim();
 			
-			if(account == null || account.length() == 0){
-				RequestDispatcher failureView = req.getRequestDispatcher("/wrong.jsp");
-				failureView.forward(req, res);
-				return; 
-			}
+//			if(account == null || account.length() == 0){
+//				RequestDispatcher failureView = req.getRequestDispatcher("/wrong.jsp");
+//				failureView.forward(req, res);
+//				return; 
+//			}
 			/*-----------------------------------------------------------------*/
 			Character MEM_STA ='E';
 			Character MF_STA ='E';
@@ -58,7 +58,7 @@ public class addMemberEmail extends HttpServlet {
 			
 			
 			
-			RequestDispatcher SuccessView = req.getRequestDispatcher("/signin.jsp");
+			RequestDispatcher SuccessView = req.getRequestDispatcher("/index.jsp");
 			SuccessView.forward(req, res);
 			
 			
