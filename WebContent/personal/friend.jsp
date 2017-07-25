@@ -24,7 +24,7 @@ h3 {
 }
 
 body {
-	font-family: "·L³n¥¿¶ÂÅé", Arial, sans-serif;
+	font-family: "å¾®è»Ÿæ­£é»‘é«”", Arial, sans-serif;
 }
 
 li+a {
@@ -93,9 +93,10 @@ li+a {
 <jsp:include page="/mustinclude/top_nav.jsp" />
 <div class="container" style="background: white; opacity: 0.8">
 	<div class="row">
+
 		<div class="col-xs-12 col-sm-12">
 
-			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1" >
 				<img
 					src="<%=request.getContextPath()%>/general_member/DBGift.do?MEM_NO=${contact_no}"
 					style="display: block; margin: auto; border-radius: 25%; width: 200px; height: 200px;">
@@ -106,7 +107,7 @@ li+a {
 
 
 		</div>
-		<div class="col-xs-12 col-sm-11">
+		<div class="col-xs-12 col-sm-11" style="background: white;opacity:0.8;">
 			<h3 style="font-family: DFKai-sb;">
 				<b>${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_NAME}</b>
 			</h3>
@@ -116,31 +117,32 @@ li+a {
 </div>
 <div class="container" style="background: white; opacity: 0.8">
 	<div class="row">
-		<div class="col-xs-12 col-sm-11 bb">
+		<div class="col-xs-12 col-sm-11 bb" style="background: white;opacity:0.8;">
 			<div role="tabpanel">
-				<!-- ¼ĞÅÒ­±ªO¡G¼ĞÅÒ°Ï -->
+				<!-- æ¨™ç±¤é¢æ¿ï¼šæ¨™ç±¤å€ -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#tab1"
-						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">­Ó¤H¸ê®Æ</a>
+						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">å€‹äººè³‡æ–™</a>
 					</li>
 
-
+          
+          
 					<li role="presentation"><a href="#tab4" aria-controls="tab4"
-						role="tab" data-toggle="tab" class="li1">ªB¤Í</a></li>
+						role="tab" data-toggle="tab" class="li1">æœ‹å‹</a></li>
 
 				</ul>
 
-				<!-- ¼ĞÅÒ­±ªO¡G¤º®e°Ï -->
+				<!-- æ¨™ç±¤é¢æ¿ï¼šå…§å®¹å€ -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">©Ê§O :
+							style="margin-top: 20px; text-align: center;">æ€§åˆ¥ :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_GEN}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">¥Í¤é :
+							style="margin-top: 20px; text-align: center;">ç”Ÿæ—¥ :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_BIRTH}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">¦Û§Ú¤¶²Ğ :
+							style="margin-top: 20px; text-align: center;">è‡ªæˆ‘ä»‹ç´¹ :
 							${GeneralMemberSvc.getOneGeneralMember(contact_no).MEM_SELF}</div>
 
 
@@ -148,7 +150,8 @@ li+a {
 					</div>
 
 
-
+          
+          
 
 					<jsp:useBean id="Contact_ListSvc" scope="page"
 						class="com.contact_list.model.Contact_ListService" />
