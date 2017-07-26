@@ -1,33 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%  int rowsPerPage1 = 8;  //瘥���    
-    int rowNumber=0;      //蝮賜�
-    int pageNumber=0;     //蝮賡�      
-    int whichPage=1;      //蝚砍嗾���
-    int pageIndexArray[]=null;
+    int rowNumber1=0;      //蝮賜�
+    int pageNumber1=0;     //蝮賡�      
+    int whichPage1=1;      //蝚砍嗾���
+    int pageIndexArray1[]=null;
     int pageIndex1=0; 
 %>
 
 <%  
-    rowNumber=list.size();
-    if (rowNumber%rowsPerPage1 !=0)
-     pageNumber=rowNumber/rowsPerPage1 +1;
-    else pageNumber=rowNumber/rowsPerPage1;    
+    rowNumber1=list.size();
+    if (rowNumber1%rowsPerPage1 !=0)
+     pageNumber1=rowNumber1/rowsPerPage1 +1;
+    else pageNumber1=rowNumber1/rowsPerPage1;    
 
-    pageIndexArray=new int[pageNumber]; 
-    for (int i=1 ; i<=pageIndexArray.length ; i++)
-    pageIndexArray[i-1]=i*rowsPerPage1-rowsPerPage1;
+    pageIndexArray1=new int[pageNumber1]; 
+    for (int i=1 ; i<=pageIndexArray1.length ; i++)
+    pageIndexArray1[i-1]=i*rowsPerPage1-rowsPerPage1;
 %>
 
 <%  try {
-      whichPage = Integer.parseInt(request.getParameter("whichPage"));
-      pageIndex1=pageIndexArray[whichPage-1];
+      whichPage1 = Integer.parseInt(request.getParameter("whichPage1"));
+      pageIndex1=pageIndexArray1[whichPage1-1];
     } catch (NumberFormatException e) { //蝚砌�甈∪銵����
-       whichPage=1;
+       whichPage1=1;
        pageIndex1=0;
     } catch (ArrayIndexOutOfBoundsException e) { //蝮賡�銋��隤日�
-         if (pageNumber>0){
-              whichPage=pageNumber;
-              pageIndex1=pageIndexArray[pageNumber-1];
+         if (pageNumber1>0){
+              whichPage1=pageNumber1;
+              pageIndex1=pageIndexArray1[pageNumber1-1];
          }
     } 
 %>

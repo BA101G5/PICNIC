@@ -30,7 +30,7 @@
 						<li><a
 							href="<%=request.getContextPath()%>/picnic/maosecondui.jsp">開團</a></li>
 						<li><a
-							href="<%=request.getContextPath()%>/buycart/moafirst.jsp">預購商品</a></li>
+							href="<%=request.getContextPath()%>/buycart/moafirst.jsp?first=first">預購商品</a></li>
 						<li><a href="#"><form method="POST"
 								action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do"
 								onclick="submit()">

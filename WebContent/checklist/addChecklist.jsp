@@ -21,6 +21,15 @@ ChecklistVO checklistVO = (ChecklistVO) request.getAttribute("checklistVO");
 </head>
 <body>
 <h3>檢舉單填寫:</h3>
+<c:if test="${not empty errorMsgs}">
+	<font color='red'>請修正以下錯誤:
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li>${message}</li>
+		</c:forEach>
+	</ul>
+	</font>
+</c:if>
 <jsp:useBean id="now" scope="page" class="java.util.Date" /> 
 <script type="text/javascript">
     function closeWindow() {
@@ -54,7 +63,7 @@ ChecklistVO checklistVO = (ChecklistVO) request.getAttribute("checklistVO");
 		</tr>
 		<tr>
 			<td>檢舉事由</td>
-			<td><textarea cols="30" rows="5" name="chli_reason"></textarea></td>
+			<td><textarea cols="30" rows="5" name="chli_reason" ></textarea></td>
 		</tr>
 		<tr>
 			<td>檢舉日期</td>

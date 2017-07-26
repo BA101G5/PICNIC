@@ -211,7 +211,7 @@ System.out.println(GS_TYPE);
 			try {
 
 				String type = new String((String) session.getAttribute("type"));
-
+				
 				String Mf_name = req.getParameter("mfcount");
 				System.out.println(Mf_name);
 				Mf_name = Mf_name.split("\\(")[0];
@@ -221,7 +221,7 @@ System.out.println(GS_TYPE);
 
 				Goods_SellService goods_sellSvc = new Goods_SellService();
 				List<Goods_SellVO> list = goods_sellSvc.findByMfType(type, Mf_no);
-
+				System.out.println(list);
 				System.out.println("Hello");
 
 				req.setAttribute("list", list);

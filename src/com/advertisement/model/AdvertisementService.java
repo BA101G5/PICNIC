@@ -44,6 +44,18 @@ AdvertisementVO aVO = new AdvertisementVO();
 		dao.update(aVO);
 		return aVO;
 	}
+	
+	public AdvertisementVO updateSTA(String AD_NO, Character AD_STA) {
+AdvertisementVO aVO = new AdvertisementVO();
+		
+		aVO = new AdvertisementVO();
+		aVO.setAD_NO(AD_NO);
+		
+		aVO.setAD_STA(AD_STA);
+		dao.updateforSTA(aVO);
+		return aVO;
+	}
+	
 
 	public void deleteAdvertisement(String AD_NO) {
 		dao.delete(AD_NO);
@@ -59,9 +71,14 @@ AdvertisementVO aVO = new AdvertisementVO();
 	public List<AdvertisementVO> getForMM(String MF_NO) {
 		return dao.findByMM(MF_NO);
 	}
-
-	public AdvertisementVO updateSTA(String aD_NO, Character aD_STA) {
-		// TODO Auto-generated method stub
-		return null;
+  
+	public List<AdvertisementVO> getAll_U(){
+		return dao.getAll_U();
 	}
+
+
+	public List<AdvertisementVO> getAll_Other(){
+		return dao.getAll_Other();
+	}
+
 }
