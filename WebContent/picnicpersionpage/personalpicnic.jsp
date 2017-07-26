@@ -15,6 +15,10 @@
 // 	System.out.println(pmListByP.get(1).getMem_no());
 // 	System.out.println(pmListByP.get(2).getMem_no());
 	pageContext.setAttribute("pmListByP", pmListByP);
+
+	GeneralMemberVO gVO = (GeneralMemberVO)session.getAttribute("gVO");
+	int _count = pmSvc.count(picnicVO.getPicnic_no(), gVO.getMEM_NO());
+	pageContext.setAttribute("_count", _count);
 %>
 
 <%
@@ -295,18 +299,22 @@ body{
 							</p>
 							<hr>
 							</p>
+								<c:if test="${_count==0}">
 								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-success">
 									<span>¥[¹Î</span>
 									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
 									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
 									<input type="hidden" name="button" value="memAddThisPG">
 								</form>
+								</c:if>
+								<c:if test="${_count!=0}">
 								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-danger">
 									<span>°h¹Î</span>
 									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
 									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
 									<input type="hidden" name="button" value="memExitThisPG">
 								</form>
+								</c:if>
 							</p>
 
 						</div>

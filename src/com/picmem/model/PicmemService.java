@@ -88,4 +88,9 @@ public class PicmemService {
 	public List<String> k_getMemPicList(String mem_no){
 		return dao.k_getMemPicList(mem_no);
 	}
+	
+	
+	public int count(String picnic_no, String mem_no) {
+		return dao.count(picnic_no, mem_no);
+	}
 }
