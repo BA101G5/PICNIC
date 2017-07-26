@@ -19,6 +19,10 @@
 	GeneralMemberVO gVO = (GeneralMemberVO)session.getAttribute("gVO");
 	int _count = pmSvc.count(picnicVO.getPicnic_no(), gVO.getMEM_NO());
 	pageContext.setAttribute("_count", _count);
+	
+
+	int _IamGroupLord = pmSvc.amILord(picnicVO.getPicnic_no(), gVO.getMEM_NO());
+	pageContext.setAttribute("_IamGroupLord", _IamGroupLord);
 %>
 
 <%
@@ -292,10 +296,15 @@ body{
 						</div>
 						<div class="well">
 							<strong>³¥À\¹Î¤¶²Ð</strong>
-							<p>${ picnicVO.picnic_desc }
-								<form method="post" action=""  onclick="submit()" class="btn btn-info">
+							<p><textarea rows="3" cols="20" id="picnic_desc_textarea" <c:if test="${_IamGroupLord!=1}">readonly</c:if>>${ picnicVO.picnic_desc }</textarea>
+								<c:if test="${_IamGroupLord==1}">
+								<form method="post" action="<%=request.getContextPath()%>/picnic/picnic.do"  onclick="$('#picnic_desc_input')[0].value=$('#picnic_desc_textarea')[0].value;submit();" class="btn btn-info">
 									<span>­×§ï</span>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="picnic_desc" id="picnic_desc_input" value="${ picnicVO.picnic_desc }">
+									<input type="hidden" name="action" value="modPicnicDesc">
 								</form>
+								</c:if>
 							</p>
 							<hr>
 							</p>

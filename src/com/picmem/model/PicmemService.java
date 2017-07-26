@@ -93,4 +93,8 @@ public class PicmemService {
 	public int count(String picnic_no, String mem_no) {
 		return dao.count(picnic_no, mem_no);
 	}
+	
+	public int amILord(String picnic_no, String mem_no) {
+		return dao.amILord(picnic_no, mem_no);
+	}
 }
