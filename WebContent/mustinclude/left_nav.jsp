@@ -39,30 +39,32 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-
+						<c:if test="${empty sessionScop.persionalpicnic }">
 							<form method="post"
 								action="<%=request.getContextPath()%>/picnic/picnic.do"
 								onclick="submit()">
-								<a data-toggle="collapse" href=""><span
+								<a data-toggle="collapse1" href=""><span
 									class="glyphicon glyphicon-star"></span> </a> <input type="hidden"
 									name="uri" value="<%=request.getRequestURI()%>"> <input
 									type="hidden" name="action" value="persionalpicnic">
 							</form>
-
+							</c:if>
+							<c:if test="${sessionScop.persionalpicnic }"><a data-toggle="collapse" href=""><span
+									class="glyphicon glyphicon-star"></span> </a></c:if>
+							
 						</h3>
 					</div>
-					<div id="collapse1" class="panel-collapse collapse">
+					<div id="collapse1" class="panel-collapse collapse in">
 						<c:if test="${not empty persionalpicnic }">
 							<c:forEach var="PicnicVO" items="${persionalpicnic}">
-								
-										<div class="panel-body">${PicnicVO.getPicnic_name()}</div>
-										<form method="post"
+										<div class="panel-body"><form method="post"
 										action="<%=request.getContextPath()%>/picnic/picnic.do"
-										onclick="submit()">
+										onclick="submit()"><P>${PicnicVO.getPicnic_name()}</P>
 										<input type="hidden" name="Picnic_no"
 											value="${PicnicVO.getPicnic_no()}"> <input
 											type="hidden" name="action" value="lookpicnic">
-									</form>
+									</form></div>
+										
 							</c:forEach>
 						</c:if>
 					</div>

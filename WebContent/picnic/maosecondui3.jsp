@@ -64,7 +64,7 @@
 							class="btn btn-default" role="button">帶我回首頁</a>
 					</div>
 					<div class="btn-group">
-						<a href="<%=request.getContextPath()%>/buycart/moafirst.jsp"
+						<a href="<%=request.getContextPath()%>/buycart/moafirst.jsp?first=first"
 							class="btn btn-default" role="button">帶我到預購商品區</a>
 					</div>
 				</div>

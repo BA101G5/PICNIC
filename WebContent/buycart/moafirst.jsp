@@ -12,9 +12,9 @@
 
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
-<%
+<%	String whichPage=request.getParameter("whichPage");
    String first = request.getParameter("first");
-if(first== null){
+if(first == null&& whichPage == null){
 	Set<String> typeset = (Set<String>) session.getAttribute("typeSet");
 	pageContext.setAttribute("typeset", typeset);}
 %>

@@ -201,9 +201,10 @@
 						</form>
 						<br>
 					</c:if>
+					
 					<form method="POST"
 						action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-
+						<c:if test="${ not empty listOrderde_DetailVO|| not empty listGs}">
 						<table class="table table-hover">
 							<caption>ÁÊª«²M³æ</caption>
 							<thead>
@@ -234,6 +235,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						</c:if>
 						<c:if
 							test="${not empty listOrderde_DetailVO &&listOrderde_DetailVO.size( )>1}">
 

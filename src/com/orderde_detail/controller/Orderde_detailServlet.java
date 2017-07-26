@@ -1,14 +1,11 @@
 package com.orderde_detail.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +21,6 @@ import com.orderde_detail.model.Orderde_DetailVO;
 import com.picmem.model.PicmemService;
 import com.picnic.model.PicnicService;
 import com.picnic.model.PicnicVO;
-import com.place.model.PlaceService;
-import com.place.model.PlaceVO;
 
 public class Orderde_detailServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -45,7 +40,7 @@ public class Orderde_detailServlet extends HttpServlet {
 				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
 				System.out.println(list);
 				if (!list.isEmpty()) {
-					req.setAttribute("picnic_no", picnic_no);
+					session.setAttribute("picnic_no", picnic_no);
 					req.setAttribute("listOrderde_DetailVO", list);
 				}
 
@@ -155,6 +150,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			orderde_detailSvc.deleteOrderde_Detail(delete);
 			List<Orderde_DetailVO> listGr = orderde_detailSvc.getAllPICNICNO(picnic_no);
 			List<Orderde_DetailVO> listGS = orderde_detailSvc.getGsByMem(account);
+	
 
 			session.setAttribute("listGs", listGS);
 			if (!listGr.isEmpty()) {
@@ -179,7 +175,7 @@ public class Orderde_detailServlet extends HttpServlet {
 			List<Orderde_DetailVO> listGr = orderde_detailSvc.getAllPICNICNO(picnic_no);
 			List<Orderde_DetailVO> listGs = ((List<Orderde_DetailVO>) session.getAttribute("listGs"));
 			System.out.println(listGr);
-			Integer tlprice=0;
+			int tlprice=0;
 			try {
 				if (!listGr.isEmpty()) {
 					for (Orderde_DetailVO orderde_detailVO : listGr) {
