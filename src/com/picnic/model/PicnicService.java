@@ -20,6 +20,10 @@ public class PicnicService {
 		return null;
 	}
 
+	public void update_desc(String picnic_no, String desc) {
+		dao.update_desc(picnic_no, desc);;
+	}	
+	
 	public void deletePicnic() {
 	}
 

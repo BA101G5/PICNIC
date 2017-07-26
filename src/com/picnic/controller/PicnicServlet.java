@@ -2,6 +2,8 @@ package com.picnic.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,32 @@ public class PicnicServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+<<<<<<< HEAD
 		 System.out.println(action);
+=======
+		// System.out.println(action);
+		
+		
+		if("modPicnicDesc".equals(action)){
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String picnic_desc = (String) req.getParameter("picnic_desc").trim();
+//			System.out.println("modPicnicDesc // "+ picnic_desc);
+			
+			/***************************2.開始新增資料***************************************/
+			PicnicService picnicSvc = new PicnicService();
+			PicnicVO picnicVO = (PicnicVO) session.getAttribute("picnicVO");
+			picnicVO.setPicnic_desc(picnic_desc);
+			picnicSvc.update_desc(picnic_no, picnic_desc);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			session.setAttribute("picnicVO", picnicVO);
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+		
+		
+>>>>>>> branch 'master' of https://github.com/BA101G5/PICNIC.git
 		if ("checkbeforeinsert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);

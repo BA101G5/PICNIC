@@ -14,7 +14,8 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 	private static final String GET_ALL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC Order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_NO = ?";
 	private static final String DELETE_STMT = "delete from PICNIC where PICNIC = ?";
-	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNICNO=?";
+	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNIC_NO=?";
+	private static final String UPDATE_STMT_DESC = "update PICNIC set PICNIC_DESC=? where PICNIC_NO=?";
 	private static final String INSERT_INITIATESTMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
 
 	@Override
@@ -88,6 +89,7 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 			pstmt.setTimestamp(11, picnicVO.getOrd_date());
 			pstmt.setString(12, picnicVO.getOrd_dm());
 			pstmt.setString(13, picnicVO.getOrd_sta());
+			pstmt.setString(14, picnicVO.getPicnic_no());
 
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -116,6 +118,45 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 
 	}
 
+	public void update_desc(String picnic_no, String desc) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			;
+			pstmt = con.prepareStatement(UPDATE_STMT_DESC);
+
+			pstmt.setString(1, desc);
+			pstmt.setString(2, picnic_no);
+
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	@Override
 	public void delete(String picnic_no) {
 		Connection con = null;
@@ -355,23 +396,24 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		// picnicjdbcdao.insert(picnicVO);
 
 		// update
-		// PicnicVO picnicVO =new PicnicVO();
-		// picnicVO.setPicnic_no(PG00000001);
-		// picnicVO.setPicnic_name("天線寶寶");
-		// picnicVO.setPicnic_desc("在這裡在這裡");
-		// picnicVO.setPicupdate(java.sql.Timestamp.valueOf("2055-01-01"));
-		// picnicVO.setPicnic_startup(java.sql.Timestamp.valueOf("2056-01-04"));
-		// picnicVO.setPicnic_setup(java.sql.Timestamp.valueOf("2055-01-02"));
-		// picnicVO.setPicnic_chk("S");
-		// picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-05"));
-		// picnicVO.setPicnic_pl(10);
-		// picnicVO.setPicnic_sta("D");
-		// picnicVO.setOrd_total(400.0);
-		// picnicVO.setOrd_date(null);
-		// picnicVO.setOrd_dm("隨便送");
-		// picnicVO.setOrd_sta("H");
-		//
-		// picnicjdbcdao.update(picnicVO);
+//		 PicnicVO picnicVO =new PicnicVO();
+//		 picnicVO.setPicnic_no("PG00000001");
+//		 picnicVO.setPicnic_name("天線寶寶");
+//		 picnicVO.setPicnic_desc("在這裡在這裡");
+//		 picnicVO.setPicupdate(java.sql.Timestamp.valueOf("2055-01-01 01:23:45.0"));
+//		 picnicVO.setPicnic_startup(java.sql.Timestamp.valueOf("2055-01-01 01:23:45.0"));
+//		 picnicVO.setPicnic_setup(java.sql.Timestamp.valueOf("2055-01-01 01:23:45.0"));
+//		 picnicVO.setPicnic_chk("S");
+//		 picnicVO.setPicnic_date(java.sql.Timestamp.valueOf("2055-01-01 01:23:45.0"));
+//		 picnicVO.setPicnic_pl(10);
+//		 picnicVO.setPicnic_sta("D");
+//		 picnicVO.setOrd_total(400.0);
+//		 picnicVO.setOrd_date(null);
+//		 picnicVO.setOrd_dm("隨便送");
+//		 picnicVO.setOrd_sta("H");		
+//		 picnicjdbcdao.update(picnicVO);
+		 
+		picnicjdbcdao.update_desc("PG00000001", "--------****-----------");
 		// delete
 		// picnicjdbcdao.delete("PG00000001");
 		// search one
@@ -421,24 +463,24 @@ public class PicnicJDBCDAO implements PicnicDAO_interface {
 		
 		
 		// 查詢 全部
-		List<PicnicVO> list = picnicjdbcdao.getAll();
-		for (PicnicVO aEmp : list) {
-			System.out.print(aEmp.getPicnic_no() + ",");
-			System.out.print(aEmp.getPicnic_name() + ",");
-			System.out.print(aEmp.getPicnic_desc() + ",");
-			System.out.print(aEmp.getPicupdate() + ",");
-			System.out.print(aEmp.getPicnic_startup() + ",");
-			System.out.print(aEmp.getPicnic_setup() + ",");
-			System.out.print(aEmp.getPicnic_chk() + ",");
-			System.out.print(aEmp.getPicnic_date() + ",");
-			System.out.print(aEmp.getPicnic_pl() + ",");
-			System.out.print(aEmp.getPicnic_sta() + ",");
-			System.out.print(aEmp.getOrd_total() + ",");
-			System.out.print(aEmp.getOrd_date() + ",");
-			System.out.print(aEmp.getOrd_dm() + ",");
-			System.out.print(aEmp.getOrd_sta());
-			System.out.println();
-		}
+//		List<PicnicVO> list = picnicjdbcdao.getAll();
+//		for (PicnicVO aEmp : list) {
+//			System.out.print(aEmp.getPicnic_no() + ",");
+//			System.out.print(aEmp.getPicnic_name() + ",");
+//			System.out.print(aEmp.getPicnic_desc() + ",");
+//			System.out.print(aEmp.getPicupdate() + ",");
+//			System.out.print(aEmp.getPicnic_startup() + ",");
+//			System.out.print(aEmp.getPicnic_setup() + ",");
+//			System.out.print(aEmp.getPicnic_chk() + ",");
+//			System.out.print(aEmp.getPicnic_date() + ",");
+//			System.out.print(aEmp.getPicnic_pl() + ",");
+//			System.out.print(aEmp.getPicnic_sta() + ",");
+//			System.out.print(aEmp.getOrd_total() + ",");
+//			System.out.print(aEmp.getOrd_date() + ",");
+//			System.out.print(aEmp.getOrd_dm() + ",");
+//			System.out.print(aEmp.getOrd_sta());
+//			System.out.println();
+//		}
 	}
 //-----------------------------------------------------------------------
 	public void k_insert(PicnicVO picnicVO){}
