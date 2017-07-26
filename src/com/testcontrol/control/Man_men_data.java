@@ -29,9 +29,9 @@ import javax.servlet.http.Part;
 import com.general_member.model.*;
 import com.manufacturers.model.ManufacturersService;
 import com.manufacturers.model.ManufacturersVO;
-@WebServlet("/man_men_data.do")
+//@WebServlet("/k_man_men_data.do")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-public class man_men_data extends HttpServlet{
+public class Man_men_data extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -42,6 +42,7 @@ public class man_men_data extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String button = req.getParameter("button");
 		String argu = req.getParameter("argu");
+		System.out.println("---------------");
 		try{
 			argu = new String(argu.getBytes("ISO-8859-1"),"UTF-8");
 		}catch(NullPointerException e){
@@ -61,7 +62,7 @@ public class man_men_data extends HttpServlet{
 		}*/
 		if("cho_generalMember".equals(button)){  //會員權限維護頁
 			GeneralMemberService meS = new GeneralMemberService();
-			List<GeneralMemberVO> memList = meS.getAll();
+			List<GeneralMemberVO> memList = meS.k_getAll();
 			
 			List<String> staList = new ArrayList<String>();
 			List<String> pboList = new ArrayList<String>();
@@ -83,7 +84,7 @@ public class man_men_data extends HttpServlet{
 		if("detail".equals(button)){  //詳細資料
 			if("MM".equals(argu.substring(0,2))){
 				ManufacturersService maS = new ManufacturersService();
-				ManufacturersVO ma_detail = maS.getOneManufacturers(argu);
+				ManufacturersVO ma_detail = maS.k_getOneManufacturers(argu);
 	
 				String sta = sta_convert(ma_detail.getMF_STA());
 				String picPath = req.getContextPath()+getPicPath(ma_detail.getMF_LOGO(),ma_detail.getMF_NO());
@@ -99,7 +100,7 @@ public class man_men_data extends HttpServlet{
 				successView.forward(req, res);
 			}else if("MG".equals(argu.substring(0,2))){
 				GeneralMemberService gmS =new GeneralMemberService();
-				GeneralMemberVO gm_detail = gmS.getOneGeneralMember(argu);
+				GeneralMemberVO gm_detail = gmS.k_getOneGeneralMember(argu);
 				
 				String sta = sta_convert(gm_detail.getMEM_STA());
 				String pbo = pbo_convert(gm_detail.getMEM_PBOARD());
@@ -120,7 +121,7 @@ public class man_men_data extends HttpServlet{
 		if("back".equals(button)){  //返回
 			
 			ManufacturersService maS = new ManufacturersService();
-			List<ManufacturersVO> maList = maS.getAll();
+			List<ManufacturersVO> maList = maS.k_getAll();
 			
 			List<String> staList = new ArrayList<String>();
 			for(ManufacturersVO maVO : maList){
@@ -139,7 +140,7 @@ public class man_men_data extends HttpServlet{
 		if("ma_verification".equals(button)){  //認證
 			if("MM".equals(req.getParameter("MF_NO").substring(0,2))){
 				ManufacturersService maS = new ManufacturersService();
-				ManufacturersVO ma_detail = maS.getOneManufacturers(req.getParameter("MF_NO"));
+				ManufacturersVO ma_detail = maS.k_getOneManufacturers(req.getParameter("MF_NO"));
 				ma_detail.setMF_STA('A');
 				maS.updateManufacturers(ma_detail);
 				
@@ -150,7 +151,7 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("staList", sta);
 				req.setAttribute("ma_detail", ma_detail);
 				String result = "ma_verification";
-				result = "";
+				result = "MM";
 				req.setAttribute("result",result);
 				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -170,7 +171,7 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("staList", sta);
 				req.setAttribute("gm_detail", gm_detail);
 				String result = "ma_verification";
-				result = "";
+				result = "MG";
 				req.setAttribute("result",result);
 				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);

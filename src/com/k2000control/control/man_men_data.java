@@ -73,7 +73,10 @@ public class man_men_data extends HttpServlet{
 			req.setAttribute("pboList", pboList);
 			req.setAttribute("staList", staList);
 			req.setAttribute("memList", memList);
-			String url = "/view/man_mem_data.jsp";
+			String result = "";
+			result = "cho_generalMember";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -88,7 +91,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("picPath", picPath);
 				req.setAttribute("staList", sta);
 				req.setAttribute("ma_detail", ma_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "detail";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else if("MG".equals(argu.substring(0,2))){
@@ -103,7 +109,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("pbo", pbo);
 				req.setAttribute("staList", sta);
 				req.setAttribute("gm_detail", gm_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "detail";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -120,7 +129,10 @@ public class man_men_data extends HttpServlet{
 			
 			req.setAttribute("staList", staList);
 			req.setAttribute("maList", maList);
-			String url = "/view/man_mem_data.jsp";
+			String result = "";
+			result = "back";
+			req.setAttribute("result",result);
+			String url = "/checklist/TEST_HOME.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
@@ -137,7 +149,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("picPath", picPath);
 				req.setAttribute("staList", sta);
 				req.setAttribute("ma_detail", ma_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "MM";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
@@ -154,7 +169,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("pbo", pbo);
 				req.setAttribute("staList", sta);
 				req.setAttribute("gm_detail", gm_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "MG";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -173,7 +191,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("picPath", picPath);
 				req.setAttribute("staList", sta);
 				req.setAttribute("ma_detail", ma_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "ma_suspension";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);	
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
@@ -190,7 +211,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("pbo", pbo);
 				req.setAttribute("staList", sta);
 				req.setAttribute("gm_detail", gm_detail);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "ma_suspension";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -209,7 +233,10 @@ public class man_men_data extends HttpServlet{
 			
 				req.setAttribute("staList", staList);
 				req.setAttribute("maList", maList);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "ma_removed";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
@@ -228,7 +255,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("pboList", pboList);
 				req.setAttribute("staList", staList);
 				req.setAttribute("memList", memList);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "ma_removed";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -257,7 +287,10 @@ public class man_men_data extends HttpServlet{
 				req.setAttribute("picPath", picPath);
 				req.setAttribute("staList", sta);
 				req.setAttribute("ma_detail", maVO);
-				String url = "/view/man_mem_data.jsp";
+				String result = "";
+				result = "ma_mod";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else if("MG".equals(req.getParameter("MF_NO").substring(0,2))){
@@ -284,7 +317,10 @@ public class man_men_data extends HttpServlet{
 					req.setAttribute("pbo", pbo);
 					req.setAttribute("staList", sta);
 					req.setAttribute("gm_detail", gmVO);
-					String url = "/view/man_mem_data.jsp";
+					String result = "";
+					result = "ma_mod";
+					req.setAttribute("result",result);
+					String url = "/checklist/TEST_HOME.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
 				} catch (ParseException e) {

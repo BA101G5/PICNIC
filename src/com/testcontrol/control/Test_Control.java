@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.administrator.model.*;
 import com.manufacturers.model.*;
@@ -23,6 +24,7 @@ public class Test_Control extends HttpServlet{
 		String action = req.getParameter("action");
 		String no = req.getParameter("admno");
 		String result = "";
+		System.out.println("CONXXX");
 		if ("get_adm_one_data".equals(action)){
 			System.out.println("123123");
 			AdministratorDAO admDAO = new AdministratorDAO();

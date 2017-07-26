@@ -260,7 +260,7 @@ section{
 										<td>${maList.MF_BS}</td>
 										<td>${maList.MF_REPORTNUM}</td>
 										<td>${staList[status.index]}</td>
-										<td><a href="${pageContext.request.contextPath}/man_men_data.do?button=detail&argu=${maList.MF_NO}">詳細資料</a></td>
+										<td><a href="${pageContext.request.contextPath}/k_man_men_data.do?button=detail&argu=${maList.MF_NO}">詳細資料</a></td>
 									</tr>
 								</c:forEach>
 								</tbody>	
@@ -269,7 +269,7 @@ section{
 							
 							<c:if test="${not empty ma_detail}">
 								<table class="form-style-1" id="ma_detailTable" >
-										<form id="ma_detailForm" action="${pageContext.request.contextPath}/man_men_data.do" method="post" name="ma_detailForm" enctype="multipart/form-data">
+										<form id="ma_detailForm" action="${pageContext.request.contextPath}/k_man_men_data.do" method="post" name="ma_detailForm" enctype="multipart/form-data">
 											<tr>
 												<td>廠 商 名 稱<input type="text" name="MF_NAME" class="field-divided" placeholder="${ma_detail.MF_NAME}" /></td>
 												<td>廠 商 電 話<input type="text" name="MF_PHONE" class="field-divided" placeholder="${ma_detail.MF_PHONE}" /></td>
@@ -315,7 +315,7 @@ section{
 											</tr>
 											<tr>
 												<td colspan="2">
-													<a href="${pageContext.request.contextPath}/man_men_data.do?button=back">返回列表</a>
+													<a href="${pageContext.request.contextPath}/k_man_men_data.do?button=back">返回列表</a>
 												</td>
 											</tr>
 										</form>
@@ -345,7 +345,7 @@ section{
 												<td>${memList.MEM_MAIL}</td>
 												<td>${pboList[status.index]}</td>
 												<td>${staList[status.index]}</td>
-												<td><a href="${pageContext.request.contextPath}/man_men_data.do?button=detail&argu=${memList.MEM_NO}">詳細資料</a></td>
+												<td><a href="${pageContext.request.contextPath}/k_man_men_data.do?button=detail&argu=${memList.MEM_NO}">詳細資料</a></td>
 											</tr>
 										</c:forEach>	
 									</tbody>
@@ -353,7 +353,7 @@ section{
 								</c:if>
 							<c:if test="${not empty gm_detail}">
 								<table class="form-style-1" id="gm_detailTable">
-										<form id="gm_detaillForm" action="${pageContext.request.contextPath}/man_men_data.do" method="post" name="gm_detailForm" enctype="multipart/form-data">
+										<form id="gm_detaillForm" action="${pageContext.request.contextPath}/k_man_men_data.do" method="post" name="gm_detailForm" enctype="multipart/form-data">
 											<tr>
 												<td>會 員 姓 名<input type="text" name="MF_NAME" class="field-divided" placeholder="${gm_detail.MEM_NAME}" /></td>
 												<td>會 員 手 機<input type="text" name="MF_PHONE" class="field-divided" placeholder="${gm_detail.MEM_PHONE}" /></td>
@@ -410,7 +410,7 @@ section{
 											</tr>
 											<tr>
 												<td colspan="2">
-													<a href="${pageContext.request.contextPath}/man_men_data.do?button=cho_generalMember">返回列表</a>
+													<a href="${pageContext.request.contextPath}/k_man_men_data.do?button=cho_generalMember">返回列表</a>
 												</td>
 											</tr>
 										</form>

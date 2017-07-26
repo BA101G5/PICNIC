@@ -13,7 +13,7 @@ import com.administrator.model.AdministratorService;
 import com.administrator.model.AdministratorVO;
 import com.purview_detail.model.Purview_DetailSerice;
 import com.purview_detail.model.Purview_DetailVO;
-@WebServlet("/admini.do")
+//@WebServlet("/k_admini.do")
 public class Test_Admini extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -38,7 +38,8 @@ public class Test_Admini extends HttpServlet{
 			}
 		}*/
 		
-	
+		System.out.println("ADMXXX");
+		System.out.println("-------------");
 		if ("del".equals(button)){
 			
 			AdministratorService admDAO = new AdministratorService();
@@ -143,7 +144,10 @@ public class Test_Admini extends HttpServlet{
 			}else{
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("add_adm",add_adm);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_adm";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -216,7 +220,10 @@ public class Test_Admini extends HttpServlet{
 
 				admVO = getSearch();
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -282,7 +289,10 @@ public class Test_Admini extends HttpServlet{
 				admDAO.modAdministrator(mod_adm);
 				List<AdministratorVO> admVO = getSearch();
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "mod_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}	

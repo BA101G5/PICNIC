@@ -15,6 +15,7 @@
 <%-- 		<link href="${pageContext.request.contextPath}/view/js/admView.css" rel="stylesheet" type="text/css" /> --%>
 	</head>
 	<body>
+<div class="yyhhyy">
 	<div class="col-xs-12 col-sm-10">
 					 
 					  <form class="navbar-form navbar-left" role="search" style="">
@@ -97,9 +98,13 @@
 					<tr>
 						<td colspan="6">
 							<section>	
-								<button type="submit" form="add_adm" value="add" name="button">增加欄數</button>
-								<button type="submit" form="add_adm" value="add_determine" name="button">確定</button>
-								<button type="button" form="add_adm" value="all_cancel" name="button" id="button_add_cancel" onclick="add_buttonCancel()">取消</button>		
+							<table>
+							<tr>
+								<th><button type="submit" form="add_adm" value="add" name="button">增加欄數</button></th>
+								<th><button type="submit" form="add_adm" value="add_determine" name="button">確定</button></th>
+								<th><button type="button" form="add_adm" value="all_cancel" name="button" id="button_add_cancel" onclick="add_buttonCancel()">取消</button>	</th>	
+							</tr>
+							</table>
 							</section>
 						</td>
 					</tr>
@@ -224,6 +229,7 @@
 		    
 		    <script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</div>
 	</body>
 </html>
 
@@ -235,15 +241,15 @@
 /* 	text-shadow: 0 1px 0 #fff; */
 /* } */
 
-strong {
+div.yyhhyy strong {
 	font-weight: bold; 
 }
 
-em {
+div.yyhhyy em {
 	font-style: italic; 
 }
 
-table {
+div.yyhhyy table {
 	background: #f5f5f5;
 	border-collapse: separate;
 	box-shadow: inset 0 1px 0 #fff;
@@ -254,45 +260,45 @@ table {
 	width: 1200px;
 }	
 
-thead{
-	font-size: 18px;
-	color:#0000AA;
-}
+ div.yyhhyy thead{ 
+ 	font-size: 18px; 
+ 	color:#0000AA; 
+ } 
 
-td {
-	border-right: 1px solid #fff;
-	border-left: 1px solid #e8e8e8;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #e8e8e8;
-	padding: 1px 15px;
-	position: relative;
-	transition: all 300ms;
-}
+ div.yyhhyy td { 
+ 	border-right: 1px solid #fff; 
+ 	border-left: 1px solid #e8e8e8; 
+ 	border-top: 1px solid #fff; 
+ 	border-bottom: 1px solid #e8e8e8; 
+ 	padding: 1px 15px; 
+ 	position: relative; 
+/*  	transition: all 300ms;  */
+ } 
 
-td:first-child {
-	box-shadow: inset 1px 0 0 #fff;
-}	
+ div.yyhhyy td:first-child { 
+ 	box-shadow: inset 1px 0 0 #fff; 
+ }	 
 
-td:last-child {
-	border-right: 1px solid #e8e8e8;
-	box-shadow: inset -1px 0 0 #fff;
-}	
+ div.yyhhyy td:last-child { 
+ 	border-right: 1px solid #e8e8e8; 
+ 	box-shadow: inset -1px 0 0 #fff; 
+ }	 
 
-tr {
-	background: url(https://jackrugile.com/images/misc/noise-diagonal.png);	
-}
+/*  tr {  */
+/*  	background: url(https://jackrugile.com/images/misc/noise-diagonal.png);	  */
+/*  }  */
 
-tbody.adm:hover td {
-	color: transparent;
-	text-shadow: 0 0 3px #aaa;
-}
+/* tbody.adm:hover td { */
+/* 	color: transparent; */
+/* 	text-shadow: 0 0 3px #aaa; */
+/* } */
 
-tbody.adm:hover tr:hover td {
-	color: #005CAF;
-	text-shadow: 0 1px 0 #fff;
-}
-<!---->
-section button {
+/* tbody.adm:hover tr:hover td { */
+/* 	color: #444; */
+/* 	text-shadow: 0 1px 0 #fff; */
+/* } */
+
+div.yyhhyy section button {
   margin-left : 50px;
   margin-right : 50px;
   font-size: 1.0rem;
@@ -309,13 +315,13 @@ section button {
   transition: all 0.3s ease-in-out;
 }
 
-section button:hover {
+div.yyhhyy section button:hover {
   background-color: #ffffff;
   color: #009ac9;
   border-color: #009ac9;
 }
 
-section.close button {
+div.yyhhyy section.close button {
   margin-left : 1px;
   margin-right : 1px;
   font-size: 1.0rem;
@@ -332,26 +338,26 @@ section.close button {
   transition: all 0.3s ease-in-out;
 }
 
-section.close button:hover {
+div.yyhhyy section.close button:hover {
   background-color: #ffffff;
   color: #D0104C;
   border-color: #D0104C;
 }
 
-section{
+div.yyhhyy section{
 	display: inline
 }
 
-.radio{
+div.yyhhyy .radio{
 	display:none;
 }
 	
-input[type="text"]{
+div.yyhhyy input[type="text"]{
 	text-align: center;
 }
 
 
-  	#toggle{
+  div.yyhhyy 	#toggle{
 			width:150px;
 			height:20px;
 			border-radius:40px;
@@ -364,11 +370,11 @@ input[type="text"]{
 			box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4);
 			background: -webkit-linear-gradient(#c6c6c6,#e3e3e3);
 		}
-		#toggle:checked{
+	div.yyhhyy 	#toggle:checked{
 			background: -webkit-linear-gradient(#bfe09c,#c8eca0);
 			box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
 		}
-		#toggle:before {
+	div.yyhhyy 	#toggle:before {
 			content:"";
 			width:13px;
 			height:13px;
@@ -384,54 +390,54 @@ input[type="text"]{
 			-webkit-transition: all 1s;
 			
 		}
-		#toggle:checked:before {
+	div.yyhhyy 	#toggle:checked:before {
 			left:125px;
 			background:#f1f1f1;
 		}
 
-.errWord{
+div.yyhhyy .errWord{
 	font-size:24px;
 	color:#FF0000;
 }		
-.table5_3 table {
+div.yyhhyy .table5_3 table {
 	width:100%;
 	margin:15px 0;
 	border:0;
 }
-.table5_3 th {
+div.yyhhyy .table5_3 th {
 	background-color:#87CEFA;
 	color:#000000
 }
 
-.table5_3,.table5_3 th,.table5_3 td {
+div.yyhhyy .table5_3,.table5_3 th,.table5_3 td {
 	font-size:0.95em;
 	text-align:center;
 	padding:4px;
 	border-collapse:collapse;
 }
-.table5_3 th,.table5_3 td {
+div.yyhhyy .table5_3 th,.table5_3 td {
 	border: 1px solid #ffffff;
 	border-width:1px 0 1px 0
 }
-.table5_3 tr {
+div.yyhhyy .table5_3 tr {
 	border: 1px solid #ffffff;
 }
-.table5_3 tr:nth-child(odd){
+div.yyhhyy .table5_3 tr:nth-child(odd){
 	background-color:#d7eefd;
 }
-.table5_3 tr:nth-child(even){
+div.yyhhyy .table5_3 tr:nth-child(even){
 	background-color:#ffffff;
 }
 /* .table5_3 tr:last-child td:last-child{ */
 /*   border-bottom-right-radius: 10px; */
 /* } */
-.table5_3 tr:first-child th:last-child{
+div.yyhhyy .table5_3 tr:first-child th:last-child{
   border-top-right-radius: 10px;
 }
 /* .table5_3 tr:last-child td:first-child{ */
 /*   border-bottom-left-radius: 10px; */
 /* } */
-.table5_3 tr:first-child th:first-child{
+div.yyhhyy .table5_3 tr:first-child th:first-child{
   border-top-left-radius: 10px;
 }
 </style>
