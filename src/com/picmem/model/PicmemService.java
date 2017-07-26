@@ -2,6 +2,8 @@ package com.picmem.model;
 
 import java.util.List;
 
+import com.pboard_article.model.Pboard_ArticleVO;
+
 public class PicmemService {
 	private PicmemDAO dao = null;
 
@@ -9,8 +11,15 @@ public class PicmemService {
 		dao = new PicmemDAO();
 	}
 
-	public PicmemVO addPicmem() {
-		return null;
+	public PicmemVO addPicmem(String picnic_no, String mem_no) {
+		PicmemVO picmemVO = new PicmemVO();
+		
+		picmemVO.setPicnic_no(picnic_no);
+		picmemVO.setMem_no(mem_no);
+		picmemVO.setPicmem_iden("C");//¹Î­û
+		dao.insert(picmemVO);
+
+		return picmemVO;
 	}
 
 	public PicmemVO updatePicmem() {
