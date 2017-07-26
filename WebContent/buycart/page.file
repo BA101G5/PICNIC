@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%  int rowsPerPage = 8;  //每頁的筆數    
-    int rowNumber=0;      //總筆數
-    int pageNumber=0;     //總頁數      
-    int whichPage=1;      //第幾頁
+<%  int rowsPerPage = 8;  //瘥���    
+    int rowNumber=0;      //蝮賜�
+    int pageNumber=0;     //蝮賡�      
+    int whichPage=1;      //蝚砍嗾���
     int pageIndexArray[]=null;
     int pageIndex=0; 
 %>
@@ -21,10 +21,10 @@
 <%  try {
       whichPage = Integer.parseInt(request.getParameter("whichPage"));
       pageIndex=pageIndexArray[whichPage-1];
-    } catch (NumberFormatException e) { //第一次執行的時候
+    } catch (NumberFormatException e) { //蝚砌�甈∪銵����
        whichPage=1;
        pageIndex=0;
-    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+    } catch (ArrayIndexOutOfBoundsException e) { //蝮賡�銋��隤日�
          if (pageNumber>0){
               whichPage=pageNumber;
               pageIndex=pageIndexArray[pageNumber-1];

@@ -12,14 +12,11 @@
 
 <jsp:useBean id="goods_sellSvc" scope="page"
 	class="com.goods_sell.model.Goods_SellService" />
-	<jsp:useBean id="goods_rentSvc" scope="page"
-	class="com.goods_rent.controller.Goods_rentServlet" />
-	
-
 <%
+   String first = request.getParameter("first");
+if(first== null){
 	Set<String> typeset = (Set<String>) session.getAttribute("typeSet");
-     session.removeAttribute("typeSet");
-	pageContext.setAttribute("typeset", typeset);
+	pageContext.setAttribute("typeset", typeset);}
 %>
 
 <style>
@@ -163,14 +160,14 @@
 								<table class="table">
 									<c:forEach var="mfcount" items="${typeset}">
 										<tr>
-											<td><form method="post"
+											<td><a href="#"><form method="post"
 													action="<%=request.getContextPath()%>/goods_sell/goods_sell.do"
 													onclick="submit()">
 													<p>${mfcount}</p>
 													<input type="hidden" name="action" value="selectByMfype">
 													<input type="hidden" name="mfcount" value="${mfcount}">
 													<input type="hidden" name="mfcount" value="${mfcount}">
-												</form></td>
+												</form></a></td>
 										</tr>
 									</c:forEach>
 								</table>
