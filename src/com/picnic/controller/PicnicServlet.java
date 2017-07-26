@@ -94,7 +94,7 @@ public class PicnicServlet extends HttpServlet {
 
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
-				session.setAttribute("tladdress", tladdress);
+				session.setAttribute("totaladdress", tladdress);
 				session.setAttribute("address", address);
 				session.setAttribute("date", date);
 				session.setAttribute("picnic_date", picnic_date);
@@ -131,7 +131,8 @@ public class PicnicServlet extends HttpServlet {
 				String account = gVO.getMEM_NO();
 				String picnic_name = (String) session.getAttribute("picnic_name");
 
-				String tladdress = (String) session.getAttribute("tladdress");
+				String tladdress = (String) session.getAttribute("totaladdress");
+				System.out.println(tladdress);
 
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
 
@@ -155,6 +156,7 @@ public class PicnicServlet extends HttpServlet {
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
+							System.out.println(tladdress);
 							List<Goods_RentVO> list = goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
 							// System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);
