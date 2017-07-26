@@ -181,7 +181,7 @@ public class PicnicServlet extends HttpServlet {
 			}
 		}
 
-		if (action.equals("persionalpicnic")) {
+		if ("persionalpicnic".equals(action)) {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -209,7 +209,7 @@ public class PicnicServlet extends HttpServlet {
 				session.setAttribute("persionalpicnic", list2);
 				String url = null;
 
-				if (action.equals("persionalpicnic")) {
+				if ("persionalpicnic".equals(action)) {
 					url = uri;
 				}
 				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
@@ -219,7 +219,7 @@ public class PicnicServlet extends HttpServlet {
 			}
 		}
 
-		if (action.equals("lookpicnic")) {
+		if ("lookpicnic".equals(action)) {
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -236,7 +236,7 @@ public class PicnicServlet extends HttpServlet {
 				session.setAttribute("picnicVO", picnicVO);
 				String url = null;
 
-				if (action.equals("lookpicnic")) {
+				if ("lookpicnic".equals(action)) {
 					url = "/picnicpersionpage/personalpicnic.jsp";
 				}
 				javax.servlet.RequestDispatcher SuccessView = req.getRequestDispatcher(url);
