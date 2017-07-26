@@ -40,7 +40,7 @@
 }
 
 .table5_3 table {
-	width:100%;
+	width:1200;
 	margin:15px 0;
 	border:0;
 }
@@ -144,7 +144,7 @@
 								<th width="100px">檢舉會員</th>
 								<th width="100px">懲罰天數</th>
 								<th width="100px">懲處類型</th>
-								<th width="100px">檢舉事由</th>
+								<th width="180px">檢舉事由</th>
 								<th width="100px">檢舉日期</th>
 								<th width="100px">處理狀態</th>
 								<th width="100px">封鎖</th>
