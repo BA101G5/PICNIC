@@ -396,14 +396,14 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 	public static void main(String[] args) {
 		PicmemJDBCDAO picmemjdbcdao = new PicmemJDBCDAO();
 		// insert
-		// PicmemVO picmemVO = new PicmemVO();
-		// picmemVO.setPicnic_no("PG00000006");
-		// picmemVO.setMem_no("MG00000001");
-		// picmemVO.setPicmem_iden("aoeuaoeu");
-		// picmemVO.setPicmem_sta("A");
-		// picmemVO.setMem_longi(44.012);
-		// picmemVO.setMem_latit(44.022);
-		// picmemjdbcdao.insert(picmemVO);
+//		 PicmemVO picmemVO = new PicmemVO();
+//		 picmemVO.setPicnic_no("PG00000006");
+//		 picmemVO.setMem_no("MG00000003");
+//		 picmemVO.setPicmem_iden("¹Î­û");
+//		 picmemVO.setPicmem_sta("A");
+//		 picmemVO.setMem_longi(121.13);
+//		 picmemVO.setMem_latit(24.57);
+//		 picmemjdbcdao.insert(picmemVO);
 		// update
 		// PicmemVO picmemVO = new PicmemVO();
 		// picmemVO.setPicnic_no("PG00000001");
@@ -426,16 +426,16 @@ public class PicmemJDBCDAO implements PicmemDAO_interface {
 		// System.out.println(picmemVO.getMem_latit());
 		// System.out.println("---------------------");
 		// search all
-		 List<PicmemVO> list = picmemjdbcdao.getAll("PG00000001");
-		 for (PicmemVO picmemVO : list) {
-			 System.out.println(picmemVO.getPicnic_no());
-			 System.out.println(picmemVO.getMem_no());
-			 System.out.println(picmemVO.getPicmem_iden());
-			 System.out.println(picmemVO.getPicmem_sta());
-			 System.out.println(picmemVO.getMem_longi());
-			 System.out.println(picmemVO.getMem_latit());
-			 System.out.println("---------------------");
-		 }
+//		 List<PicmemVO> list = picmemjdbcdao.getAll("PG00000001");
+//		 for (PicmemVO picmemVO_l : list) {
+//			 System.out.println(picmemVO_l.getPicnic_no());
+//			 System.out.println(picmemVO_l.getMem_no());
+//			 System.out.println(picmemVO_l.getPicmem_iden());
+//			 System.out.println(picmemVO_l.getPicmem_sta());
+//			 System.out.println(picmemVO_l.getMem_longi());
+//			 System.out.println(picmemVO_l.getMem_latit());
+//			 System.out.println("---------------------");
+//		 }
 		// insert owner
 		// PicmemVO picmemVO =new PicmemVO();
 		// picmemVO.setPicnic_no("PG00000007");

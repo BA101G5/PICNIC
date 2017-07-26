@@ -233,7 +233,9 @@ body{
 
 				<div class="row article-row">
 					<div class="btn-group mem-guest" id="btnPostChecklist">
-						<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">檢舉留言</a>
+						
+<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">檢舉留言</a> --%>
+<a href="#"  class="btn btn-default btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}','addChecklist', config='height=250,width=350');">檢舉留言</a>		
 					</div>
 				</div>
 				
@@ -281,21 +283,29 @@ body{
 				<div class="well">
 					<div class="row">
 						<div style="text-align:right;">
-							<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">檢舉野餐團</a>
+<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">檢舉野餐團</a> --%>
+<a href="#"  class="btn btn-default btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }','addChecklist', config='height=250,width=350');">檢舉野餐團</a>
 						</div>
 						<div class="well">
 							<strong>野餐團介紹</strong>
 							<p>${ picnicVO.picnic_desc }
-								<form method="post" action="" class="btn btn-default">
-									<a href="#">修改</a>
+								<form method="post" action=""  onclick="submit()" class="btn btn-default">
+									<span>修改</span>
 								</form>
 							</p>
+							<hr>
 							</p>
-								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  class="btn btn-default">
-									<a href="#">加團</a>
+								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-default">
+									<span>加團</span>
 									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
 									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
-									<input type="hidden" name="button" value="addThisPG">
+									<input type="hidden" name="button" value="memAddThisPG">
+								</form>
+								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-default">
+									<span>退團</span>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
+									<input type="hidden" name="button" value="memExitThisPG">
 								</form>
 							</p>
 

@@ -33,8 +33,8 @@ public class picmem extends HttpServlet{
 		String mem = (String) session.getAttribute("MEM_NO");
 		
 		
-		if("addThisPG".equals(button)){
-			System.out.println("C: picmem / " + "L37");
+		if("memAddThisPG".equals(button)){
+//			System.out.println("C: picmem / " + "L37");
 			String picnic_no = (String) req.getParameter("picnic_no").trim();
 			String mem_no = (String) req.getParameter("mem_no").trim();
 			
@@ -43,10 +43,13 @@ public class picmem extends HttpServlet{
 
 			picmemVO.setMem_no(mem_no);
 			picmemVO.setPicnic_no(picnic_no);
-
+//			picmemVO.setPicmem_iden("團員");
+//			picmemVO.setPicmem_sta("A");
+//			picmemVO.setMem_longi(121.13);
+//			picmemVO.setMem_latit(24.57);
 			/***************************2.開始新增資料***************************************/
 			PicmemService picmemSvc = new PicmemService();
-			picmemSvc.addPicmem(mem_no, picnic_no);
+			picmemSvc.addPicmem(picnic_no, mem_no);
 			
 			/***************************3.新增完成,準備轉交(Send the Success view)***********/
 			String url = "/picnicpersionpage/personalpicnic.jsp";

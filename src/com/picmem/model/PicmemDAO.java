@@ -37,6 +37,8 @@ public class PicmemDAO implements PicmemDAO_interface {
 
 		try {
 			con = ds.getConnection();
+//			System.out.println("PicmemDAO.java/ picmemVO.getPicnic_no(): " + picmemVO.getPicnic_no());
+//			System.out.println("PicmemDAO.java/ picmemVO.getMem_no(): " + picmemVO.getMem_no());
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, picmemVO.getPicnic_no());
 			pstmt.setString(2, picmemVO.getMem_no());
