@@ -158,7 +158,7 @@ public class picmem extends HttpServlet{
 
 			picmemVO.setMem_no(mem);
 			picmemVO.setPicnic_no(pic);
-			picmemVO.setPicmem_iden("C");
+			picmemVO.setPicmem_iden("¹Î­û");
 			picmemVO.setPicmem_sta("U");
 			picmemVO.setMem_longi(0.0);
 			picmemVO.setMem_latit(0.0);
