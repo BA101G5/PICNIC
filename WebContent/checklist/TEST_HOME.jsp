@@ -10,7 +10,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<title>³¥¤Ó¬ü«á¥xºŞ²z¨t²Î</title>
+		<title>é‡å¤ªç¾å¾Œå°ç®¡ç†ç³»çµ±</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -35,16 +35,23 @@
 /*		.body > nav{
 			border-bottom: 3px blue solid !important;
 		}*/
-		button{
+		.button{
 			height:41px;
 			width:100%;
 			background-color:#FFFFFF;
+			text-align:center;
 			border: 1px solid #DDDDDD ;
 		}
 		.test{
+			height:41px;
+			width:100%;
+			border: 1px solid #DDDDDD ;
 			background-color:#F5F5F5;
 			border:none;
 			text-align:center;
+		}
+		H4{
+			text-align:center
 		}
 		</style>
 		
@@ -52,22 +59,26 @@
 	<body>
 		<div></div>
 		<nav class="navbar " role="navigation" style="background-color: ;opacity: 0.8;">
-		<div class="col-sm-1" style="background-color: #8bdddd;height: 150px"></div>
-			<div class="col-sm-10 " style="background-color: #8bdddd">
+<!-- 		<div class="col-sm-1" style="background-color: #8bdddd;height: 150px"></div> -->
+			<div class="col-sm-12 " style="background-color: #8bdddd; box-shadow:0 0 30px 10px rgba(139,211,211,1) ">
 				<div class="navbar-header " >
+					<%if (request.getAttribute("result")==null){%>
 					<img class="navbar-brand navbar-left" src="LOGO.png" style="height: 150px ">
-
+					<%}%>
+					<%if (request.getAttribute("result")!=null){%>
+					<img class="navbar-brand navbar-left" src="/BA101_G5/checklist/LOGO.png" style="height: 150px ">
+					<%}%>
 				</div>
-				<div style="font-size: 70px; text-align: center; padding-top: 20px;  "><font style="color: #000000">³¥¤Ó¬ü«á¥xºŞ²z¨t²Î</font>
+				<div style="font-size: 70px; text-align: center; padding-top: 20px;  "><font style="color: #000000">é‡å¤ªç¾å¾Œå°ç®¡ç†ç³»çµ±</font>
 				<div style="float: right;">
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/logout.do"><ul class="nav navbar-nav navbar-right" style="font-size: 15px; padding-top: 80px; ">
 						<li><a><%=loginVO.getAdm_name()%></a></li>
-						<li><button type="submit" class="glyphicon glyphicon-log-out" style="background-color:#8bdddd;border:none" >µn¥X</button></li>
+						<li><button type="submit" class="glyphicon glyphicon-log-out" style="background-color:#8bdddd;border:none;padding-top:15px" >ç™»å‡º</button></li>
 					</ul></FORM>
 				</div>
 				</div>
 			</div>
-			<div class="col-sm-1" style="background-color: #8bdddd;height: 150px" ></div>
+<!-- 			<div class="col-sm-1" style="background-color: #8bdddd;height: 150px" ></div> -->
 
 			
 		</nav>
@@ -77,57 +88,57 @@
 				<div class="col-xs-12 col-sm-2" style="padding-top: 40px ">
 					<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true" >
 
-					  <!-- °Ï¶ô1 -->
+					  <!-- å€å¡Š1 -->
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel0">
 					      <h4 class="panel-title">
 					        <a href="backend_index.html" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="000">
-					          «á¥x­º­¶
+					          å¾Œå°é¦–é 
 					        </a>
 					      </h4>
 					    </div>
 					  </div>
 
-					  <!-- °Ï¶ô1 ÀËÁ|¨t²Î-->
-					  <%if (loginVO.getAdm_iden().equals("ºô¯¸ºŞ²z­û")||loginVO.getAdm_iden().equals("·|­ûºŞ²z­û")||loginVO.getAdm_iden().equals("ª÷¬yºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					  <!-- å€å¡Š1 æª¢èˆ‰ç³»çµ±-->
+					  <%if (loginVO.getAdm_iden().equals("ç¶²ç«™ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("æœƒå“¡ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("é‡‘æµç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel1">
 					      <h4 class="panel-title" >
-					        <a href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
-					          ÀËÁ|¨t²Î
+					        <a id="1" href="#aaa" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="aaa">
+					          æª¢èˆ‰ç³»çµ±
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="aaa" class="panel-collapse collapse " role="tabpanel" aria-labelledby="panel1">
 					    
 					      <div class="list-group">
-					            <%if (loginVO.getAdm_iden().equals("ºô¯¸ºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					            <%if (loginVO.getAdm_iden().equals("ç¶²ç«™ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">¤å³¹ÀËÁ|</button>
+									<button class="button" type="submit">æ–‡ç« æª¢èˆ‰</button>
 									<input type="hidden" name="chli_cate" value="0">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 					      	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">¯d¨¥ÀËÁ|</button>
+									<button class="button" type="submit">ç•™è¨€æª¢èˆ‰</button>
 									<input type="hidden" name="chli_cate" value="1">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("·|­ûºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+								<%if (loginVO.getAdm_iden().equals("æœƒå“¡ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">´ª¹ÎÀËÁ|</button>
+									<button class="button" type="submit">æªåœ˜æª¢èˆ‰</button>
 									<input type="hidden" name="chli_cate" value="2">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">·|­ûÀËÁ|</button>
+									<button class="button" type="submit">æœƒå“¡æª¢èˆ‰</button>
 									<input type="hidden" name="chli_cate" value="3">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
 								<%}%>
-								<%if (loginVO.getAdm_iden().equals("ª÷¬yºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+								<%if (loginVO.getAdm_iden().equals("é‡‘æµç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button  type="submit">°Ó®aÀËÁ|</button>
+									<button class="button" type="submit">å•†å®¶æª¢èˆ‰</button>
 									<input type="hidden" name="chli_cate" value="4">
 									<input type="hidden" name="action" value="test_undone">
 								</FORM>
@@ -136,88 +147,90 @@
 					    </div>
 					  </div>
 					  <%}%>
-					  <!-- °Ï¶ô2 ·|­û¸ê®ÆºŞ²z-->
-					  <%if (loginVO.getAdm_iden().equals("·|­ûºŞ²z­û")||loginVO.getAdm_iden().equals("ª÷¬yºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					  <!-- å€å¡Š2 æœƒå“¡è³‡æ–™ç®¡ç†-->
+					  <%if (loginVO.getAdm_iden().equals("æœƒå“¡ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("é‡‘æµç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel2">
 					      <h4 class="panel-title">
-					        <a href="#bbb" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="true" aria-controls="bbb">
-					          ·|­û¸ê®ÆºŞ²z
+					        <a id="2" onClick="f2()" href="#bbb" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="true" aria-controls="bbb">
+					          æœƒå“¡è³‡æ–™ç®¡ç†
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="bbb" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel2">
 					      <div class="list-group">
-					        <%if (loginVO.getAdm_iden().equals("·|­ûºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					        <%if (loginVO.getAdm_iden().equals("æœƒå“¡ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
-					      	<button type="submit" form="title_button" value="cho_generalMember" name="button">·|­ûÅv­­ºûÅ@</button>
+					      	<button class="button" type="submit" form="title_button" value="cho_generalMember" name="button">æœƒå“¡æ¬Šé™ç¶­è­·</button>
 					      	</FORM>
 					      	<%}%>
-					      	<%if (loginVO.getAdm_iden().equals("ª÷¬yºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					      	<%if (loginVO.getAdm_iden().equals("é‡‘æµç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
-						       <button type="submit" form="title_button" value="back" name="button">¼t°Ó¸ê®Æ¼f®Ö</button>
+						       <button class="button" type="submit" form="title_button" value="back" name="button">å» å•†è³‡æ–™å¯©æ ¸</button>
 						    </FORM>
 					      	<%}%>
 					      </div>
 					    </div>
 					  </div>
 					  <%}%>
-					  <!-- °Ï¶ô3 ·|­ûºŞ²z-->
-					  <%if (loginVO.getAdm_iden().equals("­û¤uºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					  <!-- å€å¡Š3 æœƒå“¡ç®¡ç†-->
+					  <%if (loginVO.getAdm_iden().equals("å“¡å·¥ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
 					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/adm.do" >
-					        <button class="test" type="submit">­û¤uºŞ²z</button>
+					        <button class="test" type="submit">å“¡å·¥ç®¡ç†</button>
 					        <input type="hidden" name="action" value="get_adm_one_data">
 					   		 </FORM> 
 					      </h4>
 					  </div>
 					<%}%>
-					  <!-- °Ï¶ô4 ª÷¬yºŞ²z-->
-					  <%if (loginVO.getAdm_iden().equals("ª÷¬yºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					  <!-- å€å¡Š4 é‡‘æµç®¡ç†-->
+					  <%if (loginVO.getAdm_iden().equals("é‡‘æµç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="panel4">
 					      <h4 class="panel-title">
-					        <a href="#ddd" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-					          ª÷¬yºŞ²z
+					        <a id="4" onClick="f4()" style="text-align:center;" href="#ddd" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
+					          é‡‘æµç®¡ç†
 					        </a>
 					    </div>
 					    <div id="ddd" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel3">
 					      <div class="list-group">
-					      	<a href="#" class="list-group-item">·|­ì­q³æ´Ú¶µºŞ²z</a>
-					      	<a href="#" class="list-group-item">¼t°Ó´Ú¶µºŞ²z</a>
+					      	<a href="#" class="list-group-item">æœƒåŸè¨‚å–®æ¬¾é …ç®¡ç†</a>
+					      	<a href="#" class="list-group-item">å» å•†æ¬¾é …ç®¡ç†</a>
 					      </div>
 					    </div>
 					  </div>
 
-					  <!-- °Ï¶ô5¼s§i¼f®Ö-->
+					  <!-- å€å¡Š5å»£å‘Šå¯©æ ¸-->
 					  <div class="panel panel-default">
 					    <h4 class="panel-title">
 					        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/advertisement/advertisement.do" >
-					        <button class="test" type="submit">¼s§i¸ê®æ¼f®Ö</button>
+					        <button class="test" type="submit">å»£å‘Šè³‡æ ¼å¯©æ ¸</button>
 					        <input type="hidden" name="action" value="AD">
 					   		 </FORM> 
 					      </h4>
 					  </div>
 					  <%}%>
-					  <!-- °Ï¶ô6ÃöÁä¦r-->
-					   <%if (loginVO.getAdm_iden().equals("ºô¯¸ºŞ²z­û")||loginVO.getAdm_iden().equals("Master")){%>
+					  <!-- å€å¡Š6é—œéµå­—-->
+					   <%if (loginVO.getAdm_iden().equals("ç¶²ç«™ç®¡ç†å“¡")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
 					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/blocked_keywords/blocked_keywords.do" >
-					        <button class="test" type="submit">ÃöÁä¦r«Ì½ªºŞ²z</button>
-					        <input type="hidden" name="action" value="Blocked_Keywords">
+					         <input class="test"  type="submit" value="é—œéµå­—å±è”½ç®¡ç†">
+					         <input type="hidden" name="action" value="all_Blocked_Keywordss">
 					   		 </FORM> 
+					   		
 					      </h4>
 					  </div>
 					  
- 					  <!-- °Ï¶ô7³Ì·s®ø®§-->
+ 					  <!-- å€å¡Š7æœ€æ–°æ¶ˆæ¯-->
 					   <div class="panel panel-default">
 					     <h4 class="panel-title">
 					     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/announcement/announcement.do" >
-					        <button class="test" type="submit">³Ì·s®ø®§ºŞ²z</button>
-					        <input type="hidden" name="action" value="Announcement">
+					        <input class="test" type="submit" value="æœ€æ–°æ¶ˆæ¯ç®¡ç†">
+       						 <input type="hidden" name="action" value="all_Announcements">
 					   		 </FORM> 
+					   		 
 					      </h4>
 					  </div>
 					  <%}%>
@@ -227,7 +240,7 @@
 				<div class="col-xs-12 col-sm-10">
 <!-- 					<div  style="margin-top: 0px;height: 71px"> -->
 <!-- 					  <form class="navbar-form navbar-left" role="search" style=""> -->
-<!-- 					  <div style="float: left; font-size: 28px">¤å³¹ÀËÁ|</div>  -->
+<!-- 					  <div style="float: left; font-size: 28px">æ–‡ç« æª¢èˆ‰</div>  -->
 						
 <!-- 					</form> -->
 <!-- 					</div> -->
@@ -335,7 +348,16 @@
 					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="all"){%>
-					<jsp:include page="/allAdvertisement.jsp"/>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="OTHER"){%>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="AD"){%>
+					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="AD_DELETE"){%>
+					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
 				<%}%>
 				</div>
 				</div>
@@ -347,3 +369,38 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
 </html>
+<script>
+var session = sessionStorage;
+console.log("localStorage.getItem="+localStorage.getItem("1"));
+document.getElementById("1").addEventListener("click",f1);
+document.getElementById("2").addEventListener("click",f2);
+document.getElementById("4").addEventListener("click",f4);
+function f1() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "1");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function f2() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "2");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function f4() {
+    if(typeof(Storage) !== "undefined") {
+    	localStorage.setItem("1", "4");
+    	console.log("localStorage.getItem="+localStorage.getItem("1"));
+        } 
+    }
+function init(){
+	if(localStorage.getItem("1")==1){
+		document.getElementById("1").click();
+	}else if(localStorage.getItem("1")==2){
+		document.getElementById("2").click();
+	}else{
+		document.getElementById("4").click();
+	}
+}
+// window.onload=init();
+</script>

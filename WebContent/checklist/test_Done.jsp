@@ -22,16 +22,66 @@
 	body{
 			background-color: #eff9f9;
 			}
+			.undone {
+  margin-left : 10px;
+  margin-right : 10px;
+  font-size: 1.0rem;
+  padding: 0.01rem 0.5rem;
+  display: inline;
+  background-color: #009ac9;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-weight: 100;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.table5_3 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table5_3 th {
+	background-color:#87CEFA;
+	color:#000000
+}
+.table5_3,.table5_3 th,.table5_3 td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table5_3 th,.table5_3 td {
+	border: 1px solid #ffffff;
+	border-width:1px 0 1px 0
+}
+.table5_3 tr {
+	border: 1px solid #ffffff;
+}
+.table5_3 tr:nth-child(odd){
+	background-color:#d7eefd;
+}
+.table5_3 tr:nth-child(even){
+	background-color:#ffffff;
+}
+/* .table5_3 tr:last-child td:last-child{ */
+/*   border-bottom-right-radius: 10px; */
+/* } */
+.table5_3 tr:first-child th:last-child{
+  border-top-right-radius: 10px;
+}
+.table5_3 tr:last-child td:first-child{
+  border-bottom-left-radius: 10px;
+}
+.table5_3 tr:first-child th:first-child{
+  border-top-left-radius: 10px;
+}
 	</style>
 	<body>
-
-		
-
-		<div class="col-sm-10 col-sm-offset-1">
-			<div class="row">
 				<div class="col-xs-12 col-sm-10">
-					<div  style="margin-top: 0px">
-					 
 					  <form class="navbar-form navbar-left" role="search" style="">
 					  <div class="col-xs-12 col-sm-10">
 					  <%if (request.getAttribute("testdone")=="0"){%>
@@ -52,40 +102,39 @@
 					</div>
 						
 						<div class="col-xs-12 col-sm-2">
-						<div  style="float: right;margin-left:	 800px; padding-top: 30px">
+						<div  style="float: right;margin-left:	 600px; padding-top: 30px">
 							<%if (request.getAttribute("testdone")=="0"){%>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-				<input type="submit" value="未處理文章檢舉">
+				<input class="undone" type="submit" value="未處理文章檢舉">
 				<input type="hidden" name="chli_cate" value="0">
 				<input type="hidden" name="action" value="test_undone"></FORM><%}%>
 			<%if (request.getAttribute("testdone")=="1"){%>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-				<input type="submit" value="未處理留言檢舉">
+				<input class="undone" type="submit" value="未處理留言檢舉">
 				<input type="hidden" name="chli_cate" value="1">
 				<input type="hidden" name="action" value="test_undone"></FORM><%}%>
 			<%if (request.getAttribute("testdone")=="2"){%>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-				<input type="submit" value="未處理揪團檢舉">
+				<input class="undone" type="submit" value="未處理揪團檢舉">
 				<input type="hidden" name="chli_cate" value="2">
 				<input type="hidden" name="action" value="test_undone"></FORM><%}%>
 			<%if (request.getAttribute("testdone")=="3"){%>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-				<input type="submit" value="未處理會員檢舉">
+				<input class="undone" type="submit" value="未處理會員檢舉">
 				<input type="hidden" name="chli_cate" value="3">
 				<input type="hidden" name="action" value="test_undone"></FORM><%}%>
 			<%if (request.getAttribute("testdone")=="4"){%>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-				<input type="submit" value="未處理商家檢舉">
+				<input class="undone" type="submit" value="未處理商家檢舉">
 				<input type="hidden" name="chli_cate" value="4">
 				<input type="hidden" name="action" value="test_undone"></FORM><%}%>
 						</div>
 					</div>	
 					</form>
-					</div>
 
-					<table class="table table-hover">
+					<table class="table5_3">
 						<thead>
-							<tr>
+							<tr height="50px">
 								<th width="100px">檢舉單編號</th>
 								<th width="100px">檢舉類別</th>
 								<th width="100px">被檢舉對象</th>
@@ -101,7 +150,7 @@
 						</thead>
 						<tbody>
 						<c:forEach var="checklistVO" items="${checklistVO}">
-							<tr>
+							<tr height="40px">
 								<td>${checklistVO.chli_no}</td>
 			
 				<c:if test="${checklistVO.chli_cate eq 0}" var="0" scope="page"><td>文章檢舉</td></c:if>
@@ -129,10 +178,9 @@
 						</c:forEach>	
 						</tbody>
 					</table>
-					
 				</div>
-			</div>
-		</div>
+			
+		
 		<div class="col-sm-1 "></div>
 		
 		

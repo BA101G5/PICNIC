@@ -23,6 +23,8 @@ import javax.servlet.http.Part;
 
 import com.advertisement.model.AdvertisementService;
 import com.advertisement.model.AdvertisementVO;
+import com.checklist.model.ChecklistService;
+import com.checklist.model.ChecklistVO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class AdvertisementServlet extends HttpServlet {
@@ -243,7 +245,16 @@ public class AdvertisementServlet extends HttpServlet {
 				/***************************
 				 * 3.刪除完成,準備轉交(Send the Success view)
 				 ***********/
-				String url = "/allAdvertisement.jsp";
+				
+				String result = "";
+				result = "AD_DELETE";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
+				
+				
+				
+				
+				//String url = "/allAdvertisement.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
@@ -405,7 +416,28 @@ public class AdvertisementServlet extends HttpServlet {
 		}
 		if("AD".equals(action)){
 			System.out.println("進"+action);
+			
+			AdvertisementService ADSvc = new AdvertisementService();
+			List<AdvertisementVO> advertisementVO = ADSvc.getAll_U();
+			
+			req.setAttribute("advertisementVO", advertisementVO);
+			
+			
 			String AD = "all";
+			req.setAttribute("result", AD);
+			String url = "/checklist/TEST_HOME.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		if("OTHER".equals(action)){
+			System.out.println("進"+action);
+			
+			AdvertisementService ADSvc = new AdvertisementService();
+			List<AdvertisementVO> advertisementVO = ADSvc.getAll_Other();
+			
+			req.setAttribute("advertisementVO", advertisementVO);
+			
+			String AD = "OTHER";
 			req.setAttribute("result", AD);
 			String url = "/checklist/TEST_HOME.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -465,7 +497,14 @@ public class AdvertisementServlet extends HttpServlet {
 				
 				req.setAttribute("advertisementVO", advertisementVO); // 資料庫update成功後,正確的的ADVO物件,存入req
 
-				String url = requestURL;
+				String result = "";
+				result = "AD";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
+				
+				
+				
+				//String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 
 				successView.forward(req, res);

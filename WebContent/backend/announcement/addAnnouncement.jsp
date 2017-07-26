@@ -11,21 +11,29 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 <link rel="stylesheet" type="text/css" href="js/calendar.css">
 <script language="JavaScript" src="js/calendarcode.js"></script>
 <div id="popupcalendar" class="text"></div>
+<style>
+.undone {
+  margin-left : 10px;
+  margin-right : 10px;
+  font-size: 1.0rem;
+  padding: 10px 20px;
+  display: inline;
+  background-color: #009ac9;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-weight: 100;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+</style>
+<body >
 
-<body bgcolor='white'>
-
-<table border='1' cellpadding='5' cellspacing='0' width='400'>
-	<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-		<td>
-		<h3>最新消息資料新增 - addAnnouncement.jsp</h3>
-		</td>
-		<td>
-		   <a href="select_page.jsp"><img src="<%=request.getContextPath()%>/images/back1.gif" width="100" height="100" border="1">回首頁</a>
-	    </td>
-	</tr>
-</table>
-
-<h3>資料最新消息:</h3>
+<div class="col-xs-12 col-sm-12">
+<div style="float: left; font-size: 50px">新增最新消息</div>
+</div>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font color='red'>請修正以下錯誤:
@@ -37,7 +45,7 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 	</font>
 </c:if>
 
-<FORM METHOD="post" ACTION="announcement.do" name="form1">
+<FORM style="display:inline" METHOD="post" ACTION="announcement.do" name="form1">
 <table border="0">
 
 	<tr>
@@ -45,11 +53,18 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 		<td><input type="TEXT" name="ann_text" size="45" 
 			value="<%= (announcementVO==null)? "最新消息" : announcementVO.getAnn_text()%>" /></td>
 	</tr>
-
+	<tr>
+	</tr>
+	<tr>
+	</tr>
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input class="undone"   type="submit" value="送出新增"></FORM>
+ <FORM style="display:inline" METHOD="post" ACTION="announcement.do" >
+        <input class="undone" type="submit" value="返回">
+        <input type="hidden" name="action" value="all_Announcements">
+    </FORM>
 </body>
 
 </html>
