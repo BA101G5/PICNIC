@@ -124,6 +124,11 @@ public class ChecklistServlet extends HttpServlet {
 		
 		if("insertChecklist".equals(action)){
 			System.out.print("insertChecklist");
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
 			
 			Integer chli_cate = Integer.valueOf(req.getParameter("chli_cate"));
 			String chli_be_num = req.getParameter("chli_be_num");
@@ -131,6 +136,24 @@ public class ChecklistServlet extends HttpServlet {
 			String chli_reason = req.getParameter("chli_reason");
 			Timestamp chli_date = Timestamp.valueOf(req.getParameter("chli_date"));
 			System.out.print(chli_date);
+			
+			try{
+				if (chli_reason == null || (chli_reason.trim()).length() == 0) {
+					errorMsgs.add("請輸入檢舉事由");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/checklist/addChecklist.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+			}catch(Exception e){
+				errorMsgs.add("不可空白" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/checklist/addChecklist.jsp");
+				failureView.forward(req, res);
+			}
+			
 			ChecklistVO checklistVO = new ChecklistVO();
 			checklistVO.setChli_cate(chli_cate);
 			checklistVO.setChli_be_num(chli_be_num);
