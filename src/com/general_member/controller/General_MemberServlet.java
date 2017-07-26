@@ -413,7 +413,7 @@ public class General_MemberServlet extends HttpServlet {
 				String subject = "驗證信通知";
 
 				String messageText = String.valueOf(
-						"<a href='http://localhost:8081/" + req.getContextPath() +"/addMemberEmail.do?account="+MEM_MAIL+"'>驗證網址</a>") + "\n"
+						"<a href='http://" +  req.getServerName() + ":" +  req.getServerPort() + req.getContextPath() +"/addMemberEmail.do?account="+MEM_MAIL+"'>驗證網址</a>") + "\n"
 						+ "密碼: "+MEM_PSW;
 				
 				mail.sendMail(MEM_MAIL, subject, messageText);
