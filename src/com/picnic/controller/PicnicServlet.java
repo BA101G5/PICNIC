@@ -2,8 +2,6 @@ package com.picnic.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,13 +29,10 @@ public class PicnicServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		HttpSession session = req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-<<<<<<< HEAD
-		 System.out.println(action);
-=======
 		// System.out.println(action);
 		
 		
@@ -60,7 +55,6 @@ public class PicnicServlet extends HttpServlet {
 		}
 		
 		
->>>>>>> branch 'master' of https://github.com/BA101G5/PICNIC.git
 		if ("checkbeforeinsert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
