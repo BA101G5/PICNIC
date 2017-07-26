@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container" style="background-color:white;opacity:0.8;">
 	<div class="row">
@@ -18,14 +18,14 @@
 						<Form method="post" id="form1"
 							action="<%=request.getContextPath()%>/general_member/General_Member.do">
 							<li style="padding-top: 5px;"><a href="#"
-								onclick="document.getElementById('form1').submit();">╜с╓H╦Й╝ф╜в╖О</a></li>
+								onclick="document.getElementById('form1').submit();">Е─▀Д╨╨ХЁ┤Ф√≥Д©╝Ф■╧</a></li>
 							<input type="hidden" name="MEM_NO" value="${gVO.MEM_NO}">
 							<input type="hidden" name="action" value="getOne_For_Update">
 
 						</Form>
 
 					<li style="padding-top: 5px;"><a
-							href="<%=request.getContextPath()%>/buy_coin.jsp">ай╤RбI╪ф</a></li>
+							href="<%=request.getContextPath()%>/buy_coin.jsp">ХЁ╪Х╡╥И╩·Ф∙╦</a></li>
 
 
 					</ul>
@@ -47,32 +47,32 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-11 bb">
 			<div role="tabpanel">
-				<!-- ╪пер╜╠╙O║G╪пер╟о -->
+				<!-- Ф╗≥Г╠╓И²╒Ф²©О╪ Ф╗≥Г╠╓Е█─ -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#tab1"
-						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">╜с╓H╦Й╝ф</a>
+						aria-controls="tab1" role="tab" data-toggle="tab" class="li1">Е─▀Д╨╨ХЁ┤Ф√≥</a>
 					</li>
 					<li role="presentation"><a href="#tab2" aria-controls="tab2"
-						role="tab" data-toggle="tab" class="li1">бI╪ф</a></li>
+						role="tab" data-toggle="tab" class="li1">И╩·Ф∙╦</a></li>
 					
 					<li role="presentation"><a href="#tab4" aria-controls="tab4"
-						role="tab" data-toggle="tab" class="li1">╙B╓м</a></li>
+						role="tab" data-toggle="tab" class="li1">Ф°▀Е▐▀</a></li>
 
 				</ul>
 				<jsp:useBean id="Buy_recordSvc" scope="page"
 					class="com.buy_record.model.Buy_RecordService" />
-				<!-- ╪пер╜╠╙O║G╓╨╝e╟о -->
+				<!-- Ф╗≥Г╠╓И²╒Ф²©О╪ Е┘╖Е╝╧Е█─ -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">╘й╖O :
+							style="margin-top: 20px; text-align: center;">Ф─╖Е┬╔ :
 							${gVO.MEM_GEN}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">╔м╓И :
+							style="margin-top: 20px; text-align: center;">Г■÷Ф≈╔ :
 							${gVO.MEM_BIRTH}</div>
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;margin-bottom:40px;">╕ш╖з╓╤╡п :
+							style="margin-top: 20px; text-align: center;margin-bottom:40px;">Х┤╙Ф┬▒Д╩▀Г╢╧ :
 							${gVO.MEM_SELF}</div>
 
 						
@@ -88,7 +88,7 @@
 
 
 						<div class="col-xs-12 col-sm-12"
-							style="margin-top: 20px; text-align: center;">Ё╔ю\╧Т : $
+							style="margin-top: 20px; text-align: center;">И┤▌И╓░Е╧ё : $
 							${gVO.MEM_COIN}</div>
 
 
@@ -96,9 +96,9 @@
 							style="margin-top: 5px;" class="table table-hover table-bordered table-condensed table-striped">
 							<thead>
 							<tr align='center' valign='middle'>
-								<th style="text-align: center;">╔Ф╘Ж╫s╦╧</th>
-								<th style="text-align: center;">╛Ж©Щ╝и╤║</th>
-								<th style="text-align: center;">юx╜х╙ВцB</th>
+								<th style="text-align: center;">Д╨╓Ф≤⌠Г╥╗Х≥÷</th>
+								<th style="text-align: center;">Г╢─И▄└Ф≥┌И√⌠</th>
+								<th style="text-align: center;">Е└╡Е─╪И┤▒И║█</th>
 							</tr>
 							</thead>
 							<tbody>
