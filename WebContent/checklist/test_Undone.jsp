@@ -156,7 +156,7 @@
 						<tbody>
 						<c:forEach var="checklistVO" items="${checklistVO}" >	
 							<tr height="40px">
-							
+							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">	
 								<td>${checklistVO.chli_no}</td>
 								<c:if test="${checklistVO.chli_cate eq 0}" var="0" scope="page"><td>文章檢舉</td></c:if>
 								<c:if test="${checklistVO.chli_cate eq 1}" var="0" scope="page"><td>留言檢舉</td></c:if>
@@ -185,7 +185,7 @@
 								<td><fmt:formatDate  pattern="yyyy-MM-dd" value="${checklistVO.chli_date}"/></td>
 								<td>等待處理</td>
 								<td>	
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">	
+								
 						<input type="hidden" name="chli_no" value="${checklistVO.chli_no}">	
 						<input type="hidden" name="chli_cate" value="${checklistVO.chli_cate}">	
 						<input type="hidden" name="chli_be_num" value="${checklistVO.chli_be_num}">	

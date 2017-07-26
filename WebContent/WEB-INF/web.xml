@@ -293,7 +293,6 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
-		<url-pattern>/checklist/TEST_HOME.jsp</url-pattern>
 		<url-pattern>/personal/personal.jsp</url-pattern>
 		<url-pattern>/picnic/maosecondui.jsp</url-pattern>
 		<url-pattern>/buycart/moafirst.jsp</url-pattern>
