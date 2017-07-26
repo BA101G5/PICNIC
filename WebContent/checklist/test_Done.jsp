@@ -150,7 +150,7 @@
 						</thead>
 						<tbody>
 						<c:forEach var="checklistVO" items="${checklistVO}">
-							<tr height="40px">
+							<tr height="35px">
 								<td>${checklistVO.chli_no}</td>
 			
 				<c:if test="${checklistVO.chli_cate eq 0}" var="0" scope="page"><td>§Â≥π¿À¡|</td></c:if>

@@ -70,7 +70,7 @@
 					<%}%>
 				</div>
 				<div style="font-size: 70px; text-align: center; padding-top: 20px;  "><font  face="DFKai-sb" style="color: #000000">野太美後台管理系統</font>
-				<div style="float: right;">
+				<div style="float: right; margin-right:100px">
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/logout.do"><ul class="nav navbar-nav navbar-right" style="font-size: 15px; padding-top: 80px; ">
 						<li><a><%=loginVO.getAdm_name()%></a></li>
 						<li><button type="submit" class="glyphicon glyphicon-log-out" style="background-color:#8bdddd;border:none;padding-top:15px" >登出</button></li>
@@ -112,12 +112,13 @@
 					    <div id="aaa" class="panel-collapse collapse " role="tabpanel" aria-labelledby="panel1">
 					    
 					      <div class="list-group">
-					            <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
-						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
-									<button id="11" class="button" type="submit">文章檢舉</button>
-									<input type="hidden" name="chli_cate" value="0">
-									<input type="hidden" name="action" value="test_undone">
-								</FORM>
+					            
+<%-- 						     	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do"> --%>
+<!-- 									<button id="11" class="button" type="submit">文章檢舉</button> -->
+<!-- 									<input type="hidden" name="chli_cate" value="0"> -->
+<!-- 									<input type="hidden" name="action" value="test_undone"> -->
+<!-- 								</FORM> -->
+								 <%if (loginVO.getAdm_iden().equals("網站管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					      	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/checklist/checklist.do">
 									<button id="22" class="button" type="submit">留言檢舉</button>
 									<input type="hidden" name="chli_cate" value="1">
@@ -407,10 +408,11 @@ function f3() {
 function init(){
 	console.log("init="+localStorage.getItem("1"));
 	if(localStorage.getItem("1")==null){
+		localStorage.setItem("1", "1");
 		$("#1").click();
 		console.log("123");
-		$("#11").click();
-		localStorage.setItem("1")=1;
+		$("#22").click();
+		
 	}else{
 			if(localStorage.getItem("1")==1){
 				$("#1").click();
