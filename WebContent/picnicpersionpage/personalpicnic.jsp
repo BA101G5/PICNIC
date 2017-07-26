@@ -230,6 +230,13 @@ body{
 						<p>${pboard_articleVO.article_text}</p>
 					</div>
 				</div>
+
+				<div class="row article-row">
+					<div class="btn-group mem-guest" id="btnPostChecklist">
+						<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">¿À¡|Ød®•</a>
+					</div>
+				</div>
+				
 			</div>
 </c:forEach>
 
