@@ -57,6 +57,21 @@ public class picmem extends HttpServlet{
 			successView.forward(req, res);	
 		}
 
+		if("memExitThisPG".equals(button)){
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String mem_no = (String) req.getParameter("mem_no").trim();
+			
+			PicmemService picmemSvc = new PicmemService();
+			picmemSvc.k_deletePicmem(picnic_no, mem_no);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+		
+		
+		
 //		if(true){
 //			String para = null;
 //			Enumeration<String> e = req.getParameterNames();
