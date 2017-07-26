@@ -149,7 +149,7 @@ public class PicnicServlet extends HttpServlet {
 
 					try {
 						placeVO = placeSvc.getOne(tladdress);
-						// System.out.println(placeVO + "hello");
+						 System.out.println(placeVO + "hello");
 
 						if (placeVO.getMf_no() != null) {
 							// System.out.println(placeVO.getMf_no());

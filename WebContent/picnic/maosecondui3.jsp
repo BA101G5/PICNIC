@@ -36,7 +36,7 @@
 										<p>${goods_rentVO.getGr_info()}</p>
 										<p>NT ${goods_rentVO.getGr_price()} ¤¸</p>
 										<button type="submit" class="btn btn-block btn-xs"
-											value="Submit">
+											value="Submit" style="font-size:28px">
 											<span class="glyphicon glyphicon-shopping-cart"
 												aria-hidden="true"></span>
 										</button>

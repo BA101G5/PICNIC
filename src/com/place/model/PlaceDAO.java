@@ -151,12 +151,13 @@ public class PlaceDAO implements PlaceDAO_interface {
 		PreparedStatement pstmt = null;
 		PlaceVO placeVO = null;
 		ResultSet rs = null;
+		System.out.println("HELLO");
 		
 		try {
 			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setString(1, P_place);
+			pstmt.setString(1,P_place);
 			rs = pstmt.executeQuery();
 			
 			rs.next();
