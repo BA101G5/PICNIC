@@ -2,8 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.checklist.model.*"%>
+<%@ page import="com.general_member.model.*"%>
 <%
 ChecklistVO checklistVO = (ChecklistVO) request.getAttribute("checklistVO");
+%>
+
+<%
+	String chli_be_num = request.getParameter("chli_be_num");
+	pageContext.setAttribute("chli_be_num", chli_be_num);
+	
+	String chli_cate = request.getParameter("chli_cate");
+	pageContext.setAttribute("chli_cate", chli_cate);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,26 +29,28 @@ ChecklistVO checklistVO = (ChecklistVO) request.getAttribute("checklistVO");
 </script>
 <FORM METHOD="post" ACTION="checklist.do" name="form1">
 	<table border="1">
-		<tr>
+		<tr style="display:none;">
 			<td>檢舉類別</td>
-			<td>
-				<select name="chli_cate">
-					<option value="0">文章檢舉</option>
-					<option value="1">留言檢舉</option>
-					<option value="2">揪團檢舉</option>
-					<option value="3">會員檢舉</option>
-					<option value="4">商家檢舉</option>
-				</select></td>
+			<td><input type="text" name="chli_cate"
+			value="${chli_cate}"/></td>
+<!-- 			<td> -->
+<!-- 				<select name="chli_cate"> -->
+<!-- 					<option value="0">文章檢舉</option> -->
+<!-- 					<option value="1">留言檢舉</option> -->
+<!-- 					<option value="2">揪團檢舉</option> -->
+<!-- 					<option value="3">會員檢舉</option> -->
+<!-- 					<option value="4">商家檢舉</option> -->
+<!-- 				</select></td> -->
 		</tr>
-		<tr>
+		<tr style="display:none;">
 			<td>被檢舉對象</td>
 			<td><input type="text" name="chli_be_num"
-			value="MG00000007"/></td>
+			value="${chli_be_num}"/></td>
 		</tr>
-		<tr>
+		<tr style="display:none;">
 			<td>檢舉會員</td>
 			<td><input type="text" name="chli_memno"
-			value="MG00000001"/></td>
+			value="${sessionScope.gVO.getMEM_NO()}"/></td>
 		</tr>
 		<tr>
 			<td>檢舉事由</td>

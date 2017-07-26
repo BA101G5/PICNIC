@@ -230,6 +230,13 @@ body{
 						<p>${pboard_articleVO.article_text}</p>
 					</div>
 				</div>
+
+				<div class="row article-row">
+					<div class="btn-group mem-guest" id="btnPostChecklist">
+						<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">檢舉留言</a>
+					</div>
+				</div>
+				
 			</div>
 </c:forEach>
 
@@ -273,6 +280,9 @@ body{
 			<div class="col-md-4">
 				<div class="well">
 					<div class="row">
+						<div style="text-align:right;">
+							<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">檢舉野餐團</a>
+						</div>
 						<div class="well">
 							<strong>野餐團介紹</strong>
 							<p>${ picnicVO.picnic_desc }
