@@ -160,12 +160,12 @@
 					    <div id="bbb" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel2">
 					      <div class="list-group">
 					        <%if (loginVO.getAdm_iden().equals("會員管理員")||loginVO.getAdm_iden().equals("Master")){%>
-					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
+					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/k_man_men_data.do" id="title_button">
 					      	<button class="button" type="submit" form="title_button" value="cho_generalMember" name="button">會員權限維護</button>
 					      	</FORM>
 					      	<%}%>
 					      	<%if (loginVO.getAdm_iden().equals("金流管理員")||loginVO.getAdm_iden().equals("Master")){%>
-					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data.do" id="title_button">
+					      	<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/man_men_data2.do" id="title_button">
 						       <button class="button" type="submit" form="title_button" value="back" name="button">廠商資料審核</button>
 						    </FORM>
 					      	<%}%>
@@ -177,7 +177,7 @@
 					  <%if (loginVO.getAdm_iden().equals("員工管理員")||loginVO.getAdm_iden().equals("Master")){%>
 					  <div class="panel panel-default">
 					   <h4 class="panel-title">
-					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/adm.do" >
+					        <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/adm2.do" >
 					        <button id="mem" class="test" type="submit">員工管理</button>
 					        <input type="hidden" name="action" value="get_adm_one_data">
 					   		 </FORM> 
@@ -360,6 +360,12 @@
 				<%if (request.getAttribute("result")=="AD_DELETE"){%>
 					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
 				<%}%>
+				<%if (request.getAttribute("result")=="MM"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="MG"){%>
+					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
 				</div>
 				</div>
 			</div>
@@ -400,16 +406,23 @@ function f3() {
 
 function init(){
 	console.log("init="+localStorage.getItem("1"));
-	if(localStorage.getItem("1")==1){
+	if(localStorage.getItem("1")==null){
 		$("#1").click();
-		console.log("localStorage.getItem="+localStorage.getItem("1"));
-	}else if(localStorage.getItem("1")==2){
-		console.log("init else="+localStorage.getItem("1"));
-		$("#2").click();
+		console.log("123");
+		$("#11").click();
+		localStorage.setItem("1")=1;
 	}else{
-		
+			if(localStorage.getItem("1")==1){
+				$("#1").click();
+				console.log("localStorage.getItem="+localStorage.getItem("1"));
+			}else if(localStorage.getItem("1")==2){
+				console.log("init else="+localStorage.getItem("1"));
+				$("#2").click();
+			}else{
+				
+			}
+		}
 	}
-}
 window.onload=init();
 </script>
 </html>

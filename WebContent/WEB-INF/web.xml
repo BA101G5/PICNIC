@@ -284,8 +284,39 @@
 		<url-pattern>/login/logout.do</url-pattern>
 	</servlet-mapping>
 	
-	
-	
+
+	<servlet>
+    <servlet-name>Test_Control</servlet-name>
+    <servlet-class>com.testcontrol.control.Test_Control</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test_Control</servlet-name>
+    <url-pattern>/adm2.do</url-pattern>
+  </servlet-mapping>
+
+<!-- <servlet> -->
+<!--     <servlet-name>Man_mem</servlet-name> -->
+<!--     <servlet-class>com.testcontrol.control.Man_mem_data</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>Man_mem</servlet-name> -->
+<!--     <url-pattern>/man_men_data2.do</url-pattern> -->
+<!--   </servlet-mapping> -->
+
+
+<!-- <servlet> -->
+<!--     <servlet-name>Admin</servlet-name> -->
+<!--     <servlet-class>com.testcontrol.control.Test_Admin</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>Admin</servlet-name> -->
+<!--     <url-pattern>/admini2.do</url-pattern> -->
+<!--   </servlet-mapping> -->
+
+
+
+
+
 
 	<filter>
 		<filter-name>loginFilter</filter-name>

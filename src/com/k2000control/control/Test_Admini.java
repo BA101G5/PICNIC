@@ -51,7 +51,10 @@ public class Test_Admini extends HttpServlet{
 				System.out.print("err");
 			}else{
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "del";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -84,7 +87,10 @@ public class Test_Admini extends HttpServlet{
 			}else{
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("add_adm",add_adm);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_adm";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -137,7 +143,10 @@ public class Test_Admini extends HttpServlet{
 			}else{
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("add_adm",add_adm);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_adm";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -151,7 +160,10 @@ public class Test_Admini extends HttpServlet{
 				System.out.print("err");
 			}else{
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "all_cancel";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -194,7 +206,10 @@ public class Test_Admini extends HttpServlet{
 				req.setAttribute("add_adm",add_adm);
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("err", err);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else{
@@ -204,7 +219,10 @@ public class Test_Admini extends HttpServlet{
 
 				admVO = getSearch();
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "add_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -224,7 +242,10 @@ public class Test_Admini extends HttpServlet{
 			}else{
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("mod_adm", mod_adm);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "modify";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -257,14 +278,20 @@ public class Test_Admini extends HttpServlet{
 				req.setAttribute("mod_adm", mod_adm);
 				req.setAttribute("err", err);
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "mod_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}else{		
 				admDAO.modAdministrator(mod_adm);
 				List<AdministratorVO> admVO = getSearch();
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "mod_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}	
@@ -294,7 +321,10 @@ public class Test_Admini extends HttpServlet{
 				req.setAttribute("admVO", admVO);
 				req.setAttribute("pur_adm", pur_adm);
 				req.setAttribute("pur_purDetail", pur_purDetail);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "purview";
+				req.setAttribute("result", result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -323,7 +353,10 @@ public class Test_Admini extends HttpServlet{
 				System.out.print("err");
 			}else{
 				req.setAttribute("admVO", admVO);
-				String url = "/view/admView.jsp";
+				String result = "";
+				result = "pur_determine";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
