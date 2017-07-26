@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.announcement.model.AnnouncementService;
 import com.picmem.model.PicmemService;
 import com.picmem.model.PicmemVO;
 import com.picnic.model.PicnicService;
@@ -31,6 +32,28 @@ public class picmem extends HttpServlet{
 		String pic = req.getParameter("PICNIC_NO");
 		String mem = (String) session.getAttribute("MEM_NO");
 		
+		
+		if("addThisPG".equals(button)){
+			System.out.println("C: picmem / " + "L37");
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String mem_no = (String) req.getParameter("mem_no").trim();
+			
+			
+			PicmemVO picmemVO = new PicmemVO();
+
+			picmemVO.setMem_no(mem_no);
+			picmemVO.setPicnic_no(picnic_no);
+
+			/***************************2.開始新增資料***************************************/
+			PicmemService picmemSvc = new PicmemService();
+			picmemSvc.addPicmem(mem_no, picnic_no);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+
 //		if(true){
 //			String para = null;
 //			Enumeration<String> e = req.getParameterNames();
@@ -117,7 +140,7 @@ public class picmem extends HttpServlet{
 
 			picmemVO.setMem_no(mem);
 			picmemVO.setPicnic_no(pic);
-			picmemVO.setPicmem_iden("團員");
+			picmemVO.setPicmem_iden("C");
 			picmemVO.setPicmem_sta("U");
 			picmemVO.setMem_longi(0.0);
 			picmemVO.setMem_latit(0.0);

@@ -290,6 +290,14 @@ body{
 									<a href="#">­×§ï</a>
 								</form>
 							</p>
+							</p>
+								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  class="btn btn-default">
+									<a href="#">¥[¹Î</a>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
+									<input type="hidden" name="button" value="addThisPG">
+								</form>
+							</p>
 
 						</div>
 						

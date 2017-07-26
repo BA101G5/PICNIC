@@ -17,6 +17,9 @@ public class PicmemService {
 		picmemVO.setPicnic_no(picnic_no);
 		picmemVO.setMem_no(mem_no);
 		picmemVO.setPicmem_iden("C");//¹Î­û
+		picmemVO.setPicmem_sta("U");
+		picmemVO.setMem_longi(0.0);
+		picmemVO.setMem_latit(0.0);
 		dao.insert(picmemVO);
 
 		return picmemVO;
