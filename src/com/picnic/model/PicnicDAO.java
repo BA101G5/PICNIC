@@ -28,6 +28,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 	private static final String INSERT_INITIATESTMT = "insert into PICNIC (PICNIC_NO,PICNIC_NAME,PICNIC_STARTUP,PICNIC_CHK, PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,SYSDATE,'N',?,?,'L','0','N','N')";
 	private static final String GET_ONEWHERE_STMT = "select PICNIC_NO,PICNIC_NAME from PICNIC WHERE PICNIC_NO=? and PICNIC_CHK =\'N\' and ORD_STA=\'N\'";
 	private static final String UPDATEFINISHEDPICNIC__STMT = "update PICNIC set PICNIC_CHK=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=SYSDATE,ORD_STA=? where PICNIC_NO=?";
+	private static final String UPDATE_STMT_DESC = "update PICNIC set PICNIC_DESC=? where PICNIC_NO=?";
 	
 	@Override
 	public void insert(PicnicVO picnicVO) {
@@ -95,6 +96,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 			pstmt.setTimestamp(11, picnicVO.getOrd_date());
 			pstmt.setString(12, picnicVO.getOrd_dm());
 			pstmt.setString(13, picnicVO.getOrd_sta());
+			pstmt.setString(14, picnicVO.getPicnic_no());
 
 			pstmt.executeUpdate();
 
@@ -838,5 +840,41 @@ public class PicnicDAO implements PicnicDAO_interface {
 			}
 		}
 		
+	}
+
+	
+	
+	public void update_desc(String picnic_no, String desc) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STMT_DESC);
+	
+			pstmt.setString(1, desc);
+			pstmt.setString(2, picnic_no);
+	
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+	
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+	
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	
 	}
 }
