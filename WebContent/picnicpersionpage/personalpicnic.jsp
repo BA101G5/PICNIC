@@ -280,6 +280,9 @@ body{
 			<div class="col-md-4">
 				<div class="well">
 					<div class="row">
+						<div style="text-align:right;">
+							<a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">¿À¡|≥•¿\πŒ</a>
+						</div>
 						<div class="well">
 							<strong>≥•¿\πŒ§∂≤–</strong>
 							<p>${ picnicVO.picnic_desc }
