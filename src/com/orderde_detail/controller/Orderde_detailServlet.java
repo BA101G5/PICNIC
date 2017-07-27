@@ -41,7 +41,7 @@ public class Orderde_detailServlet extends HttpServlet {
 				List<Orderde_DetailVO> list = orderde_detailSvc.getAllPICNICNO(picnic_no);
 				System.out.println(list);
 				if (!list.isEmpty()) {
-					session.setAttribute("picnic_no", picnic_no);
+					req.setAttribute("picnic_no", picnic_no);
 					req.setAttribute("listOrderde_DetailVO", list);
 				}
 

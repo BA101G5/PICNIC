@@ -150,6 +150,48 @@
 
 	window.addEventListener('load', doFirst, false);
 </script>
+<style>table5_3 table {
+ width:100%;
+ margin:15px 0;
+ border:0;
+}
+.table5_3 th {
+width:100%;
+ background-color:#87CEFA;
+ color:#000000
+}
+.table5_3,.table5_3 th,.table5_3 td {
+ font-size:0.95em;
+ text-align:center;
+ padding:4px;
+ border-collapse:collapse;
+}
+.table5_3 th,.table5_3 td {
+ border: 1px solid #ffffff;
+ border-width:1px 0 1px 0
+}
+.table5_3 tr {
+ border: 1px solid #ffffff;
+}
+.table5_3 tr:nth-child(odd){
+ background-color:#d7eefd;
+}
+.table5_3 tr:nth-child(even){
+ background-color:#ffffff;
+}
+/* .table5_3 tr:last-child td:last-child{ */
+/*   border-bottom-right-radius: 10px; */
+/* } */
+.table5_3 tr:first-child th:last-child{
+  border-top-right-radius: 10px;
+}
+.table5_3 tr:last-child td:first-child{
+  border-bottom-left-radius: 10px;
+}
+.table5_3 tr:first-child th:first-child{
+  border-top-left-radius: 10px;
+}
+</style>
 </head>
 
 <body>
@@ -177,70 +219,74 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty ListPicnicVO}">
-						<h1>請選擇野餐團</h1>
+						<h3>請選擇野餐團</h3>
 						<form method="POST" id="myForm"
 							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-							<input type="hidden" name="action" value="get_gr_no"> <select
-								name="picnic_no" onmouseup="submit()">
-									<c:if test="${not empty listOrderde_DetailVO}">
-								<c:forEach var="PicnicVO" items="${ListPicnicVO}">
-									<c:if test="${PicnicVO.getPicnic_no() eq param.picnic_no}">
-										<option value="${PicnicVO.getPicnic_no()} " selected>${PicnicVO.getPicnic_name()}</option>
-									</c:if>
-									<c:if test="${PicnicVO.getPicnic_no() != param.picnic_no}">
-										<option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option>
-									</c:if>
-								</c:forEach>
+							<input type="hidden" name="action" value="get_gr_no"> 
+							<select class="selectpicker" name="picnic_no" onchange="submit()">
+						<c:if test="${not empty listOrderde_DetailVO||empty requestScope.picnic_no}">
+									<option value=" " selected></option>
+								</c:if>
+								<c:if test="${not empty listOrderde_DetailVO}">
+									<c:forEach var="PicnicVO" items="${ListPicnicVO}">
+
+										<c:if test="${PicnicVO.getPicnic_no() eq requestScope.picnic_no}">
+											<option value="${PicnicVO.getPicnic_no()} " selected>${PicnicVO.getPicnic_name()}</option>
+										</c:if>
+										<c:if test="${PicnicVO.getPicnic_no() != requestScope.picnic_no}">
+											<option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option>
+										</c:if>
+									</c:forEach>
 								</c:if>
 								<c:if test="${empty listOrderde_DetailVO}">
-								<c:forEach var="PicnicVO" items="${ListPicnicVO}">
+									<c:forEach var="PicnicVO" items="${ListPicnicVO}">
 										<option value=" ${PicnicVO.getPicnic_no()}">${PicnicVO.getPicnic_name()}</option>
-								</c:forEach>
+									</c:forEach>
 								</c:if>
 							</select>
 						</form>
 						<br>
 					</c:if>
-					
+
 					<form method="POST"
 						action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
 						<c:if test="${ not empty listOrderde_DetailVO|| not empty listGs}">
-						<table class="table table-hover">
-							<caption>購物清單</caption>
-							<thead>
-								<tr>
-									<th>地點名稱</th>
-									<th></th>
-									<th></th>
-									<th></th>
+							<table class="table5_3">
+								<caption>購物清單</caption>
+								<thead>
+									<tr>
+										<th>地點名稱</th>
+										<th></th>
+										<th></th>
+										<th></th>
 
-									<th>價格</th>
+										<th>價格</th>
 
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="Orderde_DetailVO"
-									items="${listOrderde_DetailVO}">
-									<c:if test="${Orderde_DetailVO.getGr_no() == null}">
-										<tr>
-											<td>${Orderde_DetailVO.getOd_place()}<input
-												type="hidden" name="address"
-												value="${Orderde_DetailVO.getOd_place()}"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td class="adc">NT$ ${Orderde_DetailVO.getOd_price()}</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="Orderde_DetailVO"
+										items="${listOrderde_DetailVO}">
+										<c:if test="${Orderde_DetailVO.getGr_no() == null}">
+											<tr>
+												<td>${Orderde_DetailVO.getOd_place()}<input
+													type="hidden" name="address"
+													value="${Orderde_DetailVO.getOd_place()}"></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td class="adc">NT$ ${Orderde_DetailVO.getOd_price()}</td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</tbody>
+							</table>
 						</c:if>
 						<c:if
 							test="${not empty listOrderde_DetailVO &&listOrderde_DetailVO.size( )>1}">
 
 
-							<table class="table table-hover">
+							<table class="table5_3">
 								<thead>
 
 									<tr>
@@ -307,7 +353,7 @@
 
 						<c:if test="${not empty listGs }">
 
-							<table class="table table-hover">
+							<table class="table5_3">
 								<thead>
 									<tr>
 										<th>預購商品</th>
