@@ -35,6 +35,7 @@ public class logout extends HttpServlet {
 			if(session.getAttribute("gVO")!=null ||session.getAttribute("mVO")!=null){
 				session.removeAttribute("gVO");
 				session.removeAttribute("mVO");
+				session.removeAttribute("MEM_NO");
 			}else{
 				res.sendRedirect(req.getContextPath()+"/signin.jsp");
 				return;

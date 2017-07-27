@@ -107,7 +107,21 @@ public class commendServlet extends HttpServlet{
 					comS.k_addCommend(comVO);
 				}
 				i++;
-			}	
+			}
+			
+			//---------------------------
+			PicnicService picS =new PicnicService();
+			PicmemService picmS = new PicmemService();
+			List<PicnicVO> picList = new ArrayList<PicnicVO>();
+			
+			for(String picN : picmS.k_getMemPicList(mem)){
+				picList.add(picS.k_getOne(picN));
+			}
+			
+			req.setAttribute("picList", picList);
+			String url = "/view/history.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 		}
 	}
 }

@@ -73,7 +73,7 @@ public class LoginHandler extends HttpServlet {
     	if(allowUser(account, password) != null && allowUser1(account, password) == null){
     		//generalmember
         	session1.setAttribute("gVO", allowUser(account, password));
-        	
+        	session1.setAttribute("MEM_NO",allowUser(account, password).getMEM_NO()); //加入會員編號
           session.setAttribute("account", account);   //*工作1: 才在session內做已經登入過的標識
     	}else if(allowUser1(account, password) != null && allowUser(account, password) == null){
     		//manufacturers

@@ -37,6 +37,14 @@
 								<p>成團</p>
 								<input type="hidden" name="action" value="insert">
 							</form></a></li>
+						<li>
+							<a href="#">
+								<form method="POST" action="<%=request.getContextPath()%>/history.do" onclick="submit()" >
+									<input type="hidden" name="button" value="history">
+									<p>揪團歷史</p>
+								</form>
+							</a>
+						</li>
 					</ul>
 
 					<!-- 右選單 -->
@@ -59,11 +67,8 @@
 					</ul>
 
 					<!-- 搜尋表單 -->
-					<form class="navbar-form navbar-right" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="請輸入關鍵字">
-						</div>
-						<button type="submit" class="btn btn-default">搜尋</button>
+					<form class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/view/k_research_choice.jsp">
+						<button type="submit" class="btn btn-default">進階搜尋</button>
 					</form>
 				</div>
 			</nav>

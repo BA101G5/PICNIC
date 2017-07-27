@@ -5,9 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<!-- --------------------- -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Picnic野餐網</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<jsp:include page="/mustinclude/head.jsp" />
+<!-- --------------------- -->
+<title>揪團歷史</title>
 </head>
 <body>
+
+<jsp:include page="/mustinclude/left_nav.jsp" />
+<jsp:include page="/mustinclude/top_nav.jsp" />
+
+<div class="k_class">
 <div id="print_parts">
 	<c:if test="${not empty picList}">
 		<table>
@@ -31,13 +43,18 @@
 				        	<input type="hidden" name="button" value="his_detail">
 						</FORM>
 					</td>
+					<td>
+						<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/commend.do" >
+					        <input type="submit" value="評價">
+					        <input type="hidden" name="button" value="commend">
+					    </FORM>
+					</td>
 				</tr>
 				
 			</c:forEach>
 		</table>
 	</c:if>
 	<c:if test="${not empty plaVOList}">
-	<h1>場地</h1>
 		<table>
 				<tr>
 					<td>場地名稱</td>
@@ -62,7 +79,6 @@
 		</table>
 	</c:if>
 	<c:if test="${not empty gsVOList}">
-	<h1>一般商品</h1>
 		<table>
 				<tr>
 					<td>商品名稱</td>
@@ -81,7 +97,6 @@
 		</table>
 	</c:if>
 	<c:if test="${not empty grVOList}">
-	<h1>租借商品</h1>
 		<table>
 				<tr>
 					<td>物品名稱</td>
@@ -102,7 +117,8 @@
 		</table>
 	</c:if>
 </div>
-<a href="#" onclick="printScreen(print_parts);" >Printing ... </a>
+</div>
+<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>
 
@@ -121,75 +137,97 @@
 </script>
 
 <style type="text/css">
-body {
-	background: #fafafa url(https://jackrugile.com/images/misc/noise-diagonal.png);
-	color: #444;
-	font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
-	text-shadow: 0 1px 0 #fff;
-}
 
-strong {
-	font-weight: bold; 
-}
+div.k_class { 
+	background:#FFF;
+	margin:auto;
+	padding:10px; 
+	font:13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+	width:70%;
+	}
+	
+/* ---- Some Resets ---- */
 
-em {
-	font-style: italic; 
-}
+div.k_class p,
+table, caption, td, tr, th {
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	}
 
-table {
-	background: #f5f5f5;
-	border-collapse: separate;
-	box-shadow: inset 0 1px 0 #fff;
-	font-size: 16px;
-	line-height: 24px;
-	margin: 10px auto;
-	text-align: center;
-	width: 1200px;
-}	
+/* ---- Paragraphs ---- */
 
-thead{
-	font-size: 18px;
-	color:#0000AA;
-}
+div.k_class p {
+	margin-bottom:15px;
+	}
+	
+/* ---- Table ---- */
 
-td {
-	border-right: 1px solid #fff;
-	border-left: 1px solid #e8e8e8;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #e8e8e8;
-	padding: 1px 15px;
-	position: relative;
-	transition: all 300ms;
-}
-
-td:first-child {
-	box-shadow: inset 1px 0 0 #fff;
-}	
-
-td:last-child {
-	border-right: 1px solid #e8e8e8;
-	box-shadow: inset -1px 0 0 #fff;
-}	
-
-tr {
-	background: url(https://jackrugile.com/images/misc/noise-diagonal.png);	
-}
-
-tbody.adm:hover td {
-	color: transparent;
-	text-shadow: 0 0 3px #aaa;
-}
-
-tbody.adm:hover tr:hover td {
-	color: #444;
-	text-shadow: 0 1px 0 #fff;
-}
-
-section button {
-  margin-left : 50px;
-  margin-right : 50px;
+div.k_class table {
+	border-collapse:collapse;
+	margin:auto;
+	margin-bottom:15px;
+	width:100%;
+	
+	}
+	
+div.k_class 	caption {
+		text-align:center;
+		font-size:15px;
+		padding-bottom:10px;
+		}
+	
+div.k_class 	table td,
+	table th {
+		padding:5px;
+		border:1px solid #fff;
+		border-width:0 1px 1px 0;
+		}
+		
+div.k_class 	thead th {
+		background:#91c5d4;
+		}
+			
+		thead th[colspan],
+		thead th[rowspan] {
+			background:#66a9bd;
+			}
+		
+div.k_class 	tbody th,
+	tfoot th {
+		text-align:center;
+		background:#91c5d4;
+		}
+		
+div.k_class 	tbody td,
+	tfoot td {
+		text-align:center;
+		background:#d5eaf0;
+		}
+		
+div.k_class 	tfoot th {
+		background:#b0cc7f;
+		}
+		
+div.k_class 	tfoot td {
+		background:#d7e1c5;
+		font-weight:bold;
+		}
+			
+div.k_class 	tbody tr.odd td { 
+		background:#bcd9e1;
+		}
+div.k_class 	caption{
+		text-align:center;
+		font-size:36px;
+		color:#AA3333;
+	}
+	
+div.k_class  section button {
+  margin-left : 1px;
+  margin-right : 1px;
   font-size: 1.0rem;
-  padding: 0.01rem 2.5rem;
+  padding: 0.01rem 0.5rem;
   display: inline;
   background-color: #009ac9;
   border: 1px solid transparent;
@@ -202,17 +240,17 @@ section button {
   transition: all 0.3s ease-in-out;
 }
 
-section button:hover {
+div.k_class section button:hover {
   background-color: #ffffff;
   color: #009ac9;
   border-color: #009ac9;
 }
 
-section.close button {
+div.k_class section button.quit {
   margin-left : 1px;
   margin-right : 1px;
   font-size: 1.0rem;
-  padding: 0.1rem 0.1rem;
+  padding: 0.01rem 0.5rem;
   display: inline;
   background-color: #D0104C;
   border: 1px solid transparent;
@@ -225,66 +263,13 @@ section.close button {
   transition: all 0.3s ease-in-out;
 }
 
-section.close button:hover {
+div.k_class section button.quit:hover {
   background-color: #ffffff;
   color: #D0104C;
   border-color: #D0104C;
 }
 
-section{
+div.k_class section{
 	display: inline
 }
-
-.radio{
-	display:none;
-}
-	
-input[type="text"]{
-	text-align: center;
-}
-
-
-  	#toggle{
-			width:150px;
-			height:20px;
-			border-radius:40px;
-			position:absolute;
-			-webkit-appearance: none;
-			position:absolute;
-			top:165%;
-			left:60%;
-			margin:-39px 0 0 -89px;
-			box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4);
-			background: -webkit-linear-gradient(#c6c6c6,#e3e3e3);
-		}
-		#toggle:checked{
-			background: -webkit-linear-gradient(#bfe09c,#c8eca0);
-			box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
-		}
-		#toggle:before {
-			content:"";
-			width:13px;
-			height:13px;
-			padding:2px;
-			top:1.2px;
-			left:9px;
-			position:absolute;
-			border-radius:40px;
-			background: -webkit-linear-gradient(#ebebeb,#f1f1f1);
-			box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.2), 
-						-1px 1px 2px rgba(0, 0, 0, 0.3), 
-						inset 1px 1px 1px #ffffff;
-			-webkit-transition: all 1s;
-			
-		}
-		#toggle:checked:before {
-			left:125px;
-			background:#f1f1f1;
-		}
-
-.errWord{
-	font-size:24px;
-	color:#FF0000;
-}		
-
 </style>

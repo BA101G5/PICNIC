@@ -6,16 +6,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- --------------------- -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Picnic野餐網</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<jsp:include page="/mustinclude/head.jsp" />
+<!-- --------------------- -->
+
 <style type="text/css">
-		body { 
-	margin:0; 
+div.k_class { 
+	background:#FFF;
+	margin:auto;
 	padding:20px; 
 	font:13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+	width:75%;
 	}
 	
 /* ---- Some Resets ---- */
 
-p,
+div.k_class p,
 table, caption, td, tr, th {
 	margin:0;
 	padding:0;
@@ -24,13 +34,13 @@ table, caption, td, tr, th {
 
 /* ---- Paragraphs ---- */
 
-p {
+div.k_class p {
 	margin-bottom:15px;
 	}
 	
 /* ---- Table ---- */
 
-table {
+div.k_class table {
 	border-collapse:collapse;
 	margin:auto;
 	margin-bottom:15px;
@@ -38,20 +48,20 @@ table {
 	
 	}
 	
-	caption {
+div.k_class 	caption {
 		text-align:center;
 		font-size:15px;
 		padding-bottom:10px;
 		}
 	
-	table td,
+div.k_class 	table td,
 	table th {
 		padding:5px;
 		border:1px solid #fff;
 		border-width:0 1px 1px 0;
 		}
 		
-	thead th {
+div.k_class 	thead th {
 		background:#91c5d4;
 		}
 			
@@ -60,37 +70,37 @@ table {
 			background:#66a9bd;
 			}
 		
-	tbody th,
+div.k_class 	tbody th,
 	tfoot th {
 		text-align:center;
 		background:#91c5d4;
 		}
 		
-	tbody td,
+div.k_class 	tbody td,
 	tfoot td {
 		text-align:center;
 		background:#d5eaf0;
 		}
 		
-	tfoot th {
+div.k_class 	tfoot th {
 		background:#b0cc7f;
 		}
 		
-	tfoot td {
+div.k_class 	tfoot td {
 		background:#d7e1c5;
 		font-weight:bold;
 		}
 			
-	tbody tr.odd td { 
+div.k_class 	tbody tr.odd td { 
 		background:#bcd9e1;
 		}
-	caption{
+div.k_class 	caption{
 		text-align:center;
 		font-size:36px;
 		color:#AA3333;
 	}
 	
-	section button {
+div.k_class  section button {
   margin-left : 1px;
   margin-right : 1px;
   font-size: 1.0rem;
@@ -107,13 +117,13 @@ table {
   transition: all 0.3s ease-in-out;
 }
 
-section button:hover {
+div.k_class section button:hover {
   background-color: #ffffff;
   color: #009ac9;
   border-color: #009ac9;
 }
 
-section button.quit {
+div.k_class section button.quit {
   margin-left : 1px;
   margin-right : 1px;
   font-size: 1.0rem;
@@ -130,13 +140,13 @@ section button.quit {
   transition: all 0.3s ease-in-out;
 }
 
-section button.quit:hover {
+div.k_class section button.quit:hover {
   background-color: #ffffff;
   color: #D0104C;
   border-color: #D0104C;
 }
 
-section{
+div.k_class section{
 	display: inline
 }
 	
@@ -168,6 +178,11 @@ window.onload=buttonColor;
 </script>
 </head>
 <body>
+
+<jsp:include page="/mustinclude/left_nav.jsp" />
+<jsp:include page="/mustinclude/top_nav.jsp" />
+
+<div class="k_class">
 <div class="container">
   <table class="responsive-table">
     <caption>野餐團列表</caption>
@@ -202,6 +217,8 @@ window.onload=buttonColor;
     </tbody>
   </table>
 </div>
+</div>
+<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>
 
