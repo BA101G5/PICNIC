@@ -95,21 +95,6 @@
 									</FORM>
 								</td>
 
-								<td>
-									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit"
-											style="width: 80px; height: 40px; font-size: 20px;">
-											<span class="glyphicon glyphicon-shopping-cart"
-												aria-hidden="true"></span>
-										</button>
-										<input type="hidden" name="gs_no"
-											value="${goods_sellVO.gs_no}"> <input
-											type="hidden" name="action" value="insertintocartA">
-										<input type="hidden" name="amount" value="1">
-									</FORM>
-								</td>
 							</tr>
 						</table>
 					</div>
@@ -147,21 +132,6 @@
 									</FORM>
 								</td>
 
-								<td>
-									<FORM METHOD="post"
-										ACTION="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-										<button type="submit" class="btn btn-default btn-xs"
-											value="Submit"
-											style="width: 80px; height: 40px; font-size: 20px;">
-											<span class="glyphicon glyphicon-shopping-cart"
-												aria-hidden="true"></span>
-										</button>
-										<input type="hidden" name="gs_no"
-											value="${goods_sellVO.gs_no}"> <input
-											type="hidden" name="action" value="insertintocartA">
-										<input type="hidden" name="amount" value="1">
-									</FORM>
-								</td>
 							</tr>
 						</table>
 					</div>
