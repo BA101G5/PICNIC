@@ -43,7 +43,7 @@
 					</tr>
 				</thead>
       			<tbody class="adm">
-					<form id="administrator" action="<%=request.getContextPath()%>/admini2.do" method="post" name="del">
+					<form id="administrator" action="<%=request.getContextPath()%>/k_admini.do" method="post" name="del">
 					<c:forEach var="adm" items="${admVO}">
 						<tr class="colorCon" onclick="colorCon()">	
 							<td><input class="radio" type="radio" name="Administrator" value="${adm.administrator}" id="${adm.administrator}">
@@ -80,7 +80,7 @@
 					</tr>
 				</thead>
 				<tbody>		
-					<form id="add_adm" action="${pageContext.request.contextPath}/admini2.do" method="post" name="add_adm">
+					<form id="add_adm" action="<%=request.getContextPath()%>/k_admini.do" method="post" name="add_adm">
 					<c:forEach var="addAdm" items="${add_adm}" varStatus="status">
 						<tr>	
 							<td>
@@ -121,7 +121,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<form id="mod_adm_form" action="${pageContext.request.contextPath}/admini2.do" method="post" name="mod_adm_form">
+					<form id="mod_adm_form" action="<%=request.getContextPath()%>/k_admini.do" method="post" name="mod_adm_form">
 						<tr>	
 							<td><input type="text" name="getAdministrator" value="${mod_adm.administrator}" disabled>
 							  <input type="hidden" name="getAdministrator" value="${mod_adm.administrator}"></td>
@@ -164,7 +164,7 @@
 					</thead>
 					<c:if test="${not empty pur_purDetail}">
 						<tbody>
-							<form id="pur_adm_form" action="${pageContext.request.contextPath}/admini2.do" method="post" name="pur_adm_form">
+							<form id="pur_adm_form" action="<%=request.getContextPath()%>/k_admini.do" method="post" name="pur_adm_form">
 									<tr>
 										<td colspan="6">所有權限</td>	
 									</tr>
