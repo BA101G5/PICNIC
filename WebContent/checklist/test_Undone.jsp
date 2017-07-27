@@ -3,7 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.checklist.model.*" %>
 <%@ page import="java.util.*" %>
-<%List<ChecklistVO> checklistVO = (List<ChecklistVO>) request.getAttribute("checklistVO"); %>
+<%@ page import="com.picnic.model.*"%>
+<%@ page import="java.util.*"%>
+<%List<ChecklistVO> checklistVO = (List<ChecklistVO>) request.getAttribute("checklistVO"); 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -163,8 +166,17 @@
 								<c:if test="${checklistVO.chli_cate eq 2}" var="0" scope="page"><td>揪團檢舉</td></c:if>
 								<c:if test="${checklistVO.chli_cate eq 3}" var="0" scope="page"><td>會員檢舉</td></c:if>
 								<c:if test="${checklistVO.chli_cate eq 4}" var="0" scope="page"><td>商家檢舉</td></c:if>
+				<jsp:useBean id="picinSvc" scope="page" class="com.picnic.model.PicnicService"/>
 				
-								<td>${checklistVO.chli_be_num}</td>
+							
+								 <c:if test="${testundone eq 2}">
+					 			 <td>${picinSvc.getByPicnic_No(checklistVO.chli_be_num).picnic_name}</td> 
+								  </c:if>
+								  <%if (!((String)request.getAttribute("testundone")).equals("2")){%>
+					 			 <td>${checklistVO.chli_be_num}</td> 
+								  <%}%>
+								
+								
 								<td>${checklistVO.chli_memno}</td>
 								<td style="display:none;"><input readOnly="true" name="chli_start"
 			value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${now}"/>"/></td>
