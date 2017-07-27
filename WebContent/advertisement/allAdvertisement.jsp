@@ -86,7 +86,7 @@
 					   <%if (request.getAttribute("result")=="OTHER"){%>
 				 <div style="float: left; font-size: 50px">申請通過廣告</div> 
 				<%}%>
-				 <%if (request.getAttribute("result")=="all"){%>
+				 <%if ((request.getAttribute("result")=="all")){%>
 				 <div style="float: left; font-size: 50px">新廣告申請</div> 
 				<%}%>
 					</div>
@@ -153,7 +153,7 @@
 			     <input type="hidden" name="AD_NO" value="${advertisementVO.AD_NO}">
 			     <input type="hidden" name="AD_STA" value="${advertisementVO.AD_STA}">
 			     <input type="hidden" name="action"	value="UpdateForSTA">
-			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+<%-- 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller--> --%>
 <%-- 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller--> --%>
 			     </FORM>		
 		

@@ -356,16 +356,19 @@
 					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="AD"){%>
-					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="AD_DELETE"){%>
-					<jsp:include page="/advertisement//allAdvertisement.jsp"/>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="MM"){%>
 					<jsp:include page="/view/man_mem_data.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="MG"){%>
 					<jsp:include page="/view/man_mem_data.jsp"/>
+				<%}%>
+				<%if (request.getAttribute("result")=="updateAD"){%>
+					<jsp:include page="/advertisement/allAdvertisement.jsp"/>
 				<%}%>
 				</div>
 				</div>

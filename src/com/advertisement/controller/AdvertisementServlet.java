@@ -37,7 +37,7 @@ public class AdvertisementServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println(action);
+		System.out.println("action : "+action);
 		if ("getOne_For_Display".equals(action)) { // select_page.jsp請求
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -134,7 +134,7 @@ public class AdvertisementServlet extends HttpServlet {
 		}
 
 		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-		
+			System.out.println("測試 ");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -213,7 +213,15 @@ public class AdvertisementServlet extends HttpServlet {
 				
 				req.setAttribute("ADVO", ADVO); // 資料庫update成功後,正確的的ADVO物件,存入req
 
-				String url = requestURL;
+				
+				String result = "";
+				result = "updateAD";
+				req.setAttribute("result",result);
+				String url = "/checklist/TEST_HOME.jsp";
+				
+				
+				
+				//String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 
 				successView.forward(req, res);
@@ -221,6 +229,7 @@ public class AdvertisementServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				System.out.println("exception");
+				System.out.println("31313151");
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/advertisement/update_advertisement_input.jsp");
@@ -246,12 +255,19 @@ public class AdvertisementServlet extends HttpServlet {
 				 * 3.刪除完成,準備轉交(Send the Success view)
 				 ***********/
 				
-				String result = "";
-				result = "AD_DELETE";
-				req.setAttribute("result",result);
+//				String result = "";
+//				result = "AD_DELETE";
+//				req.setAttribute("result",result);
+				
+				
+				
+				List<AdvertisementVO> advertisementVO = ADSvc.getAll_U();
+				
+				req.setAttribute("advertisementVO", advertisementVO);
+				
+				String AD = "all";
+				req.setAttribute("result", AD);
 				String url = "/checklist/TEST_HOME.jsp";
-				
-				
 				
 				
 				//String url = "/allAdvertisement.jsp";
@@ -444,7 +460,7 @@ public class AdvertisementServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		if ("UpdateForSTA".equals(action)) { // 來自update_emp_input.jsp的請求
-			
+			System.out.println("測試 ");
 			Map<String,Character> errorMsgs = new HashMap<String,Character>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -469,12 +485,12 @@ public class AdvertisementServlet extends HttpServlet {
 				}
 				
 
-				AdvertisementVO advertisementVO = new AdvertisementVO();
+				AdvertisementVO adVO = new AdvertisementVO();
 				
 
-				advertisementVO.setAD_NO(AD_NO);
+				adVO.setAD_NO(AD_NO);
 				
-				advertisementVO.setAD_STA(AD_STA);
+				adVO.setAD_STA(AD_STA);
 				errorMsgs.put("AD_STA", AD_STA);
 
 				// Send the use back to the form, if there were errors
@@ -485,24 +501,37 @@ public class AdvertisementServlet extends HttpServlet {
 //					failureView.forward(req, res);
 //					return; // 程式中斷
 //				}
-
+//				AdvertisementService ADSvc = new AdvertisementService();
+//				List<AdvertisementVO> advertisementVO = ADSvc.getAll_U();
+//				
+//				req.setAttribute("advertisementVO", advertisementVO);
+//				
+//				
+//				String AD = "all";
+//				req.setAttribute("result", AD);
+//				String url = "/checklist/TEST_HOME.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, res);
 				/*************************** 2.開始修改資料 *****************************************/
 				System.out.println("12312313");
 				AdvertisementService ADSvc = new AdvertisementService();
-				advertisementVO = ADSvc.updateSTA(AD_NO, AD_STA);
+				adVO = ADSvc.updateSTA(AD_NO, AD_STA);
 				System.out.println("99999");
 				/***************************
 				 * 3.修改完成,準備轉交(Send the Success view)
 				 *************/
 				
+				List<AdvertisementVO> advertisementVO = ADSvc.getAll_U();
+				
+				
 				req.setAttribute("advertisementVO", advertisementVO); // 資料庫update成功後,正確的的ADVO物件,存入req
 
-				String result = "";
-				result = "AD";
-				req.setAttribute("result",result);
+				
+				String AD = "all";
+				req.setAttribute("result", AD);
 				String url = "/checklist/TEST_HOME.jsp";
 				
-				
+				System.out.print(url);
 				
 				//String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
@@ -514,7 +543,7 @@ public class AdvertisementServlet extends HttpServlet {
 				System.out.println("exception");
 				errorMsgs.put("error",'e');
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/advertisement/update_advertisement_input.jsp");
+						.getRequestDispatcher("/checklist/TEST_HOME.jsp");
 				failureView.forward(req, res);
 			}
 		}
