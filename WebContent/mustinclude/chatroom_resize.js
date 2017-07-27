@@ -12,6 +12,12 @@ var onWinResize = function(){
   jqAChatroomContainerPanelBody
       .css('max-height', hightLimit + 'px')
       .scrollTop(jqAChatroomContainerPanelBody[0].scrollHeight);
+  
+  if(document.documentElement.clientWidth<900){
+	  $('#left-navigation-bar').css('display', 'none');
+  }else{
+	  $('#left-navigation-bar').css('display', 'block');
+  }
 
 };
 onWinResize();
