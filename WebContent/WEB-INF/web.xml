@@ -171,6 +171,14 @@
 		<servlet-name>Pboard_ArticleServlet3</servlet-name>
 		<url-pattern>/picnic/pboard_article.do</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Pboard_ArticleServlet4</servlet-name>
+		<servlet-class>com.pboard_article.controller.Pboard_ArticleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Pboard_ArticleServlet4</servlet-name>
+		<url-pattern>/pboard_article.do</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>
