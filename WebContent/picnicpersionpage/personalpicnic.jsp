@@ -174,6 +174,7 @@ body{
 			<div class="btn-group mem-guest" id="btnPostNewPost">
 				<span class="btn btn-success btn-board-newpost" role="button" style="color:white;">發表留言</span>
 			</div>
+			<button type="button" class="btn btn-default btn-xs" id="btn-mmm">喵</button>
 
 
 
@@ -289,6 +290,13 @@ body{
 						$('#divBoardPostNewpost')[0].innerHTML = $('#divBoardPostNewpost').html() +'<br><img src="' + base64 + '">';
 					});
 				});
+			});
+			
+			
+			$('#btn-mmm').on('click', function(){
+				$('#divBoardPostNewpostTitle').html('終於找到組織了');
+				$('#divBoardPostNewpost').html('我是喵喵!　我看到我們的死對頭銀河隊也開了一個團！');
+				
 			});
 		</script>
 <!-- 				<ul class="pager"> -->
