@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pboard_article.model.*"%>
 <%@ page import="com.general_member.model.*"%>
@@ -15,6 +15,14 @@
 // 	System.out.println(pmListByP.get(1).getMem_no());
 // 	System.out.println(pmListByP.get(2).getMem_no());
 	pageContext.setAttribute("pmListByP", pmListByP);
+
+	GeneralMemberVO gVO = (GeneralMemberVO)session.getAttribute("gVO");
+	int _count = pmSvc.count(picnicVO.getPicnic_no(), gVO.getMEM_NO());
+	pageContext.setAttribute("_count", _count);
+	
+
+	int _IamGroupLord = pmSvc.amILord(picnicVO.getPicnic_no(), gVO.getMEM_NO());
+	pageContext.setAttribute("_IamGroupLord", _IamGroupLord);
 %>
 
 <%
@@ -24,7 +32,7 @@
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
 	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
 
-	// ÃöÁä¦r«Ì½ª¹LÂo
+	// é—œéµå­—å±è”½éæ¿¾
 	Blocked_KeywordsService bkSvc = new Blocked_KeywordsService();
 	List<Blocked_KeywordsVO> bkList = bkSvc.getAll();
 	for (Pboard_ArticleVO paVO: list) {
@@ -55,7 +63,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Picnic³¥À\ºô</title>
+<title>Picnicé‡é¤ç¶²</title>
 <jsp:include page="/mustinclude/head.jsp" />
 <style>
 body{
@@ -125,8 +133,8 @@ body{
 	<div class="container" style="background-color: white;">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="<%=request.getContextPath()%>/index.jsp">­º­¶</a></li>
-				<li>³¥À\¹ÎÅéª©­±</li>
+				<li><a href="<%=request.getContextPath()%>/index.jsp">é¦–é </a></li>
+				<li>é‡é¤åœ˜é«”ç‰ˆé¢</li>
 			</ol>
 		</div>
 		<div class="row">
@@ -142,27 +150,27 @@ body{
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-push-2">
 
-			<h2>¯d¨¥ªO</h2>
+			<h2>ç•™è¨€æ¿</h2>
 
 			<div class="col-xs-12 col-sm-12 board-post-newpost-title mem-guest" style="height: 36px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpostTitle">
 			</div>
 			<div class="col-xs-12 col-sm-12 board-post-newpost mem-guest" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
 			</div>
 			<div class="btn-group mem-guest" id="btnInsertImg">
-				<a href="#" class="btn btn-default btn-board-newpost" role="button">´¡¤J¹Ï¤ù</a>
+				<a href="#" class="btn btn-default btn-board-newpost" role="button">æ’å…¥åœ–ç‰‡</a>
 			</div>
 			<div class="btn-group mem-guest" id="btnPostNewPost">
-				<a href="#" class="btn btn-default btn-board-newpost" role="button">µoªí¯d¨¥</a>
+				<a href="#" class="btn btn-success btn-board-newpost" role="button" style="color:white;">ç™¼è¡¨ç•™è¨€</a>
 			</div>
 
 
 
 
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <div>
 <c:if test="${not empty errorMsgs}">
-	<font color='red'>½Ğ­×¥¿¥H¤U¿ù»~:
+	<font color='red'>è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li>${message}</li>
@@ -177,22 +185,22 @@ body{
 <table border="0">
 
 	<tr>
-		<td>¼ĞÃD:</td>
+		<td>æ¨™é¡Œ:</td>
 		<td><input id="article_title" type="TEXT" name="article_title" size="45" 
-			value="<%= (pboard_articleVO==null)? "¼ĞÃD" : pboard_articleVO.getArticle_title()%>" /></td>
+			value="<%= (pboard_articleVO==null)? "æ¨™é¡Œ" : pboard_articleVO.getArticle_title()%>" /></td>
 	</tr>
 	<tr>
-		<td>¯d¨¥:</td>
+		<td>ç•™è¨€:</td>
 		<td><input id="article_text" type="TEXT" name="article_text" size="45" 
-			value="<%= (pboard_articleVO==null)? "¯d¨¥" : pboard_articleVO.getArticle_text()%>" /></td>
+			value="<%= (pboard_articleVO==null)? "ç•™è¨€" : pboard_articleVO.getArticle_text()%>" /></td>
 	</tr>
 	<tr>
-		<td>§@ªÌ:</td>
+		<td>ä½œè€…:</td>
 		<td><input id="author_no" type="TEXT" name="author_no" size="45" 
 			value="<%= (pboard_articleVO==null)? "MG00000001" : pboard_articleVO.getAuthor_no()%>" /></td>
 	</tr>
 	<tr>
-		<td>³¥À\¹Î:</td>
+		<td>é‡é¤åœ˜:</td>
 		<td><input id="picnic_no" type="TEXT" name="picnic_no" size="45" 
 			value="<%= (picnicVO==null)? "PG00000001" : picnicVO.getPicnic_no() %>" /></td>
 	</tr>
@@ -203,7 +211,7 @@ body{
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
-<input id="btnSubmitPostNewPost" type="submit" value="°e¥X·s¼W"></FORM>
+<input id="btnSubmitPostNewPost" type="submit" value="é€å‡ºæ–°å¢"></FORM>
 </div>
 
 
@@ -234,8 +242,8 @@ body{
 				<div class="row article-row">
 					<div class="btn-group mem-guest" id="btnPostChecklist">
 						
-<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">ÀËÁ|¯d¨¥</a> --%>
-<a href="#"  class="btn btn-default btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}','addChecklist', config='height=250,width=350');">ÀËÁ|¯d¨¥</a>		
+<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}" class="btn btn-default btn-board-post-checklist" role="button">æª¢èˆ‰ç•™è¨€</a> --%>
+<a href="#"  class="btn btn-default btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=1&chli_be_num=${pboard_articleVO.article_no}','addChecklist', config='height=250,width=350');">æª¢èˆ‰ç•™è¨€</a>		
 					</div>
 				</div>
 				
@@ -283,15 +291,39 @@ body{
 				<div class="well">
 					<div class="row">
 						<div style="text-align:right;">
-<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">ÀËÁ|³¥À\¹Î</a> --%>
-<a href="#"  class="btn btn-default btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }','addChecklist', config='height=250,width=350');">ÀËÁ|³¥À\¹Î</a>
+<%-- <a href="<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }">æª¢èˆ‰é‡é¤åœ˜</a> --%>
+<a href="#"  class="btn btn-danger btn-board-post-checklist" role="button" onclick="window.open('<%=request.getContextPath()%>/checklist/addChecklist.jsp?chli_cate=2&chli_be_num=${ picnicVO.picnic_no }','addChecklist', config='height=250,width=350');">æª¢èˆ‰é‡é¤åœ˜</a>
 						</div>
 						<div class="well">
-							<strong>³¥À\¹Î¤¶²Ğ</strong>
-							<p>${ picnicVO.picnic_desc }
-								<form method="post" action="" class="btn btn-default">
-									<a href="#">­×§ï</a>
+							<strong>é‡é¤åœ˜ä»‹ç´¹</strong>
+							<p><textarea rows="3" cols="20" id="picnic_desc_textarea" <c:if test="${_IamGroupLord!=1}">readonly</c:if>>${ picnicVO.picnic_desc }</textarea>
+								<c:if test="${_IamGroupLord==1}">
+								<form method="post" action="<%=request.getContextPath()%>/picnic/picnic.do"  onclick="$('#picnic_desc_input')[0].value=$('#picnic_desc_textarea')[0].value;submit();" class="btn btn-info">
+									<span>ä¿®æ”¹</span>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="picnic_desc" id="picnic_desc_input" value="${ picnicVO.picnic_desc }">
+									<input type="hidden" name="action" value="modPicnicDesc">
 								</form>
+								</c:if>
+							</p>
+							<hr>
+							</p>
+								<c:if test="${_count==0}">
+								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-success">
+									<span>åŠ åœ˜</span>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
+									<input type="hidden" name="button" value="memAddThisPG">
+								</form>
+								</c:if>
+								<c:if test="${_count!=0}">
+								<form method="post"  action="<%=request.getContextPath()%>/picmem.do"  onclick="submit()" class="btn btn-danger">
+									<span>é€€åœ˜</span>
+									<input type="hidden" name="picnic_no" value="${ picnicVO.picnic_no }">
+									<input type="hidden" name="mem_no" value="${sessionScope.gVO.getMEM_NO()}">
+									<input type="hidden" name="button" value="memExitThisPG">
+								</form>
+								</c:if>
 							</p>
 
 						</div>
@@ -299,8 +331,8 @@ body{
 <c:forEach var="picmemVO" items="${pmListByP}">
 						<div class="col-lg-6">
 							<ul class="list-unstyled">
-<%-- 								<li><a href="#">¦¨­û ${ picmemVO.mem_no }</a></li> --%>
-								<li><a href="#">¦¨­û ${gmSvc.getOneGeneralMember(picmemVO.mem_no).getMEM_NAME()}</a></li>
+<%-- 								<li><a href="#">æˆå“¡ ${ picmemVO.mem_no }</a></li> --%>
+								<li><a href="#">æˆå“¡ ${gmSvc.getOneGeneralMember(picmemVO.mem_no).getMEM_NAME()}</a></li>
 							</ul>
 						</div>
 </c:forEach>	

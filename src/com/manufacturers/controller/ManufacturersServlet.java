@@ -421,7 +421,7 @@ System.out.println("---");
 				String subject = "密碼通知";
 
 				String messageText = String.valueOf(
-						"<a href='http://localhost:8081/" + req.getContextPath() +"/addMemberEmail.do?account="+MF_MAIL+"'>驗證網址</a>") + "\n"
+						"<a href='http://" +  req.getServerName() + ":" +  req.getServerPort() + req.getContextPath() +"/addMemberEmail.do?account="+MF_MAIL+"'>驗證網址</a>") + "\n"
 						+ "密碼: "+MF_PSW;
 
 				mail.sendMail(MF_MAIL, subject, messageText);

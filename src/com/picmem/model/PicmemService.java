@@ -16,7 +16,10 @@ public class PicmemService {
 		
 		picmemVO.setPicnic_no(picnic_no);
 		picmemVO.setMem_no(mem_no);
-		picmemVO.setPicmem_iden("C");//團員
+		picmemVO.setPicmem_iden("團員");
+		picmemVO.setPicmem_sta("A");
+		picmemVO.setMem_longi(121.13);
+		picmemVO.setMem_latit(24.57);
 		dao.insert(picmemVO);
 
 		return picmemVO;
@@ -84,5 +87,14 @@ public class PicmemService {
 	//---
 	public List<String> k_getMemPicList(String mem_no){
 		return dao.k_getMemPicList(mem_no);
+	}
+	
+	
+	public int count(String picnic_no, String mem_no) {
+		return dao.count(picnic_no, mem_no);
+	}
+	
+	public int amILord(String picnic_no, String mem_no) {
+		return dao.amILord(picnic_no, mem_no);
 	}
 }

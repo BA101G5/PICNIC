@@ -27,9 +27,11 @@ public class PicmemDAO implements PicmemDAO_interface {
 	private static final String GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? and MEM_NO =? order by PICNIC_NO";
 	private static final String DELETE_STMT = "delete from PICMEM where PICNIC_NO =? MEM_NO =?";
 	private static final String UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
-	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'A')";
-	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'A\'";
+	private static final String INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'團主')";
+	private static final String GET_BYMEMNO_STMT = "select PICNIC_NO from PICMEM where MEM_NO =? and PICMEM_IDEN=\'團主\'";
 	private static final String GET_ALL_STMT_P = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =?";
+	private static final String COUNT_STMT = "select COUNT(*) as COUNT from PICMEM where PICNIC_NO =? and MEM_NO =?";
+	private static final String COUNT_LORD_STMT = "select COUNT(*) as COUNT from PICMEM where PICNIC_NO =? and MEM_NO =? and PICMEM_IDEN=\'團主\'";
 	@Override
 	public void insert(PicmemVO picmemVO) {
 		Connection con = null;
@@ -37,6 +39,8 @@ public class PicmemDAO implements PicmemDAO_interface {
 
 		try {
 			con = ds.getConnection();
+//			System.out.println("PicmemDAO.java/ picmemVO.getPicnic_no(): " + picmemVO.getPicnic_no());
+//			System.out.println("PicmemDAO.java/ picmemVO.getMem_no(): " + picmemVO.getMem_no());
 			pstmt = con.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, picmemVO.getPicnic_no());
 			pstmt.setString(2, picmemVO.getMem_no());
@@ -372,6 +376,96 @@ public class PicmemDAO implements PicmemDAO_interface {
 		return list;
 	
 	}
+	public int count(String picnic_no, String mem_no) {
+		int _count = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(COUNT_STMT);
+			pstmt.setString(1, picnic_no);
+			pstmt.setString(2, mem_no);
+			rs = pstmt.executeQuery();
+	
+			rs.next();
+			_count = rs.getInt("COUNT");
+	
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return _count;
+	}
+	
+	
+	public int amILord(String picnic_no, String mem_no) {
+		int _count = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(COUNT_LORD_STMT);
+			pstmt.setString(1, picnic_no);
+			pstmt.setString(2, mem_no);
+			rs = pstmt.executeQuery();
+	
+			rs.next();
+			_count = rs.getInt("COUNT");
+	
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return _count;
+	}
+	
+	
 	//---------------------------------------------------------------------
 	private static final String K_INSERT_STMT = "insert into PICMEM (PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT) values(?,?,?,?,?,?)";
 	private static final String K_GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";

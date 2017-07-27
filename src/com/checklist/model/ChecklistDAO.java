@@ -42,28 +42,28 @@ public class ChecklistDAO implements Checklist_interface {
 			"UPDATE MANUFACTURERS set mf_sta = 'D'  where mf_no=?";
 	private static final String UPDATE_GOODS= 
 			"UPDATE GOODS_SELL set GS_STA = 'D' where mf_no=?";
-	//ä¸‹æ¶å–®å‘å•†å“
+	//¤U¬[³æ¦V°Ó«~
 	private static final String UPDATE_GOODS_ONE= 
 			"UPDATE GOODS_SELL set GS_STA = 'D' where gs_no=?";
 	
-	//æ‰¾åœ˜ä¸»
+	//§ä¹Î¥D
 	private static final String FIND_IDEM = 
-			"select mem_no from picmem where picmem_iden='A' and picnic_no=?";
-	//å°é–é‡é¤åœ˜
+			"select mem_no from picmem where picmem_iden='¹Î¥D' and picnic_no=?";
+	//«ÊÂê³¥À\¹Î
 	private static final String BLOCKADE_PICNIC = 
 			"update picnic set picnic_sta = 'B' where picnic_no = ?";
 	
-	//æ‰¾ç™¼æ–‡ç« äºº
+	//§äµo¤å³¹¤H
 	private static final String FIND_AF = 
 			"select author_no from forum_article where article_no = ?";
-	//åˆªæ–‡ç« 
+	//§R¤å³¹
 	private static final String SELETE_AF = 
 			"delete from forum_article where article_no = ?";
 	
-	//æ‰¾ç•™è¨€äºº
+	//§ä¯d¨¥¤H
 	private static final String FIND_AB = 
 				"select author_no from pboard_article where article_no = ?";
-	//åˆªç•™è¨€
+	//§R¯d¨¥
 	private static final String SELETE_AB = 
 				"delete from pboard_article_article where article_no = ?";
 	

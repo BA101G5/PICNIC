@@ -2,6 +2,8 @@ package com.picnic.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +36,27 @@ public class PicnicServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		// System.out.println(action);
+		
+		
+		if("modPicnicDesc".equals(action)){
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String picnic_desc = (String) req.getParameter("picnic_desc").trim();
+//			System.out.println("modPicnicDesc // "+ picnic_desc);
+			
+			/***************************2.開始新增資料***************************************/
+			PicnicService picnicSvc = new PicnicService();
+			PicnicVO picnicVO = (PicnicVO) session.getAttribute("picnicVO");
+			picnicVO.setPicnic_desc(picnic_desc);
+			picnicSvc.update_desc(picnic_no, picnic_desc);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			session.setAttribute("picnicVO", picnicVO);
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+		
+		
 		if ("checkbeforeinsert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -94,7 +117,7 @@ public class PicnicServlet extends HttpServlet {
 
 				session.setAttribute("picnic_name", picnic_name);
 				session.setAttribute("area", area);
-				session.setAttribute("tladdress", tladdress);
+				session.setAttribute("totaladdress", tladdress);
 				session.setAttribute("address", address);
 				session.setAttribute("date", date);
 				session.setAttribute("picnic_date", picnic_date);
@@ -131,7 +154,8 @@ public class PicnicServlet extends HttpServlet {
 				String account = gVO.getMEM_NO();
 				String picnic_name = (String) session.getAttribute("picnic_name");
 
-				String tladdress = (String) session.getAttribute("tladdress");
+				String tladdress = (String) session.getAttribute("totaladdress");
+				System.out.println(tladdress);
 
 				Timestamp picnic_date = (Timestamp) session.getAttribute("picnic_date");
 
@@ -148,13 +172,14 @@ public class PicnicServlet extends HttpServlet {
 
 					try {
 						placeVO = placeSvc.getOne(tladdress);
-						// System.out.println(placeVO + "hello");
+						 System.out.println(placeVO + "hello");
 
 						if (placeVO.getMf_no() != null) {
 							// System.out.println(placeVO.getMf_no());
 							orderde_detailSvc.addPlaceOrderde_Detail(placeVO.getP_price(), placeVO.getP_no(), account,
 									picnic_no, tladdress);
 							Goods_RentService goods_rentSvc = new Goods_RentService();
+							System.out.println(tladdress);
 							List<Goods_RentVO> list = goods_rentSvc.findbyplace(placeVO.getMf_no(), tladdress);
 							// System.out.println(list);
 							session.setAttribute("picnic_no", picnic_no);

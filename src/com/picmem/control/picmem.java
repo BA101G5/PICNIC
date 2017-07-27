@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.announcement.model.AnnouncementService;
 import com.picmem.model.PicmemService;
 import com.picmem.model.PicmemVO;
 import com.picnic.model.PicnicService;
@@ -30,6 +31,46 @@ public class picmem extends HttpServlet{
 		String button = req.getParameter("button");
 		String pic = req.getParameter("PICNIC_NO");
 		String mem = (String) session.getAttribute("MEM_NO");
+		
+		
+		if("memAddThisPG".equals(button)){
+//			System.out.println("C: picmem / " + "L37");
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String mem_no = (String) req.getParameter("mem_no").trim();
+			
+			
+			PicmemVO picmemVO = new PicmemVO();
+
+			picmemVO.setMem_no(mem_no);
+			picmemVO.setPicnic_no(picnic_no);
+//			picmemVO.setPicmem_iden("團員");
+//			picmemVO.setPicmem_sta("A");
+//			picmemVO.setMem_longi(121.13);
+//			picmemVO.setMem_latit(24.57);
+			/***************************2.開始新增資料***************************************/
+			PicmemService picmemSvc = new PicmemService();
+			picmemSvc.addPicmem(picnic_no, mem_no);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+
+		if("memExitThisPG".equals(button)){
+			String picnic_no = (String) req.getParameter("picnic_no").trim();
+			String mem_no = (String) req.getParameter("mem_no").trim();
+			
+			PicmemService picmemSvc = new PicmemService();
+			picmemSvc.k_deletePicmem(picnic_no, mem_no);
+			
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			String url = "/picnicpersionpage/personalpicnic.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);	
+		}
+		
+		
 		
 //		if(true){
 //			String para = null;
