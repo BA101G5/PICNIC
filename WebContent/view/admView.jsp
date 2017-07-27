@@ -15,7 +15,6 @@
 <%-- 		<link href="${pageContext.request.contextPath}/view/js/admView.css" rel="stylesheet" type="text/css" /> --%>
 	</head>
 	<body>
-<div class="yyhhyy">
 	<div class="col-xs-12 col-sm-10">
 					 
 					  <form class="navbar-form navbar-left" role="search" style="">
@@ -44,7 +43,7 @@
 					</tr>
 				</thead>
       			<tbody class="adm">
-					<form id="administrator" action="<%=request.getContextPath()%>/k_admini.do" method="post" name="del">
+					<form id="administrator" action="<%=request.getContextPath()%>/admini2.do" method="post" name="del">
 					<c:forEach var="adm" items="${admVO}">
 						<tr class="colorCon" onclick="colorCon()">	
 							<td><input class="radio" type="radio" name="Administrator" value="${adm.administrator}" id="${adm.administrator}">
@@ -61,8 +60,8 @@
 				</tbody>
 		    </table>
 		    <section>	
-							<table>
-							<tr>
+							<table  >
+							<tr bgcolor="#FF0000">
 								<th style="width:25%"><button type="submit" form="administrator" value="add" name="button">新增</button></th>
 								<th style="width:25%"><button type="button" form="administrator" value="del" name="button" id="del" onclick="kkkk()">刪除</button></th>
 								<th style="width:25%"><button type="submit" form="administrator" value="modify" name="button">修改</button>	</th>
@@ -81,7 +80,7 @@
 					</tr>
 				</thead>
 				<tbody>		
-					<form id="add_adm" action="${pageContext.request.contextPath}/k_admini.do" method="post" name="add_adm">
+					<form id="add_adm" action="${pageContext.request.contextPath}/admini2.do" method="post" name="add_adm">
 					<c:forEach var="addAdm" items="${add_adm}" varStatus="status">
 						<tr>	
 							<td>
@@ -98,7 +97,7 @@
 					<tr>
 						<td colspan="6">
 							<section>	
-							<table>
+							<table style="border:none;">
 							<tr>
 								<th><button type="submit" form="add_adm" value="add" name="button">增加欄數</button></th>
 								<th><button type="submit" form="add_adm" value="add_determine" name="button">確定</button></th>
@@ -122,7 +121,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<form id="mod_adm_form" action="${pageContext.request.contextPath}/k_admini.do" method="post" name="mod_adm_form">
+					<form id="mod_adm_form" action="${pageContext.request.contextPath}/admini2.do" method="post" name="mod_adm_form">
 						<tr>	
 							<td><input type="text" name="getAdministrator" value="${mod_adm.administrator}" disabled>
 							  <input type="hidden" name="getAdministrator" value="${mod_adm.administrator}"></td>
@@ -165,7 +164,7 @@
 					</thead>
 					<c:if test="${not empty pur_purDetail}">
 						<tbody>
-							<form id="pur_adm_form" action="${pageContext.request.contextPath}/k_admini.do" method="post" name="pur_adm_form">
+							<form id="pur_adm_form" action="${pageContext.request.contextPath}/admini2.do" method="post" name="pur_adm_form">
 									<tr>
 										<td colspan="6">所有權限</td>	
 									</tr>
@@ -229,7 +228,6 @@
 		    
 		    <script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</div>
 	</body>
 </html>
 
@@ -241,18 +239,18 @@
 /* 	text-shadow: 0 1px 0 #fff; */
 /* } */
 
-div.yyhhyy strong {
+strong {
 	font-weight: bold; 
 }
 
-div.yyhhyy em {
+em {
 	font-style: italic; 
 }
 
-div.yyhhyy table {
-	background: #f5f5f5;
+table {
+/* 	background: #f5f5f5; */
 	border-collapse: separate;
-	box-shadow: inset 0 1px 0 #fff;
+/* 	box-shadow: inset 0 1px 0 #fff; */
 	font-size: 16px;
 	line-height: 24px;
 	margin: 10px auto;
@@ -260,45 +258,45 @@ div.yyhhyy table {
 	width: 1200px;
 }	
 
- div.yyhhyy thead{ 
- 	font-size: 18px; 
- 	color:#0000AA; 
- } 
+thead{
+	font-size: 18px;
+	color:#0000AA;
+}
 
- div.yyhhyy td { 
- 	border-right: 1px solid #fff; 
- 	border-left: 1px solid #e8e8e8; 
- 	border-top: 1px solid #fff; 
- 	border-bottom: 1px solid #e8e8e8; 
- 	padding: 1px 15px; 
- 	position: relative; 
-/*  	transition: all 300ms;  */
- } 
+td {
+	border-right: 0px solid #fff;
+	border-left: 0px solid #e8e8e8;
+	border-top: 0px solid #fff;
+	border-bottom: 0px solid #e8e8e8;
+	padding: 1px 15px;
+	position: relative;
+/* 	transition: all 300ms; */
+}
 
- div.yyhhyy td:first-child { 
- 	box-shadow: inset 1px 0 0 #fff; 
- }	 
+td:first-child {
+	box-shadow: inset 1px 0 0 #fff;
+}	
 
- div.yyhhyy td:last-child { 
- 	border-right: 1px solid #e8e8e8; 
- 	box-shadow: inset -1px 0 0 #fff; 
- }	 
+td:last-child {
+/* 	border-right: 1px solid #e8e8e8; */
+	box-shadow: inset -1px 0 0 #fff;
+}	
 
-/*  tr {  */
-/*  	background: url(https://jackrugile.com/images/misc/noise-diagonal.png);	  */
-/*  }  */
+tr {
+	background: url(https://jackrugile.com/images/misc/noise-diagonal.png);	
+}
 
 /* tbody.adm:hover td { */
 /* 	color: transparent; */
 /* 	text-shadow: 0 0 3px #aaa; */
 /* } */
 
-/* tbody.adm:hover tr:hover td { */
-/* 	color: #444; */
-/* 	text-shadow: 0 1px 0 #fff; */
-/* } */
+tbody.adm:hover tr:hover td {
+	color: #444;
+	text-shadow: 0 1px 0 #fff;
+}
 
-div.yyhhyy section button {
+section button {
   margin-left : 50px;
   margin-right : 50px;
   font-size: 1.0rem;
@@ -315,13 +313,13 @@ div.yyhhyy section button {
   transition: all 0.3s ease-in-out;
 }
 
-div.yyhhyy section button:hover {
+section button:hover {
   background-color: #ffffff;
   color: #009ac9;
   border-color: #009ac9;
 }
 
-div.yyhhyy section.close button {
+section.close button {
   margin-left : 1px;
   margin-right : 1px;
   font-size: 1.0rem;
@@ -338,26 +336,26 @@ div.yyhhyy section.close button {
   transition: all 0.3s ease-in-out;
 }
 
-div.yyhhyy section.close button:hover {
+section.close button:hover {
   background-color: #ffffff;
   color: #D0104C;
   border-color: #D0104C;
 }
 
-div.yyhhyy section{
+section{
 	display: inline
 }
 
-div.yyhhyy .radio{
+.radio{
 	display:none;
 }
 	
-div.yyhhyy input[type="text"]{
+input[type="text"]{
 	text-align: center;
 }
 
 
-  div.yyhhyy 	#toggle{
+  	#toggle{
 			width:150px;
 			height:20px;
 			border-radius:40px;
@@ -370,11 +368,11 @@ div.yyhhyy input[type="text"]{
 			box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4);
 			background: -webkit-linear-gradient(#c6c6c6,#e3e3e3);
 		}
-	div.yyhhyy 	#toggle:checked{
+		#toggle:checked{
 			background: -webkit-linear-gradient(#bfe09c,#c8eca0);
 			box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4);
 		}
-	div.yyhhyy 	#toggle:before {
+		#toggle:before {
 			content:"";
 			width:13px;
 			height:13px;
@@ -390,55 +388,58 @@ div.yyhhyy input[type="text"]{
 			-webkit-transition: all 1s;
 			
 		}
-	div.yyhhyy 	#toggle:checked:before {
+		#toggle:checked:before {
 			left:125px;
 			background:#f1f1f1;
 		}
 
-div.yyhhyy .errWord{
+.errWord{
 	font-size:24px;
 	color:#FF0000;
 }		
-div.yyhhyy .table5_3 table {
+.table5_3 table {
 	width:100%;
 	margin:15px 0;
 	border:0;
 }
-div.yyhhyy .table5_3 th {
+.table5_3 th {
 	background-color:#87CEFA;
 	color:#000000
 }
 
-div.yyhhyy .table5_3,.table5_3 th,.table5_3 td {
+.table5_3,.table5_3 th,.table5_3 td {
 	font-size:0.95em;
 	text-align:center;
 	padding:4px;
 	border-collapse:collapse;
 }
-div.yyhhyy .table5_3 th,.table5_3 td {
+.table5_3 th,.table5_3 td {
 	border: 1px solid #ffffff;
 	border-width:1px 0 1px 0
 }
-div.yyhhyy .table5_3 tr {
+.table5_3 tr {
 	border: 1px solid #ffffff;
 }
-div.yyhhyy .table5_3 tr:nth-child(odd){
+.table5_3 tr:nth-child(odd){
 	background-color:#d7eefd;
 }
-div.yyhhyy .table5_3 tr:nth-child(even){
+.table5_3 tr:nth-child(even){
 	background-color:#ffffff;
 }
 /* .table5_3 tr:last-child td:last-child{ */
 /*   border-bottom-right-radius: 10px; */
 /* } */
-div.yyhhyy .table5_3 tr:first-child th:last-child{
+.table5_3 tr:first-child th:last-child{
   border-top-right-radius: 10px;
 }
 /* .table5_3 tr:last-child td:first-child{ */
 /*   border-bottom-left-radius: 10px; */
 /* } */
-div.yyhhyy .table5_3 tr:first-child th:first-child{
+.table5_3 tr:first-child th:first-child{
   border-top-left-radius: 10px;
+}
+table{
+ border: px solid #eff9f9;
 }
 </style>
 
