@@ -49,7 +49,7 @@
 									type="hidden" name="action" value="persionalpicnic">
 							</form>
 							</c:if>
-							<c:if test="${sessionScop.persionalpicnic }"><a data-toggle="collapse" href=""><span
+							<c:if test="${not empty sessionScop.persionalpicnic }"><a data-toggle="collapse" href=""><span
 									class="glyphicon glyphicon-star"></span> </a></c:if>
 							
 						</h3>
