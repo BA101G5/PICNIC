@@ -165,8 +165,10 @@ pageContext.setAttribute("mem_no", mem_no);
         <div class="col-xs-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <span class="glyphicon glyphicon-comment" id="aChatroom-title">Chat</span> 
                     <div class="btn-group pull-right">
+                    	<button type="button" class="btn btn-default btn-xs dropdown-toggle" id="btn-close-aChatroom-container-ww">武</button>
+                    	<button type="button" class="btn btn-default btn-xs dropdown-toggle" id="btn-close-aChatroom-container-cc">次</button>
                         <button type="button" class="btn btn-default btn-xs dropdown-toggle" id="btn-close-aChatroom-container">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
@@ -258,10 +260,19 @@ pageContext.setAttribute("mem_no", mem_no);
 			gObjCR.getContextPath = '<%=request.getContextPath()%>';
 			gObjCR.memNo = '${sessionScope.gVO.getMEM_NO()}';
 			gObjCR.memName = '${sessionScope.gVO.getMEM_NAME()}';
-
+			
+            $('#btn-close-aChatroom-container-ww').on('click', function(){
+            	$('#inputCRMessage')[0].value = '我去檢舉他們!';
+            });
+            $('#btn-close-aChatroom-container-cc').on('click', function(){
+            	$('#inputCRMessage')[0].value = '銀河隊開了個團，在團描述罵我們耶!';
+            });
+            
             $('.chatroom-list-friend-room .list-group-item').on('click', function(){
                 $('#aChatroom-container').css('display', 'block');
+                $('#aChatroom-title')[0].innerHTML = ' 聊天室房間: ' + gObjCR.memName + ' to ' + $('#'+this.id).text();
                 gObjCR.chatWithMemNo = this.id; //alert(this.id); //"MG00000003"
+				
 
                 var notMap = <%
 					String tempStr ="[";

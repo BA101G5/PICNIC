@@ -80,7 +80,7 @@
 													<div class="col-xs-12 col-sm-10 col-sm-push-1" style="padding-top: 10px;"><input type="text" name="account" id="aa" value="" placeholder="輸入信箱 or 帳號" ></div>
 													<div class="col-xs-12 col-sm-10 col-sm-push-1" style="padding-top: 10px;"> <label>密碼</label></div>
 													<div class="col-xs-12 col-sm-10 col-sm-push-1" style="padding-top: 10px;">
-												    	<input type="password" name="password" id="aa" value="" placeholder="輸入密碼" >	    	
+												    	<input type="password" name="password" id="bb" value="" placeholder="輸入密碼" >	    	
 												    </div>
 												   
 												    <div class="col-xs-12 col-sm-10 col-sm-push-1" style="padding-top: 10px;"> 
@@ -90,10 +90,12 @@
 														<a href="#" id="forget">還沒有帳號 ?</a>
 														
 													</div>
-													<div class="col-xs-12 col-sm-10 col-sm-push-1"  style="padding-top: 10px;">	<input type=submit value="  ok   "></div>								    
+													<div class="col-xs-12 col-sm-10 col-sm-push-1"  style="padding-top: 10px;">	<input type=submit value="  ok   "></div>
+							    
 												</li>  			    
 											  </ul>
-
+													<button type="button" class="btn btn-default btn-xs" id="btn-login-ww">武</button>
+													<button type="button" class="btn btn-default btn-xs" id="btn-login-cc">次</button>
 											</div>
 											 <!-- 註冊 -->
 											 <div class="panel panel-default" id="born" style="display: none;">
@@ -128,9 +130,17 @@
 
 
 			},false);
+			
+			$('#btn-login-ww').on('click', function(){
+				$('#aa')[0].value='shyangs@gmail.com';
+				$('#bb')[0].value='123456789';
+			});
+			$('#btn-login-cc').on('click', function(){
+				$('#aa')[0].value='imyenshen@gmail.com';
+				$('#bb')[0].value='123456789';
+			});
 		</script>
 		
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 </body>
 </html>
