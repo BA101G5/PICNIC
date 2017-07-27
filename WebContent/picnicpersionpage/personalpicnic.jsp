@@ -11,31 +11,43 @@
 	PicnicVO picnicVO = (PicnicVO)session.getAttribute("picnicVO");
 // 	System.out.println("personalpicnic.jsp / picnicVO.getPicnic_no() = " + picnicVO.getPicnic_no());
 	PicmemService pmSvc = new PicmemService();
+
+	PicnicService picSvc = new PicnicService();
+	if(picnicVO==null){
+		picnicVO = picSvc.getByPicnic_No("PG00000001");
+	}
+
 	List<PicmemVO> pmListByP = pmSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
 // 	System.out.println(pmListByP.get(1).getMem_no());
 // 	System.out.println(pmListByP.get(2).getMem_no());
 	pageContext.setAttribute("pmListByP", pmListByP);
-
+	
+	
+	GeneralMemberService gmSvc = new GeneralMemberService();
+	pageContext.setAttribute("gmSvc", gmSvc);
+	
+	
 	GeneralMemberVO gVO = (GeneralMemberVO)session.getAttribute("gVO");
+	
+	if(gVO==null){
+		gVO = gmSvc.getOneGeneralMember("MG00000002");
+	}
+	
 	int _count = pmSvc.count(picnicVO.getPicnic_no(), gVO.getMEM_NO());
 	pageContext.setAttribute("_count", _count);
 	
 
 	int _IamGroupLord = pmSvc.amILord(picnicVO.getPicnic_no(), gVO.getMEM_NO());
 	pageContext.setAttribute("_IamGroupLord", _IamGroupLord);
-%>
 
-<%
-	GeneralMemberService gmSvc = new GeneralMemberService();
-	pageContext.setAttribute("gmSvc", gmSvc);
-
+	
 	Pboard_ArticleService pboard_articleSvc = new Pboard_ArticleService();
-	List<Pboard_ArticleVO> list = pboard_articleSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
+	List<Pboard_ArticleVO> pbartList = pboard_articleSvc.getAll(picnicVO.getPicnic_no());//"PG00000001"
 
 	// 關鍵字屏蔽過濾
 	Blocked_KeywordsService bkSvc = new Blocked_KeywordsService();
 	List<Blocked_KeywordsVO> bkList = bkSvc.getAll();
-	for (Pboard_ArticleVO paVO: list) {
+	for (Pboard_ArticleVO paVO: pbartList) {
 		for (Blocked_KeywordsVO bkVO: bkList) {
 			paVO.setArticle_title(
 					paVO.getArticle_title().replaceAll(bkVO.getKeyword(), bkVO.getReplacement())
@@ -47,8 +59,8 @@
 	}
 
 	
-	Collections.reverse(list);
-	pageContext.setAttribute("list", list);
+	Collections.reverse(pbartList);
+	pageContext.setAttribute("pbartList", pbartList);
 %>
 
 <%
@@ -157,10 +169,10 @@ body{
 			<div class="col-xs-12 col-sm-12 board-post-newpost mem-guest" style="height: 150px; border: 1px solid grey; margin-bottom: 6px;" contenteditable="true" id="divBoardPostNewpost">
 			</div>
 			<div class="btn-group mem-guest" id="btnInsertImg">
-				<a href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</a>
+				<span href="#" class="btn btn-default btn-board-newpost" role="button">插入圖片</span>
 			</div>
 			<div class="btn-group mem-guest" id="btnPostNewPost">
-				<a href="#" class="btn btn-success btn-board-newpost" role="button" style="color:white;">發表留言</a>
+				<span class="btn btn-success btn-board-newpost" role="button" style="color:white;">發表留言</span>
 			</div>
 
 
@@ -168,7 +180,7 @@ body{
 
 
 <%-- 錯誤表列 --%>
-<div>
+<div class="row">
 <c:if test="${not empty errorMsgs}">
 	<font color='red'>請修正以下錯誤:
 	<ul>
@@ -217,7 +229,7 @@ body{
 
 
 
-<c:forEach var="pboard_articleVO" items="${list}">
+<c:forEach var="pboard_articleVO" items="${pbartList}">
 			<div class="col-xs-12 col-sm-12 board-topic board-article">
 				<div class="row article-row">
 					<div class="col-xs-2 col-sm-2">
@@ -344,9 +356,10 @@ body{
 		<hr>
 	</div>
 	<div class="row">
-	<div class="col-md-12">
-		<jsp:include page="/mustinclude/footer.jsp" />
-	</div></div>
+		<div class="col-md-12">
+			<jsp:include page="/mustinclude/footer.jsp" />
+		</div>
+	</div>
 	
 </body>
 </html>
