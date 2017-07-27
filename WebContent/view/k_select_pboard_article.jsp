@@ -15,6 +15,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		
 		<style type="text/css">
 body{
 	background-color: #eff9f9;
@@ -67,38 +68,38 @@ body{
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-push-2">
-
+ 
 			<!-- navbar -->
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="container col-sm-12">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#" style="padding: 4px;"><img src="view/logo.png" style="height: 100%;"></a>
+						<a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp" style="padding: 4px;"><img src="view/logo.png" style="height: 100%;"></a>
 					</div>
 
 						<!-- 右選單 -->
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#">shyangs</a></li>
+							<li><a href="<%=request.getContextPath()%>/personal/personal.jsp">shyangs</a></li>
 						</ul>
 
-						<!-- 搜尋表單 -->
+						<%--<!-- 搜尋表單 -->
 						<form class="navbar-form navbar-right" role="search">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="請輸入關鍵字">
 							</div>
 							<button type="submit" class="btn btn-default">搜尋</button>
 						</form>
-
+						 --%>
 				</div>
 			</nav>
 
+
 			<ol class="breadcrumb">
 				<li>
-					<a href="#">首頁</a>
+					<a href="<%=request.getContextPath()%>/index.jsp">首頁</a>
 				</li>
 				<li>
-					<a href="#">海賊團</a>
+					<a href="#">留言板</a>
 				</li>
-				<li class="active">留言板</li>
 			</ol>
 
 <c:forEach var="paList" items="${paList}" varStatus="status">

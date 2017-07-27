@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -177,14 +178,19 @@ public class Orderde_detailServlet extends HttpServlet {
 			System.out.println(listGr);
 			int tlprice=0;
 			try {
-				if (!listGr.isEmpty()) {
+				System.out.println(tlprice);
+				
 					for (Orderde_DetailVO orderde_detailVO : listGr) {
-
+						if(orderde_detailVO.getGr_no()!= null){
 						Integer preamount = orderde_detailVO.getOd_amount();
+						System.out.println(preamount);
 						Integer price = orderde_detailVO.getOd_price();
+						System.out.println(price);
 						price = price / preamount;
+						System.out.println(price);
 						Integer amount = Integer.valueOf(
 								req.getParameter(orderde_detailVO.getOrderde_detailno().toString() + "amount"));
+						System.out.println(amount);
 						price = amount * price;
 						orderde_detailVO.setOd_price(price);
 						System.out.println(orderde_detailVO.getOd_price());
@@ -197,7 +203,7 @@ public class Orderde_detailServlet extends HttpServlet {
 						tlprice=tlprice+price;
 						System.out.println(tlprice+"2");
 					}
-				}
+					}
 			} catch (Exception e) {
 			}
 			try {

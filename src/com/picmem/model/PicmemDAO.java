@@ -471,6 +471,7 @@ public class PicmemDAO implements PicmemDAO_interface {
 	private static final String K_GET_ALL_STMT = "select * from PICMEM order by PICNIC_NO";
 	private static final String K_GET_ONE_STMT = "select PICNIC_NO,MEM_NO,PICMEM_IDEN,PICMEM_STA,MEM_LONGI,MEM_LATIT from PICMEM where PICNIC_NO =? MEM_NO =? order by PICNIC_NO";
 	private static final String K_DELETE_STMT = "delete from PICMEM where PICNIC_NO =? and MEM_NO =?";
+	private static final String K_DELETE_ALL_STMT = "delete from PICMEM where PICNIC_NO =? ";
 	private static final String K_UPDATE_STMT = "update PICMEM set PICMEM_IDEN = ?,PICMEM_STA =?,MEM_LONGI =?,MEM_LATIT =? where PICNIC_NO =? and MEM_NO =?";
 	private static final String K_INSERT_OWNER_STMT = "insert into PICMEM(PICNIC_NO,MEM_NO,PICMEM_IDEN)values(?,?,'¹Î¥D')";
 	private static final String K_GET_ONE_STMT_ALL_LIST = "select * from PICMEM where MEM_NO =? order by PICNIC_NO";
@@ -760,6 +761,36 @@ public class PicmemDAO implements PicmemDAO_interface {
 			}
 		}
 		return memPicList;
+	}
+	
+	public void k_deleteAll(String picnic_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(K_DELETE_ALL_STMT);
+			pstmt.setString(1, picnic_no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 }

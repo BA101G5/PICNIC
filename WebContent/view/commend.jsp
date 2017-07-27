@@ -5,19 +5,102 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- --------------------- -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Picnic野餐網</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<jsp:include page="/mustinclude/head.jsp" />
+<!-- --------------------- -->
 <title>Insert title here</title>
 		<script src="${pageContext.request.contextPath}/view/js/sweetalert.min.js"></script>
 		<link href="${pageContext.request.contextPath}/view/js/sweetalert.css" rel="stylesheet" type="text/css" />
-		<link href="${pageContext.request.contextPath}/view/js/admView.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
+div.k_class { 
+	background:#FFF;
+	margin:auto;
+	padding:20px; 
+	font:13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+	width:75%;
+	}
+	
+/* ---- Some Resets ---- */
 
-table{
+div.k_class p,
+table, caption, td, tr, th {
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	}
 
-margin-left:auto; 
-margin-right:auto;
-text-align: center;
-}
+/* ---- Paragraphs ---- */
+
+div.k_class p {
+	margin-bottom:15px;
+	}
+	
+/* ---- Table ---- */
+
+div.k_class table {
+	border-collapse:collapse;
+	margin:auto;
+	margin-bottom:15px;
+	width:70%;
+	
+	}
+	
+div.k_class 	caption {
+		text-align:center;
+		font-size:15px;
+		padding-bottom:10px;
+		}
+	
+div.k_class 	table td,
+	table th {
+		padding:5px;
+		border:1px solid #fff;
+		border-width:0 1px 1px 0;
+		}
+		
+div.k_class 	thead th {
+		background:#91c5d4;
+		}
+			
+		thead th[colspan],
+		thead th[rowspan] {
+			background:#66a9bd;
+			}
+		
+div.k_class 	tbody th,
+	tfoot th {
+		text-align:center;
+		background:#91c5d4;
+		}
+		
+div.k_class 	tbody td,
+	tfoot td {
+		text-align:center;
+		background:#d5eaf0;
+		}
+		
+div.k_class 	tfoot th {
+		background:#b0cc7f;
+		}
+		
+div.k_class 	tfoot td {
+		background:#d7e1c5;
+		font-weight:bold;
+		}
+			
+div.k_class 	tbody tr.odd td { 
+		background:#bcd9e1;
+		}
+div.k_class 	caption{
+		text-align:center;
+		font-size:36px;
+		color:#AA3333;
+	}
 
 section button {
   margin-left : 1px;
@@ -61,6 +144,29 @@ section button.checklistButton {
 
 section button.checklistButton:hover {
   background-color: #AA5555;
+  color: #eeeeee;
+  border-color: #eeeeee;
+}
+
+section.submittt button {
+  margin-left : 1px;
+  margin-right : 1px;
+  font-size: 1.0rem;
+  padding: 0.01rem 0.5rem;
+  display: inline;
+  background-color: #eeeeee;
+  border: 1px solid transparent;
+  color: #0000ff;
+  font-weight: 300;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+section.submittt button:hover {
+  background-color: #0000ff;
   color: #eeeeee;
   border-color: #eeeeee;
 }
@@ -121,11 +227,16 @@ section button.checklistButton:hover {
 		</script>
 </head>
 <body>
+
+<jsp:include page="/mustinclude/left_nav.jsp" />
+<jsp:include page="/mustinclude/top_nav.jsp" />
+
+<div class="k_class">
 <c:if test="${not empty manList or not empty genList}">
 	<table>
 		<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/commend.do" id="emffff" name="emffff">
 
-		<tr><td>------會員------</td></tr>
+		<tr><td  colspan="5">------會員------</td></tr>
 		<c:forEach var="genList" items="${genList}" varStatus="status">
 		<tr>
 			<td>${genList.MEM_NAME}</td>
@@ -142,14 +253,9 @@ section button.checklistButton:hover {
 						</div>
 					</section>			
 			</td>
-			<td>
-				<section>
-					<button type="submit" class="checklistButton" form="emffff" name="button" value="checklist_mem.${genList.MEM_NO}" formaction="${pageContext.request.contextPath}/checklist.do">檢舉</button>
-				</section>
-			</td>
 		</tr>
 		</c:forEach>
-		<tr><td>------廠商------</td></tr>
+		<tr><td colspan="5">------廠商------</td></tr>
 		<c:forEach var="manList" items="${manList}" varStatus="status">
 		<tr>
 			<td>${manList.MF_NAME}</td>
@@ -166,16 +272,19 @@ section button.checklistButton:hover {
 						</div>
 				</section>
 			</td>
-			<td>
-				<section>
-					<button type="submit" class="checklistButton" form="emffff" name="button" value="checklist_mem.${manList.MF_NO}" formaction="${pageContext.request.contextPath}/checklist.do">檢舉</button>
-				</section>
-			</td>
 		</tr>	
 		</c:forEach>
 		</FORM>
+		<tr>
+			<td colspan="5">
+				<section class="submittt">
+					<button type="submit" form="emffff" value="commendsubmit" name=button id="commendsubmit">提交</button>
+				</section>
+			</td>
+		</tr>
 	</table>
 </c:if>
-<button type="submit" form="emffff" value="commendsubmit" name=button id="commendsubmit">submit</button>
+</div>
+<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>

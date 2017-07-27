@@ -31,7 +31,7 @@ public class picmem extends HttpServlet{
 		String button = req.getParameter("button");
 		String pic = req.getParameter("PICNIC_NO");
 		String mem = (String) session.getAttribute("MEM_NO");
-		
+		System.out.println(pic);
 		
 		if("memAddThisPG".equals(button)){
 //			System.out.println("C: picmem / " + "L37");
@@ -127,10 +127,27 @@ public class picmem extends HttpServlet{
 		if("°h¥XisForSearch".equals(button)){
 			
 			PicmemService picmem = new PicmemService();
-			picmem.k_deletePicmem(pic,mem);
-			
 			String keyWord = (String) session.getAttribute("keyWord");
 			List<PicnicVO> picList = (List<PicnicVO>) session.getAttribute("picniclist");
+			int piclistNumber = 0;
+			int piclistNumber2 = 0;
+			System.out.println(picmem.k_getOne(pic, mem).getPicmem_iden());
+			if("¹Î¥D".equals(picmem.k_getOne(pic, mem).getPicmem_iden())){
+				picmem.k_deleteAllPicmem(pic);
+				PicnicService pcS = new PicnicService();
+				pcS.k_deletePicnic(pic);
+				for(PicnicVO pvo:picList){
+					if(pvo.getPicnic_no().equals(pic)){
+						piclistNumber2 = piclistNumber;
+					}
+					piclistNumber++;
+				}
+				
+				picList.remove(piclistNumber2);
+			}else{
+				picmem.k_deletePicmem(pic,mem);
+			}
+	
 			if(mem == null){
 				req.setAttribute("isNoGm", "yes");
 			}
