@@ -332,7 +332,7 @@
 					<jsp:include page="/backend/blocked_keywords/update_blocked_keywords_input.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="updateFinal"){%>
-					<jsp:include page="/backend/blocked_keywords/listOneBlocked_Keywords.jsp"/>
+					<jsp:include page="/backend/blocked_keywords/listAllBlocked_Keywords.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="insertKeyword"){%>
 					<jsp:include page="/backend/blocked_keywords/listAllBlocked_Keywords.jsp"/>
@@ -347,7 +347,7 @@
 					<jsp:include page="/backend/announcement/update_announcement_input.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="updateFinalAnnouncement"){%>
-					<jsp:include page="/backend/announcement/listOneAnnouncement.jsp"/>
+					<jsp:include page="/backend/announcement/listAllAnnouncement.jsp"/>
 				<%}%>
 				<%if (request.getAttribute("result")=="all"){%>
 					<jsp:include page="/advertisement/allAdvertisement.jsp"/>

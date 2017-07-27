@@ -20,7 +20,7 @@ public class AnnouncementServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+		System.out.println(action);
 		if("add_Announcements".equals(action)){
 			String result = "";
 			result = "add_Announcements";
@@ -148,7 +148,7 @@ public class AnnouncementServlet extends HttpServlet {
 		
 		
 		if ("update".equals(action)) { // 來自update_announcement_input.jsp的請求
-			
+			System.out.println("測試123");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -181,6 +181,7 @@ public class AnnouncementServlet extends HttpServlet {
 				String result = "";
 				result = "updateFinalAnnouncement";
 				req.setAttribute("result",result);
+				System.out.println("測試123");
 				String url = "/checklist/TEST_HOME.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneAnnouncement.jsp
 				successView.forward(req, res);

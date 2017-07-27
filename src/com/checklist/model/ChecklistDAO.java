@@ -65,7 +65,7 @@ public class ChecklistDAO implements Checklist_interface {
 				"select author_no from pboard_article where article_no = ?";
 	//§R¯d¨¥
 	private static final String SELETE_AB = 
-				"delete from pboard_article_article where article_no = ?";
+				"delete from pboard_article where article_no = ?";
 	
 	@Override
 	public void insert(ChecklistVO checklistVO) {
