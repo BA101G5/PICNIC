@@ -31,7 +31,7 @@ public class picmem extends HttpServlet{
 		String button = req.getParameter("button");
 		String pic = req.getParameter("PICNIC_NO");
 		String mem = (String) session.getAttribute("MEM_NO");
-		
+		System.out.println(pic);
 		
 		if("memAddThisPG".equals(button)){
 //			System.out.println("C: picmem / " + "L37");

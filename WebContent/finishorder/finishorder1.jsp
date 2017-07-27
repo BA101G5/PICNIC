@@ -271,7 +271,7 @@
 												</c:forEach>
 												<td><input type="number" class="grnumber"
 													id="gr${loop.index}"
-													name="${Orderde_DetailVO.getGr_no()}amount"
+													name="${Orderde_DetailVO.getOrderde_detailno()}amount"
 													value="${Orderde_DetailVO.getOd_amount()}" min="1"></td>
 												<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
 												<td>NT$ ${Orderde_DetailVO.getOd_price()}</td>
