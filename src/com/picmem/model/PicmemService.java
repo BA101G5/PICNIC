@@ -70,9 +70,13 @@ public class PicmemService {
 	public void k_deletePicmem(String picnic_no,String mem_no) {
 		dao.k_delete(picnic_no, mem_no);
 	}
+	
+	public void k_deleteAllPicmem(String picnic_no) {
+		dao.k_deleteAll(picnic_no);
+	}
 
-	public PicmemVO k_getOne() {
-		return null;
+	public PicmemVO k_getOne(String picnic_no, String mem_no) {
+		return dao.findByPrimaryKey(picnic_no, mem_no);
 	}
 
 	public List<PicmemVO> k_getAll() {

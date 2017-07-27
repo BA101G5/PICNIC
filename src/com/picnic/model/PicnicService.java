@@ -73,7 +73,8 @@ public class PicnicService {
 		return null;
 	}
 
-	public void k_deletePicnic() {
+	public void k_deletePicnic(String picnic_no) {
+		dao.k_delete(picnic_no);
 	}
 
 	public PicnicVO k_getOne(String picnic_no) {
