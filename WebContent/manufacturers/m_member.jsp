@@ -365,14 +365,16 @@ textarea {
 				.addEventListener(
 						'click',
 						function() {
-							document.getElementById("MF_MAIL").value = "h2208339@gmail.com";
+							document.getElementById("MF_ACCO").value ="m123456789";
+							document.getElementById("MF_MAIL").value = "ba101g5m@gmail.com";
 							document.getElementById("MF_PSW").value = "123456789";
-							document.getElementById("MF_NAME").value = "邱治傑小妹";
+							document.getElementById("MF_NAME").value = "桶二集團";
 							document.getElementById("MF_ADDR").value = "桃園區中壢區中央二十路108號";
 							document.getElementById("MF_PHONE").value = "0975321555";
+							document.getElementById("MF_FAX").value = "(03)3772111";
 							document.getElementById("MF_BS").value = "00000000";
 							document.getElementById("MF_PSW_1").value = "123456789";
-							document.getElementById("MF_SELF").innerText = "我是邱小妹， 呵呵";
+							document.getElementById("MF_SELF").innerText = "桶二桶二，贏統一";
 						}, false);
 	</script>
 

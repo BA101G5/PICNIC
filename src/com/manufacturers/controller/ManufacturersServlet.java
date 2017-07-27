@@ -426,7 +426,7 @@ System.out.println("---");
 
 				mail.sendMail(MF_MAIL, subject, messageText);
 				
-				
+				req.setAttribute("msg","請去信箱驗證");
 				
 				
 				String url = "/signin.jsp";

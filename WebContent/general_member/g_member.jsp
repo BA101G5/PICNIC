@@ -389,13 +389,13 @@ textarea {
 				.addEventListener(
 						'click',
 						function() {
-							document.getElementById("MEM_MAIL").value = "h2208339@gmail.com";
-							document.getElementById("MEM_PSW").value = "ae01fe56d48e11f8e";
-							document.getElementById("MEM_PSW_1").value = "ae01fe56d48e11f8e";
-							document.getElementById("MEM_NAME").value = "邱治傑小妹";
-							document.getElementById("MEM_ADDR").value = "桃園區中壢區中央二十路108號";
+							document.getElementById("MEM_MAIL").value = "ba101g5g@gmail.com";
+							document.getElementById("MEM_PSW").value = "123456789";
+							document.getElementById("MEM_PSW_1").value = "123456789";
+							document.getElementById("MEM_NAME").value = "喵喵";
+							document.getElementById("MEM_ADDR").value = "桃園區中壢區中央二十路18號";
 							document.getElementById("MEM_PHONE").value = "0975321555";
-							document.getElementById("MEM_SELF").innerText = "我是邱小妹， 呵呵";
+							document.getElementById("MEM_SELF").innerText = "大家好我是害羞內向的喵喵";
 						}, false);
 	</script>
 	<!-- 驗證 -->
