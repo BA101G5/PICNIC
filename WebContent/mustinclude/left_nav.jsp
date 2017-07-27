@@ -38,7 +38,7 @@
 			<div class="panel-group">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">
+						<h3 class="panel-title" style="height: 36px;">
 						<c:if test="${empty sessionScop.persionalpicnic }">
 							<form method="post"
 								action="<%=request.getContextPath()%>/picnic/picnic.do"
