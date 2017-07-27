@@ -9,7 +9,7 @@
 	PicnicService picnicSvc = new PicnicService();
 	pageContext.setAttribute("picnicSvc", picnicSvc);
 
-	List<PicnicVO> list = picnicSvc.getAll();
+	List<PicnicVO> list = picnicSvc.getAll_sl();
 	Collections.reverse(list);
 	pageContext.setAttribute("list", list);
 %>

@@ -22,6 +22,7 @@ public class PicnicDAO implements PicnicDAO_interface {
 
 	private static final String INSERT_STMT = "insert into Picnic (PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICNICDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE_ORD_DM,ORD_STA) VALUES('PG'||LPAD(PICNIC_NO_SQ.NEXTVAL,8,0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC Order by PICNIC_NO";
+	private static final String GET_ALL_SL_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_STA in ('S', 'L') Order by PICNIC_NO";
 	private static final String GET_ONE_STMT = "select PICNIC_NO,PICNIC_NAME,PICNIC_DESC,PICKUPDATE,PICNIC_STARTUP,PICNIC_SETUP,PICNIC_CHK,PICNIC_DATE,PICNIC_PL,PICNIC_STA,ORD_TOTAL,ORD_DATE,ORD_DM,ORD_STA FROM PICNIC WHERE PICNIC_NO = ?";
 	private static final String DELETE_STMT = "delete from PICNIC where PICNIC = ?";
 	private static final String UPDATE_STMT = "update PICNIC set PICNIC_NAME=?,PICNIC_DESC=?,PICKUPDATE=?,PICNIC_STARTUP=?,PICNIC_SETUP=?,PICNIC_CHK=?,PICNIC_DATE=?,PICNIC_PL=?,PICNIC_STA=?,ORD_TOTAL=?,ORD_DATE=?,ORD_DM=?,ORD_STA=? where PICNIC_NO=?";
@@ -277,6 +278,67 @@ public class PicnicDAO implements PicnicDAO_interface {
 		return list;
 	}
 
+	
+	public List<PicnicVO> getAll_sl() {
+		List<PicnicVO> list = new ArrayList<PicnicVO>();
+		PicnicVO picnicVO = null;
+		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_SL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				picnicVO = new PicnicVO();
+				picnicVO.setPicnic_no(rs.getString("PICNIC_NO"));
+				picnicVO.setPicnic_name(rs.getString("PICNIC_NAME"));
+				picnicVO.setPicnic_desc(rs.getString("PICNIC_DESC"));
+				picnicVO.setPicupdate(rs.getTimestamp("PICKUPDATE"));
+				picnicVO.setPicnic_startup(rs.getTimestamp("PICNIC_STARTUP"));
+				picnicVO.setPicnic_setup(rs.getTimestamp("PICNIC_SETUP"));
+				picnicVO.setPicnic_chk(rs.getString("PICNIC_CHK"));
+				picnicVO.setPicnic_date(rs.getTimestamp("PICNIC_DATE"));
+				picnicVO.setPicnic_pl(rs.getInt("PICNIC_PL"));
+				picnicVO.setPicnic_sta(rs.getString("PICNIC_STA"));
+				picnicVO.setOrd_total(rs.getDouble("ORD_TOTAL"));
+				picnicVO.setOrd_date(rs.getTimestamp("ORD_DATE"));
+				picnicVO.setOrd_dm(rs.getString("ORD_DM"));
+				picnicVO.setOrd_sta(rs.getString("ORD_STA"));
+
+				list.add(picnicVO);
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (final SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+
+		}
+		return list;
+	}
+	
 	@Override
 	public String addPicnic(PicnicVO picnicVO) {
 		Connection con = null;

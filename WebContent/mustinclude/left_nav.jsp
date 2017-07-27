@@ -38,7 +38,7 @@
 			<div class="panel-group">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">
+						<h3 class="panel-title" style="height: 36px;">
 						<c:if test="${empty sessionScop.persionalpicnic }">
 							<form method="post"
 								action="<%=request.getContextPath()%>/picnic/picnic.do"
@@ -49,7 +49,7 @@
 									type="hidden" name="action" value="persionalpicnic">
 							</form>
 							</c:if>
-							<c:if test="${sessionScop.persionalpicnic }"><a data-toggle="collapse" href=""><span
+							<c:if test="${not empty sessionScop.persionalpicnic }"><a data-toggle="collapse" href=""><span
 									class="glyphicon glyphicon-star"></span> </a></c:if>
 							
 						</h3>
