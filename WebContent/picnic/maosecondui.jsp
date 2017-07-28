@@ -27,15 +27,15 @@
 	});
 </script>
 	<script>
-var Latitude =22.6158015;
-var Longitude =120.7120023;
+var Latitude =25.033493;
+var Longitude =121.564101;
 var zoom =7;
  function change(value){
 
 	 switch(value) {
 	    case '新北市':
-	    	Latitude =24.91571;
-	        Longitude =121.6739;
+	    	Latitude =25.06971;
+	        Longitude =121.4629;
 	        zoom =12;
 	        break;
 	    case '高雄市':
@@ -109,8 +109,8 @@ var zoom =7;
 	        zoom =12;
 	        break;
 	    case '花蓮縣':
-	    	Latitude =23.7569;
-	        Longitude =121.3542;
+	    	Latitude =23.9910732;
+	        Longitude =121.6111942;
 	        zoom =12;
 	        break;
 	    case '嘉義市':
