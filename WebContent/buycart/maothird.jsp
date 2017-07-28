@@ -12,61 +12,113 @@
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <jsp:include page="/mustinclude/head.jsp" />
 <title>Picnic偿繺呼</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+<style>
+table5_3 table {
+	width: 100%;
+	margin: 15px 0;
+	border: 0;
+}
+
+.table5_3 th {
+	width: 100%;
+	background-color: #87CEFA;
+	color: #000000
+}
+
+.table5_3, .table5_3 th, .table5_3 td {
+	font-size: 0.95em;
+	text-align: center;
+	padding: 4px;
+	border-collapse: collapse;
+}
+
+.table5_3 th, .table5_3 td {
+	border: 1px solid #ffffff;
+	border-width: 1px 0 1px 0
+}
+
+.table5_3 tr {
+	border: 1px solid #ffffff;
+}
+
+.table5_3 tr:nth-child(odd) {
+	background-color: #d7eefd;
+}
+
+.table5_3 tr:nth-child(even) {
+	background-color: #ffffff;
+}
+/* .table5_3 tr:last-child td:last-child{ */
+/*   border-bottom-right-radius: 10px; */
+/* } */
+.table5_3 tr:first-child th:last-child {
+	border-top-right-radius: 10px;
+}
+
+.table5_3 tr:last-child td:first-child {
+	border-bottom-left-radius: 10px;
+}
+
+.table5_3 tr:first-child th:first-child {
+	border-top-left-radius: 10px;
+}
+</style>
 </head>
 
 <body>
 	<jsp:include page="/mustinclude/left_nav.jsp" />
 	<jsp:include page="/mustinclude/top_nav.jsp" />
-	<div class="container-fluid">
-		<div class="row ">
+	<div class="container">
+		<div class="row">
+			<table class="table5_3">
+				<div class="col-sm-8 col-sm-push-4">
+				<tr>
+					<td>
+						<div class="col-sm-8 col-sm-push-2">
+							<div style="background: white;">
+								<img
+									src="<%= request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}"
+									height="420px" width="420px">
+								<p>${goods_sellVO.getGs_name()}</p>
+								<br>
+								<p>基: ${goods_sellVO.getGs_price()}</p>
+								<br>
+								<p>${goods_sellVO.getGs_info()}</p>
+								<br>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><br>
+						<div class="list-group">
+							<a href="#" class="list-group-item"><form method="post"
+									action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
+									<p>
+										<input type=text name="amount" size="2">计秖
+										<c:if test="${not empty errorMsgs}">
+											<font color="red">${errorMsgs.amount}<font></font>
+										</c:if>
+									</p>
+									<Button type="submit" class="btn btn-default">潦ó</Button>
+									<input type="hidden" name="gs_no"
+										value="${goods_sellVO.getGs_no()}"> <input
+										type="hidden" name="action" value="insertintocartB">
 
-			<div class="col-sm-8 col-sm-push-2">
-				<div style="background: white;">
-					<img src="<%= request.getContextPath() %>/Image/?table=GOODS_SELL&picturename=${goods_sellVO.getGs_no()}" height="420px" width="420px">
-					<p>${goods_sellVO.getGs_name()}</p>
-					<br>
-					<p>基: ${goods_sellVO.getGs_price()}</p>
-					<br>
-					<p>${goods_sellVO.getGs_info()}</p>
-					<br>
+								</form></a> <a href="#" class="list-group-item"><form method="post"
+									action="<%=request.getContextPath()%>/buycart/maosecond.jsp">
+									<Button type="submit" class="btn btn-default">Ω禦</Button>
+								</form></a>
+
+						</div></td>
+                 	</tr>
 				</div>
-			</div>
-			<div class="col-sm-2 col-sm-pull-1">
-			<br>
-				<div class="list-group">
-					<a href="#" class="list-group-item"><form method="post"
-							action="<%=request.getContextPath()%>/orderde_detail/orderde_detail.do">
-							<p>
-								<input type=text name="amount" size="2">计秖<c:if test="${not empty errorMsgs}"><font color="red">${errorMsgs.amount}<font></font></c:if>
-							</p>
-							<Button type="submit" class="btn btn-default">潦ó</Button>
-							<input type="hidden" name="gs_no" value="${goods_sellVO.getGs_no()}"> 
-							<input type="hidden" name="action" value="insertintocartB">
-						
-						</form></a> <a href="#" class="list-group-item"><form method="post"
-							action="<%=request.getContextPath()%>/buycart/maosecond.jsp">
-							<Button type="submit" class="btn btn-default">Ω禦</Button>
-						</form></a>
-
-				</div>
-
-
-			</div>
-
+			</table>
 		</div>
 	</div>
 	<div class="col-sm-8 col-sm-push-4">
 		<jsp:include page="/mustinclude/footer.jsp" />
 	</div>
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<jsp:include page="/mustinclude/chatroom.jsp" />
+	<jsp:include page="/mustinclude/chatroom.jsp" />
 </body>
 </html>
